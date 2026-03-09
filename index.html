@@ -3,53 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pacific Pines Craftsman | Local Handyman</title>
+    <title>Pacific Pines Craftsman | Rio del Mar</title>
     <style>
         :root {
             --navy: #001f3f;
             --forest: #228B22;
             --white: #ffffff;
-            --overlay: rgba(0, 31, 63, 0.7); /* Navy transparent overlay */
+            --gold: #fff3cd;
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; color: #333; line-height: 1.6; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: #333; line-height: 1.6; scroll-behavior: smooth; }
 
         /* HERO HEADER SECTION */
         .hero-header {
-            background: linear-gradient(var(--overlay), var(--overlay)), 
-                        url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1500&q=80'); /* Coastal Carpentry Style Image */
+            background: linear-gradient(rgba(0, 31, 63, 0.75), rgba(0, 31, 63, 0.75)), 
+                        url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1500&q=80');
             background-size: cover;
             background-position: center;
-            height: 80vh; /* Takes up 80% of the screen height */
+            height: 90vh;
             display: flex;
             flex-direction: column;
             color: white;
         }
 
-        /* NAVIGATION OVER IMAGE */
+        /* NAVIGATION */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
+            padding: 25px 8%;
         }
 
-        .logo-img {
-            height: 80px; /* Adjust based on your logo shape */
-            width: auto;
-        }
+        /* EMBEDDED LOGO STYLING */
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-svg { width: 60px; height: 60px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+        .logo-text { font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; color: white; text-transform: uppercase; }
 
         .nav-links a {
             color: white;
             text-decoration: none;
             margin-left: 25px;
             font-weight: 600;
-            text-transform: uppercase;
             font-size: 0.9rem;
-            letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: 0.3s;
         }
+        .nav-links a:hover { background: white; color: var(--navy); }
 
-        /* HERO TEXT */
+        /* HERO CONTENT */
         .hero-content {
             flex-grow: 1;
             display: flex;
@@ -60,40 +63,44 @@
             padding: 0 20px;
         }
 
-        .hero-content h1 { font-size: 3.5rem; margin: 0; letter-spacing: 2px; }
-        .hero-content p { font-size: 1.4rem; margin: 20px 0; max-width: 800px; }
+        .hero-content h1 { font-size: 3.8rem; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 1.5rem; margin: 20px 0; max-width: 800px; opacity: 0.9; }
 
         .cta-btn {
             background: var(--forest);
             color: white;
-            padding: 15px 40px;
+            padding: 18px 45px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: background 0.3s;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
         }
-        .cta-btn:hover { background: #1e7a1e; }
+        .cta-btn:hover { transform: scale(1.05); background: #1e7a1e; }
 
-        /* CONTENT SECTIONS */
+        /* DISCLOSURE SECTION */
         .legal-notice { 
-            background: #fff3cd; 
-            padding: 20px; 
+            background: var(--gold); 
+            padding: 25px; 
             text-align: center; 
-            border-bottom: 4px solid var(--forest); 
-            font-style: italic;
+            border-bottom: 5px solid var(--forest); 
+            font-weight: 600;
+            color: #856404;
         }
 
-        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 60px 5%; }
-        .service-card { border: 1px solid #eee; padding: 30px; border-radius: 10px; text-align: center; }
-        .service-card h3 { color: var(--navy); }
+        /* SERVICES */
+        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 80px 8%; background: white; }
+        .service-card { border: 1px solid #eee; padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .service-card h3 { color: var(--navy); font-size: 1.6rem; margin-bottom: 15px; }
 
-        footer { background: var(--navy); color: white; text-align: center; padding: 40px; }
+        /* FOOTER */
+        footer { background: var(--navy); color: white; text-align: center; padding: 50px; }
 
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.2rem; }
-            nav { flex-direction: column; }
-            .nav-links { margin-top: 20px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            nav { flex-direction: column; gap: 20px; }
+            .nav-links a { margin: 0 5px; }
         }
     </style>
 </head>
@@ -101,45 +108,40 @@
 
 <div class="hero-header">
     <nav>
-        <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" class="logo-img">
-  <circle cx="40" cy="40" r="38" fill="none" stroke="#001f3f" stroke-width="2"/>
-  <circle cx="40" cy="40" r="34" fill="none" stroke="#228B22" stroke-width="1"/>
-  
-  <path d="M40 10 L55 35 L48 35 L60 55 L20 55 L32 35 L25 35 Z" fill="#228B22"/>
-  
-  <rect x="38" y="55" width="4" height="10" fill="#001f3f"/>
-  <rect x="33" y="53" width="10" height="4" rx="1" fill="#001f3f"/>
-  
-  <path d="M15 65 Q 25 60, 40 65 T 65 65" fill="none" stroke="#001f3f" stroke-width="1"/>
-
-  <text x="85" y="38" font-family="Segoe UI, Arial" font-weight="bold" font-size="16" fill="#001f3f">PACIFIC PINES</text>
-  <text x="85" y="58" font-family="Segoe UI, Arial" font-weight="600" font-size="14" fill="#228B22" letter-spacing="2">CRAFTSMAN</text>
-</svg>
+        <div class="logo-container">
+            <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" stroke="white" stroke-width="2"/>
+                <path d="M50 15 L70 45 L60 45 L80 75 L20 75 L40 45 L30 45 Z" fill="#228B22"/>
+                <rect x="47" y="75" width="6" height="12" fill="white"/>
+                <path d="M25 85 Q 50 75, 75 85" stroke="white" stroke-width="2"/>
+            </svg>
+            <span class="logo-text">Pacific Pines</span>
+        </div>
         <div class="nav-links">
             <a href="#services">Services</a>
-            <a href="#booking">Contact</a>
+            <a href="#booking">Get Quote</a>
         </div>
     </nav>
 
     <div class="hero-content">
-        <h1>PACIFIC PINES CRAFTSMAN</h1>
-        <p>Expert Coastal Carpentry & Home Repairs in Rio del Mar</p>
-        <a href="#booking" class="cta-btn">Book a Site Visit</a>
+        <h1>Craftsmanship You Can Trust</h1>
+        <p>Premium Coastal Carpentry & Local Handyman Services in the Monterey Bay Area</p>
+        <a href="#booking" class="cta-btn">Book a Project Walkthrough</a>
     </div>
 </div>
 
 <div class="legal-notice">
-    <strong>California Disclosure:</strong> I am not a licensed contractor. All projects (labor & materials) must be under <strong>$1,000</strong>. Fully Insured.
+    NOTICE: I am not a licensed contractor. All projects (labor & materials) must be under $1,000. Fully Insured.
 </div>
 
 <section class="services" id="services">
     <div class="service-card">
-        <h3>Coastal Finish Work</h3>
-        <p>Specializing in trim, baseboards, and wood rot repairs that stand up to the Monterey Bay salt air.</p>
+        <h3>Coastal Trim & Finish</h3>
+        <p>Expert installation of baseboards, crown molding, and repairs for coastal homes in Rio del Mar.</p>
     </div>
     <div class="service-card">
-        <h3>Modern Updates</h3>
-        <p>Door hardware, lighting fixtures, and cabinetry adjustments to keep your home sharp.</p>
+        <h3>Repairs & Maintenance</h3>
+        <p>Door adjustments, fixture swaps, and exterior maintenance to keep your property in peak condition.</p>
     </div>
 </section>
 
