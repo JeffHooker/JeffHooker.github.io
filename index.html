@@ -16,6 +16,7 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
             margin: 0; 
             color: var(--forest);
+            -webkit-font-smoothing: antialiased;
         }
 
         /* --- HEADER --- */
@@ -23,47 +24,47 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 10%;
+            padding: 15px 10%;
             background: var(--white);
             border-bottom: 2px solid var(--navy);
         }
 
-        .header-logo-container { display: flex; align-items: center; }
+        .header-logo { height: 80px; width: auto; }
 
         .nav-links a {
             text-decoration: none;
             color: var(--forest);
             font-weight: 500;
-            margin-left: 25px;
+            margin-left: 30px;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
         }
 
         /* --- HERO SECTION --- */
         .hero {
-            background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
                         url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1500&q=80');
             background-size: cover;
             background-position: center;
-            height: 450px;
+            height: 500px;
             display: flex;
             align-items: center;
             padding: 0 10%;
         }
 
         .hero-text-box h1 { 
-            font-size: 2.5rem; 
+            font-size: 3rem; 
             color: var(--forest); 
             margin: 0; 
-            font-weight: 800;
-            line-height: 1.2;
+            font-weight: 900;
+            line-height: 1.1;
         }
 
         .hero-text-box p { 
-            font-size: 1.3rem; 
+            font-size: 1.5rem; 
             color: var(--navy); 
-            margin: 15px 0; 
+            margin: 20px 0; 
             font-weight: 500;
         }
 
@@ -74,87 +75,80 @@
             background: var(--light-green);
         }
 
-        .section-block { padding: 50px 8%; text-align: center; }
-        .section-block:first-child { border-right: 1px solid var(--white); }
+        .section-block { padding: 60px 10%; text-align: center; }
+        .section-block:first-child { border-right: 2px solid var(--white); }
 
         .section-title { 
             text-transform: uppercase; 
             font-weight: bold; 
             color: var(--forest); 
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
         }
 
         /* --- ICONS --- */
-        .service-grid { display: flex; justify-content: space-between; gap: 10px; }
-        .service-item { flex: 1; text-align: center; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; line-height: 1.2; }
-        .icon-svg { width: 45px; height: 45px; margin-bottom: 10px; fill: var(--forest); opacity: 0.8; }
+        .service-grid { display: flex; justify-content: space-around; gap: 20px; }
+        .service-item { flex: 1; text-align: center; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; line-height: 1.4; }
+        .icon-svg { width: 50px; height: 50px; margin-bottom: 15px; fill: var(--forest); }
 
         /* --- CONTACT FORM --- */
-        .contact-form { text-align: left; }
-        .form-input { 
+        .form-container { text-align: left; }
+        input, textarea { 
             width: 100%; 
-            padding: 10px; 
+            padding: 12px; 
             margin-bottom: 15px; 
             border: 1px solid #ccc; 
-            border-radius: 4px; 
+            border-radius: 2px;
+            font-family: inherit;
             box-sizing: border-box;
         }
-        .legal-tag { 
-            font-size: 0.7rem; 
-            font-weight: bold; 
-            text-transform: uppercase; 
+        .legal-disclosure { 
+            background: var(--white);
             border: 1px solid #000; 
-            padding: 10px; 
-            margin-bottom: 15px;
+            padding: 15px; 
+            margin-bottom: 20px; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            font-size: 0.75rem;
             color: #333;
+            line-height: 1.4;
         }
 
-        .btn-submit {
+        .btn-quote {
             background: var(--forest);
             color: var(--white);
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 4px;
-            font-size: 0.9rem;
+            padding: 15px;
             width: 100%;
             border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
+            transition: 0.3s;
         }
+        .btn-quote:hover { background: #1a2e24; }
 
         /* --- FOOTER --- */
         footer {
             background: var(--navy);
             color: var(--white);
             text-align: center;
-            padding: 25px;
-            font-size: 0.7rem;
+            padding: 40px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
         }
 
-        @media (max-width: 800px) {
+        @media (max-width: 850px) {
             .content-sections { grid-template-columns: 1fr; }
-            .hero-text-box h1 { font-size: 1.8rem; }
+            .section-block:first-child { border-right: none; border-bottom: 2px solid var(--white); }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="header-logo-container">
-        <svg width="200" height="70" viewBox="0 0 200 70" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="35" cy="35" r="33" stroke="#0a1d37" stroke-width="2" fill="none"/>
-            <circle cx="35" cy="35" r="30" stroke="#2d4c3b" stroke-width="1.5" fill="none"/>
-            <path d="M35 12 L50 38 L42 38 L55 58 L15 58 L28 38 L20 38 Z" fill="#2d4c3b"/>
-            <path d="M28 48 L42 48 L42 51 L28 51 Z" fill="#0a1d37"/>
-            <rect x="33" y="51" width="4" height="10" fill="#0a1d37"/>
-            <path d="M15 63 Q 35 58, 55 63 M15 67 Q 35 62, 55 67" stroke="#0a1d37" stroke-width="1.2" fill="none"/>
-            <text x="75" y="32" font-family="Arial" font-weight="bold" font-size="16" fill="#2d4c3b">PACIFIC PINES</text>
-            <text x="75" y="48" font-family="Arial" font-weight="bold" font-size="12" fill="#0a1d37" letter-spacing="3">CRAFTSMAN</text>
-        </svg>
-    </div>
+    <img src="logo.png" alt="Pacific Pines Craftsman" class="header-logo">
     <nav class="nav-links">
         <a href="#">Home</a>
         <a href="#">Services</a>
@@ -191,16 +185,16 @@
 
     <div class="section-block" id="booking">
         <div class="section-title">Let's Work Together</div>
-        <form class="contact-form" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
-            <input type="text" name="name" class="form-input" placeholder="Your Name" required>
-            <input type="email" name="email" class="form-input" placeholder="Your Email" required>
-            <textarea name="message" class="form-input" placeholder="Project Description..." style="height: 80px;" required></textarea>
+        <form class="form-container" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+            <input type="text" name="name" placeholder="YOUR NAME" required>
+            <input type="email" name="email" placeholder="YOUR EMAIL" required>
+            <textarea name="project" placeholder="PROJECT DESCRIPTION..." rows="3" required></textarea>
             
-            <div class="legal-tag">
+            <div class="legal-disclosure">
                 LEGAL DISCLOSURE: I, Jeff Hooker, am not a licensed contractor in the State of California. All projects under $1,000 (labor & materials).
             </div>
             
-            <button type="submit" class="btn-submit">Submit Project Request</button>
+            <button type="submit" class="btn-quote">Submit Project Request</button>
         </form>
     </div>
 </div>
