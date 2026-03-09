@@ -1,0 +1,29 @@
+<section id="booking" style="padding: 60px 5%; background: #f9f9f9; text-align: center;">
+    <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; border-top: 5px solid #228B22; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <h2 style="color: #001f3f; margin-bottom: 10px;">Request a Quote / Site Visit</h2>
+        <p style="color: #666; margin-bottom: 25px;">Select your preferred time and I'll confirm via email.</p>
+
+        <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" style="text-align: left;">
+            
+            <label style="display:block; margin-bottom: 5px; font-weight: bold;">Full Name</label>
+            <input type="text" name="name" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
+
+            <label style="display:block; margin-bottom: 5px; font-weight: bold;">Preferred Date</label>
+            <input type="date" name="date" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
+
+            <label style="display:block; margin-bottom: 5px; font-weight: bold;">Time Window</label>
+            <select name="time" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
+                <option value="Morning (8am-12pm)">Morning (8am - 12pm)</option>
+                <option value="Afternoon (12pm-4pm)">Afternoon (12pm - 4pm)</option>
+                <option value="Evening (4pm-6pm)">Evening (4pm - 6pm)</option>
+            </select>
+
+            <label style="display:block; margin-bottom: 5px; font-weight: bold;">Brief Description of Work</label>
+            <textarea name="description" placeholder="e.g. Deck board replacement in Rio del Mar..." required style="width: 100%; padding: 12px; height: 100px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+
+            <button type="submit" style="width: 100%; background: #001f3f; color: white; padding: 15px; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer; font-weight: bold; transition: background 0.3s;">
+                Submit Booking Request
+            </button>
+        </form>
+    </div>
+</section>
