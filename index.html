@@ -9,198 +9,129 @@
             --navy: #001f3f;
             --forest: #228B22;
             --white: #ffffff;
-            --light-gray: #f4f4f4;
-            --text: #333333;
+            --overlay: rgba(0, 31, 63, 0.7); /* Navy transparent overlay */
         }
 
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            color: var(--text); 
-            line-height: 1.6;
-        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; color: #333; line-height: 1.6; }
 
-        /* Header & Nav */
-        header { 
-            background: var(--white); 
-            padding: 1rem 5%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 3px solid var(--navy);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo { font-weight: bold; color: var(--navy); font-size: 1.5rem; letter-spacing: 1px; }
-        nav a { margin-left: 20px; text-decoration: none; color: var(--navy); font-weight: 600; }
-
-        /* Hero Section */
-        .hero { 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1589939705384-5185138a04b9?auto=format&fit=crop&w=1500&q=80'); 
-            height: 450px; 
-            background-size: cover; 
+        /* HERO HEADER SECTION */
+        .hero-header {
+            background: linear-gradient(var(--overlay), var(--overlay)), 
+                        url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1500&q=80'); /* Coastal Carpentry Style Image */
+            background-size: cover;
             background-position: center;
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            color: white; 
+            height: 80vh; /* Takes up 80% of the screen height */
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        /* NAVIGATION OVER IMAGE */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+        }
+
+        .logo-img {
+            height: 80px; /* Adjust based on your logo shape */
+            width: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* HERO TEXT */
+        .hero-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             padding: 0 20px;
         }
-        .hero h1 { font-size: 3.2rem; margin: 0; }
-        .hero p { font-size: 1.3rem; margin: 15px 0; max-width: 700px; }
 
-        /* Legal Disclosure Section */
+        .hero-content h1 { font-size: 3.5rem; margin: 0; letter-spacing: 2px; }
+        .hero-content p { font-size: 1.4rem; margin: 20px 0; max-width: 800px; }
+
+        .cta-btn {
+            background: var(--forest);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover { background: #1e7a1e; }
+
+        /* CONTENT SECTIONS */
         .legal-notice { 
             background: #fff3cd; 
-            padding: 25px; 
+            padding: 20px; 
             text-align: center; 
-            border-left: 8px solid var(--forest); 
-            margin: 30px 5%; 
-            border-radius: 4px;
+            border-bottom: 4px solid var(--forest); 
             font-style: italic;
         }
 
-        /* Services Section */
-        .services { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; 
-            padding: 50px 5%; 
-        }
-        .service-card { 
-            border: 1px solid #eee; 
-            padding: 30px; 
-            border-radius: 10px; 
-            text-align: center; 
-            transition: transform 0.3s;
-            background: white;
-        }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .service-card h3 { color: var(--forest); font-size: 1.5rem; margin-top: 0; }
+        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 60px 5%; }
+        .service-card { border: 1px solid #eee; padding: 30px; border-radius: 10px; text-align: center; }
+        .service-card h3 { color: var(--navy); }
 
-        /* Booking Form Section */
-        .booking-container {
-            background: var(--light-gray);
-            padding: 60px 5%;
-            text-align: center;
-        }
-        .booking-box {
-            max-width: 600px; 
-            margin: 0 auto; 
-            background: white; 
-            padding: 40px; 
-            border-radius: 12px; 
-            border-top: 6px solid var(--forest); 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-align: left;
-        }
-        .booking-box h2 { color: var(--navy); margin-top: 0; text-align: center; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--navy); }
-        input, select, textarea { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid #ccc; 
-            border-radius: 6px; 
-            box-sizing: border-box; /* Fixes padding width issues */
-        }
-        .submit-btn { 
-            width: 100%; 
-            background: var(--navy); 
-            color: white; 
-            padding: 18px; 
-            border: none; 
-            border-radius: 6px; 
-            font-size: 1.2rem; 
-            cursor: pointer; 
-            font-weight: bold; 
-        }
-        .submit-btn:hover { background: #003366; }
+        footer { background: var(--navy); color: white; text-align: center; padding: 40px; }
 
-        footer { background: var(--navy); color: white; text-align: center; padding: 30px; }
-
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2.2rem; }
-            header { flex-direction: column; text-align: center; }
-            nav { margin-top: 15px; }
-            nav a { margin: 0 10px; }
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            nav { flex-direction: column; }
+            .nav-links { margin-top: 20px; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">PACIFIC PINES CRAFTSMAN</div>
+<div class="hero-header">
     <nav>
-        <a href="#services">Services</a>
-        <a href="#booking">Book Now</a>
+        <img src="logo.png" alt="Pacific Pines Craftsman Logo" class="logo-img">
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#booking">Contact</a>
+        </div>
     </nav>
-</header>
 
-<section class="hero">
-    <h1>Quality Coastal Craftsmanship</h1>
-    <p>Insured | Local | Serving the Monterey Bay & Rio del Mar Communities</p>
-    <a href="#booking" style="background: var(--forest); color: white; padding: 15px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 20px;">Get a Quote</a>
-</section>
+    <div class="hero-content">
+        <h1>PACIFIC PINES CRAFTSMAN</h1>
+        <p>Expert Coastal Carpentry & Home Repairs in Rio del Mar</p>
+        <a href="#booking" class="cta-btn">Book a Site Visit</a>
+    </div>
+</div>
 
 <div class="legal-notice">
-    <strong>Notice:</strong> I am not a licensed contractor in the State of California. I specialize in minor repairs and home improvement projects where the total cost (labor and materials) is under <strong>$1,000</strong>.
+    <strong>California Disclosure:</strong> I am not a licensed contractor. All projects (labor & materials) must be under <strong>$1,000</strong>. Fully Insured.
 </div>
 
 <section class="services" id="services">
     <div class="service-card">
-        <h3>Carpentry & Trim</h3>
-        <p>Custom interior trim, baseboard installation, and minor wood rot repair for coastal homes.</p>
+        <h3>Coastal Finish Work</h3>
+        <p>Specializing in trim, baseboards, and wood rot repairs that stand up to the Monterey Bay salt air.</p>
     </div>
     <div class="service-card">
-        <h3>Home Maintenance</h3>
-        <p>Expert door hardware updates, fixture swaps, and general assembly for busy homeowners.</p>
-    </div>
-    <div class="service-card">
-        <h3>Exterior Repairs</h3>
-        <p>Specializing in gate repairs, fence maintenance, and weatherproofing tasks under the $1,000 threshold.</p>
-    </div>
-</section>
-
-<section class="booking-container" id="booking">
-    <div class="booking-box">
-        <h2>Request a Site Visit</h2>
-        <p style="text-align: center; margin-bottom: 30px;">Tell me about your project and I will contact you to confirm a time.</p>
-        
-        <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
-            
-            <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" name="name" placeholder="Full Name" required>
-            </div>
-
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="email@address.com" required>
-            </div>
-
-            <div class="form-group">
-                <label>Preferred Visit Date</label>
-                <input type="date" name="date" required>
-            </div>
-
-            <div class="form-group">
-                <label>Project Details</label>
-                <textarea name="message" placeholder="Describe the work you need done..." required></textarea>
-            </div>
-
-            <input type="hidden" name="_next" value="https://YOUR_USERNAME.github.io/thanks.html">
-
-            <button type="submit" class="submit-btn">Send Request</button>
-        </form>
+        <h3>Modern Updates</h3>
+        <p>Door hardware, lighting fixtures, and cabinetry adjustments to keep your home sharp.</p>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2026 Pacific Pines Craftsman. Professional Handyman Services in Rio del Mar, CA.</p>
+    <p>&copy; 2026 Pacific Pines Craftsman | Serving Rio del Mar & Monterey Bay</p>
 </footer>
 
 </body>
