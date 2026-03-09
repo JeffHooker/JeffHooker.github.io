@@ -1,29 +1,207 @@
-<section id="booking" style="padding: 60px 5%; background: #f9f9f9; text-align: center;">
-    <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; border-top: 5px solid #228B22; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-        <h2 style="color: #001f3f; margin-bottom: 10px;">Request a Quote / Site Visit</h2>
-        <p style="color: #666; margin-bottom: 25px;">Select your preferred time and I'll confirm via email.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacific Pines Craftsman | Rio del Mar Handyman</title>
+    <style>
+        :root {
+            --navy: #001f3f;
+            --forest: #228B22;
+            --white: #ffffff;
+            --light-gray: #f4f4f4;
+            --text: #333333;
+        }
 
-        <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" style="text-align: left;">
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            color: var(--text); 
+            line-height: 1.6;
+        }
+
+        /* Header & Nav */
+        header { 
+            background: var(--white); 
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 3px solid var(--navy);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-weight: bold; color: var(--navy); font-size: 1.5rem; letter-spacing: 1px; }
+        nav a { margin-left: 20px; text-decoration: none; color: var(--navy); font-weight: 600; }
+
+        /* Hero Section */
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1589939705384-5185138a04b9?auto=format&fit=crop&w=1500&q=80'); 
+            height: 450px; 
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            color: white; 
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero h1 { font-size: 3.2rem; margin: 0; }
+        .hero p { font-size: 1.3rem; margin: 15px 0; max-width: 700px; }
+
+        /* Legal Disclosure Section */
+        .legal-notice { 
+            background: #fff3cd; 
+            padding: 25px; 
+            text-align: center; 
+            border-left: 8px solid var(--forest); 
+            margin: 30px 5%; 
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        /* Services Section */
+        .services { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+            padding: 50px 5%; 
+        }
+        .service-card { 
+            border: 1px solid #eee; 
+            padding: 30px; 
+            border-radius: 10px; 
+            text-align: center; 
+            transition: transform 0.3s;
+            background: white;
+        }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .service-card h3 { color: var(--forest); font-size: 1.5rem; margin-top: 0; }
+
+        /* Booking Form Section */
+        .booking-container {
+            background: var(--light-gray);
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .booking-box {
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 12px; 
+            border-top: 6px solid var(--forest); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+        .booking-box h2 { color: var(--navy); margin-top: 0; text-align: center; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--navy); }
+        input, select, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ccc; 
+            border-radius: 6px; 
+            box-sizing: border-box; /* Fixes padding width issues */
+        }
+        .submit-btn { 
+            width: 100%; 
+            background: var(--navy); 
+            color: white; 
+            padding: 18px; 
+            border: none; 
+            border-radius: 6px; 
+            font-size: 1.2rem; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
+        .submit-btn:hover { background: #003366; }
+
+        footer { background: var(--navy); color: white; text-align: center; padding: 30px; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            header { flex-direction: column; text-align: center; }
+            nav { margin-top: 15px; }
+            nav a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">PACIFIC PINES CRAFTSMAN</div>
+    <nav>
+        <a href="#services">Services</a>
+        <a href="#booking">Book Now</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Quality Coastal Craftsmanship</h1>
+    <p>Insured | Local | Serving the Monterey Bay & Rio del Mar Communities</p>
+    <a href="#booking" style="background: var(--forest); color: white; padding: 15px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 20px;">Get a Quote</a>
+</section>
+
+<div class="legal-notice">
+    <strong>Notice:</strong> I am not a licensed contractor in the State of California. I specialize in minor repairs and home improvement projects where the total cost (labor and materials) is under <strong>$1,000</strong>.
+</div>
+
+<section class="services" id="services">
+    <div class="service-card">
+        <h3>Carpentry & Trim</h3>
+        <p>Custom interior trim, baseboard installation, and minor wood rot repair for coastal homes.</p>
+    </div>
+    <div class="service-card">
+        <h3>Home Maintenance</h3>
+        <p>Expert door hardware updates, fixture swaps, and general assembly for busy homeowners.</p>
+    </div>
+    <div class="service-card">
+        <h3>Exterior Repairs</h3>
+        <p>Specializing in gate repairs, fence maintenance, and weatherproofing tasks under the $1,000 threshold.</p>
+    </div>
+</section>
+
+<section class="booking-container" id="booking">
+    <div class="booking-box">
+        <h2>Request a Site Visit</h2>
+        <p style="text-align: center; margin-bottom: 30px;">Tell me about your project and I will contact you to confirm a time.</p>
+        
+        <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
             
-            <label style="display:block; margin-bottom: 5px; font-weight: bold;">Full Name</label>
-            <input type="text" name="name" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" name="name" placeholder="Full Name" required>
+            </div>
 
-            <label style="display:block; margin-bottom: 5px; font-weight: bold;">Preferred Date</label>
-            <input type="date" name="date" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="email@address.com" required>
+            </div>
 
-            <label style="display:block; margin-bottom: 5px; font-weight: bold;">Time Window</label>
-            <select name="time" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
-                <option value="Morning (8am-12pm)">Morning (8am - 12pm)</option>
-                <option value="Afternoon (12pm-4pm)">Afternoon (12pm - 4pm)</option>
-                <option value="Evening (4pm-6pm)">Evening (4pm - 6pm)</option>
-            </select>
+            <div class="form-group">
+                <label>Preferred Visit Date</label>
+                <input type="date" name="date" required>
+            </div>
 
-            <label style="display:block; margin-bottom: 5px; font-weight: bold;">Brief Description of Work</label>
-            <textarea name="description" placeholder="e.g. Deck board replacement in Rio del Mar..." required style="width: 100%; padding: 12px; height: 100px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+            <div class="form-group">
+                <label>Project Details</label>
+                <textarea name="message" placeholder="Describe the work you need done..." required></textarea>
+            </div>
 
-            <button type="submit" style="width: 100%; background: #001f3f; color: white; padding: 15px; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer; font-weight: bold; transition: background 0.3s;">
-                Submit Booking Request
-            </button>
+            <input type="hidden" name="_next" value="https://YOUR_USERNAME.github.io/thanks.html">
+
+            <button type="submit" class="submit-btn">Send Request</button>
         </form>
     </div>
 </section>
+
+<footer>
+    <p>&copy; 2026 Pacific Pines Craftsman. Professional Handyman Services in Rio del Mar, CA.</p>
+</footer>
+
+</body>
+</html>
