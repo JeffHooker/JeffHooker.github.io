@@ -3,150 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pacific Pines Craftsman | Rio del Mar</title>
+    <title>Pacific Pines Craftsman | Handyman Services Under $1000</title>
     <style>
         :root {
-            --navy: #001f3f;
-            --forest: #228B22;
+            --navy: #0a1d37;
+            --forest: #2d4c3b;
+            --light-green: #e9f1ee;
             --white: #ffffff;
-            --gold: #fff3cd;
         }
 
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: #333; line-height: 1.6; scroll-behavior: smooth; }
-
-        /* HERO HEADER SECTION */
-        .hero-header {
-            background: linear-gradient(rgba(0, 31, 63, 0.75), rgba(0, 31, 63, 0.75)), 
-                        url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1500&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            color: white;
+        body { 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            color: var(--forest);
         }
 
-        /* NAVIGATION */
-        nav {
+        /* --- HEADER --- */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 8%;
+            padding: 15px 10%;
+            background: var(--white);
+            border-bottom: 2px solid var(--navy);
         }
 
-        /* EMBEDDED LOGO STYLING */
-        .logo-container { display: flex; align-items: center; gap: 15px; }
-        .logo-svg { width: 60px; height: 60px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-        .logo-text { font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; color: white; text-transform: uppercase; }
-
+        .header-logo-container { display: flex; align-items: center; }
         .nav-links a {
-            color: white;
             text-decoration: none;
-            margin-left: 25px;
-            font-weight: 600;
+            color: var(--forest);
+            font-weight: 500;
+            margin-left: 30px;
+            text-transform: uppercase;
             font-size: 0.9rem;
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 8px 15px;
-            border-radius: 4px;
-            transition: 0.3s;
+            letter-spacing: 1px;
         }
-        .nav-links a:hover { background: white; color: var(--navy); }
 
-        /* HERO CONTENT */
-        .hero-content {
-            flex-grow: 1;
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), 
+                        url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            padding: 0 10%;
         }
 
-        .hero-content h1 { font-size: 3.8rem; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero-content p { font-size: 1.5rem; margin: 20px 0; max-width: 800px; opacity: 0.9; }
+        .hero-text-box { max-width: 600px; }
+        .hero-text-box h1 { 
+            font-size: 2.8rem; 
+            color: var(--forest); 
+            margin: 0; 
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        .hero-text-box h1 span { color: var(--navy); }
+        .hero-text-box p { 
+            font-size: 1.4rem; 
+            color: var(--navy); 
+            margin: 20px 0; 
+            font-weight: 500;
+        }
 
-        .cta-btn {
+        /* --- CONTENT GRID --- */
+        .content-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--light-green);
+        }
+
+        .section-block { padding: 60px 10%; text-align: center; }
+        .section-block:first-child { border-right: 2px solid var(--white); }
+
+        .section-title { 
+            text-transform: uppercase; 
+            font-weight: bold; 
+            color: var(--forest); 
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        /* --- ICONS --- */
+        .service-grid { display: flex; justify-content: space-around; }
+        .service-item { flex: 1; text-align: center; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        .icon-svg { width: 50px; height: 50px; margin-bottom: 10px; fill: var(--forest); }
+
+        /* --- WORK AGREEMENT BOX --- */
+        .agreement-box {
+            background: var(--white);
+            padding: 20px;
+            text-align: left;
+            border: 1px solid #ccc;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+        .agreement-header { font-weight: bold; text-align: center; border-bottom: 1px solid #000; margin-bottom: 10px; }
+        .legal-tag { background: #f0f0f0; padding: 5px; border: 1px solid #000; margin-top: 10px; font-weight: bold; }
+
+        .btn-quote {
+            display: inline-block;
+            margin-top: 20px;
             background: var(--forest);
-            color: white;
-            padding: 18px 45px;
+            color: var(--white);
+            padding: 12px 25px;
             text-decoration: none;
-            border-radius: 5px;
             font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: 0.3s;
-        }
-        .cta-btn:hover { transform: scale(1.05); background: #1e7a1e; }
-
-        /* DISCLOSURE SECTION */
-        .legal-notice { 
-            background: var(--gold); 
-            padding: 25px; 
-            text-align: center; 
-            border-bottom: 5px solid var(--forest); 
-            font-weight: 600;
-            color: #856404;
+            text-transform: uppercase;
+            border-radius: 4px;
         }
 
-        /* SERVICES */
-        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 80px 8%; background: white; }
-        .service-card { border: 1px solid #eee; padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .service-card h3 { color: var(--navy); font-size: 1.6rem; margin-bottom: 15px; }
-
-        /* FOOTER */
-        footer { background: var(--navy); color: white; text-align: center; padding: 50px; }
+        /* --- FOOTER --- */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            text-align: center;
+            padding: 30px;
+            font-size: 0.7rem;
+        }
+        .footer-logo { width: 50px; margin-bottom: 10px; }
 
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            nav { flex-direction: column; gap: 20px; }
-            .nav-links a { margin: 0 5px; }
+            .hero { height: auto; padding: 60px 5%; }
+            .content-sections { grid-template-columns: 1fr; }
+            .hero-text-box h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="hero-header">
-    <nav>
-        <div class="logo-container">
-            <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="48" stroke="white" stroke-width="2"/>
-                <path d="M50 15 L70 45 L60 45 L80 75 L20 75 L40 45 L30 45 Z" fill="#228B22"/>
-                <rect x="47" y="75" width="6" height="12" fill="white"/>
-                <path d="M25 85 Q 50 75, 75 85" stroke="white" stroke-width="2"/>
-            </svg>
-            <span class="logo-text">Pacific Pines</span>
-        </div>
-        <div class="nav-links">
-            <a href="#services">Services</a>
-            <a href="#booking">Get Quote</a>
-        </div>
+<header>
+    <div class="header-logo-container">
+        <svg width="180" height="60" viewBox="0 0 300 100">
+            <circle cx="50" cy="50" r="45" stroke="#0a1d37" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="50" r="41" stroke="#2d4c3b" stroke-width="1.5" fill="none"/>
+            <path d="M50 15 L70 45 L62 45 L80 75 L20 75 L38 45 L30 45 Z" fill="#2d4c3b"/>
+            <path d="M44 58 L56 58 L56 62 L44 62 Z" fill="#0a1d37"/>
+            <rect x="48" y="62" width="4" height="15" fill="#0a1d37"/>
+            <path d="M25 82 Q 50 75, 75 82 M25 87 Q 50 80, 75 87" stroke="#0a1d37" stroke-width="1.5" fill="none"/>
+            <text x="105" y="55" font-family="Arial" font-weight="bold" font-size="20" fill="#2d4c3b">PACIFIC PINES</text>
+            <text x="105" y="75" font-family="Arial" font-weight="bold" font-size="14" fill="#0a1d37" letter-spacing="4">CRAFTSMAN</text>
+        </svg>
+    </div>
+    <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">About</a>
+        <a href="#">Request Quote</a>
     </nav>
+</header>
 
-    <div class="hero-content">
-        <h1>Craftsmanship You Can Trust</h1>
-        <p>Premium Coastal Carpentry & Local Handyman Services in the Monterey Bay Area</p>
-        <a href="#booking" class="cta-btn">Book a Project Walkthrough</a>
-    </div>
-</div>
-
-<div class="legal-notice">
-    NOTICE: I am not a licensed contractor. All projects (labor & materials) must be under $1,000. Fully Insured.
-</div>
-
-<section class="services" id="services">
-    <div class="service-card">
-        <h3>Coastal Trim & Finish</h3>
-        <p>Expert installation of baseboards, crown molding, and repairs for coastal homes in Rio del Mar.</p>
-    </div>
-    <div class="service-card">
-        <h3>Repairs & Maintenance</h3>
-        <p>Door adjustments, fixture swaps, and exterior maintenance to keep your property in peak condition.</p>
+<section class="hero">
+    <div class="hero-text-box">
+        <h1>PACIFIC PINES CRAFTSMAN:<br><span>Handyman Services Under $1000.</span></h1>
+        <p>Transparent, Licensed*, Local.<br>Serving the Monterey Bay Area.</p>
     </div>
 </section>
 
+<div class="content-sections">
+    <div class="section-block">
+        <div class="section-title">My Services</div>
+        <div class="service-grid">
+            <div class="service-item">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22.7,19L13.6,9.9C14.5,7.6 14,4.9 12.1,3C10.1,1 7.1,0.6 4.7,1.7L9,6L6,9L1.7,4.7C0.6,7.1 1,10.1 3,12.1C4.9,14 7.6,14.5 9.9,13.6L19,22.7L22.7,19Z"/></svg>
+                <br>Handyman<br>Repairs
+            </div>
+            <div class="service-item">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M2,14H8V20H2V14M16,14H22V20H16V14M9,14H15V20H9V14M4,4H20V12H4V4Z"/></svg>
+                <br>General<br>Installations
+            </div>
+            <div class="service-item">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2Z"/></svg>
+                <br>Fixture<br>Upgrades
+            </div>
+        </div>
+    </div>
+
+    <div class="section-block">
+        <div class="section-title">Let's Work Together</div>
+        <div class="agreement-box">
+            <div class="agreement-header">WORK AGREEMENT</div>
+            THIS AGREEMENT is arranged by ____________________________, and the agreement is tailed to meet the form of the Work agreement.<br>
+            <div class="legal-tag">
+                LEGAL DISCLOSURE: I, [USER NAME], am not a licensed contractor in the State of California. All projects under $1,000 (labor & materials).
+            </div>
+        </div>
+        <a href="#" class="btn-quote">Request a Project Quote</a>
+    </div>
+</div>
+
 <footer>
-    <p>&copy; 2026 Pacific Pines Craftsman | Serving Rio del Mar & Monterey Bay</p>
+    <svg class="footer-logo" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" stroke="white" stroke-width="1.5" fill="none"/>
+        <path d="M50 15 L70 45 L62 45 L80 75 L20 75 L40 45 L30 45 Z" fill="white"/>
+    </svg>
+    <p>© 2026 PACIFIC PINES CRAFTSMAN | Not a Licensed Contractor | Privacy Policy | Location: Rio del Mar, CA.</p>
 </footer>
 
 </body>
