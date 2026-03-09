@@ -27,7 +27,9 @@
             background: var(--white);
             border-bottom: 2px solid var(--navy);
         }
-        .header-logo { height: 70px; width: auto; }
+
+        .header-logo-container { display: flex; align-items: center; }
+
         .nav-links a {
             text-decoration: none;
             color: var(--forest);
@@ -49,6 +51,7 @@
             align-items: center;
             padding: 0 10%;
         }
+
         .hero-text-box h1 { 
             font-size: 2.5rem; 
             color: var(--forest); 
@@ -56,6 +59,7 @@
             font-weight: 800;
             line-height: 1.2;
         }
+
         .hero-text-box p { 
             font-size: 1.3rem; 
             color: var(--navy); 
@@ -69,6 +73,7 @@
             grid-template-columns: 1fr 1fr;
             background: var(--light-green);
         }
+
         .section-block { padding: 50px 8%; text-align: center; }
         .section-block:first-child { border-right: 1px solid var(--white); }
 
@@ -86,7 +91,7 @@
         .service-item { flex: 1; text-align: center; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; line-height: 1.2; }
         .icon-svg { width: 45px; height: 45px; margin-bottom: 10px; fill: var(--forest); opacity: 0.8; }
 
-        /* --- UPDATED CONTACT FORM --- */
+        /* --- CONTACT FORM --- */
         .contact-form { text-align: left; }
         .form-input { 
             width: 100%; 
@@ -128,17 +133,28 @@
             padding: 25px;
             font-size: 0.7rem;
         }
-        .footer-logo { height: 40px; margin-bottom: 10px; filter: brightness(0) invert(1); }
 
         @media (max-width: 800px) {
             .content-sections { grid-template-columns: 1fr; }
+            .hero-text-box h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="logo.png" alt="Pacific Pines Craftsman" class="header-logo">
+    <div class="header-logo-container">
+        <svg width="200" height="70" viewBox="0 0 200 70" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="35" cy="35" r="33" stroke="#0a1d37" stroke-width="2" fill="none"/>
+            <circle cx="35" cy="35" r="30" stroke="#2d4c3b" stroke-width="1.5" fill="none"/>
+            <path d="M35 12 L50 38 L42 38 L55 58 L15 58 L28 38 L20 38 Z" fill="#2d4c3b"/>
+            <path d="M28 48 L42 48 L42 51 L28 51 Z" fill="#0a1d37"/>
+            <rect x="33" y="51" width="4" height="10" fill="#0a1d37"/>
+            <path d="M15 63 Q 35 58, 55 63 M15 67 Q 35 62, 55 67" stroke="#0a1d37" stroke-width="1.2" fill="none"/>
+            <text x="75" y="32" font-family="Arial" font-weight="bold" font-size="16" fill="#2d4c3b">PACIFIC PINES</text>
+            <text x="75" y="48" font-family="Arial" font-weight="bold" font-size="12" fill="#0a1d37" letter-spacing="3">CRAFTSMAN</text>
+        </svg>
+    </div>
     <nav class="nav-links">
         <a href="#">Home</a>
         <a href="#">Services</a>
@@ -184,15 +200,13 @@
                 LEGAL DISCLOSURE: I, Jeff Hooker, am not a licensed contractor in the State of California. All projects under $1,000 (labor & materials).
             </div>
             
-            <input type="hidden" name="_next" value="https://jeffhooker.github.io/thanks.html">
             <button type="submit" class="btn-submit">Submit Project Request</button>
         </form>
     </div>
 </div>
 
 <footer>
-    <img src="logo.png" alt="Logo" class="footer-logo">
-    <p>© 2026 PACIFIC PINES CRAFTSMAN | Not a Licensed Contractor | Privacy Policy | Location: Rio del Mar, CA.</p>
+    <p>© 2026 PACIFIC PINES CRAFTSMAN | Location: Rio del Mar, CA.</p>
 </footer>
 
 </body>
