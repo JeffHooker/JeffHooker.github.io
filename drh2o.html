@@ -220,6 +220,26 @@
     .dot-grey   { background: #444; }
 
     .screen { padding: 16px 16px 24px; }
+
+    /* ── SELECT ── */
+    .field select {
+      width: 100%;
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    .field select:focus { border-color: var(--blue); }
   </style>
 </head>
 <body>
@@ -379,14 +399,97 @@
   </div>
 
   <div class="screen" id="screen-pressure">
-    <div class="placeholder">
-      <svg viewBox="0 0 24 24" stroke="var(--blue)">
-        <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/>
-        <path d="M12 6v6l4 2"/>
-      </svg>
-      <h2>Pressure</h2>
-      <p>PSI, head, pressure drop, and pump calculations coming here.</p>
+
+    <!-- Inputs -->
+    <div class="card">
+      <div class="card-title">Pressure Inputs</div>
+
+      <div class="field">
+        <label>Source / Inlet Pressure (PSI)</label>
+        <input id="pr-source" type="number" inputmode="decimal" placeholder="e.g. 65" min="0">
+      </div>
+
+      <div class="field">
+        <label>Elevation Change (ft) <span style="font-weight:400;font-size:.75em;color:var(--muted)">+ downhill / − uphill</span></label>
+        <input id="pr-elev" type="number" inputmode="decimal" placeholder="e.g. 50">
+      </div>
+
+      <div class="field">
+        <label>Pipe Length (ft)</label>
+        <input id="pr-len" type="number" inputmode="decimal" placeholder="e.g. 1000" min="0">
+      </div>
+
+      <div class="field">
+        <label>Pipe Diameter (inches)</label>
+        <input id="pr-dia" type="number" inputmode="decimal" placeholder="e.g. 6" min="0" step="0.25">
+      </div>
+
+      <div class="field">
+        <label>Flow Rate (GPM)</label>
+        <input id="pr-gpm" type="number" inputmode="decimal" placeholder="e.g. 200" min="0">
+      </div>
+
+      <div class="field">
+        <label>Pipe Material (C-factor)</label>
+        <select id="pr-cfactor">
+          <option value="150">PVC / Plastic — C 150</option>
+          <option value="140">HDPE — C 140</option>
+          <option value="130">Copper — C 130</option>
+          <option value="120" selected>Ductile / Cast Iron — C 120</option>
+          <option value="120">Concrete — C 120</option>
+          <option value="100">Old Cast Iron — C 100</option>
+          <option value="80">Corroded Iron — C 80</option>
+        </select>
+      </div>
     </div>
+
+    <!-- Results -->
+    <div class="card">
+      <div class="card-title">Results</div>
+
+      <div class="result-row">
+        <span class="result-label">Static Pressure (elevation)</span>
+        <span class="result-val">
+          <span class="primary" id="pr-static">—</span>
+          <span class="secondary" id="pr-static-sub"></span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Friction Loss (H-W)</span>
+        <span class="result-val">
+          <span class="primary" id="pr-friction">—</span>
+          <span class="secondary" id="pr-friction-sub"></span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Friction Loss per 100 ft</span>
+        <span class="result-val">
+          <span class="primary" id="pr-per100">—</span>
+          <span class="secondary">PSI / 100 ft</span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Residual Pressure</span>
+        <span class="result-val">
+          <span class="primary" id="pr-residual">—</span>
+          <span class="secondary" id="pr-residual-sub"></span>
+        </span>
+        <span class="dot dot-grey" id="pr-residual-dot"></span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Head Loss</span>
+        <span class="result-val">
+          <span class="primary" id="pr-headloss">—</span>
+          <span class="secondary" id="pr-headloss-sub"></span>
+        </span>
+      </div>
+
+    </div>
+
   </div>
 
   <div class="screen" id="screen-more">
@@ -588,6 +691,67 @@
   // Wire flow inputs
   ['fl-dia','fl-vel','fl-time'].forEach(id => {
     document.getElementById(id).addEventListener('input', calcFlow);
+  });
+
+  // ── PRESSURE CALC ──
+  function calcPressure() {
+    const p_source = parseFloat(document.getElementById('pr-source').value) || 0;
+    const elev_ft  = parseFloat(document.getElementById('pr-elev').value)   || 0;
+    const len_ft   = parseFloat(document.getElementById('pr-len').value)    || 0;
+    const dia_in   = parseFloat(document.getElementById('pr-dia').value)    || 0;
+    const gpm      = parseFloat(document.getElementById('pr-gpm').value)    || 0;
+    const C        = parseFloat(document.getElementById('pr-cfactor').value)|| 120;
+
+    const hasFlow = dia_in > 0 && len_ft > 0 && gpm > 0;
+
+    // Static pressure from elevation (positive = downhill gain, negative = uphill loss)
+    const static_psi = elev_ft * 0.43353;
+    const static_ft  = elev_ft;
+    set('pr-static',     (static_psi >= 0 ? '+' : '') + fmt(static_psi, 2) + ' PSI');
+    set('pr-static-sub', (static_ft  >= 0 ? '+' : '') + fmt(static_ft,  1) + ' ft head');
+
+    // Hazen-Williams friction loss
+    // hf (ft) = 4.72 × L × Q^1.852 / (C^1.852 × D^4.87)
+    let hf_ft = 0, hf_psi = 0, per100_psi = 0;
+    if (hasFlow) {
+      hf_ft      = 4.72 * len_ft * Math.pow(gpm, 1.852) / (Math.pow(C, 1.852) * Math.pow(dia_in, 4.87));
+      hf_psi     = hf_ft * 0.43353;
+      per100_psi = len_ft > 0 ? (hf_psi / len_ft) * 100 : 0;
+
+      set('pr-friction',     fmt(hf_psi, 2) + ' PSI');
+      set('pr-friction-sub', fmt(hf_ft, 2)  + ' ft head');
+      set('pr-per100',       fmt(per100_psi, 3) + ' PSI');
+      set('pr-headloss',     fmt(hf_ft, 2)  + ' ft');
+      set('pr-headloss-sub', fmt(hf_psi, 2) + ' PSI  ·  C=' + C);
+    } else {
+      ['pr-friction','pr-friction-sub','pr-per100','pr-headloss','pr-headloss-sub']
+        .forEach(id => set(id, id.endsWith('sub') ? '' : '—'));
+    }
+
+    // Residual pressure = source + elevation gain − friction loss
+    const residual_psi = p_source + static_psi - hf_psi;
+    const residual_ft  = residual_psi / 0.43353;
+    set('pr-residual',     fmt(residual_psi, 2) + ' PSI');
+    set('pr-residual-sub', fmt(residual_ft,  1) + ' ft head');
+
+    // Color-code residual
+    const dot = document.getElementById('pr-residual-dot');
+    dot.className = 'dot';
+    if (residual_psi >= 40)      dot.classList.add('dot-green');
+    else if (residual_psi >= 20) dot.classList.add('dot-yellow');
+    else                          dot.classList.add('dot-red');
+
+    // Bold the residual text based on status
+    const el = document.getElementById('pr-residual');
+    el.style.color = residual_psi >= 40 ? 'var(--blue)'
+                   : residual_psi >= 20 ? '#f59e0b'
+                   : '#ef4444';
+  }
+
+  // Wire pressure inputs
+  ['pr-source','pr-elev','pr-len','pr-dia','pr-gpm','pr-cfactor'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calcPressure);
+    document.getElementById(id).addEventListener('change', calcPressure);
   });
 </script>
 
