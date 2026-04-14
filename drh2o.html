@@ -296,6 +296,67 @@
       background-position: right 14px center;
     }
     .field select:focus { border-color: var(--blue); }
+
+    /* ── ACCORDION ── */
+    .acc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .acc-head {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 18px;
+      background: var(--surface);
+      border: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .acc-label { flex: 1; }
+    .acc-badge {
+      font-size: 0.62rem;
+      color: var(--muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .acc-chevron {
+      width: 16px; height: 16px;
+      stroke: var(--muted); fill: none;
+      stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .acc-head.open .acc-chevron { transform: rotate(180deg); }
+    .acc-body { display: none; padding: 0 12px 12px; border-top: 1px solid var(--border); }
+    .acc-body.open { display: block; }
+    .acc-body .card { box-shadow: none; border-color: #2a2a2a; margin-top: 10px; }
+    .acc-body .card:last-of-type { margin-bottom: 0; }
+    .acc-body > div:last-child { margin-bottom: 0; }
+
+    /* ── MORE TAB ── */
+    .more-section { margin-bottom: 16px; }
+    .more-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .more-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .more-row:first-child { padding-top: 0; }
+    .more-row-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.6px; }
+    .more-row-val { color: var(--text); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -311,7 +372,415 @@
 <!-- ── SCREENS ── -->
 <div class="screens">
 
-  <div class="screen active" id="screen-chlorine">
+  <!-- ════════════════ CALC TAB ════════════════ -->
+  <div class="screen active" id="screen-calc">
+
+    <!-- Chlorine -->
+    <div class="acc">
+      <button class="acc-head open" onclick="toggleAcc(this)">
+        <span class="acc-label">Chlorine</span>
+        <span class="acc-badge">Dosage · CT · Feed</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body open">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs</div>
+            <button class="clear-btn" onclick="clearInputs(['cl-volume','cl-residual','cl-strength'], calcChlorine)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Water Volume (<span class="ul" data-imp="gallons" data-met="liters">gallons</span>)</label>
+            <input id="cl-volume" type="number" inputmode="decimal" placeholder="e.g. 10000" min="0">
+          </div>
+          <div class="field">
+            <label>Desired Cl₂ Residual (mg/L)</label>
+            <input id="cl-residual" type="number" inputmode="decimal" placeholder="e.g. 1.0" min="0" step="0.1">
+          </div>
+          <div class="field">
+            <label>Chlorine Solution Strength (%)</label>
+            <input id="cl-strength" type="number" inputmode="decimal" placeholder="e.g. 12.5" min="0" max="100" step="0.1">
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div class="result-row">
+            <span class="result-label">Chlorine Needed</span>
+            <span class="result-val"><span class="primary" id="cl-oz">—</span><span class="secondary" id="cl-oz-sub"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Chlorine Needed</span>
+            <span class="result-val"><span class="primary" id="cl-g">—</span><span class="secondary" id="cl-g-sub"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Solution Volume to Add</span>
+            <span class="result-val"><span class="primary" id="cl-sol-oz">—</span><span class="secondary" id="cl-sol-ml"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Min. Contact Time <span style="font-size:.65rem;color:var(--muted)">(3-log, 15°C ref)</span></span>
+            <span class="result-val"><span class="primary" id="cl-ct">—</span><span class="secondary" id="cl-ct-sub"></span></span>
+          </div>
+        </div>
+        <div style="font-size:0.7rem;color:var(--muted);line-height:1.5;padding:8px 4px 0;">
+          CT based on EPA SWTR 3-log Giardia (CT = 41 mg/L·min at 15°C, pH 6–9).
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow -->
+    <div class="acc">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-label">Flow Rate</span>
+        <span class="acc-badge">GPM · Velocity · Volume</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs</div>
+            <button class="clear-btn" onclick="clearInputs(['fl-dia','fl-vel','fl-time'], calcFlow)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Pipe Diameter (<span class="ul" data-imp="inches" data-met="mm">inches</span>)</label>
+            <input id="fl-dia" type="number" inputmode="decimal" placeholder="e.g. 6" min="0" step="0.25">
+          </div>
+          <div class="field">
+            <label>Flow Velocity (<span class="ul" data-imp="fps" data-met="m/s">fps</span>)</label>
+            <input id="fl-vel" type="number" inputmode="decimal" placeholder="e.g. 3.5" min="0" step="0.1">
+          </div>
+          <div class="field">
+            <label>Time (minutes)</label>
+            <input id="fl-time" type="number" inputmode="decimal" placeholder="e.g. 60" min="0">
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div class="result-row">
+            <span class="result-label">Flow Rate</span>
+            <span class="result-val"><span class="primary" id="fl-gpm">—</span><span class="secondary" id="fl-gpm-sub"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Flow Rate</span>
+            <span class="result-val"><span class="primary" id="fl-gph">—</span><span class="secondary" id="fl-cfs"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Total Volume (over time)</span>
+            <span class="result-val"><span class="primary" id="fl-vol">—</span><span class="secondary" id="fl-vol-sub"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Pipe Capacity</span>
+            <span class="result-val"><span class="primary" id="fl-cap">—</span><span class="secondary">gal per linear foot</span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Pipe Area</span>
+            <span class="result-val"><span class="primary" id="fl-area">—</span><span class="secondary" id="fl-area-sub"></span></span>
+          </div>
+        </div>
+        <div class="card" id="fl-status-card" style="display:none">
+          <div class="card-title">Velocity Check</div>
+          <div class="result-row" style="border:none;padding:4px 0 0">
+            <span class="result-label" id="fl-status-label"></span>
+            <span class="dot" id="fl-status-dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pressure -->
+    <div class="acc">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-label">Pressure</span>
+        <span class="acc-badge">Friction · Head · Residual</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs</div>
+            <button class="clear-btn" onclick="clearInputs(['pr-source','pr-elev','pr-len','pr-dia','pr-gpm'], calcPressure)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Source / Inlet Pressure (<span class="ul" data-imp="PSI" data-met="kPa">PSI</span>)</label>
+            <input id="pr-source" type="number" inputmode="decimal" placeholder="e.g. 65" min="0">
+          </div>
+          <div class="field">
+            <label>Elevation Change (<span class="ul" data-imp="ft" data-met="m">ft</span>) <span style="font-weight:400;font-size:.75em;color:var(--muted)">+ downhill / − uphill</span></label>
+            <input id="pr-elev" type="number" inputmode="decimal" placeholder="e.g. 50">
+          </div>
+          <div class="field">
+            <label>Pipe Length (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
+            <input id="pr-len" type="number" inputmode="decimal" placeholder="e.g. 1000" min="0">
+          </div>
+          <div class="field">
+            <label>Pipe Diameter (<span class="ul" data-imp="inches" data-met="mm">inches</span>)</label>
+            <input id="pr-dia" type="number" inputmode="decimal" placeholder="e.g. 6" min="0" step="0.25">
+          </div>
+          <div class="field">
+            <label>Flow Rate (<span class="ul" data-imp="GPM" data-met="L/min">GPM</span>)</label>
+            <input id="pr-gpm" type="number" inputmode="decimal" placeholder="e.g. 200" min="0">
+          </div>
+          <div class="field">
+            <label>Pipe Material (C-factor)</label>
+            <select id="pr-cfactor">
+              <option value="150">PVC / Plastic — C 150</option>
+              <option value="140">HDPE — C 140</option>
+              <option value="130">Copper — C 130</option>
+              <option value="120" selected>Ductile / Cast Iron — C 120</option>
+              <option value="120">Concrete — C 120</option>
+              <option value="100">Old Cast Iron — C 100</option>
+              <option value="80">Corroded Iron — C 80</option>
+            </select>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div class="result-row">
+            <span class="result-label">Static Pressure (elevation)</span>
+            <span class="result-val"><span class="primary" id="pr-static">—</span><span class="secondary" id="pr-static-sub"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Friction Loss (H-W)</span>
+            <span class="result-val"><span class="primary" id="pr-friction">—</span><span class="secondary" id="pr-friction-sub"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Friction Loss per 100 ft</span>
+            <span class="result-val"><span class="primary" id="pr-per100">—</span><span class="secondary">PSI / 100 ft</span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Residual Pressure</span>
+            <span class="result-val"><span class="primary" id="pr-residual">—</span><span class="secondary" id="pr-residual-sub"></span></span>
+            <span class="dot dot-grey" id="pr-residual-dot"></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Head Loss</span>
+            <span class="result-val"><span class="primary" id="pr-headloss">—</span><span class="secondary" id="pr-headloss-sub"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tank Volume — Cylindrical -->
+    <div class="acc">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-label">Tank Volume — Cylindrical</span>
+        <span class="acc-badge">Gallons · Liters</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs &amp; Result</div>
+            <button class="clear-btn" onclick="clearInputs(['tv-cyl-dia','tv-cyl-h'], calcCylinder)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Diameter (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
+            <input id="tv-cyl-dia" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
+          </div>
+          <div class="field">
+            <label>Height / Depth (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
+            <input id="tv-cyl-h" type="number" inputmode="decimal" placeholder="e.g. 15" min="0" step="0.1">
+          </div>
+          <div class="result-row" style="padding-top:12px">
+            <span class="result-label">Volume</span>
+            <span class="result-val"><span class="primary" id="tv-cyl-gal">—</span><span class="secondary" id="tv-cyl-sub"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tank Volume — Rectangular -->
+    <div class="acc">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-label">Tank Volume — Rectangular</span>
+        <span class="acc-badge">Gallons · Liters</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs &amp; Result</div>
+            <button class="clear-btn" onclick="clearInputs(['tv-rec-l','tv-rec-w','tv-rec-h'], calcRect)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Length (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
+            <input id="tv-rec-l" type="number" inputmode="decimal" placeholder="e.g. 30" min="0" step="0.1">
+          </div>
+          <div class="field">
+            <label>Width (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
+            <input id="tv-rec-w" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
+          </div>
+          <div class="field">
+            <label>Height / Depth (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
+            <input id="tv-rec-h" type="number" inputmode="decimal" placeholder="e.g. 10" min="0" step="0.1">
+          </div>
+          <div class="result-row" style="padding-top:12px">
+            <span class="result-label">Volume</span>
+            <span class="result-val"><span class="primary" id="tv-rec-gal">—</span><span class="secondary" id="tv-rec-sub"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detention Time -->
+    <div class="acc">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-label">Detention Time</span>
+        <span class="acc-badge">Minutes · Hours · CT</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs &amp; Result</div>
+            <button class="clear-btn" onclick="clearInputs(['dt-vol','dt-gpm'], calcDetention)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Tank Volume (<span class="ul" data-imp="gallons" data-met="liters">gallons</span>)</label>
+            <input id="dt-vol" type="number" inputmode="decimal" placeholder="e.g. 50000" min="0">
+          </div>
+          <div class="field">
+            <label>Flow Rate (<span class="ul" data-imp="GPM" data-met="L/min">GPM</span>)</label>
+            <input id="dt-gpm" type="number" inputmode="decimal" placeholder="e.g. 350" min="0">
+          </div>
+          <div class="result-row" style="padding-top:12px">
+            <span class="result-label">Detention Time</span>
+            <span class="result-val"><span class="primary" id="dt-min">—</span><span class="secondary" id="dt-hr"></span></span>
+            <span class="dot dot-grey" id="dt-dot"></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">CT Achieved <span style="font-size:.65rem;color:var(--muted)">(at 1.0 mg/L)</span></span>
+            <span class="result-val"><span class="primary" id="dt-ct">—</span><span class="secondary">mg/L · min</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chemical Feed Rate -->
+    <div class="acc">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-label">Chemical Feed Rate</span>
+        <span class="acc-badge">lbs/day · gal/day · mL/min</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs &amp; Result</div>
+            <button class="clear-btn" onclick="clearInputs(['cf-gpm','cf-dose','cf-strength'], calcChemFeed)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Flow Rate (<span class="ul" data-imp="GPM" data-met="L/min">GPM</span>)</label>
+            <input id="cf-gpm" type="number" inputmode="decimal" placeholder="e.g. 500" min="0">
+          </div>
+          <div class="field">
+            <label>Chemical Dose (mg/L)</label>
+            <input id="cf-dose" type="number" inputmode="decimal" placeholder="e.g. 2.0" min="0" step="0.1">
+          </div>
+          <div class="field">
+            <label>Solution Strength (%)</label>
+            <input id="cf-strength" type="number" inputmode="decimal" placeholder="e.g. 12.5" min="0" max="100" step="0.1">
+          </div>
+          <div class="result-row" style="padding-top:12px">
+            <span class="result-label">Feed Rate</span>
+            <span class="result-val"><span class="primary" id="cf-lbs">—</span><span class="secondary" id="cf-oz"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Solution Volume</span>
+            <span class="result-val"><span class="primary" id="cf-gal">—</span><span class="secondary" id="cf-mlmin"></span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Flow (MGD)</span>
+            <span class="result-val"><span class="primary" id="cf-mgd">—</span><span class="secondary" id="cf-gpd"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end #screen-calc -->
+
+  <!-- ════════════════ LOG TAB ════════════════ -->
+  <div class="screen" id="screen-log">
+    <div class="placeholder">
+      <svg viewBox="0 0 24 24" style="width:56px;height:56px;opacity:.12;stroke:var(--blue);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+      </svg>
+      <h2>Field Log</h2>
+      <p>Log and review daily readings, samples, and notes — coming soon.</p>
+    </div>
+  </div>
+
+  <!-- ════════════════ STUDY TAB ════════════════ -->
+  <div class="screen" id="screen-study">
+    <div class="placeholder">
+      <svg viewBox="0 0 24 24" style="width:56px;height:56px;opacity:.12;stroke:var(--blue);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+      <h2>Study</h2>
+      <p>Exam prep, formula references, and operator certification guides — coming soon.</p>
+    </div>
+  </div>
+
+  <!-- ════════════════ MORE TAB ════════════════ -->
+  <div class="screen" id="screen-more">
+
+    <div class="card">
+      <div class="card-title">Units</div>
+      <div style="display:flex;gap:8px;margin-top:4px;">
+        <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')" style="flex:1;border-radius:8px;padding:12px;">Imperial</button>
+        <button class="unit-btn" id="btn-met" onclick="setUnits('met')" style="flex:1;border-radius:8px;padding:12px;">Metric</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">About</div>
+      <div class="more-row">
+        <span class="more-row-label">App</span>
+        <span class="more-row-val">Dr. H₂O</span>
+      </div>
+      <div class="more-row">
+        <span class="more-row-label">Version</span>
+        <span class="more-row-val">1.0</span>
+      </div>
+      <div class="more-row">
+        <span class="more-row-label">Offline</span>
+        <span class="more-row-val">PWA — works without internet</span>
+      </div>
+      <div class="more-row">
+        <span class="more-row-label">Reference</span>
+        <span class="more-row-val">EPA SWTR · Hazen-Williams</span>
+      </div>
+    </div>
+
+  </div><!-- end #screen-more -->
+
+</div><!-- end .screens -->
+
+<!-- ── BOTTOM NAV ── -->
+<nav>
+  <button class="nav-btn active" data-target="calc">
+    <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px">
+      <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>
+    </svg>
+    Calc
+  </button>
+  <button class="nav-btn" data-target="log">
+    <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px">
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+    </svg>
+    Log
+  </button>
+  <button class="nav-btn" data-target="study">
+    <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px">
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+    </svg>
+    Study
+  </button>
+  <button class="nav-btn" data-target="more">
+    <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px">
+      <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+    More
+  </button>
+</nav>
 
     <!-- Inputs -->
     <div class="card">
@@ -750,16 +1219,16 @@
     U = unit;
     localStorage.setItem('drh2o-units', U);
     document.querySelectorAll('.ul').forEach(el => el.textContent = el.dataset[U]);
-    document.getElementById('btn-imp').classList.toggle('active', U === 'imp');
-    document.getElementById('btn-met').classList.toggle('active', U === 'met');
+    document.querySelectorAll('#btn-imp').forEach(b => b.classList.toggle('active', U === 'imp'));
+    document.querySelectorAll('#btn-met').forEach(b => b.classList.toggle('active', U === 'met'));
     calcChlorine(); calcFlow(); calcPressure(); calcCylinder(); calcRect(); calcDetention(); calcChemFeed();
   }
 
   // Apply saved unit on load
   if (U === 'met') {
     document.querySelectorAll('.ul').forEach(el => el.textContent = el.dataset.met);
-    document.getElementById('btn-imp').classList.remove('active');
-    document.getElementById('btn-met').classList.add('active');
+    document.querySelectorAll('#btn-imp').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#btn-met').forEach(b => b.classList.add('active'));
   }
 
   // ── CLEAR ──
@@ -780,6 +1249,14 @@
       document.getElementById('screen-' + target).classList.add('active');
     });
   });
+
+  // ── ACCORDION ──
+  function toggleAcc(btn) {
+    const body   = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    btn.classList.toggle('open',  !isOpen);
+    body.classList.toggle('open', !isOpen);
+  }
 
   // ── HELPERS ──
   function fmt(n, dec = 2) {
