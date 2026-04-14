@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dr. H₂O</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0a0a;
+      --surface:  #141414;
+      --border:   #222;
+      --blue:     #00A8E8;
+      --blue-dim: #00699a;
+      --text:     #f0f0f0;
+      --muted:    #888;
+      --nav-h:    64px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 100;
+    }
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--blue);
+    }
+    header h1 span { color: var(--text); }
+
+    /* ── SCREENS ── */
+    .screens {
+      position: fixed;
+      top: 56px;
+      bottom: var(--nav-h);
+      left: 0; right: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .screen {
+      display: none;
+      padding: 32px 20px;
+      min-height: 100%;
+    }
+    .screen.active { display: block; }
+
+    .placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      gap: 16px;
+      text-align: center;
+    }
+    .placeholder svg {
+      width: 64px;
+      height: 64px;
+      opacity: 0.15;
+    }
+    .placeholder h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .placeholder p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 240px;
+      line-height: 1.5;
+    }
+
+    /* ── BOTTOM NAV ── */
+    nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+      padding: 0;
+    }
+    .nav-btn svg {
+      width: 22px;
+      height: 22px;
+      transition: stroke 0.15s;
+    }
+    .nav-btn.active,
+    .nav-btn:active { color: var(--blue); }
+    .nav-btn.active svg,
+    .nav-btn:active svg { stroke: var(--blue); }
+    .nav-btn svg { stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Dr. H<span style="font-size:.75em;vertical-align:super;line-height:0">₂</span><span>O</span></h1>
+</header>
+
+<!-- ── SCREENS ── -->
+<div class="screens">
+
+  <div class="screen active" id="screen-chlorine">
+    <div class="placeholder">
+      <svg viewBox="0 0 24 24" stroke="var(--blue)">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8 12h8M12 8v8"/>
+      </svg>
+      <h2>Chlorine</h2>
+      <p>Dosage, feed rate, CT value, and residual calculations coming here.</p>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-flow">
+    <div class="placeholder">
+      <svg viewBox="0 0 24 24" stroke="var(--blue)">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+      <h2>Flow</h2>
+      <p>Velocity, head loss, pipe hydraulics, and flow conversions coming here.</p>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-pressure">
+    <div class="placeholder">
+      <svg viewBox="0 0 24 24" stroke="var(--blue)">
+        <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/>
+        <path d="M12 6v6l4 2"/>
+      </svg>
+      <h2>Pressure</h2>
+      <p>PSI, head, pressure drop, and pump calculations coming here.</p>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-more">
+    <div class="placeholder">
+      <svg viewBox="0 0 24 24" stroke="var(--blue)">
+        <circle cx="5" cy="12" r="1.5" fill="var(--blue)" stroke="none"/>
+        <circle cx="12" cy="12" r="1.5" fill="var(--blue)" stroke="none"/>
+        <circle cx="19" cy="12" r="1.5" fill="var(--blue)" stroke="none"/>
+      </svg>
+      <h2>More</h2>
+      <p>Unit conversions, reference tables, and settings coming here.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── BOTTOM NAV ── -->
+<nav>
+  <button class="nav-btn active" data-target="chlorine">
+    <!-- Droplet icon -->
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2C12 2 5 10 5 15a7 7 0 0 0 14 0C19 10 12 2 12 2z"/>
+    </svg>
+    Chlorine
+  </button>
+
+  <button class="nav-btn" data-target="flow">
+    <!-- Wave icon -->
+    <svg viewBox="0 0 24 24">
+      <path d="M2 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/>
+    </svg>
+    Flow
+  </button>
+
+  <button class="nav-btn" data-target="pressure">
+    <!-- Gauge icon -->
+    <svg viewBox="0 0 24 24">
+      <path d="M12 22a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/>
+      <path d="M12 7v5l3 3"/>
+    </svg>
+    Pressure
+  </button>
+
+  <button class="nav-btn" data-target="more">
+    <!-- Grid icon -->
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="3" width="7" height="7" rx="1"/>
+      <rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/>
+      <rect x="14" y="14" width="7" height="7" rx="1"/>
+    </svg>
+    More
+  </button>
+</nav>
+
+<script>
+  const btns    = document.querySelectorAll('.nav-btn');
+  const screens = document.querySelectorAll('.screen');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      btns.forEach(b => b.classList.remove('active'));
+      screens.forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('screen-' + target).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
