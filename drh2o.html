@@ -300,13 +300,82 @@
   </div>
 
   <div class="screen" id="screen-flow">
-    <div class="placeholder">
-      <svg viewBox="0 0 24 24" stroke="var(--blue)">
-        <path d="M5 12h14M13 6l6 6-6 6"/>
-      </svg>
-      <h2>Flow</h2>
-      <p>Velocity, head loss, pipe hydraulics, and flow conversions coming here.</p>
+
+    <!-- Inputs -->
+    <div class="card">
+      <div class="card-title">Flow Inputs</div>
+
+      <div class="field">
+        <label>Pipe Diameter (inches)</label>
+        <input id="fl-dia" type="number" inputmode="decimal" placeholder="e.g. 6" min="0" step="0.25">
+      </div>
+
+      <div class="field">
+        <label>Flow Velocity (fps)</label>
+        <input id="fl-vel" type="number" inputmode="decimal" placeholder="e.g. 3.5" min="0" step="0.1">
+      </div>
+
+      <div class="field">
+        <label>Time (minutes)</label>
+        <input id="fl-time" type="number" inputmode="decimal" placeholder="e.g. 60" min="0">
+      </div>
     </div>
+
+    <!-- Results -->
+    <div class="card">
+      <div class="card-title">Results</div>
+
+      <div class="result-row">
+        <span class="result-label">Flow Rate</span>
+        <span class="result-val">
+          <span class="primary" id="fl-gpm">—</span>
+          <span class="secondary" id="fl-gpm-sub"></span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Flow Rate</span>
+        <span class="result-val">
+          <span class="primary" id="fl-gph">—</span>
+          <span class="secondary" id="fl-cfs"></span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Total Volume (over time)</span>
+        <span class="result-val">
+          <span class="primary" id="fl-vol">—</span>
+          <span class="secondary" id="fl-vol-sub"></span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Pipe Capacity</span>
+        <span class="result-val">
+          <span class="primary" id="fl-cap">—</span>
+          <span class="secondary">gal per linear foot</span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Pipe Area</span>
+        <span class="result-val">
+          <span class="primary" id="fl-area">—</span>
+          <span class="secondary" id="fl-area-sub"></span>
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Velocity status -->
+    <div class="card" id="fl-status-card" style="display:none">
+      <div class="card-title">Velocity Check</div>
+      <div class="result-row" style="border:none;padding:4px 0 0">
+        <span class="result-label" id="fl-status-label"></span>
+        <span class="dot" id="fl-status-dot"></span>
+      </div>
+    </div>
+
   </div>
 
   <div class="screen" id="screen-pressure">
@@ -442,9 +511,83 @@
     set('cl-ct-sub', '(' + fmt(ct_hr, 2) + ' hrs  ·  CT = ' + CT_REQ + ' mg/L·min)');
   }
 
-  // Wire inputs
+  // Wire chlorine inputs
   ['cl-volume','cl-residual','cl-strength'].forEach(id => {
     document.getElementById(id).addEventListener('input', calcChlorine);
+  });
+
+  // ── FLOW CALC ──
+  function calcFlow() {
+    const dia_in  = parseFloat(document.getElementById('fl-dia').value)  || 0;
+    const vel_fps = parseFloat(document.getElementById('fl-vel').value)  || 0;
+    const time_min= parseFloat(document.getElementById('fl-time').value) || 0;
+
+    if (!dia_in || !vel_fps) {
+      ['fl-gpm','fl-gpm-sub','fl-gph','fl-cfs','fl-vol','fl-vol-sub','fl-cap','fl-area','fl-area-sub']
+        .forEach(id => set(id, id.endsWith('sub') ? '' : '—'));
+      document.getElementById('fl-status-card').style.display = 'none';
+      return;
+    }
+
+    const dia_ft   = dia_in / 12;
+    const area_ft2 = Math.PI * Math.pow(dia_ft / 2, 2);   // ft²
+    const area_in2 = Math.PI * Math.pow(dia_in / 2, 2);   // in²
+
+    const flow_cfs = area_ft2 * vel_fps;                  // ft³/s
+    const flow_gpm = flow_cfs * 448.831;                   // gal/min
+    const flow_gph = flow_gpm * 60;                        // gal/hr
+    const flow_gpd = flow_gpm * 1440;                      // gal/day
+
+    // Total volume over time
+    const vol_gal  = flow_gpm * time_min;
+    const vol_cf   = flow_cfs * time_min * 60;             // ft³
+
+    // Pipe capacity (gallons per linear foot of pipe)
+    const cap_gal_ft = area_ft2 * 7.48052;                 // gal/lin-ft
+
+    set('fl-gpm',     fmt(flow_gpm, 1) + ' GPM');
+    set('fl-gpm-sub', fmt(flow_gpd, 0) + ' GPD');
+    set('fl-gph',     fmt(flow_gph, 0) + ' GPH');
+    set('fl-cfs',     fmt(flow_cfs, 4) + ' CFS');
+    set('fl-area',    fmt(area_in2, 3) + ' in²');
+    set('fl-area-sub',fmt(area_ft2, 5) + ' ft²');
+    set('fl-cap',     fmt(cap_gal_ft, 4));
+
+    if (time_min > 0) {
+      set('fl-vol',     fmt(vol_gal, 0) + ' gal');
+      set('fl-vol-sub', fmt(vol_cf, 2) + ' ft³  ·  ' + fmt(time_min, 0) + ' min');
+    } else {
+      set('fl-vol', '—');
+      set('fl-vol-sub', 'Enter time above');
+    }
+
+    // Velocity status indicator
+    const card = document.getElementById('fl-status-card');
+    const lbl  = document.getElementById('fl-status-label');
+    const dot  = document.getElementById('fl-status-dot');
+    card.style.display = 'block';
+    dot.className = 'dot';
+    if (vel_fps < 1) {
+      lbl.textContent = 'Too slow — risk of sediment settling (<1 fps)';
+      dot.classList.add('dot-red');
+    } else if (vel_fps <= 2) {
+      lbl.textContent = 'Low — acceptable but watch for sediment';
+      dot.classList.add('dot-yellow');
+    } else if (vel_fps <= 8) {
+      lbl.textContent = 'Good — normal distribution velocity (2–8 fps)';
+      dot.classList.add('dot-green');
+    } else if (vel_fps <= 12) {
+      lbl.textContent = 'High — check for water hammer risk';
+      dot.classList.add('dot-yellow');
+    } else {
+      lbl.textContent = 'Too fast — high erosion & water hammer risk (>12 fps)';
+      dot.classList.add('dot-red');
+    }
+  }
+
+  // Wire flow inputs
+  ['fl-dia','fl-vel','fl-time'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calcFlow);
   });
 </script>
 
