@@ -221,6 +221,55 @@
 
     .screen { padding: 16px 16px 24px; }
 
+    /* ── LOGO ── */
+    .logo-dr    { color: var(--text); font-weight: 800; letter-spacing: 1px; }
+    .logo-water { color: var(--blue); font-weight: 800; }
+
+    /* ── UNIT TOGGLE ── */
+    .unit-toggle { display: flex; gap: 6px; margin-left: auto; }
+    .unit-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 13px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.15s;
+    }
+    .unit-btn.active { background: var(--blue); border-color: var(--blue); color: #000; }
+
+    /* ── CARD HEADER ROW ── */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .card-header .card-title { margin-bottom: 0; }
+    .clear-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      -webkit-tap-highlight-color: transparent;
+      transition: color 0.15s;
+    }
+    .clear-btn:active { color: var(--blue); }
+
+    /* ── CARD POLISH ── */
+    .card { box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+
     /* ── SELECT ── */
     .field select {
       width: 100%;
@@ -245,7 +294,11 @@
 <body>
 
 <header>
-  <h1>Dr. H<span style="font-size:.75em;vertical-align:super;line-height:0">₂</span><span>O</span></h1>
+  <h1><span class="logo-dr">DR.</span>&thinsp;<span class="logo-water">H₂O</span></h1>
+  <div class="unit-toggle">
+    <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')">Imperial</button>
+    <button class="unit-btn" id="btn-met" onclick="setUnits('met')">Metric</button>
+  </div>
 </header>
 
 <!-- ── SCREENS ── -->
@@ -255,18 +308,18 @@
 
     <!-- Inputs -->
     <div class="card">
-      <div class="card-title">Chlorine Inputs</div>
-
+      <div class="card-header">
+        <div class="card-title">Chlorine Inputs</div>
+        <button class="clear-btn" onclick="clearInputs(['cl-volume','cl-residual','cl-strength'], calcChlorine)">Clear</button>
+      </div>
       <div class="field">
-        <label>Water Volume (gallons)</label>
+        <label>Water Volume (<span class="ul" data-imp="gallons" data-met="liters">gallons</span>)</label>
         <input id="cl-volume" type="number" inputmode="decimal" placeholder="e.g. 10000" min="0">
       </div>
-
       <div class="field">
         <label>Desired Cl₂ Residual (mg/L)</label>
         <input id="cl-residual" type="number" inputmode="decimal" placeholder="e.g. 1.0" min="0" step="0.1">
       </div>
-
       <div class="field">
         <label>Chlorine Solution Strength (%)</label>
         <input id="cl-strength" type="number" inputmode="decimal" placeholder="e.g. 12.5" min="0" max="100" step="0.1">
@@ -323,18 +376,18 @@
 
     <!-- Inputs -->
     <div class="card">
-      <div class="card-title">Flow Inputs</div>
-
+      <div class="card-header">
+        <div class="card-title">Flow Inputs</div>
+        <button class="clear-btn" onclick="clearInputs(['fl-dia','fl-vel','fl-time'], calcFlow)">Clear</button>
+      </div>
       <div class="field">
-        <label>Pipe Diameter (inches)</label>
+        <label>Pipe Diameter (<span class="ul" data-imp="inches" data-met="mm">inches</span>)</label>
         <input id="fl-dia" type="number" inputmode="decimal" placeholder="e.g. 6" min="0" step="0.25">
       </div>
-
       <div class="field">
-        <label>Flow Velocity (fps)</label>
+        <label>Flow Velocity (<span class="ul" data-imp="fps" data-met="m/s">fps</span>)</label>
         <input id="fl-vel" type="number" inputmode="decimal" placeholder="e.g. 3.5" min="0" step="0.1">
       </div>
-
       <div class="field">
         <label>Time (minutes)</label>
         <input id="fl-time" type="number" inputmode="decimal" placeholder="e.g. 60" min="0">
@@ -402,33 +455,30 @@
 
     <!-- Inputs -->
     <div class="card">
-      <div class="card-title">Pressure Inputs</div>
-
+      <div class="card-header">
+        <div class="card-title">Pressure Inputs</div>
+        <button class="clear-btn" onclick="clearInputs(['pr-source','pr-elev','pr-len','pr-dia','pr-gpm'], calcPressure)">Clear</button>
+      </div>
       <div class="field">
-        <label>Source / Inlet Pressure (PSI)</label>
+        <label>Source / Inlet Pressure (<span class="ul" data-imp="PSI" data-met="kPa">PSI</span>)</label>
         <input id="pr-source" type="number" inputmode="decimal" placeholder="e.g. 65" min="0">
       </div>
-
       <div class="field">
-        <label>Elevation Change (ft) <span style="font-weight:400;font-size:.75em;color:var(--muted)">+ downhill / − uphill</span></label>
+        <label>Elevation Change (<span class="ul" data-imp="ft" data-met="m">ft</span>) <span style="font-weight:400;font-size:.75em;color:var(--muted)">+ downhill / − uphill</span></label>
         <input id="pr-elev" type="number" inputmode="decimal" placeholder="e.g. 50">
       </div>
-
       <div class="field">
-        <label>Pipe Length (ft)</label>
+        <label>Pipe Length (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
         <input id="pr-len" type="number" inputmode="decimal" placeholder="e.g. 1000" min="0">
       </div>
-
       <div class="field">
-        <label>Pipe Diameter (inches)</label>
+        <label>Pipe Diameter (<span class="ul" data-imp="inches" data-met="mm">inches</span>)</label>
         <input id="pr-dia" type="number" inputmode="decimal" placeholder="e.g. 6" min="0" step="0.25">
       </div>
-
       <div class="field">
-        <label>Flow Rate (GPM)</label>
+        <label>Flow Rate (<span class="ul" data-imp="GPM" data-met="L/min">GPM</span>)</label>
         <input id="pr-gpm" type="number" inputmode="decimal" placeholder="e.g. 200" min="0">
       </div>
-
       <div class="field">
         <label>Pipe Material (C-factor)</label>
         <select id="pr-cfactor">
@@ -496,13 +546,16 @@
 
     <!-- ── TANK VOLUME ── -->
     <div class="card">
-      <div class="card-title">Tank Volume — Cylindrical</div>
+      <div class="card-header">
+        <div class="card-title">Tank Volume — Cylindrical</div>
+        <button class="clear-btn" onclick="clearInputs(['tv-cyl-dia','tv-cyl-h'], calcCylinder)">Clear</button>
+      </div>
       <div class="field">
-        <label>Diameter (ft)</label>
+        <label>Diameter (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
         <input id="tv-cyl-dia" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
       </div>
       <div class="field">
-        <label>Height / Depth (ft)</label>
+        <label>Height / Depth (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
         <input id="tv-cyl-h" type="number" inputmode="decimal" placeholder="e.g. 15" min="0" step="0.1">
       </div>
       <div class="result-row" style="padding-top:12px">
@@ -515,17 +568,20 @@
     </div>
 
     <div class="card">
-      <div class="card-title">Tank Volume — Rectangular</div>
+      <div class="card-header">
+        <div class="card-title">Tank Volume — Rectangular</div>
+        <button class="clear-btn" onclick="clearInputs(['tv-rec-l','tv-rec-w','tv-rec-h'], calcRect)">Clear</button>
+      </div>
       <div class="field">
-        <label>Length (ft)</label>
+        <label>Length (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
         <input id="tv-rec-l" type="number" inputmode="decimal" placeholder="e.g. 30" min="0" step="0.1">
       </div>
       <div class="field">
-        <label>Width (ft)</label>
+        <label>Width (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
         <input id="tv-rec-w" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
       </div>
       <div class="field">
-        <label>Height / Depth (ft)</label>
+        <label>Height / Depth (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
         <input id="tv-rec-h" type="number" inputmode="decimal" placeholder="e.g. 10" min="0" step="0.1">
       </div>
       <div class="result-row" style="padding-top:12px">
@@ -539,13 +595,16 @@
 
     <!-- ── DETENTION TIME ── -->
     <div class="card">
-      <div class="card-title">Detention Time</div>
+      <div class="card-header">
+        <div class="card-title">Detention Time</div>
+        <button class="clear-btn" onclick="clearInputs(['dt-vol','dt-gpm'], calcDetention)">Clear</button>
+      </div>
       <div class="field">
-        <label>Tank Volume (gallons)</label>
+        <label>Tank Volume (<span class="ul" data-imp="gallons" data-met="liters">gallons</span>)</label>
         <input id="dt-vol" type="number" inputmode="decimal" placeholder="e.g. 50000" min="0">
       </div>
       <div class="field">
-        <label>Flow Rate (GPM)</label>
+        <label>Flow Rate (<span class="ul" data-imp="GPM" data-met="L/min">GPM</span>)</label>
         <input id="dt-gpm" type="number" inputmode="decimal" placeholder="e.g. 350" min="0">
       </div>
       <div class="result-row" style="padding-top:12px">
@@ -567,9 +626,12 @@
 
     <!-- ── CHEMICAL FEED RATE ── -->
     <div class="card">
-      <div class="card-title">Chemical Feed Rate</div>
+      <div class="card-header">
+        <div class="card-title">Chemical Feed Rate</div>
+        <button class="clear-btn" onclick="clearInputs(['cf-gpm','cf-dose','cf-strength'], calcChemFeed)">Clear</button>
+      </div>
       <div class="field">
-        <label>Flow Rate (GPM)</label>
+        <label>Flow Rate (<span class="ul" data-imp="GPM" data-met="L/min">GPM</span>)</label>
         <input id="cf-gpm" type="number" inputmode="decimal" placeholder="e.g. 500" min="0">
       </div>
       <div class="field">
@@ -648,6 +710,57 @@
 </nav>
 
 <script>
+  // ── UNITS ──
+  let U = localStorage.getItem('drh2o-units') || 'imp';
+
+  // Conversion factors: imperial → metric
+  const TO_MET = {
+    'cl-volume':  3.78541,   // gal → L
+    'fl-dia':     25.4,      // in → mm
+    'fl-vel':     0.3048,    // fps → m/s
+    'pr-source':  6.89476,   // PSI → kPa
+    'pr-elev':    0.3048,    // ft → m
+    'pr-len':     0.3048,    // ft → m
+    'pr-dia':     25.4,      // in → mm
+    'pr-gpm':     3.78541,   // GPM → L/min
+    'tv-cyl-dia': 0.3048, 'tv-cyl-h': 0.3048,
+    'tv-rec-l':   0.3048, 'tv-rec-w': 0.3048, 'tv-rec-h': 0.3048,
+    'dt-vol':     3.78541,   // gal → L
+    'dt-gpm':     3.78541,   // GPM → L/min
+    'cf-gpm':     3.78541,
+  };
+
+  function setUnits(unit) {
+    if (U === unit) return;
+    const toMet = unit === 'met';
+    Object.entries(TO_MET).forEach(([id, factor]) => {
+      const el = document.getElementById(id);
+      if (el && el.value !== '') {
+        const v = parseFloat(el.value);
+        if (isFinite(v)) el.value = parseFloat((toMet ? v * factor : v / factor).toPrecision(6));
+      }
+    });
+    U = unit;
+    localStorage.setItem('drh2o-units', U);
+    document.querySelectorAll('.ul').forEach(el => el.textContent = el.dataset[U]);
+    document.getElementById('btn-imp').classList.toggle('active', U === 'imp');
+    document.getElementById('btn-met').classList.toggle('active', U === 'met');
+    calcChlorine(); calcFlow(); calcPressure(); calcCylinder(); calcRect(); calcDetention(); calcChemFeed();
+  }
+
+  // Apply saved unit on load
+  if (U === 'met') {
+    document.querySelectorAll('.ul').forEach(el => el.textContent = el.dataset.met);
+    document.getElementById('btn-imp').classList.remove('active');
+    document.getElementById('btn-met').classList.add('active');
+  }
+
+  // ── CLEAR ──
+  function clearInputs(ids, recalcFn) {
+    ids.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    if (recalcFn) recalcFn();
+  }
+
   // ── NAV ──
   const btns    = document.querySelectorAll('.nav-btn');
   const screens = document.querySelectorAll('.screen');
@@ -673,9 +786,10 @@
 
   // ── CHLORINE CALC ──
   function calcChlorine() {
-    const vol_gal  = parseFloat(document.getElementById('cl-volume').value)   || 0;
+    const raw_vol  = parseFloat(document.getElementById('cl-volume').value)   || 0;
     const res_mgL  = parseFloat(document.getElementById('cl-residual').value)  || 0;
     const str_pct  = parseFloat(document.getElementById('cl-strength').value)  || 0;
+    const vol_gal  = U === 'met' ? raw_vol / 3.78541 : raw_vol;
 
     if (!vol_gal || !res_mgL) {
       ['cl-oz','cl-oz-sub','cl-g','cl-g-sub','cl-sol-oz','cl-sol-ml','cl-ct','cl-ct-sub']
@@ -723,9 +837,11 @@
 
   // ── FLOW CALC ──
   function calcFlow() {
-    const dia_in  = parseFloat(document.getElementById('fl-dia').value)  || 0;
-    const vel_fps = parseFloat(document.getElementById('fl-vel').value)  || 0;
+    const raw_dia = parseFloat(document.getElementById('fl-dia').value)  || 0;
+    const raw_vel = parseFloat(document.getElementById('fl-vel').value)  || 0;
     const time_min= parseFloat(document.getElementById('fl-time').value) || 0;
+    const dia_in  = U === 'met' ? raw_dia / 25.4   : raw_dia;
+    const vel_fps = U === 'met' ? raw_vel / 0.3048 : raw_vel;
 
     if (!dia_in || !vel_fps) {
       ['fl-gpm','fl-gpm-sub','fl-gph','fl-cfs','fl-vol','fl-vol-sub','fl-cap','fl-area','fl-area-sub']
@@ -797,20 +913,27 @@
 
   // ── PRESSURE CALC ──
   function calcPressure() {
-    const p_source = parseFloat(document.getElementById('pr-source').value) || 0;
-    const elev_ft  = parseFloat(document.getElementById('pr-elev').value)   || 0;
-    const len_ft   = parseFloat(document.getElementById('pr-len').value)    || 0;
-    const dia_in   = parseFloat(document.getElementById('pr-dia').value)    || 0;
-    const gpm      = parseFloat(document.getElementById('pr-gpm').value)    || 0;
+    const raw_src  = parseFloat(document.getElementById('pr-source').value) || 0;
+    const raw_elev = parseFloat(document.getElementById('pr-elev').value)   || 0;
+    const raw_len  = parseFloat(document.getElementById('pr-len').value)    || 0;
+    const raw_dia  = parseFloat(document.getElementById('pr-dia').value)    || 0;
+    const raw_gpm  = parseFloat(document.getElementById('pr-gpm').value)    || 0;
     const C        = parseFloat(document.getElementById('pr-cfactor').value)|| 120;
+    const p_source = U === 'met' ? raw_src  / 6.89476 : raw_src;
+    const elev_ft  = U === 'met' ? raw_elev / 0.3048  : raw_elev;
+    const len_ft   = U === 'met' ? raw_len  / 0.3048  : raw_len;
+    const dia_in   = U === 'met' ? raw_dia  / 25.4    : raw_dia;
+    const gpm      = U === 'met' ? raw_gpm  / 3.78541 : raw_gpm;
 
     const hasFlow = dia_in > 0 && len_ft > 0 && gpm > 0;
 
     // Static pressure from elevation (positive = downhill gain, negative = uphill loss)
     const static_psi = elev_ft * 0.43353;
     const static_ft  = elev_ft;
-    set('pr-static',     (static_psi >= 0 ? '+' : '') + fmt(static_psi, 2) + ' PSI');
-    set('pr-static-sub', (static_ft  >= 0 ? '+' : '') + fmt(static_ft,  1) + ' ft head');
+    const pu = U === 'met'; // pressure in metric?
+    const pSign = static_psi >= 0 ? '+' : '';
+    set('pr-static',     pSign + fmt(pu ? static_psi*6.89476 : static_psi, 2) + (pu?' kPa':' PSI'));
+    set('pr-static-sub', pSign + fmt(pu ? elev_ft*0.3048 : static_ft,  1)   + (pu?' m head':' ft head'));
 
     // Hazen-Williams friction loss
     // hf (ft) = 4.72 × L × Q^1.852 / (C^1.852 × D^4.87)
@@ -820,11 +943,11 @@
       hf_psi     = hf_ft * 0.43353;
       per100_psi = len_ft > 0 ? (hf_psi / len_ft) * 100 : 0;
 
-      set('pr-friction',     fmt(hf_psi, 2) + ' PSI');
-      set('pr-friction-sub', fmt(hf_ft, 2)  + ' ft head');
-      set('pr-per100',       fmt(per100_psi, 3) + ' PSI');
-      set('pr-headloss',     fmt(hf_ft, 2)  + ' ft');
-      set('pr-headloss-sub', fmt(hf_psi, 2) + ' PSI  ·  C=' + C);
+      set('pr-friction',     fmt(pu ? hf_psi*6.89476 : hf_psi, 2) + (pu?' kPa':' PSI'));
+      set('pr-friction-sub', fmt(pu ? hf_ft*0.3048  : hf_ft,  2) + (pu?' m head':' ft head'));
+      set('pr-per100',       fmt(pu ? per100_psi*6.89476/0.3048 : per100_psi, 3) + (pu?' kPa/100m':' PSI/100ft'));
+      set('pr-headloss',     fmt(pu ? hf_ft*0.3048 : hf_ft, 2)  + (pu?' m':' ft'));
+      set('pr-headloss-sub', fmt(pu ? hf_psi*6.89476 : hf_psi, 2) + (pu?' kPa':'  PSI') + '  ·  C=' + C);
     } else {
       ['pr-friction','pr-friction-sub','pr-per100','pr-headloss','pr-headloss-sub']
         .forEach(id => set(id, id.endsWith('sub') ? '' : '—'));
@@ -833,8 +956,8 @@
     // Residual pressure = source + elevation gain − friction loss
     const residual_psi = p_source + static_psi - hf_psi;
     const residual_ft  = residual_psi / 0.43353;
-    set('pr-residual',     fmt(residual_psi, 2) + ' PSI');
-    set('pr-residual-sub', fmt(residual_ft,  1) + ' ft head');
+    set('pr-residual',     fmt(pu ? residual_psi*6.89476 : residual_psi, 2) + (pu?' kPa':' PSI'));
+    set('pr-residual-sub', fmt(pu ? residual_ft*0.3048 : residual_ft, 1) + (pu?' m head':' ft head'));
 
     // Color-code residual
     const dot = document.getElementById('pr-residual-dot');
@@ -858,37 +981,46 @@
 
   // ── TANK VOLUME — CYLINDRICAL ──
   function calcCylinder() {
-    const d = parseFloat(document.getElementById('tv-cyl-dia').value) || 0;
-    const h = parseFloat(document.getElementById('tv-cyl-h').value)   || 0;
-    if (!d || !h) { set('tv-cyl-gal','—'); set('tv-cyl-sub',''); return; }
-    const vol_ft3 = Math.PI * Math.pow(d / 2, 2) * h;
+    const raw_d = parseFloat(document.getElementById('tv-cyl-dia').value) || 0;
+    const raw_h = parseFloat(document.getElementById('tv-cyl-h').value)   || 0;
+    if (!raw_d || !raw_h) { set('tv-cyl-gal','—'); set('tv-cyl-sub',''); return; }
+    const d_ft    = U === 'met' ? raw_d / 0.3048 : raw_d;
+    const h_ft    = U === 'met' ? raw_h / 0.3048 : raw_h;
+    const vol_ft3 = Math.PI * Math.pow(d_ft / 2, 2) * h_ft;
     const vol_gal = vol_ft3 * 7.48052;
     const vol_L   = vol_gal * 3.78541;
-    set('tv-cyl-gal', fmt(vol_gal, 0) + ' gal');
-    set('tv-cyl-sub', fmt(vol_ft3, 1) + ' ft³  ·  ' + fmt(vol_L, 0) + ' L');
+    const vol_m3  = vol_L / 1000;
+    set('tv-cyl-gal', U === 'met' ? fmt(vol_L, 0) + ' L' : fmt(vol_gal, 0) + ' gal');
+    set('tv-cyl-sub',  U === 'met' ? fmt(vol_m3, 2) + ' m³  ·  ' + fmt(vol_gal, 0) + ' gal'
+                                   : fmt(vol_ft3, 1) + ' ft³  ·  ' + fmt(vol_L, 0) + ' L');
   }
   ['tv-cyl-dia','tv-cyl-h'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcCylinder));
 
   // ── TANK VOLUME — RECTANGULAR ──
   function calcRect() {
-    const l = parseFloat(document.getElementById('tv-rec-l').value) || 0;
-    const w = parseFloat(document.getElementById('tv-rec-w').value) || 0;
-    const h = parseFloat(document.getElementById('tv-rec-h').value) || 0;
-    if (!l || !w || !h) { set('tv-rec-gal','—'); set('tv-rec-sub',''); return; }
-    const vol_ft3 = l * w * h;
+    const rl = parseFloat(document.getElementById('tv-rec-l').value) || 0;
+    const rw = parseFloat(document.getElementById('tv-rec-w').value) || 0;
+    const rh = parseFloat(document.getElementById('tv-rec-h').value) || 0;
+    if (!rl || !rw || !rh) { set('tv-rec-gal','—'); set('tv-rec-sub',''); return; }
+    const f  = U === 'met' ? 1/0.3048 : 1;
+    const vol_ft3 = (rl*f) * (rw*f) * (rh*f);
     const vol_gal = vol_ft3 * 7.48052;
     const vol_L   = vol_gal * 3.78541;
-    set('tv-rec-gal', fmt(vol_gal, 0) + ' gal');
-    set('tv-rec-sub', fmt(vol_ft3, 1) + ' ft³  ·  ' + fmt(vol_L, 0) + ' L');
+    const vol_m3  = vol_L / 1000;
+    set('tv-rec-gal', U === 'met' ? fmt(vol_L, 0) + ' L' : fmt(vol_gal, 0) + ' gal');
+    set('tv-rec-sub',  U === 'met' ? fmt(vol_m3, 2) + ' m³  ·  ' + fmt(vol_gal, 0) + ' gal'
+                                   : fmt(vol_ft3, 1) + ' ft³  ·  ' + fmt(vol_L, 0) + ' L');
   }
   ['tv-rec-l','tv-rec-w','tv-rec-h'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcRect));
 
   // ── DETENTION TIME ──
   function calcDetention() {
-    const vol_gal = parseFloat(document.getElementById('dt-vol').value) || 0;
-    const gpm     = parseFloat(document.getElementById('dt-gpm').value) || 0;
+    const raw_vol = parseFloat(document.getElementById('dt-vol').value) || 0;
+    const raw_gpm = parseFloat(document.getElementById('dt-gpm').value) || 0;
+    const vol_gal = U === 'met' ? raw_vol / 3.78541 : raw_vol;
+    const gpm     = U === 'met' ? raw_gpm / 3.78541 : raw_gpm;
     if (!vol_gal || !gpm) {
       set('dt-min','—'); set('dt-hr',''); set('dt-ct','—');
       document.getElementById('dt-dot').className = 'dot dot-grey';
@@ -913,7 +1045,8 @@
 
   // ── CHEMICAL FEED RATE ──
   function calcChemFeed() {
-    const gpm      = parseFloat(document.getElementById('cf-gpm').value)      || 0;
+    const raw_gpm  = parseFloat(document.getElementById('cf-gpm').value)      || 0;
+    const gpm      = U === 'met' ? raw_gpm / 3.78541 : raw_gpm;
     const dose     = parseFloat(document.getElementById('cf-dose').value)     || 0;
     const strength = parseFloat(document.getElementById('cf-strength').value) || 0;
     if (!gpm || !dose) {
