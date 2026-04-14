@@ -493,15 +493,117 @@
   </div>
 
   <div class="screen" id="screen-more">
-    <div class="placeholder">
-      <svg viewBox="0 0 24 24" stroke="var(--blue)">
-        <circle cx="5" cy="12" r="1.5" fill="var(--blue)" stroke="none"/>
-        <circle cx="12" cy="12" r="1.5" fill="var(--blue)" stroke="none"/>
-        <circle cx="19" cy="12" r="1.5" fill="var(--blue)" stroke="none"/>
-      </svg>
-      <h2>More</h2>
-      <p>Unit conversions, reference tables, and settings coming here.</p>
+
+    <!-- ── TANK VOLUME ── -->
+    <div class="card">
+      <div class="card-title">Tank Volume — Cylindrical</div>
+      <div class="field">
+        <label>Diameter (ft)</label>
+        <input id="tv-cyl-dia" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
+      </div>
+      <div class="field">
+        <label>Height / Depth (ft)</label>
+        <input id="tv-cyl-h" type="number" inputmode="decimal" placeholder="e.g. 15" min="0" step="0.1">
+      </div>
+      <div class="result-row" style="padding-top:12px">
+        <span class="result-label">Volume</span>
+        <span class="result-val">
+          <span class="primary" id="tv-cyl-gal">—</span>
+          <span class="secondary" id="tv-cyl-sub"></span>
+        </span>
+      </div>
     </div>
+
+    <div class="card">
+      <div class="card-title">Tank Volume — Rectangular</div>
+      <div class="field">
+        <label>Length (ft)</label>
+        <input id="tv-rec-l" type="number" inputmode="decimal" placeholder="e.g. 30" min="0" step="0.1">
+      </div>
+      <div class="field">
+        <label>Width (ft)</label>
+        <input id="tv-rec-w" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
+      </div>
+      <div class="field">
+        <label>Height / Depth (ft)</label>
+        <input id="tv-rec-h" type="number" inputmode="decimal" placeholder="e.g. 10" min="0" step="0.1">
+      </div>
+      <div class="result-row" style="padding-top:12px">
+        <span class="result-label">Volume</span>
+        <span class="result-val">
+          <span class="primary" id="tv-rec-gal">—</span>
+          <span class="secondary" id="tv-rec-sub"></span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ── DETENTION TIME ── -->
+    <div class="card">
+      <div class="card-title">Detention Time</div>
+      <div class="field">
+        <label>Tank Volume (gallons)</label>
+        <input id="dt-vol" type="number" inputmode="decimal" placeholder="e.g. 50000" min="0">
+      </div>
+      <div class="field">
+        <label>Flow Rate (GPM)</label>
+        <input id="dt-gpm" type="number" inputmode="decimal" placeholder="e.g. 350" min="0">
+      </div>
+      <div class="result-row" style="padding-top:12px">
+        <span class="result-label">Detention Time</span>
+        <span class="result-val">
+          <span class="primary" id="dt-min">—</span>
+          <span class="secondary" id="dt-hr"></span>
+        </span>
+        <span class="dot dot-grey" id="dt-dot"></span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">CT Achieved <span style="font-size:.65rem;color:var(--muted)">(at 1.0 mg/L residual)</span></span>
+        <span class="result-val">
+          <span class="primary" id="dt-ct">—</span>
+          <span class="secondary">mg/L · min</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ── CHEMICAL FEED RATE ── -->
+    <div class="card">
+      <div class="card-title">Chemical Feed Rate</div>
+      <div class="field">
+        <label>Flow Rate (GPM)</label>
+        <input id="cf-gpm" type="number" inputmode="decimal" placeholder="e.g. 500" min="0">
+      </div>
+      <div class="field">
+        <label>Chemical Dose (mg/L)</label>
+        <input id="cf-dose" type="number" inputmode="decimal" placeholder="e.g. 2.0" min="0" step="0.1">
+      </div>
+      <div class="field">
+        <label>Solution Strength (%)</label>
+        <input id="cf-strength" type="number" inputmode="decimal" placeholder="e.g. 12.5" min="0" max="100" step="0.1">
+      </div>
+
+      <div class="result-row" style="padding-top:12px">
+        <span class="result-label">Feed Rate</span>
+        <span class="result-val">
+          <span class="primary" id="cf-lbs">—</span>
+          <span class="secondary" id="cf-oz"></span>
+        </span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Solution Volume</span>
+        <span class="result-val">
+          <span class="primary" id="cf-gal">—</span>
+          <span class="secondary" id="cf-mlmin"></span>
+        </span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Flow (MGD)</span>
+        <span class="result-val">
+          <span class="primary" id="cf-mgd">—</span>
+          <span class="secondary" id="cf-gpd"></span>
+        </span>
+      </div>
+    </div>
+
   </div>
 
 </div>
@@ -753,6 +855,95 @@
     document.getElementById(id).addEventListener('input', calcPressure);
     document.getElementById(id).addEventListener('change', calcPressure);
   });
+
+  // ── TANK VOLUME — CYLINDRICAL ──
+  function calcCylinder() {
+    const d = parseFloat(document.getElementById('tv-cyl-dia').value) || 0;
+    const h = parseFloat(document.getElementById('tv-cyl-h').value)   || 0;
+    if (!d || !h) { set('tv-cyl-gal','—'); set('tv-cyl-sub',''); return; }
+    const vol_ft3 = Math.PI * Math.pow(d / 2, 2) * h;
+    const vol_gal = vol_ft3 * 7.48052;
+    const vol_L   = vol_gal * 3.78541;
+    set('tv-cyl-gal', fmt(vol_gal, 0) + ' gal');
+    set('tv-cyl-sub', fmt(vol_ft3, 1) + ' ft³  ·  ' + fmt(vol_L, 0) + ' L');
+  }
+  ['tv-cyl-dia','tv-cyl-h'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcCylinder));
+
+  // ── TANK VOLUME — RECTANGULAR ──
+  function calcRect() {
+    const l = parseFloat(document.getElementById('tv-rec-l').value) || 0;
+    const w = parseFloat(document.getElementById('tv-rec-w').value) || 0;
+    const h = parseFloat(document.getElementById('tv-rec-h').value) || 0;
+    if (!l || !w || !h) { set('tv-rec-gal','—'); set('tv-rec-sub',''); return; }
+    const vol_ft3 = l * w * h;
+    const vol_gal = vol_ft3 * 7.48052;
+    const vol_L   = vol_gal * 3.78541;
+    set('tv-rec-gal', fmt(vol_gal, 0) + ' gal');
+    set('tv-rec-sub', fmt(vol_ft3, 1) + ' ft³  ·  ' + fmt(vol_L, 0) + ' L');
+  }
+  ['tv-rec-l','tv-rec-w','tv-rec-h'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcRect));
+
+  // ── DETENTION TIME ──
+  function calcDetention() {
+    const vol_gal = parseFloat(document.getElementById('dt-vol').value) || 0;
+    const gpm     = parseFloat(document.getElementById('dt-gpm').value) || 0;
+    if (!vol_gal || !gpm) {
+      set('dt-min','—'); set('dt-hr',''); set('dt-ct','—');
+      document.getElementById('dt-dot').className = 'dot dot-grey';
+      return;
+    }
+    const dt_min = vol_gal / gpm;
+    const dt_hr  = dt_min / 60;
+    const ct     = 1.0 * dt_min; // CT at 1.0 mg/L residual
+
+    set('dt-min', fmt(dt_min, 1) + ' min');
+    set('dt-hr',  fmt(dt_hr, 2) + ' hrs');
+    set('dt-ct',  fmt(ct, 1));
+
+    const dot = document.getElementById('dt-dot');
+    dot.className = 'dot';
+    if (dt_min >= 30)      dot.classList.add('dot-green');
+    else if (dt_min >= 15) dot.classList.add('dot-yellow');
+    else                    dot.classList.add('dot-red');
+  }
+  ['dt-vol','dt-gpm'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcDetention));
+
+  // ── CHEMICAL FEED RATE ──
+  function calcChemFeed() {
+    const gpm      = parseFloat(document.getElementById('cf-gpm').value)      || 0;
+    const dose     = parseFloat(document.getElementById('cf-dose').value)     || 0;
+    const strength = parseFloat(document.getElementById('cf-strength').value) || 0;
+    if (!gpm || !dose) {
+      ['cf-lbs','cf-oz','cf-gal','cf-mlmin','cf-mgd','cf-gpd']
+        .forEach(id => set(id, id === 'cf-lbs' || id === 'cf-gal' || id === 'cf-mgd' ? '—' : ''));
+      return;
+    }
+    const mgd     = gpm * 1440 / 1e6;
+    const gpd     = gpm * 1440;
+    const lbs_day = mgd * dose * 8.34;
+    const oz_day  = lbs_day * 16;
+
+    set('cf-mgd', fmt(mgd, 5) + ' MGD');
+    set('cf-gpd', fmt(gpd, 0) + ' GPD');
+    set('cf-lbs', fmt(lbs_day, 3) + ' lbs/day');
+    set('cf-oz',  fmt(oz_day,  2) + ' oz/day');
+
+    if (strength > 0) {
+      // gal/day of solution = lbs_day / (strength% / 100 × 8.34 lb/gal)
+      const gal_day  = lbs_day / ((strength / 100) * 8.34);
+      const mL_min   = (gal_day * 3785.41) / 1440;
+      set('cf-gal',   fmt(gal_day, 3) + ' gal/day');
+      set('cf-mlmin', fmt(mL_min,  2) + ' mL/min');
+    } else {
+      set('cf-gal',   '—');
+      set('cf-mlmin', 'Enter solution strength');
+    }
+  }
+  ['cf-gpm','cf-dose','cf-strength'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcChemFeed));
 </script>
 
 </body>
