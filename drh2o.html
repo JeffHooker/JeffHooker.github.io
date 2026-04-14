@@ -130,6 +130,96 @@
     .nav-btn.active svg,
     .nav-btn:active svg { stroke: var(--blue); }
     .nav-btn svg { stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    /* ── INPUTS ── */
+    .field { margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .field input {
+      width: 100%;
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+    .field input:focus { border-color: var(--blue); }
+    .field input::placeholder { color: #444; }
+
+    /* ── RESULTS ── */
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .result-row:first-child { padding-top: 0; }
+    .result-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      flex: 1;
+    }
+    .result-val {
+      text-align: right;
+    }
+    .result-val .primary {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--blue);
+      display: block;
+    }
+    .result-val .secondary {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: block;
+    }
+    .result-val.dim .primary { color: var(--muted); font-size: 0.95rem; font-weight: 500; }
+
+    /* status dot */
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+    .dot-green  { background: #22c55e; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-red    { background: #ef4444; }
+    .dot-grey   { background: #444; }
+
+    .screen { padding: 16px 16px 24px; }
   </style>
 </head>
 <body>
@@ -142,14 +232,71 @@
 <div class="screens">
 
   <div class="screen active" id="screen-chlorine">
-    <div class="placeholder">
-      <svg viewBox="0 0 24 24" stroke="var(--blue)">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M8 12h8M12 8v8"/>
-      </svg>
-      <h2>Chlorine</h2>
-      <p>Dosage, feed rate, CT value, and residual calculations coming here.</p>
+
+    <!-- Inputs -->
+    <div class="card">
+      <div class="card-title">Chlorine Inputs</div>
+
+      <div class="field">
+        <label>Water Volume (gallons)</label>
+        <input id="cl-volume" type="number" inputmode="decimal" placeholder="e.g. 10000" min="0">
+      </div>
+
+      <div class="field">
+        <label>Desired Cl₂ Residual (mg/L)</label>
+        <input id="cl-residual" type="number" inputmode="decimal" placeholder="e.g. 1.0" min="0" step="0.1">
+      </div>
+
+      <div class="field">
+        <label>Chlorine Solution Strength (%)</label>
+        <input id="cl-strength" type="number" inputmode="decimal" placeholder="e.g. 12.5" min="0" max="100" step="0.1">
+      </div>
     </div>
+
+    <!-- Results -->
+    <div class="card">
+      <div class="card-title">Results</div>
+
+      <div class="result-row">
+        <span class="result-label">Chlorine Needed</span>
+        <span class="result-val">
+          <span class="primary" id="cl-oz">—</span>
+          <span class="secondary" id="cl-oz-sub"></span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Chlorine Needed</span>
+        <span class="result-val">
+          <span class="primary" id="cl-g">—</span>
+          <span class="secondary" id="cl-g-sub"></span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Solution Volume to Add</span>
+        <span class="result-val">
+          <span class="primary" id="cl-sol-oz">—</span>
+          <span class="secondary" id="cl-sol-ml"></span>
+        </span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Min. Contact Time <span style="font-size:.65rem;color:var(--muted)">(3-log, 15°C ref)</span></span>
+        <span class="result-val" id="cl-ct-wrap">
+          <span class="primary" id="cl-ct">—</span>
+          <span class="secondary" id="cl-ct-sub"></span>
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Reference note -->
+    <div style="font-size:0.72rem;color:var(--muted);line-height:1.5;padding:0 4px 8px;">
+      Contact time based on EPA SWTR 3-log Giardia inactivation (CT = 41 mg/L·min at 15°C, pH 6–9).
+      Actual requirements vary by temperature and permit.
+    </div>
+
   </div>
 
   <div class="screen" id="screen-flow">
@@ -227,9 +374,9 @@
 </nav>
 
 <script>
+  // ── NAV ──
   const btns    = document.querySelectorAll('.nav-btn');
   const screens = document.querySelectorAll('.screen');
-
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       const target = btn.dataset.target;
@@ -238,6 +385,66 @@
       btn.classList.add('active');
       document.getElementById('screen-' + target).classList.add('active');
     });
+  });
+
+  // ── HELPERS ──
+  function fmt(n, dec = 2) {
+    if (!isFinite(n) || isNaN(n)) return '—';
+    return n.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  }
+  function set(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+
+  // ── CHLORINE CALC ──
+  function calcChlorine() {
+    const vol_gal  = parseFloat(document.getElementById('cl-volume').value)   || 0;
+    const res_mgL  = parseFloat(document.getElementById('cl-residual').value)  || 0;
+    const str_pct  = parseFloat(document.getElementById('cl-strength').value)  || 0;
+
+    if (!vol_gal || !res_mgL) {
+      ['cl-oz','cl-oz-sub','cl-g','cl-g-sub','cl-sol-oz','cl-sol-ml','cl-ct','cl-ct-sub']
+        .forEach(id => set(id, id.endsWith('sub') ? '' : '—'));
+      return;
+    }
+
+    // Volume in liters
+    const vol_L   = vol_gal * 3.78541;
+    // Chlorine mass needed
+    const cl_mg   = vol_L * res_mgL;          // mg
+    const cl_g    = cl_mg / 1000;             // grams
+    const cl_oz   = cl_g  * 0.035274;         // oz (weight)
+    const cl_lbs  = cl_g  / 453.592;          // lbs
+
+    set('cl-oz',     fmt(cl_oz, 2) + ' oz');
+    set('cl-oz-sub', '(' + fmt(cl_lbs, 4) + ' lbs)');
+    set('cl-g',      fmt(cl_g, 1) + ' g');
+    set('cl-g-sub',  '(' + fmt(cl_mg, 0) + ' mg)');
+
+    // Solution volume to add
+    if (str_pct > 0) {
+      // X% solution = X g Cl₂ per 100 mL = (str_pct * 10) mg/mL
+      const sol_mL  = cl_mg / (str_pct * 10);
+      const sol_oz  = sol_mL * 0.033814;       // fluid oz
+      set('cl-sol-oz', fmt(sol_oz, 2) + ' fl oz');
+      set('cl-sol-ml', '(' + fmt(sol_mL, 1) + ' mL)');
+    } else {
+      set('cl-sol-oz', '—');
+      set('cl-sol-ml', 'Enter solution strength');
+    }
+
+    // Minimum contact time (CT_req = 41 mg/L·min at 15°C, 3-log Giardia)
+    const CT_REQ = 41; // mg/L·min
+    const ct_min = res_mgL > 0 ? CT_REQ / res_mgL : 0;
+    const ct_hr  = ct_min / 60;
+    set('cl-ct',     fmt(ct_min, 1) + ' min');
+    set('cl-ct-sub', '(' + fmt(ct_hr, 2) + ' hrs  ·  CT = ' + CT_REQ + ' mg/L·min)');
+  }
+
+  // Wire inputs
+  ['cl-volume','cl-residual','cl-strength'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calcChlorine);
   });
 </script>
 
