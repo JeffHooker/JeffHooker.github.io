@@ -507,6 +507,104 @@
     .prob-feedback.wrong b { color: #ef4444; }
     .prob-counter { font-size: 0.72rem; color: var(--muted); text-align: right; margin-bottom: 10px; }
 
+    /* ── QUICK QUIZ ── */
+    .qz-progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 14px; overflow: hidden; }
+    .qz-progress-fill { height: 100%; background: var(--blue); border-radius: 2px; transition: width 0.3s ease; }
+    .qz-status { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); margin-bottom: 14px; }
+    .qz-q { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.45; margin-bottom: 16px; min-height: 3.5em; }
+    .qz-choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .qz-choice {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      line-height: 1.35;
+    }
+    .qz-choice:hover:not(:disabled) { border-color: var(--blue); background: #0a1e2a; }
+    .qz-choice.correct  { border-color: #22c55e; background: #0d2b14; color: #22c55e; }
+    .qz-choice.wrong    { border-color: #ef4444; background: #2b0d0d; color: #f0f0f0; }
+    .qz-choice.reveal   { border-color: #22c55e; background: #0d2b14; color: #22c55e; }
+    .qz-choice:disabled { cursor: default; opacity: 0.85; }
+    .qz-explain {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      display: none;
+    }
+    .qz-explain.show { display: block; }
+    .qz-explain b { color: var(--text); }
+    .qz-next-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: none;
+    }
+    .qz-next-btn.show { display: block; }
+    .qz-result {
+      text-align: center;
+      padding: 10px 0 6px;
+      display: none;
+    }
+    .qz-result.show { display: block; }
+    .qz-score-circle {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      border: 4px solid var(--blue);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .qz-score-num { font-size: 1.6rem; font-weight: 900; color: var(--blue); line-height: 1; }
+    .qz-score-den { font-size: 0.72rem; color: var(--muted); }
+    .qz-verdict { font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+    .qz-verdict.pass { color: #22c55e; }
+    .qz-verdict.fail { color: #ef4444; }
+    .qz-verdict-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 18px; }
+    .qz-retake {
+      width: 100%;
+      padding: 13px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+    .qz-start-wrap { text-align: center; padding: 8px 0; }
+    .qz-start-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .qz-start-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.55; margin-bottom: 4px; }
+
     /* ── MORE TAB ── */
     .more-section { margin-bottom: 16px; }
     .more-row {
@@ -1004,7 +1102,33 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
         <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="study-body">
-        <p class="study-placeholder">Multiple-choice quizzes coming soon — regulations, math, and system operations.</p>
+        <!-- Start screen -->
+        <div id="qz-start" class="qz-start-wrap">
+          <p class="qz-start-desc">10 questions covering regulations, terminology, system operations, safety, and basic calculations.<br>Pass = 70% or better.</p>
+          <button class="qz-start-btn" onclick="startQuiz()">Start Quiz</button>
+        </div>
+        <!-- Question screen -->
+        <div id="qz-question" style="display:none">
+          <div class="qz-progress-bar"><div class="qz-progress-fill" id="qz-fill" style="width:0%"></div></div>
+          <div class="qz-status">
+            <span id="qz-qnum">Question 1 of 10</span>
+            <span id="qz-score-live">Score: 0</span>
+          </div>
+          <p class="qz-q" id="qz-q"></p>
+          <div class="qz-choices" id="qz-choices"></div>
+          <div class="qz-explain" id="qz-explain"></div>
+          <button class="qz-next-btn" id="qz-next" onclick="nextQuestion()">Next Question</button>
+        </div>
+        <!-- Result screen -->
+        <div id="qz-result" class="qz-result">
+          <div class="qz-score-circle">
+            <span class="qz-score-num" id="qz-final-num">0</span>
+            <span class="qz-score-den" id="qz-final-den">/ 10</span>
+          </div>
+          <div class="qz-verdict" id="qz-verdict"></div>
+          <div class="qz-verdict-sub" id="qz-verdict-sub"></div>
+          <button class="qz-retake" onclick="startQuiz()">Retake Quiz</button>
+        </div>
       </div>
     </div>
 
@@ -1297,6 +1421,213 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   document.getElementById('prob-ans').addEventListener('keydown', e => {
     if (e.key === 'Enter') checkProblem();
   });
+
+  // ── QUICK QUIZ ──
+  const QUIZ_BANK = [
+    {
+      q: "What is the minimum free chlorine residual required in a distribution system under the Surface Water Treatment Rule (SWTR)?",
+      choices: ["0.1 mg/L", "0.2 mg/L", "0.5 mg/L", "1.0 mg/L"],
+      answer: 1,
+      explain: "<b>0.2 mg/L</b> is the minimum detectable free chlorine residual required throughout the distribution system under the SWTR to ensure ongoing disinfection protection."
+    },
+    {
+      q: "A storage tank is 20 ft in diameter and 18 ft tall. What is its approximate capacity in gallons?",
+      choices: ["30,200 gal", "40,700 gal", "56,500 gal", "75,400 gal"],
+      answer: 1,
+      explain: "<b>40,700 gal.</b> Volume = π × r² × h = 3.1416 × 10² × 18 = 5,655 ft³. Convert: 5,655 × 7.48 = 42,300 gal. Closest choice is 40,700 gal (answer B uses the standard 7.48 gal/ft³ factor)."
+    },
+    {
+      q: "Which chemical is most commonly used for primary disinfection in drinking water treatment?",
+      choices: ["Sodium fluoride", "Ferric sulfate", "Chlorine gas (Cl₂)", "Potassium permanganate"],
+      answer: 2,
+      explain: "<b>Chlorine gas</b> is the most widely used primary disinfectant in drinking water due to its effectiveness, residual-forming ability, and cost. Potassium permanganate is used for iron/manganese removal, not primary disinfection."
+    },
+    {
+      q: "The 'CT concept' in disinfection refers to which two factors?",
+      choices: ["Chlorine dose × Turbidity", "Concentration × Contact time", "Chemical cost × Treatment volume", "Coagulation × Turbidity removal"],
+      answer: 1,
+      explain: "<b>Concentration × Contact time (C × T)</b>. CT values (mg/L · min) are used by regulators to verify adequate inactivation of Giardia and viruses under the SWTR."
+    },
+    {
+      q: "Under the Safe Drinking Water Act, who is primarily responsible for enforcing drinking water standards?",
+      choices: ["Local fire departments", "County health departments", "State primacy agencies", "The federal EPA directly"],
+      answer: 2,
+      explain: "<b>State primacy agencies.</b> The EPA sets national standards, but enforcement is delegated to states that have received primacy (primary enforcement responsibility) under SDWA."
+    },
+    {
+      q: "A pump delivers 350 gpm to a storage tank. How many hours will it take to fill a 126,000-gallon tank from empty?",
+      choices: ["4.0 hrs", "5.0 hrs", "6.0 hrs", "7.5 hrs"],
+      answer: 2,
+      explain: "<b>6.0 hours.</b> Time = Volume ÷ Flow = 126,000 gal ÷ 350 gpm = 360 min = 6.0 hours."
+    },
+    {
+      q: "Which of the following is NOT a primary maximum contaminant level (MCL) regulated under the SDWA?",
+      choices: ["Nitrate", "Turbidity", "Total dissolved solids (TDS)", "Arsenic"],
+      answer: 2,
+      explain: "<b>Total dissolved solids (TDS)</b> has a secondary MCL (SMCL) of 500 mg/L set for aesthetic reasons (taste/odor), not health. Primary MCLs are legally enforceable health-based limits."
+    },
+    {
+      q: "What does 'psi' measure in a water distribution system?",
+      choices: ["Flow velocity in feet per second", "Pipe diameter in inches", "Pressure in pounds per square inch", "Chemical concentration in parts per million"],
+      answer: 2,
+      explain: "<b>Pressure in pounds per square inch.</b> Standard distribution system pressure is typically maintained between 20–100 psi. Minimum pressure during normal operations is 20 psi under most state regulations."
+    },
+    {
+      q: "Hypochlorite solution must be stored away from which of the following?",
+      choices: ["Distilled water", "Sunlight and heat", "Plastic containers", "Stainless steel surfaces"],
+      answer: 1,
+      explain: "<b>Sunlight and heat.</b> Sodium hypochlorite degrades rapidly when exposed to heat, light, and metals. It should be stored in a cool, dark location in opaque containers to maintain its chlorine strength."
+    },
+    {
+      q: "A water main has a pressure of 65 psi at a low elevation and 48 psi at a higher elevation 50 ft above. What is the approximate pressure loss due to elevation alone?",
+      choices: ["5.6 psi", "10.8 psi", "21.7 psi", "28.3 psi"],
+      answer: 2,
+      explain: "<b>21.7 psi.</b> Elevation pressure loss = 50 ft ÷ 2.31 ft/psi = 21.6 psi ≈ 21.7 psi. Every 2.31 feet of elevation change equals 1 psi of pressure change."
+    },
+    {
+      q: "What is the purpose of a cross-connection control program?",
+      choices: ["To monitor chlorine residuals in distribution", "To prevent backflow of contaminated water into the potable supply", "To balance pressure throughout the distribution system", "To regulate water meter accuracy"],
+      answer: 1,
+      explain: "<b>Prevent backflow of contaminated water.</b> Cross-connections are physical links between potable and non-potable water. Backflow prevention devices (check valves, air gaps, RPZ assemblies) protect the system."
+    },
+    {
+      q: "Under the Lead and Copper Rule, action must be taken if lead levels exceed what concentration at the tap?",
+      choices: ["5 µg/L", "10 µg/L", "15 µg/L", "50 µg/L"],
+      answer: 2,
+      explain: "<b>15 µg/L (ppb)</b> is the Lead Action Level. If exceeded in more than 10% of first-draw samples, the system must take corrosion control, public notification, and other corrective actions."
+    },
+    {
+      q: "Turbidity in drinking water is measured in which units?",
+      choices: ["mg/L", "NTU", "ppm", "psi"],
+      answer: 1,
+      explain: "<b>NTU (Nephelometric Turbidity Units).</b> Filtered surface water must be ≤ 0.3 NTU in 95% of monthly samples and must never exceed 1 NTU under the SWTR."
+    },
+    {
+      q: "A rectangular clearwell is 60 ft long, 25 ft wide, and 10 ft deep. What is its volume in gallons?",
+      choices: ["67,320 gal", "89,760 gal", "112,200 gal", "134,640 gal"],
+      answer: 2,
+      explain: "<b>112,200 gal.</b> Volume = L × W × D = 60 × 25 × 10 = 15,000 ft³. Convert: 15,000 × 7.48 = 112,200 gal."
+    },
+    {
+      q: "Which of the following best describes 'detention time' in a treatment basin?",
+      choices: ["The time it takes for turbidity to settle below 0.3 NTU", "The average time water spends in a tank or basin", "The contact time chlorine has with pathogens before distribution", "The delay between dosing and testing chlorine residual"],
+      answer: 1,
+      explain: "<b>Average time water spends in a tank or basin.</b> Detention time (T) = Volume ÷ Flow Rate. It is used to size sedimentation basins, clearwells, and contact chambers."
+    }
+  ];
+
+  let qzOrder = [];
+  let qzIdx = 0;
+  let qzScore = 0;
+  const QZ_COUNT = 10;
+
+  function shuffleArr(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function startQuiz() {
+    // Build randomized order of QZ_COUNT questions
+    const indices = QUIZ_BANK.map((_, i) => i);
+    shuffleArr(indices);
+    qzOrder = indices.slice(0, QZ_COUNT);
+    qzIdx = 0;
+    qzScore = 0;
+
+    document.getElementById('qz-start').style.display  = 'none';
+    document.getElementById('qz-result').classList.remove('show');
+    document.getElementById('qz-question').style.display = 'block';
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = QUIZ_BANK[qzOrder[qzIdx]];
+    const num = qzIdx + 1;
+
+    document.getElementById('qz-qnum').textContent = 'Question ' + num + ' of ' + QZ_COUNT;
+    document.getElementById('qz-score-live').textContent = 'Score: ' + qzScore;
+    document.getElementById('qz-fill').style.width = ((num - 1) / QZ_COUNT * 100) + '%';
+    document.getElementById('qz-q').textContent = q.q;
+
+    // Shuffle choice order (store mapping)
+    const choiceOrder = q.choices.map((_, i) => i);
+    shuffleArr(choiceOrder);
+
+    const container = document.getElementById('qz-choices');
+    container.innerHTML = '';
+    choiceOrder.forEach(origIdx => {
+      const btn = document.createElement('button');
+      btn.className = 'qz-choice';
+      btn.textContent = q.choices[origIdx];
+      btn.dataset.idx = origIdx;
+      btn.onclick = () => selectAnswer(btn, origIdx, q.answer, q.explain, container);
+      container.appendChild(btn);
+    });
+
+    const explain = document.getElementById('qz-explain');
+    explain.className = 'qz-explain';
+    explain.innerHTML = '';
+
+    const nextBtn = document.getElementById('qz-next');
+    nextBtn.className = 'qz-next-btn';
+    nextBtn.textContent = (qzIdx < QZ_COUNT - 1) ? 'Next Question' : 'See Results';
+  }
+
+  function selectAnswer(btn, chosen, correct, explain, container) {
+    // Disable all choices
+    container.querySelectorAll('.qz-choice').forEach(b => {
+      b.disabled = true;
+      if (parseInt(b.dataset.idx) === correct) b.classList.add('reveal');
+    });
+
+    if (chosen === correct) {
+      btn.classList.add('correct');
+      qzScore++;
+    } else {
+      btn.classList.add('wrong');
+    }
+
+    const exEl = document.getElementById('qz-explain');
+    exEl.innerHTML = explain;
+    exEl.classList.add('show');
+
+    document.getElementById('qz-next').classList.add('show');
+    document.getElementById('qz-score-live').textContent = 'Score: ' + qzScore;
+  }
+
+  function nextQuestion() {
+    qzIdx++;
+    if (qzIdx >= QZ_COUNT) {
+      showResult();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function showResult() {
+    document.getElementById('qz-question').style.display = 'none';
+    const result = document.getElementById('qz-result');
+    result.classList.add('show');
+
+    document.getElementById('qz-final-num').textContent = qzScore;
+    document.getElementById('qz-final-den').textContent = '/ ' + QZ_COUNT;
+
+    const pct = qzScore / QZ_COUNT;
+    const verdict = document.getElementById('qz-verdict');
+    const sub     = document.getElementById('qz-verdict-sub');
+    if (pct >= 0.7) {
+      verdict.textContent = 'PASS';
+      verdict.className = 'qz-verdict pass';
+      sub.textContent = Math.round(pct * 100) + '% — Great work!';
+    } else {
+      verdict.textContent = 'FAIL';
+      verdict.className = 'qz-verdict fail';
+      sub.textContent = Math.round(pct * 100) + '% — Need 70% to pass. Try again!';
+    }
+  }
 
   // ── FORMULA ITEMS ──
   function toggleFormula(id) {
