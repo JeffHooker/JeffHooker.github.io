@@ -396,6 +396,54 @@
       font-style: italic;
     }
 
+    /* ── FORMULA LIST ── */
+    .f-list { margin-top: 4px; }
+    .f-item { border-bottom: 1px solid var(--border); }
+    .f-item:last-child { border-bottom: none; }
+    .f-head {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 0;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      -webkit-tap-highlight-color: transparent;
+      gap: 10px;
+    }
+    .f-chevron {
+      width: 14px; height: 14px;
+      stroke: var(--blue); fill: none;
+      stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .f-item.open .f-chevron { transform: rotate(180deg); }
+    .f-body { display: none; padding-bottom: 14px; }
+    .f-item.open .f-body { display: block; }
+    .f-eq {
+      background: #111;
+      border-left: 3px solid var(--blue);
+      border-radius: 0 6px 6px 0;
+      padding: 10px 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--blue);
+      line-height: 1.6;
+      margin-bottom: 8px;
+      word-break: break-word;
+    }
+    .f-when {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
     /* ── MORE TAB ── */
     .more-section { margin-bottom: 16px; }
     .more-row {
@@ -770,7 +818,90 @@
         <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="study-body">
-        <p class="study-placeholder">Formula sheets coming soon — chlorine dosage, flow velocity, head loss, detention time, and more.</p>
+        <div class="f-list">
+
+          <div class="f-item" id="f-cl">
+            <button class="f-head" onclick="toggleFormula('f-cl')">Chlorine Dosage <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">Dose (mg/L) = Demand (mg/L) + Residual (mg/L)
+lbs/day = Flow (MGD) × Dose (mg/L) × 8.34</div>
+              <p class="f-when">Use when calculating how much chlorine to add to meet a target residual, or how many pounds per day a system must feed.</p>
+            </div>
+          </div>
+
+          <div class="f-item" id="f-flow">
+            <button class="f-head" onclick="toggleFormula('f-flow')">Flow Rate <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">Q = A × V
+GPM = Area (ft²) × Velocity (fps) × 448.83</div>
+              <p class="f-when">Use when calculating how many gallons per minute flow through a pipe given the pipe size and water velocity.</p>
+            </div>
+          </div>
+
+          <div class="f-item" id="f-dt">
+            <button class="f-head" onclick="toggleFormula('f-dt')">Detention Time <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">DT (min) = Volume (gal) ÷ Flow Rate (GPM)
+DT (hr)  = Volume (gal) ÷ Flow Rate (GPH)</div>
+              <p class="f-when">Use to find how long water remains in a tank or basin — critical for verifying adequate contact time for disinfection (CT).</p>
+            </div>
+          </div>
+
+          <div class="f-item" id="f-cyl">
+            <button class="f-head" onclick="toggleFormula('f-cyl')">Tank Volume — Cylindrical <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">V (gal) = 0.785 × D² × H × 7.48
+  D = diameter (ft), H = height (ft)</div>
+              <p class="f-when">Use to find the capacity of a round storage tank, clearwell, or standpipe in gallons.</p>
+            </div>
+          </div>
+
+          <div class="f-item" id="f-rect">
+            <button class="f-head" onclick="toggleFormula('f-rect')">Tank Volume — Rectangular <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">V (gal) = L × W × H × 7.48
+  L = length (ft), W = width (ft), H = depth (ft)</div>
+              <p class="f-when">Use to find the capacity of a rectangular basin, sedimentation tank, or storage vault in gallons.</p>
+            </div>
+          </div>
+
+          <div class="f-item" id="f-hp">
+            <button class="f-head" onclick="toggleFormula('f-hp')">Horsepower <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">WHP = (GPM × Head ft) ÷ 3,960
+BHP = WHP ÷ Pump Efficiency
+MHP = BHP ÷ Motor Efficiency</div>
+              <p class="f-when">Use when sizing a pump motor, calculating energy consumption, or checking pump efficiency on an existing system.</p>
+            </div>
+          </div>
+
+          <div class="f-item" id="f-psi">
+            <button class="f-head" onclick="toggleFormula('f-psi')">Pressure — PSI &amp; Head <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">Head (ft) = PSI × 2.31
+PSI = Head (ft) × 0.433</div>
+              <p class="f-when">Use to convert between pressure gauge readings (PSI) and feet of head — needed for pump curves, elevation calculations, and system design.</p>
+            </div>
+          </div>
+
+          <div class="f-item" id="f-feed">
+            <button class="f-head" onclick="toggleFormula('f-feed')">Chemical Feed Rate <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">lbs/day = Flow (MGD) × Dose (mg/L) × 8.34
+gal/day = lbs/day ÷ (% Strength × 8.34)</div>
+              <p class="f-when">Use to calculate how much chemical to feed daily — works for chlorine, fluoride, coagulants, or any treatment chemical.</p>
+            </div>
+          </div>
+
+          <div class="f-item" id="f-pct">
+            <button class="f-head" onclick="toggleFormula('f-pct')">Percent Strength <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="f-body">
+              <div class="f-eq">% Strength = (Wt of Chemical ÷ Wt of Solution) × 100</div>
+              <p class="f-when">Use to find the concentration of a chemical solution you are mixing or to verify the strength of a delivered product before feeding it.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -918,6 +1049,14 @@
       document.getElementById('screen-' + target).classList.add('active');
     });
   });
+
+  // ── FORMULA ITEMS ──
+  function toggleFormula(id) {
+    const item   = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.f-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
 
   // ── STUDY CARDS ──
   function toggleStudy(id) {
