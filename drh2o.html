@@ -621,6 +621,64 @@
     }
     .qz-start-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.55; margin-bottom: 4px; }
 
+    /* ── SHOW YOUR WORK ── */
+    .syw-wrap { margin-top: 10px; }
+    .syw-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .syw-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .syw-btn.open { color: var(--text); border-color: #333; }
+    .syw-chevron {
+      margin-left: auto;
+      width: 14px; height: 14px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .syw-btn.open .syw-chevron { transform: rotate(180deg); }
+    .syw-body {
+      display: none;
+      background: #0c0c0c;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 14px 12px;
+      margin-top: 6px;
+      font-size: 0.77rem;
+      line-height: 1.75;
+      color: var(--muted);
+      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    }
+    .syw-body.open { display: block; }
+    .syw-lbl {
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--blue);
+      margin-top: 12px;
+      margin-bottom: 2px;
+    }
+    .syw-body .syw-lbl:first-child { margin-top: 0; }
+    .syw-hi  { color: var(--text); padding-left: 6px; }
+    .syw-ans { color: var(--blue); font-weight: 700; padding-left: 6px; }
+    .syw-dim { color: #555; padding-left: 6px; }
+    .syw-sep { border: none; border-top: 1px solid #1e1e1e; margin: 8px 0 4px; }
+
     /* ── LOG TAB ── */
     .log-save-btn {
       width: 100%;
@@ -836,6 +894,10 @@
         <div style="font-size:0.7rem;color:var(--muted);line-height:1.5;padding:8px 4px 0;">
           CT based on EPA SWTR 3-log Giardia (CT = 41 mg/L·min at 15°C, pH 6–9).
         </div>
+        <div class="syw-wrap" id="syw-cl-wrap" style="display:none">
+          <button class="syw-btn" id="syw-cl-btn" onclick="toggleSyw('cl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-body" id="syw-cl"></div>
+        </div>
       </div>
     </div>
 
@@ -894,6 +956,10 @@
             <span class="result-label" id="fl-status-label"></span>
             <span class="dot" id="fl-status-dot"></span>
           </div>
+        </div>
+        <div class="syw-wrap" id="syw-fl-wrap" style="display:none">
+          <button class="syw-btn" id="syw-fl-btn" onclick="toggleSyw('fl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-body" id="syw-fl"></div>
         </div>
       </div>
     </div>
@@ -968,6 +1034,10 @@
             <span class="result-val"><span class="primary" id="pr-headloss">—</span><span class="secondary" id="pr-headloss-sub"></span></span>
           </div>
         </div>
+        <div class="syw-wrap" id="syw-pr-wrap" style="display:none">
+          <button class="syw-btn" id="syw-pr-btn" onclick="toggleSyw('pr')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-body" id="syw-pr"></div>
+        </div>
       </div>
     </div>
 
@@ -996,6 +1066,10 @@
             <span class="result-label">Volume</span>
             <span class="result-val"><span class="primary" id="tv-cyl-gal">—</span><span class="secondary" id="tv-cyl-sub"></span></span>
           </div>
+        </div>
+        <div class="syw-wrap" id="syw-cyl-wrap" style="display:none">
+          <button class="syw-btn" id="syw-cyl-btn" onclick="toggleSyw('cyl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-body" id="syw-cyl"></div>
         </div>
       </div>
     </div>
@@ -1030,6 +1104,10 @@
             <span class="result-val"><span class="primary" id="tv-rec-gal">—</span><span class="secondary" id="tv-rec-sub"></span></span>
           </div>
         </div>
+        <div class="syw-wrap" id="syw-rec-wrap" style="display:none">
+          <button class="syw-btn" id="syw-rec-btn" onclick="toggleSyw('rec')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-body" id="syw-rec"></div>
+        </div>
       </div>
     </div>
 
@@ -1063,6 +1141,10 @@
             <span class="result-label">CT Achieved <span style="font-size:.65rem;color:var(--muted)">(at 1.0 mg/L)</span></span>
             <span class="result-val"><span class="primary" id="dt-ct">—</span><span class="secondary">mg/L · min</span></span>
           </div>
+        </div>
+        <div class="syw-wrap" id="syw-dt-wrap" style="display:none">
+          <button class="syw-btn" id="syw-dt-btn" onclick="toggleSyw('dt')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-body" id="syw-dt"></div>
         </div>
       </div>
     </div>
@@ -1104,6 +1186,10 @@
             <span class="result-label">Flow (MGD)</span>
             <span class="result-val"><span class="primary" id="cf-mgd">—</span><span class="secondary" id="cf-gpd"></span></span>
           </div>
+        </div>
+        <div class="syw-wrap" id="syw-cf-wrap" style="display:none">
+          <button class="syw-btn" id="syw-cf-btn" onclick="toggleSyw('cf')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-body" id="syw-cf"></div>
         </div>
       </div>
     </div>
@@ -1885,6 +1971,218 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     if (el) el.textContent = val;
   }
 
+  // ── SHOW YOUR WORK ──
+  function toggleSyw(id) {
+    const btn  = document.getElementById('syw-' + id + '-btn');
+    const body = document.getElementById('syw-' + id);
+    const open = btn.classList.toggle('open');
+    body.classList.toggle('open', open);
+  }
+  function setSyw(id, html) {
+    const wrap = document.getElementById('syw-' + id + '-wrap');
+    const btn  = document.getElementById('syw-' + id + '-btn');
+    const body = document.getElementById('syw-' + id);
+    if (html) {
+      wrap.style.display = 'block';
+      body.innerHTML = html;
+    } else {
+      wrap.style.display = 'none';
+      btn.classList.remove('open');
+      body.classList.remove('open');
+      body.innerHTML = '';
+    }
+  }
+  function sywFmt(n, d) {
+    return isFinite(n) ? n.toLocaleString('en-US', {minimumFractionDigits:d, maximumFractionDigits:d}) : '?';
+  }
+  function sywL(cls, txt) { return `<div class="${cls}">${txt}</div>`; }
+  function sywSep()       { return '<hr class="syw-sep">'; }
+  function sywLbl(txt)    { return sywL('syw-lbl', txt); }
+  function sywHi(txt)     { return sywL('syw-hi',  txt); }
+  function sywAns(txt)    { return sywL('syw-ans', txt); }
+  function sywDim(txt)    { return sywL('syw-dim', txt); }
+
+  function buildSyw_cl(vol_gal, vol_L, res_mgL, cl_mg, cl_g, cl_oz, cl_lbs, str_pct, sol_mL, sol_oz, ct_min) {
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('Cl₂ Needed (mg) = Volume (L) × Residual (mg/L)');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Volume    = ${f(vol_gal,0)} gal`);
+    s += sywHi(`Residual  = ${f(res_mgL,2)} mg/L`);
+    if (str_pct) s += sywHi(`Strength  = ${f(str_pct,1)}%`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywDim('Convert volume to liters:');
+    s += sywHi(`  ${f(vol_gal,0)} gal × 3.785 = ${f(vol_L,1)} L`);
+    s += sywDim('Chlorine mass needed:');
+    s += sywHi(`  ${f(vol_L,1)} L × ${f(res_mgL,2)} mg/L = ${f(cl_mg,0)} mg`);
+    s += sywAns(`  = ${f(cl_g,2)} g  →  ${f(cl_oz,2)} oz  (${f(cl_lbs,4)} lbs)`);
+    if (str_pct && sol_mL != null) {
+      s += sywSep();
+      s += sywLbl('Solution Volume to Add');
+      s += sywDim('Sol. Vol (mL) = Cl₂ (mg) ÷ (Strength (%) × 10)');
+      s += sywHi(`  ${f(cl_mg,0)} mg ÷ (${f(str_pct,1)} × 10) = ${f(cl_mg,0)} ÷ ${f(str_pct*10,0)}`);
+      s += sywAns(`  = ${f(sol_mL,1)} mL  →  ${f(sol_oz,2)} fl oz`);
+    }
+    s += sywSep();
+    s += sywLbl('Min. Contact Time  (CT Check, EPA SWTR)');
+    s += sywDim('T (min) = CT Required ÷ Cl₂ Residual');
+    s += sywHi(`  41 mg/L·min ÷ ${f(res_mgL,2)} mg/L`);
+    s += sywAns(`  = ${f(ct_min,1)} min`);
+    return s;
+  }
+
+  function buildSyw_fl(dia_in, vel_fps, dia_ft, area_ft2, area_in2, flow_cfs, flow_gpm, time_min, vol_gal) {
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('Q (GPM) = A (ft²) × V (fps) × 448.831');
+    s += sywDim('A (ft²) = π × (D ÷ 2)²');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Diameter = ${f(dia_in,2)} in  →  ${f(dia_ft,4)} ft`);
+    s += sywHi(`Velocity = ${f(vel_fps,2)} fps`);
+    if (time_min) s += sywHi(`Time     = ${f(time_min,0)} min`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywDim('Pipe cross-sectional area:');
+    s += sywHi(`  A = π × (${f(dia_in,2)} ÷ 2)²  =  π × ${f(dia_in/2,4)}²`);
+    s += sywHi(`    = ${f(area_in2,3)} in²  =  ${f(area_ft2,5)} ft²`);
+    s += sywDim('Flow rate:');
+    s += sywHi(`  Q = ${f(area_ft2,5)} ft² × ${f(vel_fps,2)} fps × 448.831`);
+    s += sywHi(`    = ${f(flow_cfs,4)} CFS × 448.831`);
+    s += sywAns(`    = ${f(flow_gpm,2)} GPM`);
+    if (time_min > 0) {
+      s += sywSep();
+      s += sywLbl('Volume Over Time');
+      s += sywDim('V (gal) = Q (GPM) × Time (min)');
+      s += sywHi(`  ${f(flow_gpm,2)} GPM × ${f(time_min,0)} min`);
+      s += sywAns(`  = ${f(vol_gal,0)} gal`);
+    }
+    return s;
+  }
+
+  function buildSyw_pr(p_src, elev_ft, len_ft, dia_in, gpm, C, static_psi, hf_ft, hf_psi, residual_psi, hasFlow) {
+    const f = sywFmt;
+    const sign = v => (v >= 0 ? '+' : '') + f(v, 2);
+    let s = '';
+    s += sywLbl('Formula — Elevation Pressure');
+    s += sywDim('P_elev (PSI) = Elevation (ft) ÷ 2.31 ft/PSI');
+    s += sywHi(`  ${f(elev_ft,1)} ft ÷ 2.31`);
+    s += sywAns(`  = ${sign(static_psi)} PSI`);
+    if (hasFlow) {
+      s += sywSep();
+      s += sywLbl('Formula — Hazen-Williams Friction Loss');
+      s += sywDim('hf (ft) = 4.72 × L × Q^1.852 ÷ (C^1.852 × D^4.87)');
+      s += sywHi(`  L = ${f(len_ft,0)} ft,  Q = ${f(gpm,0)} GPM,  C = ${f(C,0)},  D = ${f(dia_in,2)} in`);
+      s += sywHi(`  hf = 4.72 × ${f(len_ft,0)} × ${f(gpm,0)}^1.852`);
+      s += sywHi(`         ÷ (${f(C,0)}^1.852 × ${f(dia_in,2)}^4.87)`);
+      s += sywAns(`       = ${f(hf_ft,2)} ft  →  ${f(hf_psi,2)} PSI`);
+    }
+    s += sywSep();
+    s += sywLbl('Residual Pressure');
+    if (hasFlow) {
+      s += sywDim('P_res = Source + Elevation − Friction');
+      s += sywHi(`  ${f(p_src,2)} ${sign(static_psi)} − ${f(hf_psi,2)}`);
+    } else {
+      s += sywDim('P_res = Source + Elevation  (no flow entered)');
+      s += sywHi(`  ${f(p_src,2)} ${sign(static_psi)}`);
+    }
+    s += sywAns(`  = ${f(residual_psi,2)} PSI`);
+    return s;
+  }
+
+  function buildSyw_cyl(d_ft, h_ft, vol_ft3, vol_gal) {
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('V (ft³) = π × (D ÷ 2)² × H');
+    s += sywDim('V (gal) = V (ft³) × 7.48');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Diameter = ${f(d_ft,2)} ft  →  radius = ${f(d_ft/2,4)} ft`);
+    s += sywHi(`Height   = ${f(h_ft,2)} ft`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  V = π × ${f(d_ft/2,4)}² × ${f(h_ft,2)}`);
+    s += sywHi(`    = 3.1416 × ${f(Math.pow(d_ft/2,2),4)} × ${f(h_ft,2)}`);
+    s += sywHi(`    = ${f(vol_ft3,2)} ft³`);
+    s += sywHi(`  V (gal) = ${f(vol_ft3,2)} × 7.48`);
+    s += sywAns(`          = ${f(vol_gal,0)} gal`);
+    return s;
+  }
+
+  function buildSyw_rec(rl, rw, rh, vol_ft3, vol_gal) {
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('V (ft³) = L × W × H');
+    s += sywDim('V (gal) = V (ft³) × 7.48');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Length = ${f(rl,2)} ft`);
+    s += sywHi(`Width  = ${f(rw,2)} ft`);
+    s += sywHi(`Height = ${f(rh,2)} ft`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  V = ${f(rl,2)} × ${f(rw,2)} × ${f(rh,2)}`);
+    s += sywHi(`    = ${f(vol_ft3,2)} ft³`);
+    s += sywHi(`  V (gal) = ${f(vol_ft3,2)} × 7.48`);
+    s += sywAns(`          = ${f(vol_gal,0)} gal`);
+    return s;
+  }
+
+  function buildSyw_dt(vol_gal, gpm, dt_min, dt_hr, ct) {
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('T (min) = Volume (gal) ÷ Flow Rate (GPM)');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Volume    = ${f(vol_gal,0)} gal`);
+    s += sywHi(`Flow Rate = ${f(gpm,1)} GPM`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  T = ${f(vol_gal,0)} ÷ ${f(gpm,1)}`);
+    s += sywAns(`    = ${f(dt_min,1)} min  (${f(dt_hr,2)} hrs)`);
+    s += sywSep();
+    s += sywLbl('CT Value  (at 1.0 mg/L Cl₂ Residual)');
+    s += sywDim('CT = Residual (mg/L) × Time (min)');
+    s += sywHi(`  1.0 mg/L × ${f(dt_min,1)} min`);
+    s += sywAns(`  = ${f(ct,1)} mg/L·min`);
+    return s;
+  }
+
+  function buildSyw_cf(gpm, mgd, gpd, dose, lbs_day, oz_day, strength, gal_day, mL_min) {
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('Feed (lbs/day) = Flow (MGD) × Dose (mg/L) × 8.34');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Flow Rate = ${f(gpm,0)} GPM`);
+    s += sywHi(`Dose      = ${f(dose,2)} mg/L`);
+    if (strength) s += sywHi(`Strength  = ${f(strength,1)}%`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywDim('Convert GPM → MGD:');
+    s += sywHi(`  ${f(gpm,0)} × 1,440 ÷ 1,000,000 = ${f(mgd,6)} MGD`);
+    s += sywDim('Chemical feed rate:');
+    s += sywHi(`  ${f(mgd,6)} × ${f(dose,2)} × 8.34`);
+    s += sywAns(`  = ${f(lbs_day,3)} lbs/day  (${f(oz_day,2)} oz/day)`);
+    if (strength && gal_day != null) {
+      s += sywSep();
+      s += sywLbl('Solution Feed Volume');
+      s += sywDim('Vol (gal/day) = Feed (lbs) ÷ (Strength ÷ 100 × 8.34 lb/gal)');
+      s += sywHi(`  ${f(lbs_day,3)} ÷ (${f(strength,1)}% ÷ 100 × 8.34)`);
+      s += sywHi(`  = ${f(lbs_day,3)} ÷ ${f((strength/100)*8.34,4)}`);
+      s += sywAns(`  = ${f(gal_day,3)} gal/day  →  ${f(mL_min,2)} mL/min`);
+    }
+    return s;
+  }
+
   // ── CHLORINE CALC ──
   function calcChlorine() {
     const raw_vol  = parseFloat(document.getElementById('cl-volume').value)   || 0;
@@ -1895,6 +2193,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     if (!vol_gal || !res_mgL) {
       ['cl-oz','cl-oz-sub','cl-g','cl-g-sub','cl-sol-oz','cl-sol-ml','cl-ct','cl-ct-sub']
         .forEach(id => set(id, id.endsWith('sub') ? '' : '—'));
+      setSyw('cl', null);
       return;
     }
 
@@ -1912,11 +2211,11 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     set('cl-g-sub',  '(' + fmt(cl_mg, 0) + ' mg)');
 
     // Solution volume to add
+    let sol_mL = null, sol_oz_val = null;
     if (str_pct > 0) {
-      // X% solution = X g Cl₂ per 100 mL = (str_pct * 10) mg/mL
-      const sol_mL  = cl_mg / (str_pct * 10);
-      const sol_oz  = sol_mL * 0.033814;       // fluid oz
-      set('cl-sol-oz', fmt(sol_oz, 2) + ' fl oz');
+      sol_mL    = cl_mg / (str_pct * 10);
+      sol_oz_val = sol_mL * 0.033814;
+      set('cl-sol-oz', fmt(sol_oz_val, 2) + ' fl oz');
       set('cl-sol-ml', '(' + fmt(sol_mL, 1) + ' mL)');
     } else {
       set('cl-sol-oz', '—');
@@ -1924,11 +2223,12 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     }
 
     // Minimum contact time (CT_req = 41 mg/L·min at 15°C, 3-log Giardia)
-    const CT_REQ = 41; // mg/L·min
+    const CT_REQ = 41;
     const ct_min = res_mgL > 0 ? CT_REQ / res_mgL : 0;
     const ct_hr  = ct_min / 60;
     set('cl-ct',     fmt(ct_min, 1) + ' min');
     set('cl-ct-sub', '(' + fmt(ct_hr, 2) + ' hrs  ·  CT = ' + CT_REQ + ' mg/L·min)');
+    setSyw('cl', buildSyw_cl(vol_gal, vol_L, res_mgL, cl_mg, cl_g, cl_oz, cl_lbs, str_pct, sol_mL, sol_oz_val, ct_min));
   }
 
   // Wire chlorine inputs
@@ -1948,6 +2248,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       ['fl-gpm','fl-gpm-sub','fl-gph','fl-cfs','fl-vol','fl-vol-sub','fl-cap','fl-area','fl-area-sub']
         .forEach(id => set(id, id.endsWith('sub') ? '' : '—'));
       document.getElementById('fl-status-card').style.display = 'none';
+      setSyw('fl', null);
       return;
     }
 
@@ -2005,6 +2306,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       lbl.textContent = 'Too fast — high erosion & water hammer risk (>12 fps)';
       dot.classList.add('dot-red');
     }
+    setSyw('fl', buildSyw_fl(dia_in, vel_fps, dia_ft, area_ft2, area_in2, flow_cfs, flow_gpm, time_min, vol_gal));
   }
 
   // Wire flow inputs
@@ -2072,6 +2374,11 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     el.style.color = residual_psi >= 40 ? 'var(--blue)'
                    : residual_psi >= 20 ? '#f59e0b'
                    : '#ef4444';
+
+    if (p_source > 0 || elev_ft !== 0)
+      setSyw('pr', buildSyw_pr(p_source, elev_ft, len_ft, dia_in, gpm, C, static_psi, hf_ft, hf_psi, residual_psi, hasFlow));
+    else
+      setSyw('pr', null);
   }
 
   // Wire pressure inputs
@@ -2084,7 +2391,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   function calcCylinder() {
     const raw_d = parseFloat(document.getElementById('tv-cyl-dia').value) || 0;
     const raw_h = parseFloat(document.getElementById('tv-cyl-h').value)   || 0;
-    if (!raw_d || !raw_h) { set('tv-cyl-gal','—'); set('tv-cyl-sub',''); return; }
+    if (!raw_d || !raw_h) { set('tv-cyl-gal','—'); set('tv-cyl-sub',''); setSyw('cyl',null); return; }
     const d_ft    = U === 'met' ? raw_d / 0.3048 : raw_d;
     const h_ft    = U === 'met' ? raw_h / 0.3048 : raw_h;
     const vol_ft3 = Math.PI * Math.pow(d_ft / 2, 2) * h_ft;
@@ -2094,6 +2401,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     set('tv-cyl-gal', U === 'met' ? fmt(vol_L, 0) + ' L' : fmt(vol_gal, 0) + ' gal');
     set('tv-cyl-sub',  U === 'met' ? fmt(vol_m3, 2) + ' m³  ·  ' + fmt(vol_gal, 0) + ' gal'
                                    : fmt(vol_ft3, 1) + ' ft³  ·  ' + fmt(vol_L, 0) + ' L');
+    setSyw('cyl', buildSyw_cyl(d_ft, h_ft, vol_ft3, vol_gal));
   }
   ['tv-cyl-dia','tv-cyl-h'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcCylinder));
@@ -2103,15 +2411,17 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     const rl = parseFloat(document.getElementById('tv-rec-l').value) || 0;
     const rw = parseFloat(document.getElementById('tv-rec-w').value) || 0;
     const rh = parseFloat(document.getElementById('tv-rec-h').value) || 0;
-    if (!rl || !rw || !rh) { set('tv-rec-gal','—'); set('tv-rec-sub',''); return; }
+    if (!rl || !rw || !rh) { set('tv-rec-gal','—'); set('tv-rec-sub',''); setSyw('rec',null); return; }
     const f  = U === 'met' ? 1/0.3048 : 1;
-    const vol_ft3 = (rl*f) * (rw*f) * (rh*f);
+    const rl_ft = rl*f, rw_ft = rw*f, rh_ft = rh*f;
+    const vol_ft3 = rl_ft * rw_ft * rh_ft;
     const vol_gal = vol_ft3 * 7.48052;
     const vol_L   = vol_gal * 3.78541;
     const vol_m3  = vol_L / 1000;
     set('tv-rec-gal', U === 'met' ? fmt(vol_L, 0) + ' L' : fmt(vol_gal, 0) + ' gal');
     set('tv-rec-sub',  U === 'met' ? fmt(vol_m3, 2) + ' m³  ·  ' + fmt(vol_gal, 0) + ' gal'
                                    : fmt(vol_ft3, 1) + ' ft³  ·  ' + fmt(vol_L, 0) + ' L');
+    setSyw('rec', buildSyw_rec(rl_ft, rw_ft, rh_ft, vol_ft3, vol_gal));
   }
   ['tv-rec-l','tv-rec-w','tv-rec-h'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcRect));
@@ -2125,15 +2435,17 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     if (!vol_gal || !gpm) {
       set('dt-min','—'); set('dt-hr',''); set('dt-ct','—');
       document.getElementById('dt-dot').className = 'dot dot-grey';
+      setSyw('dt', null);
       return;
     }
     const dt_min = vol_gal / gpm;
     const dt_hr  = dt_min / 60;
-    const ct     = 1.0 * dt_min; // CT at 1.0 mg/L residual
+    const ct     = 1.0 * dt_min;
 
     set('dt-min', fmt(dt_min, 1) + ' min');
     set('dt-hr',  fmt(dt_hr, 2) + ' hrs');
     set('dt-ct',  fmt(ct, 1));
+    setSyw('dt', buildSyw_dt(vol_gal, gpm, dt_min, dt_hr, ct));
 
     const dot = document.getElementById('dt-dot');
     dot.className = 'dot';
@@ -2153,6 +2465,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     if (!gpm || !dose) {
       ['cf-lbs','cf-oz','cf-gal','cf-mlmin','cf-mgd','cf-gpd']
         .forEach(id => set(id, id === 'cf-lbs' || id === 'cf-gal' || id === 'cf-mgd' ? '—' : ''));
+      setSyw('cf', null);
       return;
     }
     const mgd     = gpm * 1440 / 1e6;
@@ -2165,16 +2478,17 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     set('cf-lbs', fmt(lbs_day, 3) + ' lbs/day');
     set('cf-oz',  fmt(oz_day,  2) + ' oz/day');
 
+    let gal_day_cf = null, mL_min_cf = null;
     if (strength > 0) {
-      // gal/day of solution = lbs_day / (strength% / 100 × 8.34 lb/gal)
-      const gal_day  = lbs_day / ((strength / 100) * 8.34);
-      const mL_min   = (gal_day * 3785.41) / 1440;
-      set('cf-gal',   fmt(gal_day, 3) + ' gal/day');
-      set('cf-mlmin', fmt(mL_min,  2) + ' mL/min');
+      gal_day_cf = lbs_day / ((strength / 100) * 8.34);
+      mL_min_cf  = (gal_day_cf * 3785.41) / 1440;
+      set('cf-gal',   fmt(gal_day_cf, 3) + ' gal/day');
+      set('cf-mlmin', fmt(mL_min_cf,  2) + ' mL/min');
     } else {
       set('cf-gal',   '—');
       set('cf-mlmin', 'Enter solution strength');
     }
+    setSyw('cf', buildSyw_cf(gpm, mgd, gpd, dose, lbs_day, oz_day, strength, gal_day_cf, mL_min_cf));
   }
   ['cf-gpm','cf-dose','cf-strength'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcChemFeed));
