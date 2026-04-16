@@ -444,6 +444,69 @@
       line-height: 1.55;
     }
 
+    /* ── PRACTICE PROBLEMS ── */
+    .prob-wrap { padding-top: 10px; }
+    .prob-q {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .prob-q b { color: var(--blue); }
+    .prob-ans-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .prob-input {
+      flex: 1;
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 1rem;
+      color: var(--text);
+      outline: none;
+      -webkit-appearance: none;
+      transition: border-color 0.15s;
+    }
+    .prob-input:focus { border-color: var(--blue); }
+    .prob-unit-lbl {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+      min-width: 48px;
+    }
+    .prob-btn {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      margin-bottom: 8px;
+    }
+    .prob-check { background: var(--blue); color: #000; }
+    .prob-new   { background: #1e1e1e; color: var(--muted); border: 1px solid var(--border); }
+    .prob-feedback {
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+    }
+    .prob-feedback.correct { background: #0d2b14; border: 1px solid #22c55e; color: #22c55e; }
+    .prob-feedback.wrong   { background: #2b0d0d; border: 1px solid #ef4444; color: #f0f0f0; }
+    .prob-feedback.wrong b { color: #ef4444; }
+    .prob-counter { font-size: 0.72rem; color: var(--muted); text-align: right; margin-bottom: 10px; }
+
     /* ── MORE TAB ── */
     .more-section { margin-bottom: 16px; }
     .more-row {
@@ -915,7 +978,19 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
         <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="study-body">
-        <p class="study-placeholder">Step-by-step practice problems coming soon — T1, T2, T3, and T4 operator exam levels.</p>
+        <div class="prob-wrap">
+          <div class="prob-counter" id="prob-counter"></div>
+          <p class="prob-q" id="prob-q">Tap <b>New Problem</b> to start a randomized question.</p>
+          <div id="prob-inputs" style="display:none">
+            <div class="prob-ans-row">
+              <input type="number" inputmode="decimal" id="prob-ans" class="prob-input" placeholder="Your answer">
+              <span class="prob-unit-lbl" id="prob-unit"></span>
+            </div>
+            <button class="prob-btn prob-check" onclick="checkProblem()">Check Answer</button>
+          </div>
+          <div class="prob-feedback" id="prob-feedback" style="display:none"></div>
+          <button class="prob-btn prob-new" onclick="newProblem()">New Problem</button>
+        </div>
       </div>
     </div>
 
@@ -1048,6 +1123,179 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       btn.classList.add('active');
       document.getElementById('screen-' + target).classList.add('active');
     });
+  });
+
+  // ── PRACTICE PROBLEMS ──
+  let currentProblem = null;
+  let probCount = 0;
+
+  function rnd(min, max, dec) {
+    const v = Math.random() * (max - min) + min;
+    return dec !== undefined ? parseFloat(v.toFixed(dec)) : Math.round(v);
+  }
+
+  const PROBLEM_TYPES = [
+
+    // 1. Chlorine feed rate lbs/day
+    () => {
+      const mgd  = rnd(0.5, 5.0, 2);
+      const dose = rnd(1.0, 3.5, 1);
+      const ans  = mgd * dose * 8.34;
+      return {
+        q: `A water system delivers <b>${mgd} MGD</b> and requires a chlorine dose of <b>${dose} mg/L</b>. How many <b>lbs/day</b> of chlorine are needed?`,
+        answer: ans, unit: 'lbs/day', tol: 0.03,
+        steps: `lbs/day = Flow (MGD) × Dose (mg/L) × 8.34\n= ${mgd} × ${dose} × 8.34\n= ${ans.toFixed(2)} lbs/day`
+      };
+    },
+
+    // 2. Chlorine mass in ounces for a tank
+    () => {
+      const vol = rnd(5000, 80000);
+      const res = rnd(0.5, 2.0, 1);
+      const vol_L = vol * 3.78541;
+      const cl_g  = (vol_L * res) / 1000;
+      const cl_oz = cl_g * 0.035274;
+      return {
+        q: `How many <b>ounces</b> of chlorine are needed to bring <b>${vol.toLocaleString()} gallons</b> to a residual of <b>${res} mg/L</b>?`,
+        answer: cl_oz, unit: 'oz', tol: 0.03,
+        steps: `Step 1: gallons → liters\n${vol.toLocaleString()} × 3.785 = ${vol_L.toFixed(0)} L\n\nStep 2: mass needed\n${vol_L.toFixed(0)} L × ${res} mg/L = ${(vol_L*res).toFixed(0)} mg = ${cl_g.toFixed(2)} g\n\nStep 3: grams → ounces\n${cl_g.toFixed(2)} g × 0.03527 = ${cl_oz.toFixed(2)} oz`
+      };
+    },
+
+    // 3. Flow rate GPM from pipe diameter + velocity
+    () => {
+      const dia = rnd(2, 12);
+      const vel = rnd(2, 8, 1);
+      const area_ft2 = Math.PI * Math.pow(dia / 24, 2);
+      const ans  = area_ft2 * vel * 448.83;
+      return {
+        q: `A <b>${dia}-inch pipe</b> has a water velocity of <b>${vel} fps</b>. What is the flow rate in <b>GPM</b>?`,
+        answer: ans, unit: 'GPM', tol: 0.03,
+        steps: `Step 1: pipe area\nA = π × (D/2)²  (in feet)\nD = ${dia} in ÷ 12 = ${(dia/12).toFixed(3)} ft\nA = π × ${(dia/24).toFixed(3)}² = ${area_ft2.toFixed(4)} ft²\n\nStep 2: flow\nQ = A × V × 448.83\n= ${area_ft2.toFixed(4)} × ${vel} × 448.83\n= ${ans.toFixed(1)} GPM`
+      };
+    },
+
+    // 4. Detention time in minutes
+    () => {
+      const vol = rnd(10000, 500000);
+      const gpm = rnd(50, 800);
+      const ans  = vol / gpm;
+      return {
+        q: `A tank holds <b>${vol.toLocaleString()} gallons</b> and receives flow at <b>${gpm} GPM</b>. What is the <b>detention time</b> in minutes?`,
+        answer: ans, unit: 'min', tol: 0.03,
+        steps: `DT (min) = Volume (gal) ÷ Flow (GPM)\n= ${vol.toLocaleString()} ÷ ${gpm}\n= ${ans.toFixed(1)} min\n(= ${(ans/60).toFixed(2)} hrs)`
+      };
+    },
+
+    // 5. Find volume from detention time + flow
+    () => {
+      const dt  = rnd(30, 360);
+      const gpm = rnd(50, 500);
+      const ans = dt * gpm;
+      return {
+        q: `A tank must provide <b>${dt} minutes</b> of detention time at a flow of <b>${gpm} GPM</b>. What <b>volume</b> (gallons) is required?`,
+        answer: ans, unit: 'gal', tol: 0.02,
+        steps: `Volume = DT (min) × Flow (GPM)\n= ${dt} × ${gpm}\n= ${ans.toLocaleString()} gallons`
+      };
+    },
+
+    // 6. Cylindrical tank volume
+    () => {
+      const d = rnd(10, 50);
+      const h = rnd(8, 30);
+      const ans = 0.785 * d * d * h * 7.48;
+      return {
+        q: `A cylindrical tank is <b>${d} ft in diameter</b> and <b>${h} ft tall</b>. What is its volume in <b>gallons</b>?`,
+        answer: ans, unit: 'gal', tol: 0.03,
+        steps: `V = 0.785 × D² × H × 7.48\n= 0.785 × ${d}² × ${h} × 7.48\n= 0.785 × ${d*d} × ${h} × 7.48\n= ${ans.toFixed(0)} gallons`
+      };
+    },
+
+    // 7. Rectangular tank volume
+    () => {
+      const l = rnd(20, 80), w = rnd(10, 40), h = rnd(6, 20);
+      const ans = l * w * h * 7.48;
+      return {
+        q: `A rectangular tank measures <b>${l} ft × ${w} ft × ${h} ft</b> deep. What is its volume in <b>gallons</b>?`,
+        answer: ans, unit: 'gal', tol: 0.03,
+        steps: `V = L × W × H × 7.48\n= ${l} × ${w} × ${h} × 7.48\n= ${l*w*h} ft³ × 7.48\n= ${ans.toFixed(0)} gallons`
+      };
+    },
+
+    // 8. PSI → feet of head
+    () => {
+      const psi = rnd(20, 120);
+      const ans = psi * 2.31;
+      return {
+        q: `A pressure gauge reads <b>${psi} PSI</b>. What is the equivalent pressure in <b>feet of head</b>?`,
+        answer: ans, unit: 'ft', tol: 0.02,
+        steps: `Head (ft) = PSI × 2.31\n= ${psi} × 2.31\n= ${ans.toFixed(1)} ft`
+      };
+    },
+
+    // 9. Feet of head → PSI
+    () => {
+      const head = rnd(50, 350);
+      const ans  = head * 0.433;
+      return {
+        q: `A storage tank has <b>${head} feet</b> of head. What is the equivalent pressure in <b>PSI</b>?`,
+        answer: ans, unit: 'PSI', tol: 0.02,
+        steps: `PSI = Head (ft) × 0.433\n= ${head} × 0.433\n= ${ans.toFixed(1)} PSI`
+      };
+    },
+
+    // 10. Water horsepower
+    () => {
+      const gpm  = rnd(100, 1000);
+      const head = rnd(50, 300);
+      const ans  = (gpm * head) / 3960;
+      return {
+        q: `A pump moves <b>${gpm} GPM</b> against a total head of <b>${head} ft</b>. What is the <b>water horsepower (WHP)</b>?`,
+        answer: ans, unit: 'WHP', tol: 0.03,
+        steps: `WHP = (GPM × Head) ÷ 3,960\n= (${gpm} × ${head}) ÷ 3,960\n= ${(gpm*head).toLocaleString()} ÷ 3,960\n= ${ans.toFixed(2)} WHP`
+      };
+    }
+  ];
+
+  function newProblem() {
+    probCount++;
+    const idx = Math.floor(Math.random() * PROBLEM_TYPES.length);
+    currentProblem = PROBLEM_TYPES[idx]();
+    document.getElementById('prob-q').innerHTML = currentProblem.q;
+    document.getElementById('prob-unit').textContent = currentProblem.unit;
+    document.getElementById('prob-ans').value = '';
+    document.getElementById('prob-inputs').style.display = 'block';
+    const fb = document.getElementById('prob-feedback');
+    fb.style.display = 'none'; fb.className = 'prob-feedback';
+    document.getElementById('prob-counter').textContent = 'Problem #' + probCount;
+    document.getElementById('prob-ans').focus();
+  }
+
+  function checkProblem() {
+    if (!currentProblem) return;
+    const userVal = parseFloat(document.getElementById('prob-ans').value);
+    const fb = document.getElementById('prob-feedback');
+    if (isNaN(userVal)) {
+      fb.style.display = 'block';
+      fb.className = 'prob-feedback wrong';
+      fb.innerHTML = 'Please enter a number.';
+      return;
+    }
+    const correct = currentProblem.answer;
+    const pct = Math.abs(userVal - correct) / correct;
+    fb.style.display = 'block';
+    if (pct <= currentProblem.tol) {
+      fb.className = 'prob-feedback correct';
+      fb.textContent = '✓ Correct! ' + correct.toFixed(2) + ' ' + currentProblem.unit;
+    } else {
+      fb.className = 'prob-feedback wrong';
+      fb.innerHTML = '<b>Not quite.</b> Correct answer: ' + correct.toFixed(2) + ' ' + currentProblem.unit + '\n\n' + currentProblem.steps;
+    }
+  }
+
+  // Allow Enter key to check
+  document.getElementById('prob-ans').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkProblem();
   });
 
   // ── FORMULA ITEMS ──
