@@ -830,7 +830,7 @@
     });
   });
 
-  // ── ACCORDION ── (one open at a time)
+  // ── ACCORDION ── (one open at a time, scroll to top on open)
   function toggleAcc(btn) {
     const body   = btn.nextElementSibling;
     const isOpen = btn.classList.contains('open');
@@ -839,10 +839,16 @@
       h.classList.remove('open');
       h.nextElementSibling.classList.remove('open');
     });
-    // If it wasn't open, open it now
+    // If it wasn't open, open it and scroll it to the top
     if (!isOpen) {
       btn.classList.add('open');
       body.classList.add('open');
+      // Scroll the .screens container so this section is at the top
+      const scroller = document.querySelector('.screens');
+      const accEl    = btn.closest('.acc');
+      setTimeout(() => {
+        scroller.scrollTo({ top: accEl.offsetTop - 8, behavior: 'smooth' });
+      }, 10);
     }
   }
 
