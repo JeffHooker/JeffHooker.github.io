@@ -343,6 +343,59 @@
     .acc-body .card:last-of-type { margin-bottom: 0; }
     .acc-body > div:last-child { margin-bottom: 0; }
 
+    /* ── STUDY CARDS ── */
+    .study-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .study-head {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .study-head-text { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .study-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .study-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .study-chevron {
+      width: 18px; height: 18px;
+      stroke: var(--blue); fill: none;
+      stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .study-card.open .study-chevron { transform: rotate(180deg); }
+    .study-body {
+      display: none;
+      padding: 0 18px 18px;
+      border-top: 1px solid var(--border);
+    }
+    .study-card.open .study-body { display: block; }
+    .study-placeholder {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      padding-top: 14px;
+      font-style: italic;
+    }
+
     /* ── MORE TAB ── */
     .more-section { margin-bottom: 16px; }
     .more-row {
@@ -706,13 +759,49 @@
 
   <!-- ════════════════ STUDY TAB ════════════════ -->
   <div class="screen" id="screen-study">
-    <div class="placeholder">
-      <svg viewBox="0 0 24 24" style="width:56px;height:56px;opacity:.12;stroke:var(--blue);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-      </svg>
-      <h2>Study</h2>
-      <p>Exam prep, formula references, and operator certification guides — coming soon.</p>
+
+    <!-- Formula Reference -->
+    <div class="study-card" id="sc-formula">
+      <button class="study-head" onclick="toggleStudy('sc-formula')">
+        <div class="study-head-text">
+          <span class="study-title">Formula Reference</span>
+          <span class="study-desc">Key equations every operator should know</span>
+        </div>
+        <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="study-body">
+        <p class="study-placeholder">Formula sheets coming soon — chlorine dosage, flow velocity, head loss, detention time, and more.</p>
+      </div>
     </div>
+
+    <!-- Practice Problems -->
+    <div class="study-card" id="sc-practice">
+      <button class="study-head" onclick="toggleStudy('sc-practice')">
+        <div class="study-head-text">
+          <span class="study-title">Practice Problems</span>
+          <span class="study-desc">Worked examples for exam preparation</span>
+        </div>
+        <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="study-body">
+        <p class="study-placeholder">Step-by-step practice problems coming soon — T1, T2, T3, and T4 operator exam levels.</p>
+      </div>
+    </div>
+
+    <!-- Quick Quiz -->
+    <div class="study-card" id="sc-quiz">
+      <button class="study-head" onclick="toggleStudy('sc-quiz')">
+        <div class="study-head-text">
+          <span class="study-title">Quick Quiz</span>
+          <span class="study-desc">Test your knowledge on the go</span>
+        </div>
+        <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="study-body">
+        <p class="study-placeholder">Multiple-choice quizzes coming soon — regulations, math, and system operations.</p>
+      </div>
+    </div>
+
   </div>
 
   <!-- ════════════════ MORE TAB ════════════════ -->
@@ -829,6 +918,14 @@
       document.getElementById('screen-' + target).classList.add('active');
     });
   });
+
+  // ── STUDY CARDS ──
+  function toggleStudy(id) {
+    const card   = document.getElementById(id);
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.study-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
 
   // ── ACCORDION ── (one open at a time, scroll to top on open)
   function toggleAcc(btn) {
