@@ -181,6 +181,22 @@
     }
     .field input:focus { border-color: var(--blue); }
     .field input::placeholder { color: #444; }
+    .field textarea {
+      width: 100%;
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      color: var(--text);
+      outline: none;
+      resize: vertical;
+      font-family: inherit;
+      transition: border-color 0.15s;
+      min-height: 72px;
+    }
+    .field textarea:focus { border-color: var(--blue); }
+    .field textarea::placeholder { color: #444; }
 
     /* ── RESULTS ── */
     .result-row {
@@ -605,6 +621,97 @@
     }
     .qz-start-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.55; margin-bottom: 4px; }
 
+    /* ── LOG TAB ── */
+    .log-save-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background 0.2s;
+    }
+    .log-save-btn:active { background: var(--blue-dim); }
+    .log-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .log-empty {
+      text-align: center;
+      padding: 28px 0 16px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .log-entry {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .log-entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .log-entry-loc {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .log-entry-dt {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .log-entry-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .log-pill {
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .log-pill b { color: var(--text); }
+    .log-entry-notes {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.45;
+      border-top: 1px solid var(--border);
+      padding-top: 7px;
+      margin-top: 4px;
+    }
+    .log-entry-del {
+      background: none;
+      border: none;
+      color: #555;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0 0 0 8px;
+      line-height: 1;
+    }
+    .log-entry-del:active { color: #ef4444; }
+    .log-field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 12px;
+    }
+
     /* ── MORE TAB ── */
     .more-section { margin-bottom: 16px; }
     .more-row {
@@ -957,14 +1064,64 @@
 
   <!-- ════════════════ LOG TAB ════════════════ -->
   <div class="screen" id="screen-log">
-    <div class="placeholder">
-      <svg viewBox="0 0 24 24" style="width:56px;height:56px;opacity:.12;stroke:var(--blue);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-      </svg>
-      <h2>Field Log</h2>
-      <p>Log and review daily readings, samples, and notes — coming soon.</p>
+
+    <!-- Entry Form -->
+    <div class="card">
+      <div class="card-title">New Entry</div>
+
+      <div class="log-field-row">
+        <div class="field">
+          <label for="log-date">Date</label>
+          <input type="date" id="log-date">
+        </div>
+        <div class="field">
+          <label for="log-time">Time</label>
+          <input type="time" id="log-time">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="log-loc">Location / System Name</label>
+        <input type="text" id="log-loc" placeholder="e.g. Well 3 — Main Street Booster">
+      </div>
+
+      <div class="log-field-row">
+        <div class="field">
+          <label for="log-cl">Chlorine Residual (mg/L)</label>
+          <input type="number" inputmode="decimal" id="log-cl" placeholder="0.00" step="0.01" min="0">
+        </div>
+        <div class="field">
+          <label for="log-ph">pH</label>
+          <input type="number" inputmode="decimal" id="log-ph" placeholder="7.0" step="0.1" min="0" max="14">
+        </div>
+      </div>
+
+      <div class="log-field-row">
+        <div class="field">
+          <label for="log-turb">Turbidity (NTU)</label>
+          <input type="number" inputmode="decimal" id="log-turb" placeholder="0.00" step="0.01" min="0">
+        </div>
+        <div class="field">
+          <label for="log-flow">Flow Rate (GPM)</label>
+          <input type="number" inputmode="decimal" id="log-flow" placeholder="0" step="1" min="0">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="log-notes">Notes</label>
+        <textarea id="log-notes" placeholder="Observations, actions taken, equipment status…"></textarea>
+      </div>
+
+      <button class="log-save-btn" onclick="saveLogEntry()">Save Entry</button>
     </div>
-  </div>
+
+    <!-- Saved Entries -->
+    <div style="padding: 0 0 8px;">
+      <div class="log-section-title">Saved Entries</div>
+      <div id="log-list"></div>
+    </div>
+
+  </div><!-- end #screen-log -->
 
   <!-- ════════════════ STUDY TAB ════════════════ -->
   <div class="screen" id="screen-study">
@@ -1970,6 +2127,102 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   }
   ['cf-gpm','cf-dose','cf-strength'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcChemFeed));
+
+  // ── FIELD LOG ──
+  const LOG_KEY = 'drh2o-log';
+
+  function loadLog() {
+    try { return JSON.parse(localStorage.getItem(LOG_KEY)) || []; }
+    catch (e) { return []; }
+  }
+  function saveLog(entries) {
+    localStorage.setItem(LOG_KEY, JSON.stringify(entries));
+  }
+
+  function renderLog() {
+    const entries = loadLog();
+    const list = document.getElementById('log-list');
+    if (!entries.length) {
+      list.innerHTML = '<div class="log-empty">No entries yet — save your first reading above.</div>';
+      return;
+    }
+    list.innerHTML = entries.map((e, i) => {
+      const pills = [
+        e.cl    !== '' ? `<span class="log-pill"><b>${e.cl}</b> mg/L Cl₂</span>` : '',
+        e.ph    !== '' ? `<span class="log-pill"><b>pH ${e.ph}</b></span>` : '',
+        e.turb  !== '' ? `<span class="log-pill"><b>${e.turb}</b> NTU</span>` : '',
+        e.flow  !== '' ? `<span class="log-pill"><b>${e.flow}</b> GPM</span>` : '',
+      ].filter(Boolean).join('');
+      const notesHtml = e.notes
+        ? `<div class="log-entry-notes">${e.notes.replace(/</g,'&lt;')}</div>` : '';
+      return `
+        <div class="log-entry">
+          <div class="log-entry-header">
+            <span class="log-entry-loc">${(e.loc || 'Unknown Location').replace(/</g,'&lt;')}</span>
+            <span style="display:flex;align-items:center;gap:4px;">
+              <span class="log-entry-dt">${e.date || ''}${e.date && e.time ? ' ' : ''}${e.time || ''}</span>
+              <button class="log-entry-del" onclick="deleteLogEntry(${i})" title="Delete">✕</button>
+            </span>
+          </div>
+          ${pills ? `<div class="log-entry-pills">${pills}</div>` : ''}
+          ${notesHtml}
+        </div>`;
+    }).join('');
+  }
+
+  function saveLogEntry() {
+    const date  = document.getElementById('log-date').value.trim();
+    const time  = document.getElementById('log-time').value.trim();
+    const loc   = document.getElementById('log-loc').value.trim();
+    const cl    = document.getElementById('log-cl').value.trim();
+    const ph    = document.getElementById('log-ph').value.trim();
+    const turb  = document.getElementById('log-turb').value.trim();
+    const flow  = document.getElementById('log-flow').value.trim();
+    const notes = document.getElementById('log-notes').value.trim();
+
+    if (!loc && !cl && !ph && !turb && !flow) {
+      alert('Please fill in at least a location or one reading before saving.');
+      return;
+    }
+
+    const entries = loadLog();
+    entries.unshift({ date, time, loc, cl, ph, turb, flow, notes });
+    saveLog(entries);
+
+    // Clear form fields
+    ['log-date','log-time','log-loc','log-cl','log-ph','log-turb','log-flow','log-notes']
+      .forEach(id => { document.getElementById(id).value = ''; });
+
+    renderLog();
+  }
+
+  function deleteLogEntry(idx) {
+    if (!confirm('Delete this entry?')) return;
+    const entries = loadLog();
+    entries.splice(idx, 1);
+    saveLog(entries);
+    renderLog();
+  }
+
+  // Pre-fill today's date and current time on Log tab open
+  btns.forEach(btn => {
+    if (btn.dataset.target === 'log') {
+      btn.addEventListener('click', () => {
+        const now = new Date();
+        const dateEl = document.getElementById('log-date');
+        const timeEl = document.getElementById('log-time');
+        if (!dateEl.value) {
+          dateEl.value = now.toISOString().slice(0, 10);
+        }
+        if (!timeEl.value) {
+          timeEl.value = now.toTimeString().slice(0, 5);
+        }
+      });
+    }
+  });
+
+  // Initial render
+  renderLog();
 
   // ── SERVICE WORKER ──
   if ('serviceWorker' in navigator) {
