@@ -848,12 +848,20 @@
     });
   });
 
-  // ── ACCORDION ──
+  // ── ACCORDION ── (one open at a time)
   function toggleAcc(btn) {
     const body   = btn.nextElementSibling;
     const isOpen = btn.classList.contains('open');
-    btn.classList.toggle('open',  !isOpen);
-    body.classList.toggle('open', !isOpen);
+    // Collapse all sections
+    document.querySelectorAll('.acc-head').forEach(h => {
+      h.classList.remove('open');
+      h.nextElementSibling.classList.remove('open');
+    });
+    // If it wasn't open, open it now
+    if (!isOpen) {
+      btn.classList.add('open');
+      body.classList.add('open');
+    }
   }
 
   // ── HELPERS ──
