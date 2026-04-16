@@ -679,6 +679,24 @@
     .syw-dim { color: #555; padding-left: 6px; }
     .syw-sep { border: none; border-top: 1px solid #1e1e1e; margin: 8px 0 4px; }
 
+    /* ── COPY RESULT ── */
+    .syw-action-row { display: flex; gap: 6px; }
+    .syw-action-row .syw-btn { flex: 1; }
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .copy-btn:hover  { border-color: var(--blue); color: var(--blue); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; background: #0d2b14; }
+
     /* ── LOG TAB ── */
     .log-save-btn {
       width: 100%;
@@ -895,7 +913,10 @@
           CT based on EPA SWTR 3-log Giardia (CT = 41 mg/L·min at 15°C, pH 6–9).
         </div>
         <div class="syw-wrap" id="syw-cl-wrap" style="display:none">
-          <button class="syw-btn" id="syw-cl-btn" onclick="toggleSyw('cl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-cl-btn" onclick="toggleSyw('cl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-cl" onclick="copyResult('cl')">Copy</button>
+          </div>
           <div class="syw-body" id="syw-cl"></div>
         </div>
       </div>
@@ -958,7 +979,10 @@
           </div>
         </div>
         <div class="syw-wrap" id="syw-fl-wrap" style="display:none">
-          <button class="syw-btn" id="syw-fl-btn" onclick="toggleSyw('fl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-fl-btn" onclick="toggleSyw('fl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-fl" onclick="copyResult('fl')">Copy</button>
+          </div>
           <div class="syw-body" id="syw-fl"></div>
         </div>
       </div>
@@ -1035,7 +1059,10 @@
           </div>
         </div>
         <div class="syw-wrap" id="syw-pr-wrap" style="display:none">
-          <button class="syw-btn" id="syw-pr-btn" onclick="toggleSyw('pr')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-pr-btn" onclick="toggleSyw('pr')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-pr" onclick="copyResult('pr')">Copy</button>
+          </div>
           <div class="syw-body" id="syw-pr"></div>
         </div>
       </div>
@@ -1068,7 +1095,10 @@
           </div>
         </div>
         <div class="syw-wrap" id="syw-cyl-wrap" style="display:none">
-          <button class="syw-btn" id="syw-cyl-btn" onclick="toggleSyw('cyl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-cyl-btn" onclick="toggleSyw('cyl')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-cyl" onclick="copyResult('cyl')">Copy</button>
+          </div>
           <div class="syw-body" id="syw-cyl"></div>
         </div>
       </div>
@@ -1105,7 +1135,10 @@
           </div>
         </div>
         <div class="syw-wrap" id="syw-rec-wrap" style="display:none">
-          <button class="syw-btn" id="syw-rec-btn" onclick="toggleSyw('rec')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-rec-btn" onclick="toggleSyw('rec')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-rec" onclick="copyResult('rec')">Copy</button>
+          </div>
           <div class="syw-body" id="syw-rec"></div>
         </div>
       </div>
@@ -1143,7 +1176,10 @@
           </div>
         </div>
         <div class="syw-wrap" id="syw-dt-wrap" style="display:none">
-          <button class="syw-btn" id="syw-dt-btn" onclick="toggleSyw('dt')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-dt-btn" onclick="toggleSyw('dt')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-dt" onclick="copyResult('dt')">Copy</button>
+          </div>
           <div class="syw-body" id="syw-dt"></div>
         </div>
       </div>
@@ -1188,7 +1224,10 @@
           </div>
         </div>
         <div class="syw-wrap" id="syw-cf-wrap" style="display:none">
-          <button class="syw-btn" id="syw-cf-btn" onclick="toggleSyw('cf')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-cf-btn" onclick="toggleSyw('cf')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-cf" onclick="copyResult('cf')">Copy</button>
+          </div>
           <div class="syw-body" id="syw-cf"></div>
         </div>
       </div>
@@ -1969,6 +2008,123 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   function set(id, val) {
     const el = document.getElementById(id);
     if (el) el.textContent = val;
+  }
+
+  // ── COPY RESULT ──
+  function copyResult(id) {
+    const iv = id => (document.getElementById(id) || {}).value || '';
+    const rv = id => ((document.getElementById(id) || {}).textContent || '').trim();
+    const u  = U === 'met';
+    let lines = [];
+
+    switch (id) {
+      case 'cl': {
+        const vol = iv('cl-volume'), res = iv('cl-residual'), str = iv('cl-strength');
+        lines.push('Dr. H₂O — Chlorine Dosage');
+        lines.push(`Volume: ${vol} ${u?'L':'gal'} | Cl₂ Residual: ${res} mg/L${str?' | Strength: '+str+'%':''}`);
+        lines.push('');
+        lines.push(`Cl₂ Needed:        ${rv('cl-oz')}  ${rv('cl-oz-sub')}`);
+        lines.push(`                   ${rv('cl-g')}  ${rv('cl-g-sub')}`);
+        const sol = rv('cl-sol-oz');
+        if (sol && sol !== '—') lines.push(`Solution to Add:   ${sol}  ${rv('cl-sol-ml')}`);
+        lines.push(`Min. Contact Time: ${rv('cl-ct')}  ${rv('cl-ct-sub')}`);
+        break;
+      }
+      case 'fl': {
+        const dia = iv('fl-dia'), vel = iv('fl-vel'), time = iv('fl-time');
+        lines.push('Dr. H₂O — Flow Rate');
+        lines.push(`Diameter: ${dia} ${u?'mm':'in'} | Velocity: ${vel} ${u?'m/s':'fps'}${time?' | Time: '+time+' min':''}`);
+        lines.push('');
+        lines.push(`Flow Rate:  ${rv('fl-gpm')}  (${rv('fl-gph')} | ${rv('fl-cfs')})`);
+        lines.push(`Pipe Area:  ${rv('fl-area')}  ${rv('fl-area-sub')}`);
+        const vol = rv('fl-vol');
+        if (vol && vol !== '—') lines.push(`Volume (${time} min): ${vol}  ${rv('fl-vol-sub')}`);
+        break;
+      }
+      case 'pr': {
+        const src = iv('pr-source'), elev = iv('pr-elev'), len = iv('pr-len');
+        const dia = iv('pr-dia'), gpm = iv('pr-gpm');
+        const C = rv('pr-headloss-sub').match(/C=(\d+)/)?.[1] || iv('pr-cfactor') || '';
+        const pu = u ? 'kPa' : 'PSI', lu = u ? 'm' : 'ft', du = u ? 'mm' : 'in';
+        lines.push('Dr. H₂O — Pressure / Head Loss');
+        let inputs = `Source: ${src} ${pu}`;
+        if (elev) inputs += ` | Elevation: ${elev} ${lu}`;
+        if (len)  inputs += ` | Length: ${len} ${lu}`;
+        if (dia)  inputs += ` | Diameter: ${dia} ${du}`;
+        if (gpm)  inputs += ` | Flow: ${gpm} GPM`;
+        if (C)    inputs += ` | C=${C}`;
+        lines.push(inputs);
+        lines.push('');
+        lines.push(`Elevation Change:  ${rv('pr-static')}  ${rv('pr-static-sub')}`);
+        const fric = rv('pr-friction');
+        if (fric && fric !== '—') {
+          lines.push(`Friction Loss:     ${fric}  ${rv('pr-friction-sub')}`);
+          lines.push(`  (per 100 ft:     ${rv('pr-per100')})`);
+        }
+        lines.push(`Residual Pressure: ${rv('pr-residual')}  ${rv('pr-residual-sub')}`);
+        break;
+      }
+      case 'cyl': {
+        const d = iv('tv-cyl-dia'), h = iv('tv-cyl-h'), du = u ? 'm' : 'ft';
+        lines.push('Dr. H₂O — Cylindrical Tank Volume');
+        lines.push(`Diameter: ${d} ${du} | Height: ${h} ${du}`);
+        lines.push('');
+        lines.push(`Volume: ${rv('tv-cyl-gal')}  (${rv('tv-cyl-sub')})`);
+        break;
+      }
+      case 'rec': {
+        const l = iv('tv-rec-l'), w = iv('tv-rec-w'), h = iv('tv-rec-h'), du = u ? 'm' : 'ft';
+        lines.push('Dr. H₂O — Rectangular Tank Volume');
+        lines.push(`Length: ${l} ${du} | Width: ${w} ${du} | Height: ${h} ${du}`);
+        lines.push('');
+        lines.push(`Volume: ${rv('tv-rec-gal')}  (${rv('tv-rec-sub')})`);
+        break;
+      }
+      case 'dt': {
+        const vol = iv('dt-vol'), gpm = iv('dt-gpm');
+        lines.push('Dr. H₂O — Detention Time');
+        lines.push(`Volume: ${vol} ${u?'L':'gal'} | Flow: ${gpm} ${u?'L/min':'GPM'}`);
+        lines.push('');
+        lines.push(`Detention Time:       ${rv('dt-min')}  (${rv('dt-hr')})`);
+        lines.push(`CT Value (1.0 mg/L):  ${rv('dt-ct')} mg/L·min`);
+        break;
+      }
+      case 'cf': {
+        const gpm = iv('cf-gpm'), dose = iv('cf-dose'), str = iv('cf-strength');
+        lines.push('Dr. H₂O — Chemical Feed Rate');
+        lines.push(`Flow: ${gpm} ${u?'L/min':'GPM'} | Dose: ${dose} mg/L${str?' | Strength: '+str+'%':''}`);
+        lines.push('');
+        lines.push(`Feed Rate:    ${rv('cf-lbs')}  (${rv('cf-oz')})`);
+        lines.push(`Flow:         ${rv('cf-mgd')}  (${rv('cf-gpd')})`);
+        const gal = rv('cf-gal');
+        if (gal && gal !== '—') lines.push(`Solution:     ${gal}  (${rv('cf-mlmin')})`);
+        break;
+      }
+    }
+
+    const text = lines.join('\n');
+    const btn  = document.getElementById('copy-' + id);
+    const flash = () => {
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(flash).catch(() => fallbackCopy(text, flash));
+    } else {
+      fallbackCopy(text, flash);
+    }
+  }
+
+  function fallbackCopy(text, cb) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); cb(); } catch(e) {}
+    document.body.removeChild(ta);
   }
 
   // ── SHOW YOUR WORK ──
