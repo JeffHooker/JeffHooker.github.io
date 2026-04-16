@@ -363,10 +363,6 @@
 
 <header>
   <h1><span class="logo-dr">DR.</span>&thinsp;<span class="logo-water">H₂O</span></h1>
-  <div class="unit-toggle">
-    <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')">Imperial</button>
-    <button class="unit-btn" id="btn-met" onclick="setUnits('met')">Metric</button>
-  </div>
 </header>
 
 <!-- ── SCREENS ── -->
@@ -724,30 +720,16 @@
 
     <div class="card">
       <div class="card-title">Units</div>
-      <div style="display:flex;gap:8px;margin-top:4px;">
-        <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')" style="flex:1;border-radius:8px;padding:12px;">Imperial</button>
-        <button class="unit-btn" id="btn-met" onclick="setUnits('met')" style="flex:1;border-radius:8px;padding:12px;">Metric</button>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')" style="flex:1;padding:12px;border-radius:8px;">Imperial</button>
+        <button class="unit-btn" id="btn-met" onclick="setUnits('met')" style="flex:1;padding:12px;border-radius:8px;">Metric</button>
       </div>
     </div>
 
     <div class="card">
       <div class="card-title">About</div>
-      <div class="more-row">
-        <span class="more-row-label">App</span>
-        <span class="more-row-val">Dr. H₂O</span>
-      </div>
-      <div class="more-row">
-        <span class="more-row-label">Version</span>
-        <span class="more-row-val">1.0</span>
-      </div>
-      <div class="more-row">
-        <span class="more-row-label">Offline</span>
-        <span class="more-row-val">PWA — works without internet</span>
-      </div>
-      <div class="more-row">
-        <span class="more-row-label">Reference</span>
-        <span class="more-row-val">EPA SWTR · Hazen-Williams</span>
-      </div>
+      <p style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px;">Dr. H₂O</p>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Field calculator for water system operators — chlorine, flow, pressure, tank volume, detention time, and chemical feed rate.</p>
     </div>
 
   </div><!-- end #screen-more -->
