@@ -637,6 +637,19 @@
       transition: background 0.2s;
     }
     .log-save-btn:active { background: var(--blue-dim); }
+    .log-export-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .log-export-btn:hover { border-color: var(--blue); color: var(--blue); }
     .log-section-title {
       font-size: 0.7rem;
       font-weight: 700;
@@ -1152,7 +1165,10 @@
 
     <!-- Saved Entries -->
     <div style="padding: 0 0 8px;">
-      <div class="log-section-title">Saved Entries</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div class="log-section-title" style="margin-bottom:0;">Saved Entries</div>
+        <button class="log-export-btn" onclick="exportLogCSV()">Export CSV</button>
+      </div>
       <div id="log-list"></div>
     </div>
 
@@ -2271,6 +2287,31 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // Initial render
   renderLog();
+
+  // ── LOG EXPORT ──
+  function exportLogCSV() {
+    const entries = loadLog();
+    if (!entries.length) {
+      alert('No log entries to export.');
+      return;
+    }
+    const headers = ['Date','Time','Location','Chlorine Residual (mg/L)','pH','Turbidity (NTU)','Flow Rate (GPM)','Notes'];
+    const rows = entries.map(e => [
+      e.date, e.time, e.loc, e.cl, e.ph, e.turb, e.flow, e.notes
+    ].map(v => {
+      const s = (v == null ? '' : String(v)).replace(/"/g, '""');
+      return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s;
+    }));
+    const csv = [headers, ...rows].map(r => r.join(',')).join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    const date = new Date().toISOString().slice(0,10);
+    a.href     = url;
+    a.download = `drh2o-log-${date}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 
   // ── SERVICE WORKER ──
   if ('serviceWorker' in navigator) {
