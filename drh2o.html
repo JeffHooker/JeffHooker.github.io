@@ -25,6 +25,47 @@
       --nav-h:    64px;
     }
 
+    html.light {
+      --bg:       #f5f5f2;
+      --surface:  #ffffff;
+      --border:   #d8d8d8;
+      --blue:     #00A8E8;
+      --blue-dim: #0080b8;
+      --text:     #1a1a1a;
+      --muted:    #666;
+    }
+
+    html.light .field input,
+    html.light .field textarea,
+    html.light .field select { background: #f0f0ed; color: var(--text); }
+    html.light .field input::placeholder,
+    html.light .field textarea::placeholder { color: #aaa; }
+    html.light .acc-body .card { border-color: #ddd; }
+    html.light .f-eq { background: #efefec; }
+    html.light .f-source { color: #888; }
+    html.light .prob-input { background: #f0f0ed; }
+    html.light .prob-new { background: #f0f0ed; }
+    html.light .prob-feedback.correct { background: #d4f0dc; color: #166534; border-color: #22c55e; }
+    html.light .prob-feedback.wrong   { background: #fde8e8; color: #991b1b; border-color: #ef4444; }
+    html.light .prob-feedback.wrong b { color: #dc2626; }
+    html.light .qz-choice:hover:not(:disabled) { background: #dff3fc; border-color: var(--blue); }
+    html.light .qz-choice.correct  { background: #d4f0dc; color: #166534; border-color: #22c55e; }
+    html.light .qz-choice.wrong    { background: #fde8e8; color: #991b1b; border-color: #ef4444; }
+    html.light .qz-choice.reveal   { background: #d4f0dc; color: #166534; border-color: #22c55e; }
+    html.light .syw-body { background: #ececea; }
+    html.light .syw-dim { color: #999; }
+    html.light .syw-sep { border-top-color: #d8d8d8; }
+    html.light .copy-btn.copied { background: #d4f0dc; border-color: #22c55e; color: #166534; }
+    html.light .log-pill { background: #e8e8e5; }
+    html.light .log-entry-field-val.empty { color: #bbb; }
+    html.light .log-entry-del { border-color: #f5c0c0; }
+    html.light .log-entry-del:hover { background: #fde8e8; border-color: #ef4444; }
+    html.light .log-entry-del:active { background: #fbd5d5; }
+    html.light .dot-grey { background: #bbb; }
+    html.light .card,
+    html.light .acc,
+    html.light .study-card { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+
     html, body {
       height: 100%;
       background: var(--bg);
@@ -1486,6 +1527,14 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   <div class="screen" id="screen-more">
 
     <div class="card">
+      <div class="card-title">Appearance</div>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button class="unit-btn active" id="btn-dark" onclick="setTheme('dark')" style="flex:1;padding:12px;border-radius:8px;">Dark</button>
+        <button class="unit-btn" id="btn-light" onclick="setTheme('light')" style="flex:1;padding:12px;border-radius:8px;">Light</button>
+      </div>
+    </div>
+
+    <div class="card">
       <div class="card-title">Units</div>
       <div style="display:flex;gap:8px;margin-top:8px;">
         <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')" style="flex:1;padding:12px;border-radius:8px;">Imperial</button>
@@ -1576,6 +1625,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.querySelectorAll('.ul').forEach(el => el.textContent = el.dataset.met);
     document.querySelectorAll('#btn-imp').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('#btn-met').forEach(b => b.classList.add('active'));
+  }
+
+  // ── THEME ──
+  let THEME = localStorage.getItem('drh2o-theme') || 'dark';
+
+  function setTheme(theme) {
+    THEME = theme;
+    localStorage.setItem('drh2o-theme', theme);
+    document.documentElement.classList.toggle('light', theme === 'light');
+    document.getElementById('btn-dark').classList.toggle('active', theme === 'dark');
+    document.getElementById('btn-light').classList.toggle('active', theme === 'light');
+  }
+
+  // Apply saved theme on load
+  if (THEME === 'light') {
+    document.documentElement.classList.add('light');
+    document.getElementById('btn-dark').classList.remove('active');
+    document.getElementById('btn-light').classList.add('active');
   }
 
   // ── CLEAR ──
