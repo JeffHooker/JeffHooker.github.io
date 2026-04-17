@@ -66,6 +66,28 @@
     html.light .acc,
     html.light .study-card { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
 
+    /* ── GLOVE MODE ── */
+    html.glove { font-size: 125%; --nav-h: 83px; }
+    html.glove .nav-btn svg { width: 29px; height: 29px; }
+    html.glove .field input,
+    html.glove .field textarea { padding: 16px 18px; }
+    html.glove .field select { padding: 16px 18px; }
+    html.glove .clear-btn { padding: 5px 10px; }
+    html.glove .acc-head { padding: 20px 18px; }
+    html.glove .study-head { padding: 23px 18px; }
+    html.glove .f-item { padding: 17px 0; }
+    html.glove .prob-input { padding: 14px 18px; }
+    html.glove .prob-btn { padding: 17px; }
+    html.glove .qz-choice { padding: 16px 18px; }
+    html.glove .qz-next-btn { padding: 16px; }
+    html.glove .qz-retake,
+    html.glove .qz-start-btn { padding: 17px; }
+    html.glove .syw-btn { padding: 12px 16px; }
+    html.glove .copy-btn { padding: 12px 18px; }
+    html.glove .log-save-btn { padding: 17px; }
+    html.glove .log-export-btn { padding: 7px 13px; }
+    html.glove .log-entry-del { padding: 12px; }
+
     html, body {
       height: 100%;
       background: var(--bg);
@@ -1535,6 +1557,15 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     </div>
 
     <div class="card">
+      <div class="card-title">Glove Mode</div>
+      <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-bottom:10px;">Larger text and tap targets for field use with gloves.</p>
+      <div style="display:flex;gap:8px;">
+        <button class="unit-btn active" id="btn-glove-off" onclick="setGlove(false)" style="flex:1;padding:12px;border-radius:8px;">Off</button>
+        <button class="unit-btn" id="btn-glove-on" onclick="setGlove(true)" style="flex:1;padding:12px;border-radius:8px;">On</button>
+      </div>
+    </div>
+
+    <div class="card">
       <div class="card-title">Units</div>
       <div style="display:flex;gap:8px;margin-top:8px;">
         <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')" style="flex:1;padding:12px;border-radius:8px;">Imperial</button>
@@ -1643,6 +1674,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.documentElement.classList.add('light');
     document.getElementById('btn-dark').classList.remove('active');
     document.getElementById('btn-light').classList.add('active');
+  }
+
+  // ── GLOVE MODE ──
+  let GLOVE = localStorage.getItem('drh2o-glove') === '1';
+
+  function setGlove(on) {
+    GLOVE = on;
+    localStorage.setItem('drh2o-glove', on ? '1' : '0');
+    document.documentElement.classList.toggle('glove', on);
+    document.getElementById('btn-glove-off').classList.toggle('active', !on);
+    document.getElementById('btn-glove-on').classList.toggle('active', on);
+  }
+
+  // Apply saved glove mode on load
+  if (GLOVE) {
+    document.documentElement.classList.add('glove');
+    document.getElementById('btn-glove-off').classList.remove('active');
+    document.getElementById('btn-glove-on').classList.add('active');
   }
 
   // ── CLEAR ──
