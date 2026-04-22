@@ -1048,6 +1048,18 @@
       gap: 0 12px;
     }
 
+    #log-header {
+      margin: -16px -16px 16px;
+      padding: 10px 16px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
     /* ── MORE TAB ── */
     .more-section { margin-bottom: 16px; }
     .more-row {
@@ -1594,8 +1606,10 @@
   <!-- ════════════════ LOG TAB ════════════════ -->
   <div class="screen" id="screen-log">
 
-    <!-- Entry Form -->
-    <div class="card">
+    <div id="log-header">Drinking Water Log</div>
+
+    <!-- Drinking Water Entry Form -->
+    <div class="card" id="log-form-dw">
       <div class="card-title">New Entry</div>
 
       <div class="log-field-row">
@@ -1639,6 +1653,61 @@
       <div class="field">
         <label for="log-notes">Notes</label>
         <textarea id="log-notes" placeholder="Observations, actions taken, equipment status…"></textarea>
+      </div>
+
+      <button class="log-save-btn" onclick="saveLogEntry()">Save Entry</button>
+    </div>
+
+    <!-- Wastewater Entry Form -->
+    <div class="card" id="log-form-ww" style="display:none">
+      <div class="card-title">New Entry</div>
+
+      <div class="log-field-row">
+        <div class="field">
+          <label for="ww-date">Date</label>
+          <input type="date" id="ww-date">
+        </div>
+        <div class="field">
+          <label for="ww-time">Time</label>
+          <input type="time" id="ww-time">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="ww-loc">Location / System Name</label>
+        <input type="text" id="ww-loc" placeholder="e.g. Headworks — Plant 1">
+      </div>
+
+      <div class="log-field-row">
+        <div class="field">
+          <label for="ww-inf-flow">Influent Flow (MGD)</label>
+          <input type="number" inputmode="decimal" id="ww-inf-flow" placeholder="0.000" step="0.001" min="0">
+        </div>
+        <div class="field">
+          <label for="ww-eff-turb">Effluent Turbidity (NTU)</label>
+          <input type="number" inputmode="decimal" id="ww-eff-turb" placeholder="0.00" step="0.01" min="0">
+        </div>
+      </div>
+
+      <div class="log-field-row">
+        <div class="field">
+          <label for="ww-do">Dissolved Oxygen (mg/L)</label>
+          <input type="number" inputmode="decimal" id="ww-do" placeholder="0.0" step="0.1" min="0">
+        </div>
+        <div class="field">
+          <label for="ww-ph">pH</label>
+          <input type="number" inputmode="decimal" id="ww-ph" placeholder="7.0" step="0.1" min="0" max="14">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="ww-cl">Chlorine Residual (mg/L)</label>
+        <input type="number" inputmode="decimal" id="ww-cl" placeholder="0.00" step="0.01" min="0">
+      </div>
+
+      <div class="field">
+        <label for="ww-notes">Notes</label>
+        <textarea id="ww-notes" placeholder="Observations, process conditions, equipment status…"></textarea>
       </div>
 
       <button class="log-save-btn" onclick="saveLogEntry()">Save Entry</button>
@@ -2109,10 +2178,23 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.documentElement.classList.toggle('waste', isWaste);
     document.getElementById('mode-bar-label').textContent =
       isWaste ? 'Wastewater' : 'Drinking Water';
+
+    // Log tab header + form visibility
+    const logHeader = document.getElementById('log-header');
+    const formDw    = document.getElementById('log-form-dw');
+    const formWw    = document.getElementById('log-form-ww');
+    if (logHeader) logHeader.textContent = isWaste ? 'Wastewater Log' : 'Drinking Water Log';
+    if (formDw)    formDw.style.display  = isWaste ? 'none' : '';
+    if (formWw)    formWw.style.display  = isWaste ? ''     : 'none';
+
+    // More tab discipline buttons
     const btnW = document.getElementById('btn-water');
     const btnWw = document.getElementById('btn-waste');
     if (btnW)  btnW.classList.toggle('active', !isWaste);
     if (btnWw) btnWw.classList.toggle('active',  isWaste);
+
+    // Refresh log list to show mode-appropriate entries
+    renderLog();
   }
 
   function setMode(mode) {
@@ -3221,21 +3303,23 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.getElementById(id).addEventListener('input', calcChemFeed));
 
   // ── FIELD LOG ──
-  const LOG_KEY = 'drh2o-log';
+  const LOG_KEY_DW = 'drh2o-log';
+  const LOG_KEY_WW = 'drh2o-log-ww';
+
+  function _logKey() { return MODE === 'waste' ? LOG_KEY_WW : LOG_KEY_DW; }
 
   function loadLog() {
-    try { return JSON.parse(localStorage.getItem(LOG_KEY)) || []; }
+    try { return JSON.parse(localStorage.getItem(_logKey())) || []; }
     catch (e) { return []; }
   }
-  function saveLog(entries) {
-    localStorage.setItem(LOG_KEY, JSON.stringify(entries));
-  }
+  function saveLog(entries) { localStorage.setItem(_logKey(), JSON.stringify(entries)); }
 
   function esc(s) { return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
   function renderLog() {
     const entries = loadLog();
     const list = document.getElementById('log-list');
+    if (!list) return;
     if (!entries.length) {
       list.innerHTML = '<div class="log-empty">No entries yet — save your first reading above.</div>';
       return;
@@ -3255,6 +3339,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
              <div class="log-entry-notes-label">Notes</div>
              <div class="log-entry-notes">${esc(e.notes)}</div>
            </div>` : '';
+      const modeFields = MODE === 'waste'
+        ? field('Influent Flow',       e.infFlow,     'MGD')
+          + field('Effluent Turbidity', e.effTurb,    'NTU')
+          + field('Dissolved Oxygen',   e.dissolvedO2, 'mg/L')
+          + field('pH',                 e.ph)
+          + field('Cl₂ Residual',       e.cl,          'mg/L')
+        : field('Cl₂ Residual',  e.cl,   'mg/L')
+          + field('pH',          e.ph)
+          + field('Turbidity',   e.turb, 'NTU')
+          + field('Flow Rate',   e.flow, 'GPM');
       return `
         <div class="log-entry">
           <div class="log-entry-header">
@@ -3264,10 +3358,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
           <div class="log-entry-fields">
             ${field('Date', e.date)}
             ${field('Time', e.time)}
-            ${field('Chlorine Residual', e.cl, 'mg/L')}
-            ${field('pH', e.ph)}
-            ${field('Turbidity', e.turb, 'NTU')}
-            ${field('Flow Rate', e.flow, 'GPM')}
+            ${modeFields}
           </div>
           ${notesHtml}
           <button class="log-entry-del" onclick="deleteLogEntry(${i})">Delete Entry</button>
@@ -3276,28 +3367,36 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   }
 
   function saveLogEntry() {
-    const date  = document.getElementById('log-date').value.trim();
-    const time  = document.getElementById('log-time').value.trim();
-    const loc   = document.getElementById('log-loc').value.trim();
-    const cl    = document.getElementById('log-cl').value.trim();
-    const ph    = document.getElementById('log-ph').value.trim();
-    const turb  = document.getElementById('log-turb').value.trim();
-    const flow  = document.getElementById('log-flow').value.trim();
-    const notes = document.getElementById('log-notes').value.trim();
-
-    if (!loc && !cl && !ph && !turb && !flow) {
-      alert('Please fill in at least a location or one reading before saving.');
-      return;
+    const v = id => document.getElementById(id).value.trim();
+    let entry, ids;
+    if (MODE === 'waste') {
+      entry = {
+        date: v('ww-date'), time: v('ww-time'), loc: v('ww-loc'),
+        infFlow: v('ww-inf-flow'), effTurb: v('ww-eff-turb'),
+        dissolvedO2: v('ww-do'), ph: v('ww-ph'), cl: v('ww-cl'),
+        notes: v('ww-notes')
+      };
+      if (!entry.loc && !entry.infFlow && !entry.effTurb && !entry.dissolvedO2 && !entry.ph && !entry.cl) {
+        alert('Please fill in at least a location or one reading before saving.');
+        return;
+      }
+      ids = ['ww-date','ww-time','ww-loc','ww-inf-flow','ww-eff-turb','ww-do','ww-ph','ww-cl','ww-notes'];
+    } else {
+      entry = {
+        date: v('log-date'), time: v('log-time'), loc: v('log-loc'),
+        cl: v('log-cl'), ph: v('log-ph'), turb: v('log-turb'),
+        flow: v('log-flow'), notes: v('log-notes')
+      };
+      if (!entry.loc && !entry.cl && !entry.ph && !entry.turb && !entry.flow) {
+        alert('Please fill in at least a location or one reading before saving.');
+        return;
+      }
+      ids = ['log-date','log-time','log-loc','log-cl','log-ph','log-turb','log-flow','log-notes'];
     }
-
     const entries = loadLog();
-    entries.unshift({ date, time, loc, cl, ph, turb, flow, notes });
+    entries.unshift(entry);
     saveLog(entries);
-
-    // Clear form fields
-    ['log-date','log-time','log-loc','log-cl','log-ph','log-turb','log-flow','log-notes']
-      .forEach(id => { document.getElementById(id).value = ''; });
-
+    ids.forEach(id => { document.getElementById(id).value = ''; });
     renderLog();
   }
 
@@ -3313,15 +3412,13 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   btns.forEach(btn => {
     if (btn.dataset.target === 'log') {
       btn.addEventListener('click', () => {
-        const now = new Date();
-        const dateEl = document.getElementById('log-date');
-        const timeEl = document.getElementById('log-time');
-        if (!dateEl.value) {
-          dateEl.value = now.toISOString().slice(0, 10);
-        }
-        if (!timeEl.value) {
-          timeEl.value = now.toTimeString().slice(0, 5);
-        }
+        const now    = new Date();
+        const dateId = MODE === 'waste' ? 'ww-date'  : 'log-date';
+        const timeId = MODE === 'waste' ? 'ww-time'  : 'log-time';
+        const dateEl = document.getElementById(dateId);
+        const timeEl = document.getElementById(timeId);
+        if (dateEl && !dateEl.value) dateEl.value = now.toISOString().slice(0, 10);
+        if (timeEl && !timeEl.value) timeEl.value = now.toTimeString().slice(0, 5);
       });
     }
   });
@@ -3332,24 +3429,25 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   // ── LOG EXPORT ──
   function exportLogCSV() {
     const entries = loadLog();
-    if (!entries.length) {
-      alert('No log entries to export.');
-      return;
+    if (!entries.length) { alert('No log entries to export.'); return; }
+    let headers, rows, filename;
+    const date = new Date().toISOString().slice(0, 10);
+    if (MODE === 'waste') {
+      headers  = ['Date','Time','Location','Influent Flow (MGD)','Effluent Turbidity (NTU)','Dissolved Oxygen (mg/L)','pH','Cl₂ Residual (mg/L)','Notes'];
+      rows     = entries.map(e => [e.date, e.time, e.loc, e.infFlow, e.effTurb, e.dissolvedO2, e.ph, e.cl, e.notes]);
+      filename = `drh2o-log-ww-${date}.csv`;
+    } else {
+      headers  = ['Date','Time','Location','Chlorine Residual (mg/L)','pH','Turbidity (NTU)','Flow Rate (GPM)','Notes'];
+      rows     = entries.map(e => [e.date, e.time, e.loc, e.cl, e.ph, e.turb, e.flow, e.notes]);
+      filename = `drh2o-log-dw-${date}.csv`;
     }
-    const headers = ['Date','Time','Location','Chlorine Residual (mg/L)','pH','Turbidity (NTU)','Flow Rate (GPM)','Notes'];
-    const rows = entries.map(e => [
-      e.date, e.time, e.loc, e.cl, e.ph, e.turb, e.flow, e.notes
-    ].map(v => {
-      const s = (v == null ? '' : String(v)).replace(/"/g, '""');
-      return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s;
-    }));
-    const csv = [headers, ...rows].map(r => r.join(',')).join('\r\n');
+    const qcsv = v => { const s = (v == null ? '' : String(v)).replace(/"/g,'""'); return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s; };
+    const csv  = [headers, ...rows.map(r => r.map(qcsv))].map(r => r.join(',')).join('\r\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
-    const date = new Date().toISOString().slice(0,10);
     a.href     = url;
-    a.download = `drh2o-log-${date}.csv`;
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
   }
