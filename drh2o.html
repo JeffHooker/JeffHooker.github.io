@@ -65,6 +65,8 @@
     html.light .card,
     html.light .acc,
     html.light .study-card { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    html.light .doc-del { border-color: #f5c0c0; }
+    html.light .doc-del:hover { background: #fde8e8; border-color: #ef4444; color: #dc2626; }
 
     /* ── GLOVE MODE ── */
     html.glove { font-size: 125%; --nav-h: 83px; }
@@ -87,6 +89,9 @@
     html.glove .log-save-btn { padding: 17px; }
     html.glove .log-export-btn { padding: 7px 13px; }
     html.glove .log-entry-del { padding: 12px; }
+    html.glove .doc-upload-btn { padding: 17px; }
+    html.glove .doc-open { padding: 16px 18px; }
+    html.glove .doc-del { padding: 0 16px; }
 
     html, body {
       height: 100%;
@@ -919,6 +924,83 @@
     .more-row:first-child { padding-top: 0; }
     .more-row-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.6px; }
     .more-row-val { color: var(--text); font-weight: 600; }
+
+    /* ── MY DOCUMENTS ── */
+    .doc-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.5;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+    }
+    .doc-upload-btn {
+      width: 100%;
+      padding: 13px;
+      background: none;
+      border: 1.5px dashed var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: border-color 0.15s, color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .doc-upload-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .doc-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .doc-item { display: flex; align-items: stretch; gap: 8px; }
+    .doc-open {
+      flex: 1;
+      text-align: left;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+      min-width: 0;
+    }
+    .doc-open:hover { border-color: var(--blue); }
+    .doc-name {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .doc-meta { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
+    .doc-del {
+      background: none;
+      border: 1px solid #3a1a1a;
+      border-radius: 8px;
+      padding: 0 13px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .doc-del:hover { background: #2b0d0d; border-color: #ef4444; color: #ef4444; }
+    .doc-empty {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 18px 0 4px;
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
@@ -1571,6 +1653,20 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
         <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')" style="flex:1;padding:12px;border-radius:8px;">Imperial</button>
         <button class="unit-btn" id="btn-met" onclick="setUnits('met')" style="flex:1;padding:12px;border-radius:8px;">Metric</button>
       </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">My Documents</div>
+      <div class="doc-notice">
+        <span style="font-size:1rem;line-height:1.2">🔒</span>
+        <span>Documents stored on your device only — never shared or uploaded to any server.</span>
+      </div>
+      <input type="file" id="doc-file-input" accept=".pdf,application/pdf" multiple style="display:none" onchange="handleDocUpload(event)">
+      <button class="doc-upload-btn" onclick="document.getElementById('doc-file-input').click()">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Add PDF
+      </button>
+      <div id="doc-list" class="doc-list"></div>
     </div>
 
     <div class="card">
@@ -2913,6 +3009,101 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     a.click();
     URL.revokeObjectURL(url);
   }
+
+  // ── MY DOCUMENTS (IndexedDB) ──
+  const _DOC_DB = 'drh2o-docs', _DOC_VER = 1, _DOC_STORE = 'documents';
+  let _docDb = null, _docCache = {};
+
+  function _openDocDb() {
+    return new Promise((resolve, reject) => {
+      if (_docDb) { resolve(_docDb); return; }
+      const req = indexedDB.open(_DOC_DB, _DOC_VER);
+      req.onupgradeneeded = e => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains(_DOC_STORE))
+          db.createObjectStore(_DOC_STORE, { keyPath: 'id', autoIncrement: true });
+      };
+      req.onsuccess = e => { _docDb = e.target.result; resolve(_docDb); };
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  function _getAllDocs() {
+    return _openDocDb().then(db => new Promise((resolve, reject) => {
+      const req = db.transaction(_DOC_STORE, 'readonly').objectStore(_DOC_STORE).getAll();
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    }));
+  }
+
+  function _saveDoc(file) {
+    return _openDocDb().then(db => new Promise((resolve, reject) => {
+      const req = db.transaction(_DOC_STORE, 'readwrite').objectStore(_DOC_STORE).add({
+        name: file.name, size: file.size, date: new Date().toISOString(), blob: file
+      });
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
+    }));
+  }
+
+  function _deleteDocDb(id) {
+    return _openDocDb().then(db => new Promise((resolve, reject) => {
+      const req = db.transaction(_DOC_STORE, 'readwrite').objectStore(_DOC_STORE).delete(id);
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
+    }));
+  }
+
+  function handleDocUpload(e) {
+    const files = Array.from(e.target.files);
+    if (!files.length) return;
+    Promise.all(files.map(_saveDoc))
+      .then(() => { e.target.value = ''; renderDocs(); })
+      .catch(err => alert('Could not save file: ' + (err.message || err)));
+  }
+
+  function openDocById(id) {
+    const doc = _docCache[id];
+    if (!doc) return;
+    const url = URL.createObjectURL(doc.blob);
+    window.open(url, '_blank');
+    setTimeout(() => URL.revokeObjectURL(url), 15000);
+  }
+
+  function deleteDocById(id) {
+    if (!confirm('Remove this document from your device?')) return;
+    _deleteDocDb(id).then(renderDocs);
+  }
+
+  function renderDocs() {
+    const list = document.getElementById('doc-list');
+    if (!list) return;
+    _getAllDocs().then(docs => {
+      _docCache = {};
+      if (!docs.length) {
+        list.innerHTML = '<p class="doc-empty">No documents yet.<br>Tap "Add PDF" above to get started.</p>';
+        return;
+      }
+      docs.sort((a, b) => new Date(b.date) - new Date(a.date));
+      list.innerHTML = docs.map(doc => {
+        _docCache[doc.id] = doc;
+        const d = new Date(doc.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+        const sz = doc.size < 1048576 ? Math.round(doc.size / 1024) + ' KB' : (doc.size / 1048576).toFixed(1) + ' MB';
+        const name = doc.name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        return `<div class="doc-item">
+          <button class="doc-open" onclick="openDocById(${doc.id})">
+            <span class="doc-name">${name}</span>
+            <span class="doc-meta">${d} · ${sz}</span>
+          </button>
+          <button class="doc-del" onclick="deleteDocById(${doc.id})" aria-label="Delete">✕</button>
+        </div>`;
+      }).join('');
+    }).catch(() => {
+      list.innerHTML = '<p class="doc-empty">Unable to load documents.</p>';
+    });
+  }
+
+  renderDocs();
 
   // ── SERVICE WORKER ──
   if ('serviceWorker' in navigator) {
