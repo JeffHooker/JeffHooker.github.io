@@ -3011,8 +3011,10 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   }
 
   // ── MY DOCUMENTS (IndexedDB) ──
+  // Files are stored as ArrayBuffer (not File/Blob) for broad browser compatibility,
+  // including iOS Safari which cannot serialize File objects into IndexedDB.
   const _DOC_DB = 'drh2o-docs', _DOC_VER = 1, _DOC_STORE = 'documents';
-  let _docDb = null, _docCache = {};
+  let _docDb = null;
 
   function _openDocDb() {
     return new Promise((resolve, reject) => {
@@ -3028,22 +3030,53 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     });
   }
 
-  function _getAllDocs() {
+  // Collect only metadata from each record (skip the data ArrayBuffer) to
+  // avoid loading every PDF's binary content into memory for the list view.
+  function _getAllDocsMeta() {
     return _openDocDb().then(db => new Promise((resolve, reject) => {
-      const req = db.transaction(_DOC_STORE, 'readonly').objectStore(_DOC_STORE).getAll();
+      const results = [];
+      const req = db.transaction(_DOC_STORE, 'readonly').objectStore(_DOC_STORE).openCursor();
+      req.onsuccess = e => {
+        const cursor = e.target.result;
+        if (cursor) {
+          const { id, name, size, type, date } = cursor.value;
+          results.push({ id, name, size, type, date });
+          cursor.continue();
+        } else {
+          resolve(results);
+        }
+      };
+      req.onerror = () => reject(req.error);
+    }));
+  }
+
+  function _getDocById(id) {
+    return _openDocDb().then(db => new Promise((resolve, reject) => {
+      const req = db.transaction(_DOC_STORE, 'readonly').objectStore(_DOC_STORE).get(id);
       req.onsuccess = () => resolve(req.result);
       req.onerror = () => reject(req.error);
     }));
   }
 
   function _saveDoc(file) {
-    return _openDocDb().then(db => new Promise((resolve, reject) => {
-      const req = db.transaction(_DOC_STORE, 'readwrite').objectStore(_DOC_STORE).add({
-        name: file.name, size: file.size, date: new Date().toISOString(), blob: file
-      });
-      req.onsuccess = () => resolve();
-      req.onerror = () => reject(req.error);
-    }));
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(reader.error);
+      reader.onload = e => {
+        _openDocDb().then(db => new Promise((res, rej) => {
+          const req = db.transaction(_DOC_STORE, 'readwrite').objectStore(_DOC_STORE).add({
+            name: file.name,
+            size: file.size,
+            type: file.type || 'application/pdf',
+            date: new Date().toISOString(),
+            data: e.target.result   // ArrayBuffer
+          });
+          req.onsuccess = () => res();
+          req.onerror = () => rej(req.error);
+        })).then(resolve).catch(reject);
+      };
+      reader.readAsArrayBuffer(file);
+    });
   }
 
   function _deleteDocDb(id) {
@@ -3063,11 +3096,13 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   }
 
   function openDocById(id) {
-    const doc = _docCache[id];
-    if (!doc) return;
-    const url = URL.createObjectURL(doc.blob);
-    window.open(url, '_blank');
-    setTimeout(() => URL.revokeObjectURL(url), 15000);
+    _getDocById(id).then(doc => {
+      if (!doc) return;
+      const blob = new Blob([doc.data], { type: doc.type || 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+      setTimeout(() => URL.revokeObjectURL(url), 15000);
+    }).catch(err => alert('Could not open document: ' + (err.message || err)));
   }
 
   function deleteDocById(id) {
@@ -3078,15 +3113,13 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   function renderDocs() {
     const list = document.getElementById('doc-list');
     if (!list) return;
-    _getAllDocs().then(docs => {
-      _docCache = {};
+    _getAllDocsMeta().then(docs => {
       if (!docs.length) {
         list.innerHTML = '<p class="doc-empty">No documents yet.<br>Tap "Add PDF" above to get started.</p>';
         return;
       }
       docs.sort((a, b) => new Date(b.date) - new Date(a.date));
       list.innerHTML = docs.map(doc => {
-        _docCache[doc.id] = doc;
         const d = new Date(doc.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
         const sz = doc.size < 1048576 ? Math.round(doc.size / 1024) + ' KB' : (doc.size / 1048576).toFixed(1) + ' MB';
         const name = doc.name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
