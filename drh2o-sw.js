@@ -1,4 +1,4 @@
-const CACHE = 'drh2o-v6';
+const CACHE = 'drh2o-v7';
 const ASSETS = [
   '/drh2o.html',
   '/drh2o-manifest.json'
