@@ -1550,6 +1550,23 @@
       <div id="log-list"></div>
     </div>
 
+    <!-- My Documents -->
+    <div style="padding: 0 0 8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div class="log-section-title" style="margin-bottom:0;">My Documents</div>
+      </div>
+      <div class="doc-notice">
+        <span style="font-size:1rem;line-height:1.2">🔒</span>
+        <span>Documents stored on your device only — never shared or uploaded to any server.</span>
+      </div>
+      <input type="file" id="doc-file-input" accept=".pdf,application/pdf" multiple style="display:none" onchange="handleDocUpload(event)">
+      <button class="doc-upload-btn" onclick="document.getElementById('doc-file-input').click()">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Add PDF
+      </button>
+      <div id="doc-list" class="doc-list"></div>
+    </div>
+
   </div><!-- end #screen-log -->
 
   <!-- ════════════════ STUDY TAB ════════════════ -->
@@ -1849,20 +1866,6 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
         <button class="unit-btn active" id="btn-imp" onclick="setUnits('imp')" style="flex:1;padding:12px;border-radius:8px;">Imperial</button>
         <button class="unit-btn" id="btn-met" onclick="setUnits('met')" style="flex:1;padding:12px;border-radius:8px;">Metric</button>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">My Documents</div>
-      <div class="doc-notice">
-        <span style="font-size:1rem;line-height:1.2">🔒</span>
-        <span>Documents stored on your device only — never shared or uploaded to any server.</span>
-      </div>
-      <input type="file" id="doc-file-input" accept=".pdf,application/pdf" multiple style="display:none" onchange="handleDocUpload(event)">
-      <button class="doc-upload-btn" onclick="document.getElementById('doc-file-input').click()">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Add PDF
-      </button>
-      <div id="doc-list" class="doc-list"></div>
     </div>
 
     <div class="card">
