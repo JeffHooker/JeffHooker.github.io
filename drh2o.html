@@ -4351,6 +4351,126 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   renderDocs();
 
+  // ── WW CALCULATORS ──
+
+  function calcWwMassLoad() {
+    const mgd  = parseFloat(document.getElementById('wml-mgd').value)  || 0;
+    const conc = parseFloat(document.getElementById('wml-conc').value) || 0;
+    if (!mgd || !conc) { set('wml-lbs', '—'); setSyw('wml', null); return; }
+    const lbs = mgd * conc * 8.34;
+    set('wml-lbs', fmt(lbs, 1));
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('lbs/day = Flow (MGD) × Concentration (mg/L) × 8.34');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Flow          = ${f(mgd, 3)} MGD`);
+    s += sywHi(`Concentration = ${f(conc, 1)} mg/L`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  ${f(mgd, 3)} × ${f(conc, 1)} × 8.34`);
+    s += sywAns(`  = ${f(lbs, 1)} lbs/day`);
+    setSyw('wml', s);
+  }
+  ['wml-mgd','wml-conc'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcWwMassLoad));
+
+  function calcWwFlowConv() {
+    const raw  = parseFloat(document.getElementById('wfc-val').value) || 0;
+    const unit = document.getElementById('wfc-unit').value;
+    if (!raw) {
+      ['wfc-mgd','wfc-gpm','wfc-gpd','wfc-cfs'].forEach(id => set(id, '—'));
+      setSyw('wfc', null);
+      return;
+    }
+    let mgd;
+    if      (unit === 'mgd') mgd = raw;
+    else if (unit === 'gpm') mgd = raw * 1440 / 1e6;
+    else if (unit === 'gpd') mgd = raw / 1e6;
+    else                     mgd = raw * 646317 / 1e6;
+    const gpm = mgd * 1e6 / 1440;
+    const gpd = mgd * 1e6;
+    const cfs = mgd * 1e6 / 646317;
+    set('wfc-mgd', fmt(mgd, 4));
+    set('wfc-gpm', fmt(gpm, 1));
+    set('wfc-gpd', fmt(gpd, 0));
+    set('wfc-cfs', fmt(cfs, 3));
+    const f = sywFmt;
+    const labels = { mgd: 'MGD', gpm: 'GPM', gpd: 'GPD', cfs: 'cfs' };
+    let s = '';
+    s += sywLbl('Conversion Factors');
+    s += sywDim('1 MGD = 694.4 GPM = 1,000,000 GPD = 1.547 cfs');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Flow = ${f(raw, 3)} ${labels[unit]}`);
+    s += sywSep();
+    s += sywLbl('Results');
+    s += sywHi(`MGD = ${f(mgd, 4)}`);
+    s += sywHi(`GPM = ${f(gpm, 1)}`);
+    s += sywHi(`GPD = ${f(gpd, 0)}`);
+    s += sywAns(`cfs = ${f(cfs, 3)}`);
+    setSyw('wfc', s);
+  }
+  document.getElementById('wfc-val').addEventListener('input', calcWwFlowConv);
+  document.getElementById('wfc-unit').addEventListener('change', calcWwFlowConv);
+
+  function calcWwDetention() {
+    const vol  = parseFloat(document.getElementById('wdt-vol').value)  || 0;
+    const gpm  = parseFloat(document.getElementById('wdt-flow').value) || 0;
+    if (!vol || !gpm) { set('wdt-min', '—'); set('wdt-hr', ''); setSyw('wdt', null); return; }
+    const dt_min = vol / gpm;
+    const dt_hr  = dt_min / 60;
+    set('wdt-min', fmt(dt_min, 1) + ' min');
+    set('wdt-hr',  '(' + fmt(dt_hr, 2) + ' hrs)');
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('T (min) = Volume (gal) ÷ Flow Rate (GPM)');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Volume    = ${f(vol, 0)} gal`);
+    s += sywHi(`Flow Rate = ${f(gpm, 1)} GPM`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  T = ${f(vol, 0)} ÷ ${f(gpm, 1)}`);
+    s += sywAns(`    = ${f(dt_min, 1)} min  (${f(dt_hr, 2)} hrs)`);
+    setSyw('wdt', s);
+  }
+  ['wdt-vol','wdt-flow'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcWwDetention));
+
+  function calcWwRemoval() {
+    const rawInf = document.getElementById('wrem-inf').value;
+    const rawEff = document.getElementById('wrem-eff').value;
+    const inf = parseFloat(rawInf);
+    const eff = parseFloat(rawEff);
+    if (!rawInf || !rawEff || isNaN(inf) || isNaN(eff) || inf <= 0) {
+      set('wrem-pct', '—'); set('wrem-diff', '—'); setSyw('wrem', null);
+      return;
+    }
+    const diff = inf - eff;
+    const pct  = (diff / inf) * 100;
+    set('wrem-pct',  fmt(pct, 1) + '%');
+    set('wrem-diff', fmt(diff, 1));
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('% Removal = (Influent − Effluent) ÷ Influent × 100');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Influent = ${f(inf, 1)} mg/L`);
+    s += sywHi(`Effluent = ${f(eff, 1)} mg/L`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  (${f(inf, 1)} − ${f(eff, 1)}) ÷ ${f(inf, 1)} × 100`);
+    s += sywHi(`  = ${f(diff, 1)} ÷ ${f(inf, 1)} × 100`);
+    s += sywAns(`  = ${f(pct, 1)}%`);
+    setSyw('wrem', s);
+  }
+  ['wrem-inf','wrem-eff'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcWwRemoval));
+
   // ── SERVICE WORKER ──
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
