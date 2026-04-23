@@ -4678,6 +4678,308 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   ['wslr-inf','wslr-ras','wslr-mlss','wslr-area'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcWwSLR));
 
+  // ── WW PRACTICE PROBLEMS ──
+  let wwCurrentProblem = null;
+  let wwProbCount = 0;
+
+  const WW_PROBLEM_TYPES = [
+    // 1. Mass loading lbs/day
+    () => {
+      const mgd  = rnd(0.5, 5.0, 2);
+      const conc = rnd(100, 300);
+      const ans  = mgd * conc * 8.34;
+      return {
+        q: `An influent flow of <b>${mgd} MGD</b> has a BOD concentration of <b>${conc} mg/L</b>. What is the BOD <b>mass loading</b> in lbs/day?`,
+        answer: ans, unit: 'lbs/day', tol: 0.03,
+        steps: `lbs/day = Flow (MGD) × Conc (mg/L) × 8.34\n= ${mgd} × ${conc} × 8.34\n= ${ans.toFixed(1)} lbs/day`
+      };
+    },
+    // 2. SVI
+    () => {
+      const ssv  = rnd(100, 350);
+      const mlss = rnd(1500, 3500);
+      const ans  = (ssv * 1000) / mlss;
+      return {
+        q: `A 30-minute settleability test gives an SSV of <b>${ssv} mL/L</b> with an MLSS of <b>${mlss} mg/L</b>. What is the <b>SVI</b>?`,
+        answer: ans, unit: 'mL/g', tol: 0.03,
+        steps: `SVI = (SSV × 1000) ÷ MLSS\n= (${ssv} × 1000) ÷ ${mlss}\n= ${(ssv*1000).toLocaleString()} ÷ ${mlss}\n= ${ans.toFixed(1)} mL/g`
+      };
+    },
+    // 3. RAS return rate %
+    () => {
+      const qinf = rnd(1.0, 5.0, 2);
+      const qras = rnd(0.3, 1.5, 2);
+      const ans  = (qras / qinf) * 100;
+      return {
+        q: `A plant treats <b>${qinf} MGD</b> and returns <b>${qras} MGD</b> of RAS. What is the <b>RAS return rate</b> as a percentage of influent flow?`,
+        answer: ans, unit: '%', tol: 0.03,
+        steps: `RAS % = (Q_RAS ÷ Q_Inf) × 100\n= (${qras} ÷ ${qinf}) × 100\n= ${ans.toFixed(1)}%`
+      };
+    },
+    // 4. Surface overflow rate
+    () => {
+      const gpd  = rnd(500000, 4000000);
+      const area = rnd(1000, 8000);
+      const ans  = gpd / area;
+      return {
+        q: `A secondary clarifier receives <b>${gpd.toLocaleString()} GPD</b> and has a surface area of <b>${area.toLocaleString()} ft²</b>. What is the <b>surface overflow rate</b>?`,
+        answer: ans, unit: 'GPD/ft²', tol: 0.03,
+        steps: `SOR = Flow (GPD) ÷ Area (ft²)\n= ${gpd.toLocaleString()} ÷ ${area.toLocaleString()}\n= ${ans.toFixed(1)} GPD/ft²`
+      };
+    },
+    // 5. Chemical dose lbs/day
+    () => {
+      const mgd  = rnd(0.5, 4.0, 2);
+      const dose = rnd(5, 25);
+      const ans  = mgd * dose * 8.34;
+      return {
+        q: `A plant doses polymer at <b>${dose} mg/L</b> to treat <b>${mgd} MGD</b>. How many <b>lbs/day</b> of polymer are used?`,
+        answer: ans, unit: 'lbs/day', tol: 0.03,
+        steps: `lbs/day = Flow (MGD) × Dose (mg/L) × 8.34\n= ${mgd} × ${dose} × 8.34\n= ${ans.toFixed(1)} lbs/day`
+      };
+    },
+    // 6. MLSS inventory lbs
+    () => {
+      const mlss = rnd(1500, 3500);
+      const vol  = rnd(0.5, 3.0, 2);
+      const ans  = mlss * vol * 8.34;
+      return {
+        q: `An aeration basin holds <b>${vol} MG</b> of mixed liquor with an MLSS of <b>${mlss} mg/L</b>. What is the <b>solids inventory</b> in lbs?`,
+        answer: ans, unit: 'lbs', tol: 0.03,
+        steps: `Inventory = MLSS × Volume (MG) × 8.34\n= ${mlss} × ${vol} × 8.34\n= ${ans.toFixed(0)} lbs`
+      };
+    },
+    // 7. Detention time
+    () => {
+      const vol = rnd(50000, 500000);
+      const gpm = rnd(100, 1000);
+      const ans = vol / gpm;
+      return {
+        q: `An aeration basin holds <b>${vol.toLocaleString()} gallons</b> and receives flow at <b>${gpm} GPM</b>. What is the <b>detention time</b> in minutes?`,
+        answer: ans, unit: 'min', tol: 0.03,
+        steps: `DT = Volume (gal) ÷ Flow (GPM)\n= ${vol.toLocaleString()} ÷ ${gpm}\n= ${ans.toFixed(1)} min\n(= ${(ans/60).toFixed(2)} hrs)`
+      };
+    }
+  ];
+
+  function wwNewProblem() {
+    wwProbCount++;
+    const idx = Math.floor(Math.random() * WW_PROBLEM_TYPES.length);
+    wwCurrentProblem = WW_PROBLEM_TYPES[idx]();
+    document.getElementById('ww-prob-q').innerHTML = wwCurrentProblem.q;
+    document.getElementById('ww-prob-unit').textContent = wwCurrentProblem.unit;
+    document.getElementById('ww-prob-ans').value = '';
+    document.getElementById('ww-prob-inputs').style.display = 'block';
+    const fb = document.getElementById('ww-prob-feedback');
+    fb.style.display = 'none'; fb.className = 'prob-feedback';
+    document.getElementById('ww-prob-counter').textContent = 'Problem #' + wwProbCount;
+    document.getElementById('ww-prob-ans').focus();
+  }
+
+  function wwCheckProblem() {
+    if (!wwCurrentProblem) return;
+    const userVal = parseFloat(document.getElementById('ww-prob-ans').value);
+    const fb = document.getElementById('ww-prob-feedback');
+    if (isNaN(userVal)) {
+      fb.style.display = 'block';
+      fb.className = 'prob-feedback wrong';
+      fb.innerHTML = 'Please enter a number.';
+      return;
+    }
+    const correct = wwCurrentProblem.answer;
+    const pct = Math.abs(userVal - correct) / correct;
+    fb.style.display = 'block';
+    if (pct <= wwCurrentProblem.tol) {
+      fb.className = 'prob-feedback correct';
+      fb.textContent = '✓ Correct! ' + correct.toFixed(2) + ' ' + wwCurrentProblem.unit;
+    } else {
+      fb.className = 'prob-feedback wrong';
+      fb.innerHTML = '<b>Not quite.</b> Correct answer: ' + correct.toFixed(2) + ' ' + wwCurrentProblem.unit + '\n\n' + wwCurrentProblem.steps;
+    }
+  }
+
+  document.getElementById('ww-prob-ans').addEventListener('keydown', e => {
+    if (e.key === 'Enter') wwCheckProblem();
+  });
+
+  // ── WW QUICK QUIZ ──
+  const WW_QUIZ_BANK = [
+    {
+      q: "What does MLSS stand for in activated sludge treatment?",
+      choices: ["Mixed Liquor Suspended Solids", "Maximum Liquid Sludge Standard", "Mixed Loading Solids Suspension", "Measured Liquor Settleable Solids"],
+      answer: 0,
+      explain: "<b>Mixed Liquor Suspended Solids (MLSS)</b> is the concentration of suspended solids in the aeration basin, including both active biomass and inert material. Typical MLSS in conventional activated sludge is 1,500–3,500 mg/L."
+    },
+    {
+      q: "A Sludge Volume Index (SVI) of 200 mL/g indicates:",
+      choices: ["Excellent settling — dense, compact sludge", "Normal settling — well-operated system", "Poor settling — possible bulking condition", "Toxic condition — process failure"],
+      answer: 2,
+      explain: "<b>Poor settling / possible bulking.</b> SVI > 150 mL/g indicates poor settleability, often caused by filamentous bacteria overgrowth (bulking). Normal range is 80–150 mL/g."
+    },
+    {
+      q: "What does BOD stand for?",
+      choices: ["Bacterial Oxygen Demand", "Biochemical Oxygen Demand", "Biological Oxidation Deficiency", "Baseline Organic Discharge"],
+      answer: 1,
+      explain: "<b>Biochemical Oxygen Demand (BOD)</b> measures the amount of dissolved oxygen consumed by microorganisms while decomposing organic matter in water. It is a key indicator of organic pollution strength."
+    },
+    {
+      q: "The purpose of return activated sludge (RAS) is to:",
+      choices: ["Remove nitrogen from the effluent", "Maintain the MLSS concentration in the aeration basin", "Increase the detention time in the clarifier", "Add oxygen to the secondary clarifier"],
+      answer: 1,
+      explain: "<b>Maintain MLSS in the aeration basin.</b> RAS recycles settled biomass from the secondary clarifier back to the aeration basin to keep the microbial population at the level needed for treatment."
+    },
+    {
+      q: "Solids Retention Time (SRT) is also called:",
+      choices: ["Hydraulic Retention Time", "Sludge Age", "Biological Oxygen Demand", "Mean Cell Residence Time only"],
+      answer: 1,
+      explain: "<b>Sludge Age</b> (also called Mean Cell Residence Time or MCRT). SRT = total solids inventory ÷ solids wasted per day. A longer SRT means slower growth, better nitrification, and more stable operation."
+    },
+    {
+      q: "A rising sludge problem in a secondary clarifier is most commonly caused by:",
+      choices: ["Low dissolved oxygen in the aeration basin", "Denitrification — nitrogen gas lifts sludge blanket", "Too much RAS being returned", "Excess polymer addition"],
+      answer: 1,
+      explain: "<b>Denitrification in the clarifier.</b> When sludge stays too long in the clarifier, nitrate is reduced to nitrogen gas (N₂) by facultative bacteria. The gas bubbles attach to floc and lift it to the surface."
+    },
+    {
+      q: "Primary treatment of wastewater typically removes what percentage of BOD?",
+      choices: ["10–20%", "25–40%", "55–70%", "80–95%"],
+      answer: 1,
+      explain: "<b>25–40% of BOD.</b> Primary treatment (sedimentation) removes most settleable and floatable solids, achieving roughly 25–40% BOD removal. Secondary biological treatment is needed to meet discharge limits."
+    },
+    {
+      q: "Under the Clean Water Act, the secondary treatment standard requires effluent BOD to be no greater than:",
+      choices: ["10 mg/L 30-day average", "20 mg/L 30-day average", "30 mg/L 30-day average", "50 mg/L 30-day average"],
+      answer: 2,
+      explain: "<b>30 mg/L 30-day average BOD.</b> EPA's secondary treatment regulation (40 CFR Part 133) requires ≤ 30 mg/L BOD and ≤ 30 mg/L TSS as 30-day averages, plus ≥ 85% removal."
+    },
+    {
+      q: "Which test measures the settleability of activated sludge?",
+      choices: ["BOD test", "Jar test", "Settlometer (30-minute SSV) test", "Membrane filtration test"],
+      answer: 2,
+      explain: "<b>Settlometer (30-minute SSV) test.</b> A 1-liter graduated cylinder is filled with mixed liquor and allowed to settle for 30 minutes. The settled sludge volume (mL/L) is used to calculate SVI."
+    },
+    {
+      q: "WAS stands for:",
+      choices: ["Water Aeration System", "Waste Activated Sludge", "Wastewater Assessment Standard", "Weekly Aeration Summary"],
+      answer: 1,
+      explain: "<b>Waste Activated Sludge (WAS)</b> is the excess biomass removed from the activated sludge system to control SRT and MLSS. WAS is typically wasted from the return sludge line or directly from the aeration basin."
+    },
+    {
+      q: "The F/M ratio in activated sludge relates:",
+      choices: ["Filter area to media depth", "Flow rate to mixed liquor volume", "Food (BOD) to Microorganisms (MLVSS)", "Ferric dose to manganese concentration"],
+      answer: 2,
+      explain: "<b>Food to Microorganisms (F/M).</b> F/M = BOD loading (lbs/day) ÷ MLVSS (lbs). Typical range: 0.2–0.5 for conventional AS. Lower F/M → extended aeration; higher F/M → high-rate process."
+    },
+    {
+      q: "Dissolved oxygen in an aeration basin is typically maintained at:",
+      choices: ["0.5–1.0 mg/L", "1.0–2.0 mg/L", "2.0–4.0 mg/L", "5.0–8.0 mg/L"],
+      answer: 2,
+      explain: "<b>2.0–4.0 mg/L DO</b> is the typical operational target in an aeration basin. Too low causes poor treatment and filamentous growth; too high wastes energy. Most operators target ≥ 2 mg/L."
+    },
+    {
+      q: "A plant has an influent BOD of 200 mg/L and an effluent BOD of 20 mg/L. What is the BOD removal efficiency?",
+      choices: ["80%", "85%", "90%", "95%"],
+      answer: 2,
+      explain: "<b>90%.</b> Removal % = (Influent − Effluent) ÷ Influent × 100 = (200 − 20) ÷ 200 × 100 = 180 ÷ 200 × 100 = 90%."
+    },
+    {
+      q: "Chlorination of wastewater effluent before discharge is done primarily to:",
+      choices: ["Remove nutrients (nitrogen and phosphorus)", "Reduce BOD to meet permit limits", "Inactivate pathogenic organisms", "Improve the settleability of solids"],
+      answer: 2,
+      explain: "<b>Inactivate pathogenic organisms.</b> Disinfection protects public health by killing or inactivating bacteria, viruses, and protozoa in the effluent before it reaches receiving waters."
+    },
+    {
+      q: "Surface overflow rate (SOR) for a secondary clarifier is calculated as:",
+      choices: ["Flow (GPM) ÷ Depth (ft)", "Flow (GPD) ÷ Surface Area (ft²)", "MLSS (mg/L) × Volume (MG) × 8.34", "BOD (lbs/day) ÷ MLVSS (lbs)"],
+      answer: 1,
+      explain: "<b>Flow (GPD) ÷ Surface Area (ft²).</b> SOR is a hydraulic loading parameter expressed in GPD/ft². Typical secondary clarifier SOR range is 400–800 GPD/ft² under average flow conditions."
+    }
+  ];
+
+  let wwQzOrder = [];
+  let wwQzIdx = 0;
+  let wwQzScore = 0;
+  const WW_QZ_COUNT = 10;
+
+  function wwStartQuiz() {
+    const indices = WW_QUIZ_BANK.map((_, i) => i);
+    shuffleArr(indices);
+    wwQzOrder = indices.slice(0, WW_QZ_COUNT);
+    wwQzIdx = 0;
+    wwQzScore = 0;
+    document.getElementById('ww-qz-start').style.display    = 'none';
+    document.getElementById('ww-qz-result').classList.remove('show');
+    document.getElementById('ww-qz-question').style.display = 'block';
+    wwRenderQuestion();
+  }
+
+  function wwRenderQuestion() {
+    const q   = WW_QUIZ_BANK[wwQzOrder[wwQzIdx]];
+    const num = wwQzIdx + 1;
+    document.getElementById('ww-qz-qnum').textContent       = 'Question ' + num + ' of ' + WW_QZ_COUNT;
+    document.getElementById('ww-qz-score-live').textContent = 'Score: ' + wwQzScore;
+    document.getElementById('ww-qz-fill').style.width       = ((num - 1) / WW_QZ_COUNT * 100) + '%';
+    document.getElementById('ww-qz-q').textContent          = q.q;
+    const choiceOrder = q.choices.map((_, i) => i);
+    shuffleArr(choiceOrder);
+    const container = document.getElementById('ww-qz-choices');
+    container.innerHTML = '';
+    choiceOrder.forEach(origIdx => {
+      const btn = document.createElement('button');
+      btn.className    = 'qz-choice';
+      btn.textContent  = q.choices[origIdx];
+      btn.dataset.idx  = origIdx;
+      btn.onclick = () => wwSelectAnswer(btn, origIdx, q.answer, q.explain, container);
+      container.appendChild(btn);
+    });
+    const explain = document.getElementById('ww-qz-explain');
+    explain.className = 'qz-explain';
+    explain.innerHTML = '';
+    const nextBtn = document.getElementById('ww-qz-next');
+    nextBtn.className   = 'qz-next-btn';
+    nextBtn.textContent = (wwQzIdx < WW_QZ_COUNT - 1) ? 'Next Question' : 'See Results';
+  }
+
+  function wwSelectAnswer(btn, chosen, correct, explain, container) {
+    container.querySelectorAll('.qz-choice').forEach(b => {
+      b.disabled = true;
+      if (parseInt(b.dataset.idx) === correct) b.classList.add('reveal');
+    });
+    if (chosen === correct) { btn.classList.add('correct'); wwQzScore++; }
+    else { btn.classList.add('wrong'); }
+    const exEl = document.getElementById('ww-qz-explain');
+    exEl.innerHTML = explain;
+    exEl.classList.add('show');
+    document.getElementById('ww-qz-next').classList.add('show');
+    document.getElementById('ww-qz-score-live').textContent = 'Score: ' + wwQzScore;
+  }
+
+  function wwNextQuestion() {
+    wwQzIdx++;
+    if (wwQzIdx >= WW_QZ_COUNT) { wwShowResult(); }
+    else { wwRenderQuestion(); }
+  }
+
+  function wwShowResult() {
+    document.getElementById('ww-qz-question').style.display = 'none';
+    const result = document.getElementById('ww-qz-result');
+    result.classList.add('show');
+    document.getElementById('ww-qz-final-num').textContent = wwQzScore;
+    document.getElementById('ww-qz-final-den').textContent = '/ ' + WW_QZ_COUNT;
+    const pct     = wwQzScore / WW_QZ_COUNT;
+    const verdict = document.getElementById('ww-qz-verdict');
+    const sub     = document.getElementById('ww-qz-verdict-sub');
+    if (pct >= 0.7) {
+      verdict.textContent = 'PASS';
+      verdict.className   = 'qz-verdict pass';
+      sub.textContent     = Math.round(pct * 100) + '% — Great work!';
+    } else {
+      verdict.textContent = 'FAIL';
+      verdict.className   = 'qz-verdict fail';
+      sub.textContent     = Math.round(pct * 100) + '% — Need 70% to pass. Try again!';
+    }
+  }
+
   // ── SERVICE WORKER ──
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
