@@ -100,6 +100,23 @@
     html.waste .qz-choice:hover:not(:disabled) { background: #0f2a1e; }
     html.waste.light .qz-choice:hover:not(:disabled) { background: #ddf0e8; border-color: var(--blue); }
 
+    /* ── WW / DW CONTENT VISIBILITY ── */
+    #ww-calcs { display: none; }
+    html.waste #ww-calcs { display: block; }
+    html.waste #dw-calcs { display: none; }
+    #ww-study { display: none; }
+    html.waste #ww-study { display: block; }
+    html.waste #dw-study { display: none; }
+    .calc-group-label {
+      padding: 14px 4px 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .f-source { font-size: 0.7rem; color: var(--muted); margin-top: 6px; font-style: italic; }
+
     /* ── MODE BAR ── */
     #mode-bar {
       position: fixed;
@@ -1232,6 +1249,8 @@
   <!-- ════════════════ CALC TAB ════════════════ -->
   <div class="screen active" id="screen-calc">
 
+    <div id="dw-calcs">
+
     <!-- Chlorine -->
     <div class="acc">
       <button class="acc-head open" onclick="toggleAcc(this)">
@@ -1601,6 +1620,491 @@
       </div>
     </div>
 
+    </div><!-- end #dw-calcs -->
+
+    <div id="ww-calcs">
+
+      <div class="calc-group-label">Hydraulics &amp; Loading</div>
+
+      <!-- WW: Pounds / Mass Loading -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Pounds / Mass Loading</span>
+          <span class="acc-badge">lbs/day · MGD · mg/L</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wml-mgd','wml-conc'], calcWwMassLoad)">Clear</button>
+            </div>
+            <div class="field"><label>Flow Rate (MGD)</label>
+              <input id="wml-mgd" type="number" inputmode="decimal" placeholder="e.g. 2.5" min="0" step="0.01">
+            </div>
+            <div class="field"><label>Concentration (mg/L)</label>
+              <input id="wml-conc" type="number" inputmode="decimal" placeholder="e.g. 220" min="0">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Mass Loading</span>
+              <span class="result-val"><span class="primary" id="wml-lbs">—</span><span class="secondary">lbs/day</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wml-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wml-btn" onclick="toggleSyw('wml')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wml" onclick="copyResult('wml')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wml"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Flow Rate Conversions -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Flow Rate Conversions</span>
+          <span class="acc-badge">MGD · GPM · GPD · cfs</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wfc-val'], calcWwFlowConv)">Clear</button>
+            </div>
+            <div class="field"><label>Flow Value</label>
+              <input id="wfc-val" type="number" inputmode="decimal" placeholder="e.g. 2.5" min="0" step="0.001">
+            </div>
+            <div class="field"><label>From Unit</label>
+              <select id="wfc-unit">
+                <option value="mgd">MGD</option>
+                <option value="gpm">GPM</option>
+                <option value="gpd">GPD</option>
+                <option value="cfs">cfs</option>
+              </select>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row"><span class="result-label">MGD</span><span class="result-val"><span class="primary" id="wfc-mgd">—</span></span></div>
+            <div class="result-row"><span class="result-label">GPM</span><span class="result-val"><span class="primary" id="wfc-gpm">—</span></span></div>
+            <div class="result-row"><span class="result-label">GPD</span><span class="result-val"><span class="primary" id="wfc-gpd">—</span></span></div>
+            <div class="result-row"><span class="result-label">cfs</span><span class="result-val"><span class="primary" id="wfc-cfs">—</span></span></div>
+          </div>
+          <div class="syw-wrap" id="syw-wfc-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wfc-btn" onclick="toggleSyw('wfc')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wfc" onclick="copyResult('wfc')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wfc"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Detention Time -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Detention Time</span>
+          <span class="acc-badge">Minutes · Hours</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wdt-vol','wdt-flow'], calcWwDetention)">Clear</button>
+            </div>
+            <div class="field"><label>Basin Volume (gallons)</label>
+              <input id="wdt-vol" type="number" inputmode="decimal" placeholder="e.g. 250000" min="0">
+            </div>
+            <div class="field"><label>Influent Flow Rate (GPM)</label>
+              <input id="wdt-flow" type="number" inputmode="decimal" placeholder="e.g. 700" min="0">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Detention Time</span>
+              <span class="result-val"><span class="primary" id="wdt-min">—</span><span class="secondary" id="wdt-hr"></span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wdt-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wdt-btn" onclick="toggleSyw('wdt')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wdt" onclick="copyResult('wdt')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wdt"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Percent Removal -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Percent Removal</span>
+          <span class="acc-badge">BOD · TSS · Efficiency</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wrem-inf','wrem-eff'], calcWwRemoval)">Clear</button>
+            </div>
+            <div class="field"><label>Influent Concentration (mg/L)</label>
+              <input id="wrem-inf" type="number" inputmode="decimal" placeholder="e.g. 220" min="0">
+            </div>
+            <div class="field"><label>Effluent Concentration (mg/L)</label>
+              <input id="wrem-eff" type="number" inputmode="decimal" placeholder="e.g. 18" min="0">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Percent Removal</span>
+              <span class="result-val"><span class="primary" id="wrem-pct">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Concentration Removed</span>
+              <span class="result-val"><span class="primary" id="wrem-diff">—</span><span class="secondary">mg/L</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wrem-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wrem-btn" onclick="toggleSyw('wrem')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wrem" onclick="copyResult('wrem')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wrem"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Chemical Dose / Feed Rate -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Chemical Dose / Feed Rate</span>
+          <span class="acc-badge">lbs/day · gal/day · mL/min</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wch-mgd','wch-dose','wch-str'], calcWwChem)">Clear</button>
+            </div>
+            <div class="field"><label>Flow Rate (MGD)</label>
+              <input id="wch-mgd" type="number" inputmode="decimal" placeholder="e.g. 2.5" min="0" step="0.01">
+            </div>
+            <div class="field"><label>Chemical Dose (mg/L)</label>
+              <input id="wch-dose" type="number" inputmode="decimal" placeholder="e.g. 5.0" min="0" step="0.1">
+            </div>
+            <div class="field"><label>Solution Strength (%) <span style="font-weight:400;font-size:.75em;color:var(--muted)">optional</span></label>
+              <input id="wch-str" type="number" inputmode="decimal" placeholder="e.g. 12.5" min="0" max="100" step="0.1">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Feed Rate</span>
+              <span class="result-val"><span class="primary" id="wch-lbs">—</span><span class="secondary">lbs/day</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Solution Volume</span>
+              <span class="result-val"><span class="primary" id="wch-gal">—</span><span class="secondary" id="wch-mlmin"></span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wch-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wch-btn" onclick="toggleSyw('wch')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wch" onclick="copyResult('wch')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wch"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Surface Overflow Rate -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Surface Overflow Rate</span>
+          <span class="acc-badge">SOR · gpd/ft²</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wsor-gpd','wsor-area'], calcWwSOR)">Clear</button>
+            </div>
+            <div class="field"><label>Influent Flow (GPD)</label>
+              <input id="wsor-gpd" type="number" inputmode="decimal" placeholder="e.g. 2500000" min="0">
+            </div>
+            <div class="field"><label>Clarifier Surface Area (ft²)</label>
+              <input id="wsor-area" type="number" inputmode="decimal" placeholder="e.g. 1500" min="0">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Surface Overflow Rate</span>
+              <span class="result-val"><span class="primary" id="wsor-sor">—</span><span class="secondary">gpd/ft²</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wsor-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wsor-btn" onclick="toggleSyw('wsor')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wsor" onclick="copyResult('wsor')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wsor"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-group-label">Solids Control</div>
+
+      <!-- WW: Sludge Volume Index (SVI) -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Sludge Volume Index (SVI)</span>
+          <span class="acc-badge">mL/g · Settling</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wsvi-ssv','wsvi-mlss'], calcWwSVI)">Clear</button>
+            </div>
+            <div class="field"><label>Settled Sludge Volume — 30 min (mL/L)</label>
+              <input id="wsvi-ssv" type="number" inputmode="decimal" placeholder="e.g. 250" min="0" max="1000">
+            </div>
+            <div class="field"><label>MLSS (mg/L)</label>
+              <input id="wsvi-mlss" type="number" inputmode="decimal" placeholder="e.g. 2000" min="0">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">SVI</span>
+              <span class="result-val"><span class="primary" id="wsvi-svi">—</span><span class="secondary">mL/g</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Assessment</span>
+              <span class="result-val"><span class="primary" id="wsvi-interp" style="font-size:0.85rem;font-weight:600">—</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wsvi-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wsvi-btn" onclick="toggleSyw('wsvi')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wsvi" onclick="copyResult('wsvi')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wsvi"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Return Activated Sludge Rate -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Return Activated Sludge Rate</span>
+          <span class="acc-badge">RAS % · Flow</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wras-inf','wras-ras'], calcWwRAS)">Clear</button>
+            </div>
+            <div class="field"><label>Influent Flow (MGD)</label>
+              <input id="wras-inf" type="number" inputmode="decimal" placeholder="e.g. 2.5" min="0" step="0.01">
+            </div>
+            <div class="field"><label>RAS Flow (MGD)</label>
+              <input id="wras-ras" type="number" inputmode="decimal" placeholder="e.g. 1.25" min="0" step="0.01">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">RAS Rate</span>
+              <span class="result-val"><span class="primary" id="wras-pct">—</span><span class="secondary">% of influent</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wras-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wras-btn" onclick="toggleSyw('wras')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wras" onclick="copyResult('wras')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wras"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: MLSS / MLVSS Inventory -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">MLSS / MLVSS Inventory</span>
+          <span class="acc-badge">lbs in System</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['winv-conc','winv-vol'], calcWwInventory)">Clear</button>
+            </div>
+            <div class="field"><label>MLSS or MLVSS Concentration (mg/L)</label>
+              <input id="winv-conc" type="number" inputmode="decimal" placeholder="e.g. 2500" min="0">
+            </div>
+            <div class="field"><label>Aeration Basin Volume (MG)</label>
+              <input id="winv-vol" type="number" inputmode="decimal" placeholder="e.g. 0.75" min="0" step="0.01">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Solids Inventory</span>
+              <span class="result-val"><span class="primary" id="winv-lbs">—</span><span class="secondary">lbs</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-winv-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-winv-btn" onclick="toggleSyw('winv')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-winv" onclick="copyResult('winv')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-winv"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-group-label">Process Control</div>
+
+      <!-- WW: Sludge Age (SRT) -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Sludge Age (SRT)</span>
+          <span class="acc-badge">Days · Solids Retention</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wsa-mlss','wsa-vol','wsa-wst'], calcWwSludgeAge)">Clear</button>
+            </div>
+            <div class="field"><label>MLSS (mg/L)</label>
+              <input id="wsa-mlss" type="number" inputmode="decimal" placeholder="e.g. 2500" min="0">
+            </div>
+            <div class="field"><label>Aeration Basin Volume (MG)</label>
+              <input id="wsa-vol" type="number" inputmode="decimal" placeholder="e.g. 0.75" min="0" step="0.01">
+            </div>
+            <div class="field"><label>Waste Sludge Rate (lbs/day)</label>
+              <input id="wsa-wst" type="number" inputmode="decimal" placeholder="e.g. 800" min="0">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Sludge Age (SRT)</span>
+              <span class="result-val"><span class="primary" id="wsa-days">—</span><span class="secondary">days</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wsa-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wsa-btn" onclick="toggleSyw('wsa')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wsa" onclick="copyResult('wsa')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wsa"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: F/M Ratio -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">F/M Ratio</span>
+          <span class="acc-badge">Food-to-Mass · lbs BOD/lb MLVSS</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wfm-bod','wfm-inv'], calcWwFM)">Clear</button>
+            </div>
+            <div class="field"><label>BOD Loading (lbs/day)</label>
+              <input id="wfm-bod" type="number" inputmode="decimal" placeholder="e.g. 1200" min="0">
+            </div>
+            <div class="field"><label>MLVSS Inventory (lbs)</label>
+              <input id="wfm-inv" type="number" inputmode="decimal" placeholder="e.g. 8000" min="0">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">F/M Ratio</span>
+              <span class="result-val"><span class="primary" id="wfm-ratio">—</span><span class="secondary">lbs BOD/lb MLVSS/day</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wfm-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wfm-btn" onclick="toggleSyw('wfm')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wfm" onclick="copyResult('wfm')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wfm"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Solids Loading Rate -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Solids Loading Rate</span>
+          <span class="acc-badge">lbs/ft²/day · Clarifier</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wslr-qinf','wslr-qras','wslr-mlss','wslr-area'], calcWwSLR)">Clear</button>
+            </div>
+            <div class="field"><label>Influent Flow (MGD)</label>
+              <input id="wslr-qinf" type="number" inputmode="decimal" placeholder="e.g. 2.5" min="0" step="0.01">
+            </div>
+            <div class="field"><label>RAS Flow (MGD) <span style="font-weight:400;font-size:.75em;color:var(--muted)">optional</span></label>
+              <input id="wslr-qras" type="number" inputmode="decimal" placeholder="e.g. 1.25" min="0" step="0.01">
+            </div>
+            <div class="field"><label>MLSS (mg/L)</label>
+              <input id="wslr-mlss" type="number" inputmode="decimal" placeholder="e.g. 2500" min="0">
+            </div>
+            <div class="field"><label>Clarifier Surface Area (ft²)</label>
+              <input id="wslr-area" type="number" inputmode="decimal" placeholder="e.g. 1500" min="0">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Solids Loading Rate</span>
+              <span class="result-val"><span class="primary" id="wslr-slr">—</span><span class="secondary">lbs/ft²/day</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wslr-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wslr-btn" onclick="toggleSyw('wslr')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wslr" onclick="copyResult('wslr')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wslr"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end #ww-calcs -->
+
   </div><!-- end #screen-calc -->
 
   <!-- ════════════════ LOG TAB ════════════════ -->
@@ -1743,6 +2247,8 @@
 
   <!-- ════════════════ STUDY TAB ════════════════ -->
   <div class="screen" id="screen-study">
+
+    <div id="dw-study">
 
     <!-- Formula Reference -->
     <div class="study-card" id="sc-formula">
@@ -2009,6 +2515,172 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
       </div>
     </div>
+
+    </div><!-- end #dw-study -->
+
+    <div id="ww-study">
+
+      <!-- WW: Formula Reference -->
+      <div class="study-card" id="sc-ww-formula">
+        <button class="study-head" onclick="toggleStudy('sc-ww-formula')">
+          <div class="study-head-text">
+            <span class="study-title">Formula Reference</span>
+            <span class="study-desc">Key wastewater operator equations</span>
+          </div>
+          <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="study-body">
+          <div class="f-list">
+
+            <div class="f-item" id="f-ww-mass">
+              <button class="f-head" onclick="toggleFormula('f-ww-mass')">Pounds / Mass Loading <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">lbs/day = Flow (MGD) × Concentration (mg/L) × 8.34</div>
+                <p class="f-when">Use for BOD, TSS, or any pollutant mass entering or leaving a treatment system.</p>
+                <p class="f-source">Source: ABC Need-to-Know Criteria, Grade T1 Wastewater Treatment</p>
+              </div>
+            </div>
+
+            <div class="f-item" id="f-ww-rem">
+              <button class="f-head" onclick="toggleFormula('f-ww-rem')">Percent Removal <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">% Removal = (Influent − Effluent) ÷ Influent × 100</div>
+                <p class="f-when">Use to calculate treatment efficiency for BOD, TSS, ammonia, or other parameters.</p>
+                <p class="f-source">Source: ABC Need-to-Know Criteria, Grade T1 Wastewater Treatment</p>
+              </div>
+            </div>
+
+            <div class="f-item" id="f-ww-svi">
+              <button class="f-head" onclick="toggleFormula('f-ww-svi')">Sludge Volume Index (SVI) <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">SVI (mL/g) = SSV₃₀ (mL/L) × 1000 ÷ MLSS (mg/L)</div>
+                <p class="f-when">Use to assess sludge settleability. Normal range: 80–150 mL/g. Above 150 indicates potential bulking.</p>
+                <p class="f-source">Source: Sacramento State OIT Wastewater T1 Study Guide</p>
+              </div>
+            </div>
+
+            <div class="f-item" id="f-ww-ras">
+              <button class="f-head" onclick="toggleFormula('f-ww-ras')">Return Activated Sludge Rate <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">RAS % = (RAS Flow ÷ Influent Flow) × 100</div>
+                <p class="f-when">Typical RAS rate is 25–100% of influent flow. Higher rates increase MLSS in the aeration basin.</p>
+                <p class="f-source">Source: Sacramento State OIT Wastewater T1 Study Guide</p>
+              </div>
+            </div>
+
+            <div class="f-item" id="f-ww-inv">
+              <button class="f-head" onclick="toggleFormula('f-ww-inv')">MLSS / MLVSS Inventory <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">Inventory (lbs) = Concentration (mg/L) × Volume (MG) × 8.34</div>
+                <p class="f-when">Used to calculate total pounds of mixed liquor solids in the aeration basin system.</p>
+                <p class="f-source">Source: ABC Need-to-Know Criteria, Grade T1 Wastewater Treatment</p>
+              </div>
+            </div>
+
+            <div class="f-item" id="f-ww-srt">
+              <button class="f-head" onclick="toggleFormula('f-ww-srt')">Sludge Age (SRT) <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">SRT (days) = MLSS Inventory (lbs) ÷ Waste Sludge (lbs/day)</div>
+                <p class="f-when">Target SRT varies: conventional AS 5–15 days; extended aeration 20–30 days; nitrification ≥ 10 days.</p>
+                <p class="f-source">Source: ABC Need-to-Know Criteria, Grade T1 Wastewater Treatment</p>
+              </div>
+            </div>
+
+            <div class="f-item" id="f-ww-fm">
+              <button class="f-head" onclick="toggleFormula('f-ww-fm')">F/M Ratio <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">F/M = BOD Loading (lbs/day) ÷ MLVSS Inventory (lbs)</div>
+                <p class="f-when">Conventional AS: 0.2–0.4. Extended aeration: 0.05–0.15. Higher F/M = younger sludge.</p>
+                <p class="f-source">Source: Sacramento State OIT Wastewater T1 Study Guide</p>
+              </div>
+            </div>
+
+            <div class="f-item" id="f-ww-sor">
+              <button class="f-head" onclick="toggleFormula('f-ww-sor')">Surface Overflow Rate <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">SOR (gpd/ft²) = Flow (GPD) ÷ Clarifier Surface Area (ft²)</div>
+                <p class="f-when">Typical design: 400–800 gpd/ft² for primary clarifiers; 400–600 for secondary. Exceeding limits causes carryover.</p>
+                <p class="f-source">Source: ABC Need-to-Know Criteria, Grade T1 Wastewater Treatment</p>
+              </div>
+            </div>
+
+            <div class="f-item" id="f-ww-slr">
+              <button class="f-head" onclick="toggleFormula('f-ww-slr')">Solids Loading Rate <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="f-body">
+                <div class="f-eq">SLR (lbs/ft²/day) = (Q_inf + Q_RAS) × MLSS × 8.34 ÷ Area (ft²)</div>
+                <p class="f-when">Secondary clarifier design max: 20–30 lbs/ft²/day. Overloading causes sludge blanket rise and solids loss.</p>
+                <p class="f-source">Source: Sacramento State OIT Wastewater T1 Study Guide</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Practice Problems -->
+      <div class="study-card" id="sc-ww-practice">
+        <button class="study-head" onclick="toggleStudy('sc-ww-practice')">
+          <div class="study-head-text">
+            <span class="study-title">Practice Problems</span>
+            <span class="study-desc">Wastewater T1 calculation prep</span>
+          </div>
+          <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="study-body">
+          <div class="prob-wrap">
+            <div class="prob-counter" id="ww-prob-counter"></div>
+            <p class="prob-q" id="ww-prob-q">Tap <b>New Problem</b> to start a randomized question.</p>
+            <div id="ww-prob-inputs" style="display:none">
+              <div class="prob-ans-row">
+                <input type="number" inputmode="decimal" id="ww-prob-ans" class="prob-input" placeholder="Your answer">
+                <span class="prob-unit-lbl" id="ww-prob-unit"></span>
+              </div>
+              <button class="prob-btn prob-check" onclick="wwCheckProblem()">Check Answer</button>
+            </div>
+            <div class="prob-feedback" id="ww-prob-feedback" style="display:none"></div>
+            <button class="prob-btn prob-new" onclick="wwNewProblem()">New Problem</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Quick Quiz -->
+      <div class="study-card" id="sc-ww-quiz">
+        <button class="study-head" onclick="toggleStudy('sc-ww-quiz')">
+          <div class="study-head-text">
+            <span class="study-title">Quick Quiz</span>
+            <span class="study-desc">Wastewater operator certification prep</span>
+          </div>
+          <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="study-body">
+          <div id="ww-qz-start" class="qz-start-wrap">
+            <p class="qz-start-desc">10 questions covering activated sludge, sludge digestion, chlorination, pumping, and lab procedures.<br>Pass = 70% or better.</p>
+            <button class="qz-start-btn" onclick="wwStartQuiz()">Start Quiz</button>
+          </div>
+          <div id="ww-qz-question" style="display:none">
+            <div class="qz-progress-bar"><div class="qz-progress-fill" id="ww-qz-fill" style="width:0%"></div></div>
+            <div class="qz-status">
+              <span id="ww-qz-qnum">Question 1 of 10</span>
+              <span id="ww-qz-score-live">Score: 0</span>
+            </div>
+            <p class="qz-q" id="ww-qz-q"></p>
+            <div class="qz-choices" id="ww-qz-choices"></div>
+            <div class="qz-explain" id="ww-qz-explain"></div>
+            <button class="qz-next-btn" id="ww-qz-next" onclick="wwNextQuestion()">Next Question</button>
+          </div>
+          <div id="ww-qz-result" class="qz-result">
+            <div class="qz-score-circle">
+              <span class="qz-score-num" id="ww-qz-final-num">0</span>
+              <span class="qz-score-den" id="ww-qz-final-den">/ 10</span>
+            </div>
+            <div class="qz-verdict" id="ww-qz-verdict"></div>
+            <div class="qz-verdict-sub" id="ww-qz-verdict-sub"></div>
+            <button class="qz-retake" onclick="wwStartQuiz()">Retake Quiz</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end #ww-study -->
 
   </div>
 
@@ -2751,6 +3423,77 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
         lines.push(`Flow:         ${rv('cf-mgd')}  (${rv('cf-gpd')})`);
         const gal = rv('cf-gal');
         if (gal && gal !== '—') lines.push(`Solution:     ${gal}  (${rv('cf-mlmin')})`);
+        break;
+      }
+      case 'wml': {
+        lines.push('Dr. H₂O — WW Mass Loading');
+        lines.push(`Flow: ${iv('wml-mgd')} MGD | Conc: ${iv('wml-conc')} mg/L`);
+        lines.push(`Mass Loading: ${rv('wml-lbs')} lbs/day`);
+        break;
+      }
+      case 'wfc': {
+        lines.push('Dr. H₂O — WW Flow Conversions');
+        lines.push(`MGD: ${rv('wfc-mgd')} | GPM: ${rv('wfc-gpm')} | GPD: ${rv('wfc-gpd')} | cfs: ${rv('wfc-cfs')}`);
+        break;
+      }
+      case 'wdt': {
+        lines.push('Dr. H₂O — WW Detention Time');
+        lines.push(`Volume: ${iv('wdt-vol')} gal | Flow: ${iv('wdt-flow')} GPM`);
+        lines.push(`Detention Time: ${rv('wdt-min')}`);
+        break;
+      }
+      case 'wrem': {
+        lines.push('Dr. H₂O — WW Percent Removal');
+        lines.push(`Influent: ${iv('wrem-inf')} mg/L | Effluent: ${iv('wrem-eff')} mg/L`);
+        lines.push(`Removal: ${rv('wrem-pct')} | Removed: ${rv('wrem-diff')} mg/L`);
+        break;
+      }
+      case 'wch': {
+        lines.push('Dr. H₂O — WW Chemical Dose/Feed');
+        lines.push(`Flow: ${iv('wch-mgd')} MGD | Dose: ${iv('wch-dose')} mg/L`);
+        lines.push(`Feed Rate: ${rv('wch-lbs')} lbs/day | Solution: ${rv('wch-gal')}`);
+        break;
+      }
+      case 'wsor': {
+        lines.push('Dr. H₂O — WW Surface Overflow Rate');
+        lines.push(`Flow: ${iv('wsor-gpd')} GPD | Area: ${iv('wsor-area')} ft²`);
+        lines.push(`SOR: ${rv('wsor-sor')} gpd/ft²`);
+        break;
+      }
+      case 'wsvi': {
+        lines.push('Dr. H₂O — WW SVI');
+        lines.push(`SSV30: ${iv('wsvi-ssv')} mL/L | MLSS: ${iv('wsvi-mlss')} mg/L`);
+        lines.push(`SVI: ${rv('wsvi-svi')} mL/g | ${rv('wsvi-interp')}`);
+        break;
+      }
+      case 'wras': {
+        lines.push('Dr. H₂O — WW RAS Rate');
+        lines.push(`Influent: ${iv('wras-inf')} MGD | RAS: ${iv('wras-ras')} MGD`);
+        lines.push(`RAS Rate: ${rv('wras-pct')}% of influent`);
+        break;
+      }
+      case 'winv': {
+        lines.push('Dr. H₂O — WW MLSS Inventory');
+        lines.push(`Conc: ${iv('winv-conc')} mg/L | Volume: ${iv('winv-vol')} MG`);
+        lines.push(`Inventory: ${rv('winv-lbs')} lbs`);
+        break;
+      }
+      case 'wsa': {
+        lines.push('Dr. H₂O — WW Sludge Age (SRT)');
+        lines.push(`MLSS: ${iv('wsa-mlss')} mg/L | Vol: ${iv('wsa-vol')} MG | Waste: ${iv('wsa-wst')} lbs/day`);
+        lines.push(`SRT: ${rv('wsa-days')} days`);
+        break;
+      }
+      case 'wfm': {
+        lines.push('Dr. H₂O — WW F/M Ratio');
+        lines.push(`BOD: ${iv('wfm-bod')} lbs/day | MLVSS: ${iv('wfm-inv')} lbs`);
+        lines.push(`F/M: ${rv('wfm-ratio')} lbs BOD/lb MLVSS/day`);
+        break;
+      }
+      case 'wslr': {
+        lines.push('Dr. H₂O — WW Solids Loading Rate');
+        lines.push(`Inf: ${iv('wslr-qinf')} MGD | RAS: ${iv('wslr-qras')} MGD | MLSS: ${iv('wslr-mlss')} mg/L | Area: ${iv('wslr-area')} ft²`);
+        lines.push(`SLR: ${rv('wslr-slr')} lbs/ft²/day`);
         break;
       }
     }
