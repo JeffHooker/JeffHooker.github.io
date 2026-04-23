@@ -4471,6 +4471,131 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   ['wrem-inf','wrem-eff'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcWwRemoval));
 
+  function calcWwChem() {
+    const mgd  = parseFloat(document.getElementById('wch-mgd').value)  || 0;
+    const dose = parseFloat(document.getElementById('wch-dose').value) || 0;
+    const str  = parseFloat(document.getElementById('wch-str').value)  || 0;
+    if (!mgd || !dose) {
+      set('wch-lbs', '—'); set('wch-gal', '—'); set('wch-mlmin', '');
+      setSyw('wch', null); return;
+    }
+    const lbs = mgd * dose * 8.34;
+    set('wch-lbs', fmt(lbs, 2));
+    let gal_day = null, mL_min = null;
+    if (str > 0) {
+      gal_day = lbs / ((str / 100) * 8.34);
+      mL_min  = (gal_day * 3785.41) / 1440;
+      set('wch-gal',   fmt(gal_day, 2) + ' gal/day');
+      set('wch-mlmin', fmt(mL_min, 2) + ' mL/min');
+    } else {
+      set('wch-gal', '—');
+      set('wch-mlmin', 'Enter solution strength');
+    }
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('Feed (lbs/day) = Flow (MGD) × Dose (mg/L) × 8.34');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Flow  = ${f(mgd, 3)} MGD`);
+    s += sywHi(`Dose  = ${f(dose, 2)} mg/L`);
+    if (str) s += sywHi(`Strength = ${f(str, 1)}%`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  ${f(mgd, 3)} × ${f(dose, 2)} × 8.34`);
+    s += sywAns(`  = ${f(lbs, 2)} lbs/day`);
+    if (str && gal_day != null) {
+      s += sywSep();
+      s += sywLbl('Solution Feed Volume');
+      s += sywDim('Vol (gal/day) = Feed (lbs) ÷ (Strength ÷ 100 × 8.34)');
+      s += sywHi(`  ${f(lbs, 2)} ÷ (${f(str, 1)}% ÷ 100 × 8.34)`);
+      s += sywAns(`  = ${f(gal_day, 2)} gal/day  →  ${f(mL_min, 2)} mL/min`);
+    }
+    setSyw('wch', s);
+  }
+  ['wch-mgd','wch-dose','wch-str'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcWwChem));
+
+  function calcWwSOR() {
+    const gpd  = parseFloat(document.getElementById('wsor-gpd').value)  || 0;
+    const area = parseFloat(document.getElementById('wsor-area').value) || 0;
+    if (!gpd || !area) { set('wsor-sor', '—'); setSyw('wsor', null); return; }
+    const sor = gpd / area;
+    set('wsor-sor', fmt(sor, 0));
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('SOR (gpd/ft²) = Flow (GPD) ÷ Surface Area (ft²)');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Flow         = ${f(gpd, 0)} GPD  (${f(gpd / 1e6, 3)} MGD)`);
+    s += sywHi(`Surface Area = ${f(area, 0)} ft²`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  ${f(gpd, 0)} ÷ ${f(area, 0)}`);
+    s += sywAns(`  = ${f(sor, 0)} gpd/ft²`);
+    setSyw('wsor', s);
+  }
+  ['wsor-gpd','wsor-area'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcWwSOR));
+
+  function calcWwSVI() {
+    const ssv  = parseFloat(document.getElementById('wsvi-ssv').value)  || 0;
+    const mlss = parseFloat(document.getElementById('wsvi-mlss').value) || 0;
+    if (!ssv || !mlss) {
+      set('wsvi-svi', '—'); set('wsvi-interp', '—'); setSyw('wsvi', null); return;
+    }
+    const svi = (ssv * 1000) / mlss;
+    const interp = svi < 80  ? 'Low — dense sludge / possible pin floc'
+                 : svi <= 150 ? 'Normal — good settling'
+                 :              'High — possible bulking';
+    set('wsvi-svi',    fmt(svi, 0));
+    set('wsvi-interp', interp);
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('SVI (mL/g) = SSV₃₀ (mL/L) × 1000 ÷ MLSS (mg/L)');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`SSV₃₀ = ${f(ssv, 0)} mL/L`);
+    s += sywHi(`MLSS  = ${f(mlss, 0)} mg/L`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  ${f(ssv, 0)} × 1000 ÷ ${f(mlss, 0)}`);
+    s += sywAns(`  = ${f(svi, 0)} mL/g`);
+    s += sywSep();
+    s += sywLbl('Interpretation');
+    s += sywDim('< 80 mL/g:    Dense sludge / possible pin floc');
+    s += sywDim('80–150 mL/g:  Normal settling');
+    s += sywDim('> 150 mL/g:   Possible bulking');
+    setSyw('wsvi', s);
+  }
+  ['wsvi-ssv','wsvi-mlss'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcWwSVI));
+
+  function calcWwRAS() {
+    const qinf = parseFloat(document.getElementById('wras-inf').value) || 0;
+    const qras = parseFloat(document.getElementById('wras-ras').value) || 0;
+    if (!qinf || !qras) { set('wras-pct', '—'); setSyw('wras', null); return; }
+    const pct = (qras / qinf) * 100;
+    set('wras-pct', fmt(pct, 1));
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('RAS % = (RAS Flow ÷ Influent Flow) × 100');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Influent Flow = ${f(qinf, 3)} MGD`);
+    s += sywHi(`RAS Flow      = ${f(qras, 3)} MGD`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  ${f(qras, 3)} ÷ ${f(qinf, 3)} × 100`);
+    s += sywAns(`  = ${f(pct, 1)}%`);
+    setSyw('wras', s);
+  }
+  ['wras-inf','wras-ras'].forEach(id =>
+    document.getElementById(id).addEventListener('input', calcWwRAS));
+
   // ── SERVICE WORKER ──
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
