@@ -4631,51 +4631,61 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.getElementById(id).addEventListener('input', calcWwSludgeAge));
 
   function calcWwFM() {
-    const bod  = parseFloat(document.getElementById('wfm-bod').value);
-    const flow = parseFloat(document.getElementById('wfm-flow').value);
-    const mlvss= parseFloat(document.getElementById('wfm-mlvss').value);
-    const vol  = parseFloat(document.getElementById('wfm-vol').value);
-    if (isNaN(bod) || isNaN(flow) || isNaN(mlvss) || isNaN(vol) || vol === 0) { setSyw('wfm', null); return; }
-    const bodLbs   = bod * flow * 8.34;
-    const mlvssLbs = mlvss * vol * 8.34;
-    const fm = bodLbs / mlvssLbs;
+    const bod = parseFloat(document.getElementById('wfm-bod').value);
+    const inv = parseFloat(document.getElementById('wfm-inv').value);
+    if (isNaN(bod) || isNaN(inv) || inv === 0) { set('wfm-ratio', '—'); setSyw('wfm', null); return; }
+    const fm = bod / inv;
+    set('wfm-ratio', fmt(fm, 3));
     let assessment = fm < 0.05 ? 'Very low — possible over-aeration'
                    : fm <= 0.2  ? 'Low — extended aeration range'
                    : fm <= 0.5  ? 'Normal — conventional activated sludge'
                    : 'High — high-rate / food surplus';
-    const s = sywL('F/M Ratio',
-      sywLbl('BOD') + sywHi(fmt(bod)) + sywDim('mg/L') + sywSep() +
-      sywLbl('Flow') + sywHi(fmt(flow)) + sywDim('MGD') + sywSep() +
-      sywLbl('MLVSS') + sywHi(fmt(mlvss)) + sywDim('mg/L') + sywSep() +
-      sywLbl('Aeration Vol') + sywHi(fmt(vol)) + sywDim('MG') + sywSep() +
-      sywLbl('BOD lbs/day') + sywFmt(fmt(bodLbs, 1)) + sywSep() +
-      sywLbl('MLVSS lbs') + sywFmt(fmt(mlvssLbs, 1)) + sywSep() +
-      sywLbl('Formula') + sywFmt('F/M = BOD lbs/day ÷ MLVSS lbs') + sywSep() +
-      sywAns(fmt(fm, 3) + ' lbs BOD/lb MLVSS/day') + sywSep() +
-      sywLbl('Assessment') + sywFmt(assessment));
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('F/M = BOD Loading (lbs/day) ÷ MLVSS Inventory (lbs)');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`BOD Loading      = ${f(bod, 1)} lbs/day`);
+    s += sywHi(`MLVSS Inventory  = ${f(inv, 1)} lbs`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  ${f(bod, 1)} ÷ ${f(inv, 1)}`);
+    s += sywAns(`  = ${f(fm, 3)} lbs BOD/lb MLVSS/day`);
+    s += sywSep();
+    s += sywLbl('Assessment');
+    s += sywDim(assessment);
     setSyw('wfm', s);
   }
-  ['wfm-bod','wfm-flow','wfm-mlvss','wfm-vol'].forEach(id =>
+  ['wfm-bod','wfm-inv'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcWwFM));
 
   function calcWwSLR() {
-    const qinf = parseFloat(document.getElementById('wslr-inf').value);
-    const qras = parseFloat(document.getElementById('wslr-ras').value);
+    const qinf = parseFloat(document.getElementById('wslr-qinf').value);
+    const qras = parseFloat(document.getElementById('wslr-qras').value) || 0;
     const mlss = parseFloat(document.getElementById('wslr-mlss').value);
     const area = parseFloat(document.getElementById('wslr-area').value);
-    if (isNaN(qinf) || isNaN(qras) || isNaN(mlss) || isNaN(area) || area === 0) { setSyw('wslr', null); return; }
-    const totalFlow = (qinf + qras) * 1000000;
-    const slr = (totalFlow * mlss * 8.34) / (area * 1000);
-    const s = sywL('Solids Loading Rate',
-      sywLbl('Influent Flow') + sywHi(fmt(qinf)) + sywDim('MGD') + sywSep() +
-      sywLbl('RAS Flow') + sywHi(fmt(qras)) + sywDim('MGD') + sywSep() +
-      sywLbl('MLSS') + sywHi(fmt(mlss)) + sywDim('mg/L') + sywSep() +
-      sywLbl('Clarifier Area') + sywHi(fmt(area)) + sywDim('ft²') + sywSep() +
-      sywLbl('Formula') + sywFmt('SLR = (Q_inf + Q_RAS) × MLSS × 8.34 ÷ Area') + sywSep() +
-      sywAns(fmt(slr, 1) + ' lbs/day/1000 ft²'));
+    if (isNaN(qinf) || isNaN(mlss) || isNaN(area) || area === 0) { set('wslr-slr', '—'); setSyw('wslr', null); return; }
+    const totalQ = qinf + qras;
+    const slr = totalQ * mlss * 8.34 / area;
+    set('wslr-slr', fmt(slr, 1));
+    const f = sywFmt;
+    let s = '';
+    s += sywLbl('Formula');
+    s += sywDim('SLR (lbs/day/ft²) = (Q_inf + Q_RAS) × MLSS × 8.34 ÷ Area');
+    s += sywSep();
+    s += sywLbl('Given');
+    s += sywHi(`Influent Flow  = ${f(qinf, 3)} MGD`);
+    if (qras) s += sywHi(`RAS Flow       = ${f(qras, 3)} MGD`);
+    s += sywHi(`MLSS           = ${f(mlss, 0)} mg/L`);
+    s += sywHi(`Clarifier Area = ${f(area, 0)} ft²`);
+    s += sywSep();
+    s += sywLbl('Solve');
+    s += sywHi(`  ${f(totalQ, 3)} × ${f(mlss, 0)} × 8.34 ÷ ${f(area, 0)}`);
+    s += sywAns(`  = ${f(slr, 1)} lbs/day/ft²`);
     setSyw('wslr', s);
   }
-  ['wslr-inf','wslr-ras','wslr-mlss','wslr-area'].forEach(id =>
+  ['wslr-qinf','wslr-qras','wslr-mlss','wslr-area'].forEach(id =>
     document.getElementById(id).addEventListener('input', calcWwSLR));
 
   // ── WW PRACTICE PROBLEMS ──
