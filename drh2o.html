@@ -207,21 +207,20 @@
     .disc-btn:active { opacity: 0.85; }
 
     /* ── DR. H₂O ASSIST ── */
-    #assist-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 9800;
-      background: var(--bg);
-      display: flex;
+    #screen-assist {
+      padding: 0;
+      min-height: unset;
+      height: 100%;
+      display: none;
       flex-direction: column;
     }
-    #assist-screen.hidden { display: none; }
+    #screen-assist.active { display: flex; }
     .assist-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: #0C1C4D;
+      justify-content: center;
+      padding: 12px 16px;
+      background: var(--blue);
       flex-shrink: 0;
     }
     .assist-header-title {
@@ -229,16 +228,6 @@
       font-weight: 700;
       color: #fff;
       letter-spacing: 0.2px;
-    }
-    .assist-close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 4px 8px;
-      line-height: 1;
-      -webkit-tap-highlight-color: transparent;
     }
     .assist-messages {
       flex: 1;
@@ -257,7 +246,7 @@
     }
     .assist-msg.user {
       align-self: flex-end;
-      background: #0C1C4D;
+      background: var(--blue);
       color: #fff;
       border-bottom-right-radius: 4px;
     }
@@ -312,9 +301,9 @@
       line-height: 1.4;
       font-family: inherit;
     }
-    .assist-input:focus { border-color: #0C1C4D; }
+    .assist-input:focus { border-color: var(--blue); }
     .assist-send {
-      background: #0C1C4D;
+      background: var(--blue);
       color: #fff;
       border: none;
       border-radius: 22px;
@@ -2904,18 +2893,6 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Field calculator for water system operators — chlorine, flow, pressure, tank volume, detention time, and chemical feed rate.</p>
     </div>
 
-    <button class="card" onclick="openAssist()" style="width:100%;text-align:left;cursor:pointer;border:1.5px solid #0C1C4D;background:var(--surface);-webkit-tap-highlight-color:transparent;">
-      <div style="display:flex;align-items:center;justify-content:space-between;">
-        <div>
-          <div class="card-title" style="color:#0C1C4D;margin-bottom:4px;">Dr. H₂O Assist</div>
-          <p style="font-size:0.8rem;color:var(--muted);line-height:1.4;margin:0;">Water &amp; wastewater guidance, on demand.</p>
-        </div>
-        <svg viewBox="0 0 24 24" style="width:22px;height:22px;flex-shrink:0;fill:none;stroke:#0C1C4D;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-left:12px;">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-      </div>
-    </button>
-
     <div class="card">
       <div class="card-title" style="margin-bottom:10px;">Privacy Policy</div>
       <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;">Dr. H₂O collects no personal data. All log entries, uploaded documents, and app settings are stored locally on your device only and are never transmitted, shared, or stored on any external server. We have no access to your data. Documents you upload are stored on your device only. This app does not use analytics, advertising, or tracking of any kind.</p>
@@ -2923,6 +2900,26 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     </div>
 
   </div><!-- end #screen-more -->
+
+  <!-- ── ASSIST TAB ── -->
+  <div class="screen" id="screen-assist">
+    <div class="assist-header">
+      <span class="assist-header-title">Dr. H₂O Assist</span>
+    </div>
+    <div class="assist-messages" id="assist-messages">
+      <div class="assist-empty" id="assist-empty">
+        <div class="assist-empty-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:var(--blue)">H₂O</span></div>
+        <p>Ask a water or wastewater question to get started.</p>
+      </div>
+    </div>
+    <div class="assist-footer">
+      <div class="assist-input-row">
+        <textarea id="assist-input" class="assist-input" rows="1" placeholder="Ask a water or wastewater question…"></textarea>
+        <button class="assist-send" id="assist-send-btn" onclick="sendAssist()">Send</button>
+      </div>
+      <p class="assist-disclaimer">For water and wastewater guidance only. Always verify against official sources.</p>
+    </div>
+  </div><!-- end #screen-assist -->
 
 </div><!-- end .screens -->
 
@@ -2952,30 +2949,15 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     </svg>
     More
   </button>
+  <button class="nav-btn" data-target="assist">
+    <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    Assist
+  </button>
 </nav>
 
 
-<!-- ── DR. H₂O ASSIST ── -->
-<div id="assist-screen" class="hidden">
-  <div class="assist-header">
-    <button class="assist-close" onclick="closeAssist()" aria-label="Close">✕</button>
-    <span class="assist-header-title">Dr. H₂O Assist</span>
-    <div style="width:36px"></div>
-  </div>
-  <div class="assist-messages" id="assist-messages">
-    <div class="assist-empty" id="assist-empty">
-      <div class="assist-empty-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:#0C1C4D">H₂O</span></div>
-      <p>Ask a water or wastewater question to get started.</p>
-    </div>
-  </div>
-  <div class="assist-footer">
-    <div class="assist-input-row">
-      <textarea id="assist-input" class="assist-input" rows="1" placeholder="Ask a water or wastewater question…"></textarea>
-      <button class="assist-send" id="assist-send-btn" onclick="sendAssist()">Send</button>
-    </div>
-    <p class="assist-disclaimer">For water and wastewater guidance only. Always verify against official sources.</p>
-  </div>
-</div>
 
 <!-- ── DISCLAIMER SCREEN ── -->
 <div id="disclaimer-screen">
@@ -3014,13 +2996,6 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   }
 
   // ── DR. H₂O ASSIST ──
-  function openAssist() {
-    document.getElementById('assist-screen').classList.remove('hidden');
-    document.getElementById('assist-input').focus();
-  }
-  function closeAssist() {
-    document.getElementById('assist-screen').classList.add('hidden');
-  }
   function sendAssist() {
     const input = document.getElementById('assist-input');
     const text  = input.value.trim();
