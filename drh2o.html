@@ -157,6 +157,54 @@
       overflow-y: auto;
     }
     #welcome-screen.hidden { display: none; }
+    #disclaimer-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 24px 48px;
+      overflow-y: auto;
+    }
+    #disclaimer-screen.hidden { display: none; }
+    .disc-logo {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 32px;
+    }
+    .disc-box {
+      width: 100%;
+      max-width: 420px;
+      border: 1.5px solid #0C1C4D;
+      border-radius: 14px;
+      padding: 24px 22px;
+      margin-bottom: 28px;
+    }
+    .disc-box p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin: 0;
+    }
+    .disc-btn {
+      width: 100%;
+      max-width: 420px;
+      background: #0C1C4D;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .disc-btn:active { opacity: 0.85; }
     .welcome-logo {
       font-size: 2.2rem;
       font-weight: 900;
@@ -2760,6 +2808,15 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 </nav>
 
 
+<!-- ── DISCLAIMER SCREEN ── -->
+<div id="disclaimer-screen">
+  <div class="disc-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:#0C1C4D">H₂O</span></div>
+  <div class="disc-box">
+    <p>Dr. H₂O is a reference and calculation tool for licensed water and wastewater operators. All calculations should be independently verified. This app does not constitute professional engineering or regulatory compliance advice. Users are solely responsible for their operational decisions.</p>
+  </div>
+  <button class="disc-btn" onclick="dismissDisclaimer()">I Understand</button>
+</div>
+
 <!-- ── WELCOME SCREEN ── -->
 <div id="welcome-screen">
   <div class="welcome-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:var(--blue)">H₂O</span></div>
@@ -2778,6 +2835,15 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 </div>
 
 <script>
+  // ── DISCLAIMER ──
+  if (localStorage.getItem('drh2o-disclaimer') === '1') {
+    document.getElementById('disclaimer-screen').classList.add('hidden');
+  }
+  function dismissDisclaimer() {
+    localStorage.setItem('drh2o-disclaimer', '1');
+    document.getElementById('disclaimer-screen').classList.add('hidden');
+  }
+
   // ── UNITS ──
   let U = localStorage.getItem('drh2o-units') || 'imp';
 
