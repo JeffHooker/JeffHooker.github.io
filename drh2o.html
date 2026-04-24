@@ -2760,6 +2760,23 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 </nav>
 
 
+<!-- ── WELCOME SCREEN ── -->
+<div id="welcome-screen">
+  <div class="welcome-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:var(--blue)">H₂O</span></div>
+  <p class="welcome-tagline">Professional field tool for water system operators</p>
+  <p class="welcome-prompt">Choose your discipline</p>
+  <div class="welcome-cards">
+    <button class="welcome-card" onclick="selectMode('water')">
+      <div class="welcome-card-title">💧 Drinking Water</div>
+      <p class="welcome-card-desc">Chlorination, filtration, pressure, tank volume, and distribution system compliance monitoring.</p>
+    </button>
+    <button class="welcome-card" onclick="selectMode('waste')">
+      <div class="welcome-card-title">🌿 Wastewater</div>
+      <p class="welcome-card-desc">Treatment processes, effluent monitoring, biosolids, and regulatory compliance.</p>
+    </button>
+  </div>
+</div>
+
 <script>
   // ── UNITS ──
   let U = localStorage.getItem('drh2o-units') || 'imp';
@@ -4998,23 +5015,6 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     });
   }
 </script>
-
-<!-- ── WELCOME SCREEN ── -->
-<div id="welcome-screen">
-  <div class="welcome-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:var(--blue)">H₂O</span></div>
-  <p class="welcome-tagline">Professional field tool for water system operators</p>
-  <p class="welcome-prompt">Choose your discipline</p>
-  <div class="welcome-cards">
-    <button class="welcome-card" onclick="selectMode('water')">
-      <div class="welcome-card-title">💧 Drinking Water</div>
-      <p class="welcome-card-desc">Chlorination, filtration, pressure, tank volume, and distribution system compliance monitoring.</p>
-    </button>
-    <button class="welcome-card" onclick="selectMode('waste')">
-      <div class="welcome-card-title">🌿 Wastewater</div>
-      <p class="welcome-card-desc">Treatment processes, effluent monitoring, biosolids, and regulatory compliance.</p>
-    </button>
-  </div>
-</div>
 
 <!-- ── PDF VIEWER MODAL ── -->
 <div id="pdf-modal" role="dialog" aria-modal="true" aria-label="PDF Viewer">
