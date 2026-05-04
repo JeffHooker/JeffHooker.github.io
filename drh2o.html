@@ -8,9 +8,9 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Dr. H₂O">
+  <meta name="apple-mobile-web-app-title" content="flocs">
   <link rel="manifest" href="/drh2o-manifest.json">
-  <title>Dr. H₂O</title>
+  <title>flocs</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1420,7 +1420,7 @@
 <body>
 
 <header>
-  <h1><span class="logo-dr">DR.</span>&thinsp;<span class="logo-water">H₂O</span></h1>
+  <h1><span class="logo-water">flocs</span></h1>
 </header>
 
 <div id="mode-bar">
@@ -3002,14 +3002,14 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
     <div class="card">
       <div class="card-title">About</div>
-      <p style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px;">Dr. H₂O</p>
+      <p style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px;">flocs</p>
       <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Field calculator for water system operators — chlorine, flow, pressure, tank volume, detention time, and chemical feed rate.</p>
     </div>
 
     <div class="card">
       <div class="card-title" style="margin-bottom:10px;">Privacy Policy</div>
-      <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;">Dr. H₂O collects no personal data. All log entries, uploaded documents, and app settings are stored locally on your device only and are never transmitted, shared, or stored on any external server. We have no access to your data. Documents you upload are stored on your device only. This app does not use analytics, advertising, or tracking of any kind.</p>
-      <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;margin-top:10px;">By using Dr. H₂O you agree to use all calculations and AI-generated guidance as reference only and accept sole responsibility for operational decisions.</p>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;">flocs collects no personal data. All log entries, uploaded documents, and app settings are stored locally on your device only and are never transmitted, shared, or stored on any external server. We have no access to your data. Documents you upload are stored on your device only. This app does not use analytics, advertising, or tracking of any kind.</p>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;margin-top:10px;">By using flocs you agree to use all calculations and AI-generated guidance as reference only and accept sole responsibility for operational decisions.</p>
       <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;margin-top:10px;"><b style="color:var(--text);">AI Assist Security:</b> When you use Dr. H₂O Assist, your messages are routed through a secure proxy server solely to protect our API credentials. Your message content is never logged, stored, or retained on any server. The proxy acts as a passthrough only — no data is saved at any point in the process.</p>
     </div>
 
@@ -3022,7 +3022,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     </div>
     <div class="assist-messages" id="assist-messages">
       <div class="assist-empty" id="assist-empty">
-        <div class="assist-empty-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:var(--blue)">H₂O</span></div>
+        <div class="assist-empty-logo"><span style="color:var(--blue)">flocs</span></div>
         <p>Ask a water or wastewater question to get started.</p>
       </div>
     </div>
@@ -3075,16 +3075,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
 <!-- ── DISCLAIMER SCREEN ── -->
 <div id="disclaimer-screen">
-  <div class="disc-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:var(--blue)">H₂O</span></div>
+  <div class="disc-logo"><span style="color:var(--blue)">flocs</span></div>
   <div class="disc-box">
-    <p>Dr. H₂O is a reference and calculation tool for licensed water and wastewater operators. All calculations should be independently verified. This app does not constitute professional engineering or regulatory compliance advice. Users are solely responsible for their operational decisions.</p>
+    <p>flocs is a reference and calculation tool for licensed water and wastewater operators. All calculations should be independently verified. This app does not constitute professional engineering or regulatory compliance advice. Users are solely responsible for their operational decisions.</p>
   </div>
   <button class="disc-btn" onclick="dismissDisclaimer()">I Understand</button>
 </div>
 
 <!-- ── WELCOME SCREEN ── -->
 <div id="welcome-screen">
-  <div class="welcome-logo"><span style="color:var(--text)">DR.</span>&thinsp;<span style="color:var(--blue)">H₂O</span></div>
+  <div class="welcome-logo"><span style="color:var(--blue)">flocs</span></div>
   <p class="welcome-tagline">Professional field tool for water system operators</p>
   <p class="welcome-prompt">Choose your discipline</p>
   <div class="welcome-cards">
@@ -3784,7 +3784,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     switch (id) {
       case 'cl': {
         const vol = iv('cl-volume'), res = iv('cl-residual'), str = iv('cl-strength');
-        lines.push('Dr. H₂O — Chlorine Dosage');
+        lines.push('flocs — Chlorine Dosage');
         lines.push(`Volume: ${vol} ${u?'L':'gal'} | Cl₂ Residual: ${res} mg/L${str?' | Strength: '+str+'%':''}`);
         lines.push('');
         lines.push(`Cl₂ Needed:        ${rv('cl-oz')}  ${rv('cl-oz-sub')}`);
@@ -3796,7 +3796,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       }
       case 'fl': {
         const dia = iv('fl-dia'), vel = iv('fl-vel'), time = iv('fl-time');
-        lines.push('Dr. H₂O — Flow Rate');
+        lines.push('flocs — Flow Rate');
         lines.push(`Diameter: ${dia} ${u?'mm':'in'} | Velocity: ${vel} ${u?'m/s':'fps'}${time?' | Time: '+time+' min':''}`);
         lines.push('');
         lines.push(`Flow Rate:  ${rv('fl-gpm')}  (${rv('fl-gph')} | ${rv('fl-cfs')})`);
@@ -3810,7 +3810,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
         const dia = iv('pr-dia'), gpm = iv('pr-gpm');
         const C = rv('pr-headloss-sub').match(/C=(\d+)/)?.[1] || iv('pr-cfactor') || '';
         const pu = u ? 'kPa' : 'PSI', lu = u ? 'm' : 'ft', du = u ? 'mm' : 'in';
-        lines.push('Dr. H₂O — Pressure / Head Loss');
+        lines.push('flocs — Pressure / Head Loss');
         let inputs = `Source: ${src} ${pu}`;
         if (elev) inputs += ` | Elevation: ${elev} ${lu}`;
         if (len)  inputs += ` | Length: ${len} ${lu}`;
@@ -3830,7 +3830,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       }
       case 'cyl': {
         const d = iv('tv-cyl-dia'), h = iv('tv-cyl-h'), du = u ? 'm' : 'ft';
-        lines.push('Dr. H₂O — Cylindrical Tank Volume');
+        lines.push('flocs — Cylindrical Tank Volume');
         lines.push(`Diameter: ${d} ${du} | Height: ${h} ${du}`);
         lines.push('');
         lines.push(`Volume: ${rv('tv-cyl-gal')}  (${rv('tv-cyl-sub')})`);
@@ -3838,7 +3838,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       }
       case 'rec': {
         const l = iv('tv-rec-l'), w = iv('tv-rec-w'), h = iv('tv-rec-h'), du = u ? 'm' : 'ft';
-        lines.push('Dr. H₂O — Rectangular Tank Volume');
+        lines.push('flocs — Rectangular Tank Volume');
         lines.push(`Length: ${l} ${du} | Width: ${w} ${du} | Height: ${h} ${du}`);
         lines.push('');
         lines.push(`Volume: ${rv('tv-rec-gal')}  (${rv('tv-rec-sub')})`);
@@ -3846,7 +3846,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       }
       case 'dt': {
         const vol = iv('dt-vol'), gpm = iv('dt-gpm');
-        lines.push('Dr. H₂O — Detention Time');
+        lines.push('flocs — Detention Time');
         lines.push(`Volume: ${vol} ${u?'L':'gal'} | Flow: ${gpm} ${u?'L/min':'GPM'}`);
         lines.push('');
         lines.push(`Detention Time:       ${rv('dt-min')}  (${rv('dt-hr')})`);
@@ -3855,7 +3855,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       }
       case 'cf': {
         const gpm = iv('cf-gpm'), dose = iv('cf-dose'), str = iv('cf-strength');
-        lines.push('Dr. H₂O — Chemical Feed Rate');
+        lines.push('flocs — Chemical Feed Rate');
         lines.push(`Flow: ${gpm} ${u?'L/min':'GPM'} | Dose: ${dose} mg/L${str?' | Strength: '+str+'%':''}`);
         lines.push('');
         lines.push(`Feed Rate:    ${rv('cf-lbs')}  (${rv('cf-oz')})`);
@@ -3865,72 +3865,72 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
         break;
       }
       case 'wml': {
-        lines.push('Dr. H₂O — WW Mass Loading');
+        lines.push('flocs — WW Mass Loading');
         lines.push(`Flow: ${iv('wml-mgd')} MGD | Conc: ${iv('wml-conc')} mg/L`);
         lines.push(`Mass Loading: ${rv('wml-lbs')} lbs/day`);
         break;
       }
       case 'wfc': {
-        lines.push('Dr. H₂O — WW Flow Conversions');
+        lines.push('flocs — WW Flow Conversions');
         lines.push(`MGD: ${rv('wfc-mgd')} | GPM: ${rv('wfc-gpm')} | GPD: ${rv('wfc-gpd')} | cfs: ${rv('wfc-cfs')}`);
         break;
       }
       case 'wdt': {
-        lines.push('Dr. H₂O — WW Detention Time');
+        lines.push('flocs — WW Detention Time');
         lines.push(`Volume: ${iv('wdt-vol')} gal | Flow: ${iv('wdt-flow')} GPM`);
         lines.push(`Detention Time: ${rv('wdt-min')}`);
         break;
       }
       case 'wrem': {
-        lines.push('Dr. H₂O — WW Percent Removal');
+        lines.push('flocs — WW Percent Removal');
         lines.push(`Influent: ${iv('wrem-inf')} mg/L | Effluent: ${iv('wrem-eff')} mg/L`);
         lines.push(`Removal: ${rv('wrem-pct')} | Removed: ${rv('wrem-diff')} mg/L`);
         break;
       }
       case 'wch': {
-        lines.push('Dr. H₂O — WW Chemical Dose/Feed');
+        lines.push('flocs — WW Chemical Dose/Feed');
         lines.push(`Flow: ${iv('wch-mgd')} MGD | Dose: ${iv('wch-dose')} mg/L`);
         lines.push(`Feed Rate: ${rv('wch-lbs')} lbs/day | Solution: ${rv('wch-gal')}`);
         break;
       }
       case 'wsor': {
-        lines.push('Dr. H₂O — WW Surface Overflow Rate');
+        lines.push('flocs — WW Surface Overflow Rate');
         lines.push(`Flow: ${iv('wsor-gpd')} GPD | Area: ${iv('wsor-area')} ft²`);
         lines.push(`SOR: ${rv('wsor-sor')} gpd/ft²`);
         break;
       }
       case 'wsvi': {
-        lines.push('Dr. H₂O — WW SVI');
+        lines.push('flocs — WW SVI');
         lines.push(`SSV30: ${iv('wsvi-ssv')} mL/L | MLSS: ${iv('wsvi-mlss')} mg/L`);
         lines.push(`SVI: ${rv('wsvi-svi')} mL/g | ${rv('wsvi-interp')}`);
         break;
       }
       case 'wras': {
-        lines.push('Dr. H₂O — WW RAS Rate');
+        lines.push('flocs — WW RAS Rate');
         lines.push(`Influent: ${iv('wras-inf')} MGD | RAS: ${iv('wras-ras')} MGD`);
         lines.push(`RAS Rate: ${rv('wras-pct')}% of influent`);
         break;
       }
       case 'winv': {
-        lines.push('Dr. H₂O — WW MLSS Inventory');
+        lines.push('flocs — WW MLSS Inventory');
         lines.push(`Conc: ${iv('winv-conc')} mg/L | Volume: ${iv('winv-vol')} MG`);
         lines.push(`Inventory: ${rv('winv-lbs')} lbs`);
         break;
       }
       case 'wsa': {
-        lines.push('Dr. H₂O — WW Sludge Age (SRT)');
+        lines.push('flocs — WW Sludge Age (SRT)');
         lines.push(`MLSS: ${iv('wsa-mlss')} mg/L | Vol: ${iv('wsa-vol')} MG | Waste: ${iv('wsa-wst')} lbs/day`);
         lines.push(`SRT: ${rv('wsa-days')} days`);
         break;
       }
       case 'wfm': {
-        lines.push('Dr. H₂O — WW F/M Ratio');
+        lines.push('flocs — WW F/M Ratio');
         lines.push(`BOD: ${iv('wfm-bod')} lbs/day | MLVSS: ${iv('wfm-inv')} lbs`);
         lines.push(`F/M: ${rv('wfm-ratio')} lbs BOD/lb MLVSS/day`);
         break;
       }
       case 'wslr': {
-        lines.push('Dr. H₂O — WW Solids Loading Rate');
+        lines.push('flocs — WW Solids Loading Rate');
         lines.push(`Inf: ${iv('wslr-qinf')} MGD | RAS: ${iv('wslr-qras')} MGD | MLSS: ${iv('wslr-mlss')} mg/L | Area: ${iv('wslr-area')} ft²`);
         lines.push(`SLR: ${rv('wslr-slr')} lbs/ft²/day`);
         break;

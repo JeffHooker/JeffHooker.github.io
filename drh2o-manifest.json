@@ -1,6 +1,6 @@
 {
-  "name": "Dr. H₂O",
-  "short_name": "Dr. H₂O",
+  "name": "flocs",
+  "short_name": "flocs",
   "description": "Professional field calculator for water system operators.",
   "start_url": "/drh2o.html",
   "scope": "/",
