@@ -3161,16 +3161,22 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       });
       const data = await res.json();
       assistHideTyping();
-      if (data.content && data.content[0] && data.content[0].text) {
+      console.log('[Assist] HTTP', res.status, data);
+      if (!res.ok) {
+        console.error('[Assist] Worker error:', res.status, data);
+        assistAddBubble('assistant', `Error ${res.status}: ${data.error || data.message || 'Request failed.'}`);
+      } else if (data.content && data.content[0] && data.content[0].text) {
         const reply = data.content[0].text;
         assistAddBubble('assistant', reply);
         assistHistory.push({ role: 'assistant', content: reply });
       } else {
+        console.error('[Assist] Unexpected response shape:', data);
         assistAddBubble('assistant', 'Sorry, no response received. Please try again.');
       }
     } catch (err) {
       assistHideTyping();
-      assistAddBubble('assistant', 'Connection error. Please check your network and try again.');
+      console.error('[Assist] Fetch error:', err);
+      assistAddBubble('assistant', `Connection error: ${err.message}`);
     } finally {
       sendBtn.disabled = false;
       input.focus();
