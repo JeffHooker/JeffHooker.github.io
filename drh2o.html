@@ -3079,8 +3079,20 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   <div class="disc-box">
     <p>flocs is a reference and calculation tool for licensed water and wastewater operators. All calculations should be independently verified. This app does not constitute professional engineering or regulatory compliance advice. Users are solely responsible for their operational decisions.</p>
   </div>
-  <button class="disc-btn" onclick="dismissDisclaimer()">I Understand</button>
+  <button class="disc-btn" id="disc-understand-btn">I Understand</button>
 </div>
+<script>
+  (function() {
+    var screen = document.getElementById('disclaimer-screen');
+    if (localStorage.getItem('drh2o-disclaimer') === '1') {
+      screen.classList.add('hidden');
+    }
+    document.getElementById('disc-understand-btn').addEventListener('click', function() {
+      localStorage.setItem('drh2o-disclaimer', '1');
+      screen.classList.add('hidden');
+    });
+  })();
+</script>
 
 <!-- ── WELCOME SCREEN ── -->
 <div id="welcome-screen">
@@ -3100,15 +3112,6 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 </div>
 
 <script>
-  // ── DISCLAIMER ──
-  if (localStorage.getItem('drh2o-disclaimer') === '1') {
-    document.getElementById('disclaimer-screen').classList.add('hidden');
-  }
-  function dismissDisclaimer() {
-    localStorage.setItem('drh2o-disclaimer', '1');
-    document.getElementById('disclaimer-screen').classList.add('hidden');
-  }
-
   // ── DR. H₂O ASSIST ──
   const ASSIST_SYSTEM = 'You are Dr. H₂O Assist, an AI helper exclusively for licensed water and wastewater operators. You only answer questions related to water treatment, wastewater treatment, system operations, calculations, compliance, troubleshooting, and operator certification. If asked anything outside this scope, politely decline and redirect the user to water or wastewater topics. Keep responses concise and field-appropriate. Always recommend verifying advice against official regulatory sources.';
   const assistHistory = [];
