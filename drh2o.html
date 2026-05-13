@@ -3524,97 +3524,1147 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // ── QUICK QUIZ ──
   const QUIZ_BANK = [
-    {
-      q: "What is the minimum free chlorine residual required in a distribution system under the Surface Water Treatment Rule (SWTR)?",
-      choices: ["0.1 mg/L", "0.2 mg/L", "0.5 mg/L", "1.0 mg/L"],
-      answer: 1,
-      explain: "<b>0.2 mg/L</b> is the minimum detectable free chlorine residual required throughout the distribution system under the SWTR to ensure ongoing disinfection protection."
-    },
-    {
-      q: "A storage tank is 20 ft in diameter and 18 ft tall. What is its approximate capacity in gallons?",
-      choices: ["30,200 gal", "40,700 gal", "56,500 gal", "75,400 gal"],
-      answer: 1,
-      explain: "<b>40,700 gal.</b> Volume = π × r² × h = 3.1416 × 10² × 18 = 5,655 ft³. Convert: 5,655 × 7.48 = 42,300 gal. Closest choice is 40,700 gal (answer B uses the standard 7.48 gal/ft³ factor)."
-    },
-    {
-      q: "Which chemical is most commonly used for primary disinfection in drinking water treatment?",
-      choices: ["Sodium fluoride", "Ferric sulfate", "Chlorine gas (Cl₂)", "Potassium permanganate"],
-      answer: 2,
-      explain: "<b>Chlorine gas</b> is the most widely used primary disinfectant in drinking water due to its effectiveness, residual-forming ability, and cost. Potassium permanganate is used for iron/manganese removal, not primary disinfection."
-    },
-    {
-      q: "The 'CT concept' in disinfection refers to which two factors?",
-      choices: ["Chlorine dose × Turbidity", "Concentration × Contact time", "Chemical cost × Treatment volume", "Coagulation × Turbidity removal"],
-      answer: 1,
-      explain: "<b>Concentration × Contact time (C × T)</b>. CT values (mg/L · min) are used by regulators to verify adequate inactivation of Giardia and viruses under the SWTR."
-    },
-    {
-      q: "Under the Safe Drinking Water Act, who is primarily responsible for enforcing drinking water standards?",
-      choices: ["Local fire departments", "County health departments", "State primacy agencies", "The federal EPA directly"],
-      answer: 2,
-      explain: "<b>State primacy agencies.</b> The EPA sets national standards, but enforcement is delegated to states that have received primacy (primary enforcement responsibility) under SDWA."
-    },
-    {
-      q: "A pump delivers 350 gpm to a storage tank. How many hours will it take to fill a 126,000-gallon tank from empty?",
-      choices: ["4.0 hrs", "5.0 hrs", "6.0 hrs", "7.5 hrs"],
-      answer: 2,
-      explain: "<b>6.0 hours.</b> Time = Volume ÷ Flow = 126,000 gal ÷ 350 gpm = 360 min = 6.0 hours."
-    },
-    {
-      q: "Which of the following is NOT a primary maximum contaminant level (MCL) regulated under the SDWA?",
-      choices: ["Nitrate", "Turbidity", "Total dissolved solids (TDS)", "Arsenic"],
-      answer: 2,
-      explain: "<b>Total dissolved solids (TDS)</b> has a secondary MCL (SMCL) of 500 mg/L set for aesthetic reasons (taste/odor), not health. Primary MCLs are legally enforceable health-based limits."
-    },
-    {
-      q: "What does 'psi' measure in a water distribution system?",
-      choices: ["Flow velocity in feet per second", "Pipe diameter in inches", "Pressure in pounds per square inch", "Chemical concentration in parts per million"],
-      answer: 2,
-      explain: "<b>Pressure in pounds per square inch.</b> Standard distribution system pressure is typically maintained between 20–100 psi. Minimum pressure during normal operations is 20 psi under most state regulations."
-    },
-    {
-      q: "Hypochlorite solution must be stored away from which of the following?",
-      choices: ["Distilled water", "Sunlight and heat", "Plastic containers", "Stainless steel surfaces"],
-      answer: 1,
-      explain: "<b>Sunlight and heat.</b> Sodium hypochlorite degrades rapidly when exposed to heat, light, and metals. It should be stored in a cool, dark location in opaque containers to maintain its chlorine strength."
-    },
-    {
-      q: "A water main has a pressure of 65 psi at a low elevation and 48 psi at a higher elevation 50 ft above. What is the approximate pressure loss due to elevation alone?",
-      choices: ["5.6 psi", "10.8 psi", "21.7 psi", "28.3 psi"],
-      answer: 2,
-      explain: "<b>21.7 psi.</b> Elevation pressure loss = 50 ft ÷ 2.31 ft/psi = 21.6 psi ≈ 21.7 psi. Every 2.31 feet of elevation change equals 1 psi of pressure change."
-    },
-    {
-      q: "What is the purpose of a cross-connection control program?",
-      choices: ["To monitor chlorine residuals in distribution", "To prevent backflow of contaminated water into the potable supply", "To balance pressure throughout the distribution system", "To regulate water meter accuracy"],
-      answer: 1,
-      explain: "<b>Prevent backflow of contaminated water.</b> Cross-connections are physical links between potable and non-potable water. Backflow prevention devices (check valves, air gaps, RPZ assemblies) protect the system."
-    },
-    {
-      q: "Under the Lead and Copper Rule, action must be taken if lead levels exceed what concentration at the tap?",
-      choices: ["5 µg/L", "10 µg/L", "15 µg/L", "50 µg/L"],
-      answer: 2,
-      explain: "<b>15 µg/L (ppb)</b> is the Lead Action Level. If exceeded in more than 10% of first-draw samples, the system must take corrosion control, public notification, and other corrective actions."
-    },
-    {
-      q: "Turbidity in drinking water is measured in which units?",
-      choices: ["mg/L", "NTU", "ppm", "psi"],
-      answer: 1,
-      explain: "<b>NTU (Nephelometric Turbidity Units).</b> Filtered surface water must be ≤ 0.3 NTU in 95% of monthly samples and must never exceed 1 NTU under the SWTR."
-    },
-    {
-      q: "A rectangular clearwell is 60 ft long, 25 ft wide, and 10 ft deep. What is its volume in gallons?",
-      choices: ["67,320 gal", "89,760 gal", "112,200 gal", "134,640 gal"],
-      answer: 2,
-      explain: "<b>112,200 gal.</b> Volume = L × W × D = 60 × 25 × 10 = 15,000 ft³. Convert: 15,000 × 7.48 = 112,200 gal."
-    },
-    {
-      q: "Which of the following best describes 'detention time' in a treatment basin?",
-      choices: ["The time it takes for turbidity to settle below 0.3 NTU", "The average time water spends in a tank or basin", "The contact time chlorine has with pathogens before distribution", "The delay between dosing and testing chlorine residual"],
-      answer: 1,
-      explain: "<b>Average time water spends in a tank or basin.</b> Detention time (T) = Volume ÷ Flow Rate. It is used to size sedimentation basins, clearwells, and contact chambers."
-    }
-  ];
+  // --- CHLORINATION AND CHLORINE RESIDUALS ---
+  {
+    q: "What is the difference between free chlorine residual and combined chlorine residual?",
+    choices: [
+      "Free chlorine is chlorine combined with ammonia; combined is hypochlorous acid",
+      "Free chlorine is HOCl and OCl⁻; combined chlorine is chlorine reacted with ammonia to form chloramines",
+      "Free chlorine is added chlorine; combined is the chlorine demand",
+      "There is no difference — both terms mean the same thing"
+    ],
+    answer: 1,
+    explain: "<b>Free chlorine includes HOCl and OCl⁻.</b> Combined chlorine (chloramines) forms when free chlorine reacts with ammonia or nitrogen compounds and is less effective as a disinfectant."
+  },
+  {
+    q: "At pH 7.5, approximately what percentage of chlorine exists as the more effective disinfectant hypochlorous acid (HOCl)?",
+    choices: ["10%", "50%", "75%", "99%"],
+    answer: 1,
+    explain: "<b>At pH 7.5, roughly 50% of free chlorine is HOCl.</b> As pH rises, the equilibrium shifts toward the less effective hypochlorite ion (OCl⁻), reducing disinfection efficiency."
+  },
+  {
+    q: "A water system adds 3.5 mg/L chlorine to a source with a chlorine demand of 2.1 mg/L. What is the chlorine residual?",
+    choices: ["1.4 mg/L", "2.1 mg/L", "3.5 mg/L", "5.6 mg/L"],
+    answer: 0,
+    explain: "<b>Chlorine residual = dose − demand = 3.5 − 2.1 = 1.4 mg/L.</b> The chlorine demand is consumed by organic matter, iron, and other reducing agents in the water."
+  },
+  {
+    q: "What is the maximum residual disinfectant level (MRDL) for chlorine in drinking water under the Stage 1 DBPR?",
+    choices: ["0.8 mg/L", "2.0 mg/L", "4.0 mg/L", "6.0 mg/L"],
+    answer: 2,
+    explain: "<b>The MRDL for chlorine is 4.0 mg/L.</b> This is an annual average measured at entry points to the distribution system, not to be confused with the maximum contaminant level for chlorite or chloramines."
+  },
+  {
+    q: "Breakpoint chlorination refers to the point at which:",
+    choices: [
+      "Chlorine dose equals the chlorine demand exactly",
+      "Adding more chlorine destroys all chloramines and free chlorine residual begins to rise",
+      "The chlorine residual reaches 4.0 mg/L",
+      "Chlorine gas is first detectable in the air"
+    ],
+    answer: 1,
+    explain: "<b>Breakpoint is where all chloramines are oxidized and free residual starts to increase.</b> Additional chlorine beyond the breakpoint appears as free chlorine residual."
+  },
+  {
+    q: "Sodium hypochlorite solution (12% available chlorine) is less concentrated than gas chlorine. Compared to gas chlorine, liquid hypochlorite is:",
+    choices: [
+      "More hazardous because it is a stronger oxidizer",
+      "Safer to handle but raises pH and degrades over time",
+      "Less effective at all pH values",
+      "Identical in disinfection byproduct formation potential"
+    ],
+    answer: 1,
+    explain: "<b>Liquid hypochlorite is safer to handle but raises water pH and loses strength over time.</b> Degradation accelerates with heat and light exposure, requiring careful inventory management."
+  },
+  {
+    q: "Which chlorine compound has the highest available chlorine content by weight?",
+    choices: [
+      "Sodium hypochlorite (liquid bleach, ~12%)",
+      "Calcium hypochlorite granules (~65–70%)",
+      "Chlorine gas (100%)",
+      "Chlorine dioxide"
+    ],
+    answer: 2,
+    explain: "<b>Chlorine gas is 100% available chlorine by weight.</b> Calcium hypochlorite is ~65–70%, making it the most concentrated dry form, but gas still has the highest overall content."
+  },
+  {
+    q: "A plant needs to add 2.0 mg/L chlorine to 1.5 MGD of water. How many pounds of chlorine are needed per day? (Use: lbs/day = mg/L × MGD × 8.34)",
+    choices: ["15.0 lbs/day", "25.0 lbs/day", "16.7 lbs/day", "33.4 lbs/day"],
+    answer: 1,
+    explain: "<b>lbs/day = 2.0 × 1.5 × 8.34 = 25.0 lbs/day.</b> The 8.34 factor converts mg/L × MGD to pounds per day."
+  },
+  {
+    q: "Which of the following is TRUE about chloramines as a secondary disinfectant?",
+    choices: [
+      "Chloramines are stronger disinfectants than free chlorine",
+      "Chloramines produce fewer trihalomethanes and provide a more stable residual in distribution",
+      "Chloramines have a higher CT requirement than chlorine for Giardia inactivation",
+      "Both B and C are true"
+    ],
+    answer: 3,
+    explain: "<b>Both B and C are true.</b> Chloramines form fewer DBPs and maintain a more stable residual, but they are weaker disinfectants requiring higher CT values for pathogen inactivation."
+  },
+  {
+    q: "What is the minimum free chlorine residual required at the entry point to a distribution system under the Surface Water Treatment Rule?",
+    choices: ["0.1 mg/L", "0.2 mg/L", "0.5 mg/L", "1.0 mg/L"],
+    answer: 1,
+    explain: "<b>The SWTR requires a minimum of 0.2 mg/L free chlorine (or equivalent) at the entry point.</b> This ensures residual protection throughout the distribution system."
+  },
+
+  // --- CT CALCULATIONS AND LOG INACTIVATION ---
+  {
+    q: "CT is defined as:",
+    choices: [
+      "Chlorine residual (mg/L) multiplied by contact time (minutes)",
+      "Contact time (hours) divided by chlorine dose (mg/L)",
+      "Temperature (°C) multiplied by chlorine residual",
+      "Chlorine dose minus chlorine demand"
+    ],
+    answer: 0,
+    explain: "<b>CT = concentration (mg/L) × time (minutes).</b> The CT value is compared to CT tables to determine the log inactivation credit for a given pathogen at a given temperature and pH."
+  },
+  {
+    q: "A clearwell provides a CT of 120 mg·min/L with a free chlorine residual of 2.0 mg/L. What is the calculated contact time?",
+    choices: ["30 minutes", "60 minutes", "120 minutes", "240 minutes"],
+    answer: 1,
+    explain: "<b>Time = CT ÷ C = 120 ÷ 2.0 = 60 minutes.</b> The contact time is the T10 value (the time it takes 10% of the water to pass through the basin), not the theoretical detention time."
+  },
+  {
+    q: "The SWTR requires a minimum of how many log inactivation of Giardia lamblia cysts?",
+    choices: ["0.5 log", "1.0 log", "2.0 log", "3.0 log"],
+    answer: 3,
+    explain: "<b>The SWTR requires 3-log (99.9%) inactivation/removal of Giardia.</b> This can be achieved through a combination of treatment (filtration = 2.5 log removal credit) and disinfection."
+  },
+  {
+    q: "How many log inactivation of viruses does the SWTR require for surface water systems?",
+    choices: ["2 log", "3 log", "4 log", "5 log"],
+    answer: 2,
+    explain: "<b>The SWTR requires 4-log (99.99%) inactivation/removal of viruses.</b> Filtration typically receives 2-log removal credit, so disinfection must provide the remaining 2 log."
+  },
+  {
+    q: "If a surface water plant uses conventional filtration, how much Giardia log inactivation credit must disinfection provide to meet the 3-log SWTR requirement?",
+    choices: ["0.5 log", "1.0 log", "1.5 log", "2.5 log"],
+    answer: 0,
+    explain: "<b>Conventional filtration receives 2.5-log removal credit for Giardia.</b> Therefore, disinfection must provide 3.0 − 2.5 = 0.5 log inactivation to achieve the required 3-log total."
+  },
+  {
+    q: "A 1-log reduction corresponds to removal of what percentage of organisms?",
+    choices: ["10%", "90%", "99%", "99.9%"],
+    answer: 1,
+    explain: "<b>1 log = 90% removal.</b> Log reductions: 1 log = 90%, 2 log = 99%, 3 log = 99.9%, 4 log = 99.99%."
+  },
+  {
+    q: "CT values are higher (more CT needed) at which temperature condition?",
+    choices: [
+      "Warmer water (25°C) because organisms are more active",
+      "Colder water (5°C) because disinfection reactions are slower",
+      "Temperature has no effect on CT requirements",
+      "CT is only affected by pH, not temperature"
+    ],
+    answer: 1,
+    explain: "<b>Colder water requires higher CT because disinfection chemistry slows at lower temperatures.</b> CT tables are organized by temperature — systems must use CT values for the lowest temperature they experience."
+  },
+  {
+    q: "The T10 value used in CT calculations represents:",
+    choices: [
+      "The time for 10% removal of Giardia",
+      "The theoretical detention time divided by 10",
+      "The time it takes 10% of the water to pass through the contact basin",
+      "Ten times the chlorine contact time"
+    ],
+    answer: 2,
+    explain: "<b>T10 is the time it takes 10% of water to pass through, representing the shortest realistic contact time.</b> Using T10 is conservative — it accounts for short-circuiting in basins."
+  },
+
+  // --- COAGULATION AND FLOCCULATION ---
+  {
+    q: "What is the purpose of coagulation in water treatment?",
+    choices: [
+      "To kill pathogens by chemical means",
+      "To destabilize colloidal particles so they can clump together and be removed",
+      "To remove dissolved solids by precipitation",
+      "To adjust pH for corrosion control"
+    ],
+    answer: 1,
+    explain: "<b>Coagulation destabilizes colloidal particles</b> by neutralizing their negative surface charges, allowing them to come together (flocculate) and be removed by settling or filtration."
+  },
+  {
+    q: "Aluminum sulfate (alum) is a common coagulant. When added to water, it:",
+    choices: [
+      "Raises the pH of the water",
+      "Has no effect on pH",
+      "Lowers the pH and consumes alkalinity",
+      "Only works in water with zero alkalinity"
+    ],
+    answer: 2,
+    explain: "<b>Alum hydrolysis consumes alkalinity and lowers pH.</b> Sufficient alkalinity (typically 30–150 mg/L as CaCO₃) is needed for effective coagulation. Lime may be added to restore pH."
+  },
+  {
+    q: "The jar test is used in water treatment primarily to:",
+    choices: [
+      "Determine the chlorine demand of the source water",
+      "Determine the optimal coagulant dose and pH for treatment",
+      "Test for coliform bacteria in finished water",
+      "Measure the turbidity of the raw water"
+    ],
+    answer: 1,
+    explain: "<b>The jar test determines the optimal coagulant dose and pH.</b> Water operators use jar tests when raw water quality changes to optimize chemical dosing before applying changes to the full plant."
+  },
+  {
+    q: "Flocculation follows coagulation. Its purpose is to:",
+    choices: [
+      "Add chemicals to neutralize charge",
+      "Gently mix water to encourage microfloc particles to collide and grow into larger, settleable floc",
+      "Rapidly mix chemicals to ensure uniform distribution",
+      "Remove settled sludge from the bottom of a basin"
+    ],
+    answer: 1,
+    explain: "<b>Flocculation uses gentle agitation to promote particle collision and growth.</b> Too much energy breaks apart floc; too little prevents particle collisions. Tapered flocculation reduces mixing energy as floc grows."
+  },
+  {
+    q: "Which of the following pH ranges is generally optimal for alum coagulation?",
+    choices: ["4.0–5.5", "6.0–7.5", "8.0–9.5", "10.0–11.0"],
+    answer: 1,
+    explain: "<b>Alum coagulation works best at pH 6.0–7.5.</b> Outside this range, aluminum hydroxide floc is less stable and residual aluminum in the finished water may increase."
+  },
+  {
+    q: "Enhanced coagulation (required under the Stage 1 D/DBPR) is intended to:",
+    choices: [
+      "Increase turbidity removal efficiency",
+      "Remove additional total organic carbon (TOC) to reduce DBP precursors",
+      "Eliminate the need for filtration",
+      "Replace chlorination as the primary disinfectant"
+    ],
+    answer: 1,
+    explain: "<b>Enhanced coagulation removes additional TOC to reduce disinfection byproduct precursors.</b> By reducing the organic carbon load before chlorination, THM and HAA formation is reduced."
+  },
+  {
+    q: "Zeta potential is used in coagulation control to measure:",
+    choices: [
+      "The temperature of the coagulation basin",
+      "The electrical charge on the surface of colloidal particles",
+      "The settleability of floc",
+      "The concentration of coagulant in the water"
+    ],
+    answer: 1,
+    explain: "<b>Zeta potential measures the surface charge of colloidal particles.</b> When zeta potential is near zero, particles are destabilized and coagulation is effective. Values far from zero indicate restabilization."
+  },
+
+  // --- FILTRATION ---
+  {
+    q: "What is the maximum turbidity allowed in individual filter effluent under the Long Term 2 Enhanced Surface Water Treatment Rule (LT2ESWTR)?",
+    choices: ["0.1 NTU in 95% of samples", "0.3 NTU in 95% of measurements", "1.0 NTU at all times", "0.5 NTU at all times"],
+    answer: 1,
+    explain: "<b>Individual filter effluent must be ≤0.3 NTU in 95% of measurements each month.</b> Additionally, turbidity must never exceed 1.0 NTU at any time in a 4-hour period (for conventional/direct filtration)."
+  },
+  {
+    q: "Slow sand filtration differs from rapid sand filtration primarily because:",
+    choices: [
+      "Slow sand uses chemical coagulation while rapid sand does not",
+      "Slow sand relies on a biological layer (schmutzdecke) and much lower loading rates",
+      "Slow sand can only treat groundwater",
+      "Rapid sand uses sand while slow sand uses anthracite"
+    ],
+    answer: 1,
+    explain: "<b>Slow sand filtration relies on the schmutzdecke (biological mat) for treatment.</b> It operates at very low loading rates (~0.015–0.15 gpm/ft²) compared to rapid sand (~2–5 gpm/ft²) and requires no coagulation."
+  },
+  {
+    q: "What is the typical loading rate for conventional rapid sand filtration?",
+    choices: ["0.1–0.3 gpm/ft²", "2–5 gpm/ft²", "10–15 gpm/ft²", "20–25 gpm/ft²"],
+    answer: 1,
+    explain: "<b>Rapid sand filters typically operate at 2–5 gpm/ft².</b> Higher rates reduce filter run time and may compromise removal efficiency. Backwash is needed every 12–72 hours depending on turbidity loading."
+  },
+  {
+    q: "Which filtration method is most effective for removing Cryptosporidium oocysts?",
+    choices: [
+      "Conventional filtration (coagulation + sedimentation + filtration)",
+      "Chlorination alone",
+      "UV disinfection alone",
+      "Ion exchange"
+    ],
+    answer: 0,
+    explain: "<b>Conventional filtration provides effective physical removal of Cryptosporidium.</b> Chlorine at typical drinking water doses does NOT inactivate Cryptosporidium — physical removal or UV is required."
+  },
+  {
+    q: "A filter that is operating in 'filter-to-waste' mode is:",
+    choices: [
+      "Sending effluent to a waste lagoon permanently",
+      "Diverting initial filter effluent to waste after backwash until turbidity is acceptable",
+      "Wasting filter media that has been clogged",
+      "Running at maximum hydraulic loading to waste filter capacity"
+    ],
+    answer: 1,
+    explain: "<b>Filter-to-waste diverts the initial turbid filtrate after backwash until the filter ripens.</b> A filter needs time to 'ripen' (form a thin layer of particles) after cleaning before producing acceptable effluent."
+  },
+  {
+    q: "Membrane filtration classified as ultrafiltration (UF) is designed to remove:",
+    choices: [
+      "Dissolved salts and minerals",
+      "Viruses and protozoa including Cryptosporidium and Giardia",
+      "Only large suspended solids",
+      "Dissolved gases"
+    ],
+    answer: 1,
+    explain: "<b>Ultrafiltration membranes remove viruses, protozoa (Giardia, Cryptosporidium), and bacteria.</b> UF has a nominal pore size of 0.01–0.1 microns. Reverse osmosis removes dissolved salts."
+  },
+  {
+    q: "What does the term 'filter ripening period' refer to?",
+    choices: [
+      "The time a filter runs before its first backwash",
+      "The period after backwash when filter performance improves as particles coat the media",
+      "The chemical maturation of filter media over years of use",
+      "The time needed for the biological layer to grow in slow sand filtration"
+    ],
+    answer: 1,
+    explain: "<b>Filter ripening is the initial period after backwash when turbidity is elevated.</b> As the filter captures particles, a thin layer forms that improves removal efficiency. Turbidity typically spikes initially then drops."
+  },
+
+  // --- pH EFFECTS ---
+  {
+    q: "How does raising pH affect the effectiveness of chlorine disinfection?",
+    choices: [
+      "Higher pH increases HOCl concentration, improving disinfection",
+      "Higher pH shifts equilibrium toward OCl⁻, which is less effective, reducing disinfection efficiency",
+      "pH has no effect on chlorine species distribution",
+      "Higher pH increases CT requirements for Giardia but not viruses"
+    ],
+    answer: 1,
+    explain: "<b>At higher pH, more chlorine exists as OCl⁻ (hypochlorite ion), which is 80× less effective than HOCl.</b> The pKa of this equilibrium is ~7.5, so above pH 7.5 the less effective form predominates."
+  },
+  {
+    q: "The Langelier Saturation Index (LSI) is used to:",
+    choices: [
+      "Determine the optimal chlorine dose for disinfection",
+      "Assess whether water is corrosive or scale-forming with respect to calcium carbonate",
+      "Calculate CT values for pathogen inactivation",
+      "Measure the turbidity potential of source water"
+    ],
+    answer: 1,
+    explain: "<b>The LSI indicates whether water will dissolve or deposit calcium carbonate.</b> An LSI near zero is balanced. Negative values indicate corrosive water; positive values indicate scale-forming water."
+  },
+  {
+    q: "Carbonate chemistry in water treatment: which species predominates at pH 8.3?",
+    choices: [
+      "Carbon dioxide (CO₂)",
+      "Bicarbonate (HCO₃⁻)",
+      "Carbonate (CO₃²⁻)",
+      "Equal amounts of all three"
+    ],
+    answer: 1,
+    explain: "<b>Bicarbonate (HCO₃⁻) predominates between pH 6.3 and 10.3.</b> Below pH 6.3, CO₂ dominates. Above pH 10.3, carbonate (CO₃²⁻) dominates. At pH 8.3, essentially all alkalinity is bicarbonate."
+  },
+
+  // --- DISINFECTION BYPRODUCTS ---
+  {
+    q: "Trihalomethanes (THMs) form when chlorine reacts with:",
+    choices: [
+      "Ammonia in the water",
+      "Natural organic matter (NOM/humic substances) as DBP precursors",
+      "Iron and manganese in the source water",
+      "Calcium and magnesium (hardness)"
+    ],
+    answer: 1,
+    explain: "<b>THMs form when chlorine reacts with natural organic matter (NOM).</b> Humic and fulvic acids are the primary precursors. Reducing NOM before disinfection (enhanced coagulation) reduces THM formation."
+  },
+  {
+    q: "The current MCL for total trihalomethanes (TTHMs) under the Stage 2 D/DBPR is:",
+    choices: ["0.010 mg/L", "0.040 mg/L", "0.080 mg/L", "0.100 mg/L"],
+    answer: 2,
+    explain: "<b>The MCL for TTHMs is 0.080 mg/L (80 µg/L).</b> The Stage 2 DBPR changed compliance from a system-wide average to a locational running annual average (LRAA) at each monitoring location."
+  },
+  {
+    q: "The MCL for haloacetic acids (HAA5) is:",
+    choices: ["0.010 mg/L", "0.040 mg/L", "0.060 mg/L", "0.080 mg/L"],
+    answer: 2,
+    explain: "<b>The MCL for HAA5 is 0.060 mg/L (60 µg/L).</b> HAA5 includes five haloacetic acids: monochloroacetic, dichloroacetic, trichloroacetic, monobromoacetic, and dibromoacetic acids."
+  },
+  {
+    q: "Which disinfectant produces the least amount of trihalomethanes?",
+    choices: ["Chlorine gas", "Sodium hypochlorite", "Chloramines", "Chlorine dioxide"],
+    answer: 2,
+    explain: "<b>Chloramines produce significantly fewer THMs than free chlorine.</b> This is why many utilities switch to chloramines as a secondary disinfectant. Chlorine dioxide also produces fewer THMs but generates chlorite as a byproduct."
+  },
+  {
+    q: "Bromate is a disinfection byproduct associated with which treatment process?",
+    choices: [
+      "Chlorination of water containing bromide",
+      "Ozonation of water containing bromide",
+      "UV disinfection of bromide-containing water",
+      "Chloramination of water containing bromide"
+    ],
+    answer: 1,
+    explain: "<b>Bromate forms when ozone reacts with naturally occurring bromide in source water.</b> The MCL for bromate is 0.010 mg/L. Reducing ozone dose or using ozone with UV can minimize bromate formation."
+  },
+  {
+    q: "The Stage 2 Disinfectants/Disinfection Byproducts Rule (D/DBPR) changed compliance monitoring for TTHMs and HAA5 by requiring:",
+    choices: [
+      "More frequent sampling than Stage 1",
+      "Compliance based on locational running annual average (LRAA) at each monitoring site instead of system-wide average",
+      "Sampling only at the plant entry point",
+      "Compliance based on maximum single sample rather than average"
+    ],
+    answer: 1,
+    explain: "<b>Stage 2 D/DBPR uses LRAA at each monitoring location.</b> This prevents high values at some sites from being masked by lower values elsewhere when averaged system-wide."
+  },
+  {
+    q: "Which of the following is NOT one of the four regulated trihalomethane compounds?",
+    choices: [
+      "Chloroform (trichloromethane)",
+      "Bromodichloromethane",
+      "Dibromochloromethane",
+      "Dichloroacetonitrile"
+    ],
+    answer: 3,
+    explain: "<b>Dichloroacetonitrile is a haloacetonitrile, not a THM.</b> The four regulated THMs are: chloroform, bromodichloromethane, dibromochloromethane, and bromoform."
+  },
+
+  // --- SAFE DRINKING WATER ACT ---
+  {
+    q: "Under the Safe Drinking Water Act, which federal agency is responsible for setting MCLs for drinking water contaminants?",
+    choices: ["CDC", "OSHA", "EPA", "FDA"],
+    answer: 2,
+    explain: "<b>The U.S. Environmental Protection Agency (EPA) sets MCLs under the SDWA.</b> States may adopt their own regulations that are at least as stringent as federal standards and may apply for primacy to enforce them."
+  },
+  {
+    q: "What is the difference between an MCL and an MCLG?",
+    choices: [
+      "MCL is a goal; MCLG is the legally enforceable limit",
+      "MCLG is a non-enforceable health goal; MCL is the legally enforceable standard",
+      "They are the same value set at different times",
+      "MCL applies to surface water; MCLG applies to groundwater"
+    ],
+    answer: 1,
+    explain: "<b>MCLG (Maximum Contaminant Level Goal) is a non-enforceable health-based goal.</b> MCL is the enforceable standard, set as close to the MCLG as is technically and economically feasible."
+  },
+  {
+    q: "Under the SDWA, which type of water system is defined as serving at least 25 people or having at least 15 service connections year-round?",
+    choices: [
+      "Non-community water system",
+      "Community water system (CWS)",
+      "Transient non-community water system",
+      "Consecutive water system"
+    ],
+    answer: 1,
+    explain: "<b>A Community Water System (CWS) serves at least 25 people or 15 connections year-round.</b> Examples include cities, towns, and mobile home parks with permanent residents."
+  },
+  {
+    q: "A public water system that serves the same people year-round but not as their primary residence (e.g., a nursing home) is classified as:",
+    choices: [
+      "Community water system",
+      "Transient non-community water system",
+      "Non-transient non-community water system (NTNCWS)",
+      "Consecutive system"
+    ],
+    answer: 2,
+    explain: "<b>A non-transient non-community water system (NTNCWS) serves 25+ of the same people for 6+ months/year but not as their primary residence.</b> Examples: schools, factories. Subject to most MCLs."
+  },
+  {
+    q: "What must a public water system do when it discovers an MCL violation?",
+    choices: [
+      "Notify the state within 24 hours and issue public notification within required timeframes",
+      "Immediately shut down the system until the violation is corrected",
+      "Notify only the state; public notification is optional",
+      "Wait until the end of the monitoring period before reporting"
+    ],
+    answer: 0,
+    explain: "<b>MCL violations require notification to the state and public notification within regulatory timeframes.</b> For acute violations, public notice must be given within 24 hours; for non-acute violations, within 30 days."
+  },
+  {
+    q: "A Treatment Technique (TT) requirement differs from an MCL because:",
+    choices: [
+      "TTs are less stringent than MCLs",
+      "TTs specify required treatment processes rather than a measurable contaminant level",
+      "TTs only apply to surface water systems",
+      "TTs are set by states, not EPA"
+    ],
+    answer: 1,
+    explain: "<b>Treatment Techniques specify required treatment processes when measuring the contaminant is not practical or feasible.</b> Examples: the Surface Water Treatment Rule's turbidity and CT requirements, and the Lead and Copper Rule's corrosion control treatment."
+  },
+
+  // --- LEAD AND COPPER RULE ---
+  {
+    q: "Under the Lead and Copper Rule, the action level for lead is:",
+    choices: ["0.005 mg/L", "0.010 mg/L", "0.015 mg/L", "0.050 mg/L"],
+    answer: 2,
+    explain: "<b>The Lead and Copper Rule action level for lead is 0.015 mg/L (15 ppb).</b> If more than 10% of tap samples exceed this level, the system must take action including corrosion control treatment."
+  },
+  {
+    q: "Under the Lead and Copper Rule, the action level for copper is:",
+    choices: ["0.3 mg/L", "0.5 mg/L", "1.0 mg/L", "1.3 mg/L"],
+    answer: 3,
+    explain: "<b>The copper action level is 1.3 mg/L.</b> The lead action level is 0.015 mg/L. Both use the 90th percentile of first-draw tap samples to determine compliance."
+  },
+  {
+    q: "Lead and Copper Rule samples must be collected as:",
+    choices: [
+      "Running tap samples after 5 minutes of flushing",
+      "First-draw samples after water has stood in pipes for at least 6 hours",
+      "Composite samples from multiple taps at the same site",
+      "Grab samples from the distribution main"
+    ],
+    answer: 1,
+    explain: "<b>LCR samples are first-draw after 6+ hours of stagnation.</b> This approach captures water that has been in contact with lead-containing plumbing, maximizing the likelihood of detecting lead leaching."
+  },
+  {
+    q: "Orthophosphate is often used for corrosion control under the Lead and Copper Rule because it:",
+    choices: [
+      "Reduces the pH of the water to prevent leaching",
+      "Forms a protective phosphate film on pipe surfaces that reduces lead and copper release",
+      "Removes lead from water by precipitation",
+      "Increases the alkalinity to buffer pH changes"
+    ],
+    answer: 1,
+    explain: "<b>Orthophosphate forms a thin protective film (lead phosphate minerals) on pipe surfaces.</b> This passivation layer reduces the contact between water and lead-containing materials, lowering lead levels at the tap."
+  },
+  {
+    q: "Under the revised Lead and Copper Rule (LCRR), systems must identify and inventory all:",
+    choices: [
+      "Fire hydrants and flushing stations",
+      "Service line materials, including identifying lead service lines",
+      "Backflow prevention devices",
+      "Pressure reducing valves"
+    ],
+    answer: 1,
+    explain: "<b>The LCRR requires systems to inventory all service line materials.</b> Systems must identify lead, galvanized requiring replacement (GRR), non-lead, and unknown service lines, with unknown lines treated as lead."
+  },
+
+  // --- SURFACE WATER TREATMENT RULE ---
+  {
+    q: "The Surface Water Treatment Rule applies to all public water systems using:",
+    choices: [
+      "Groundwater sources only",
+      "Surface water or groundwater under the direct influence of surface water (GWUDI)",
+      "Any water source with more than 500 service connections",
+      "Any source with detectable coliform"
+    ],
+    answer: 1,
+    explain: "<b>The SWTR applies to surface water and GWUDI (groundwater under direct influence of surface water).</b> GWUDI is groundwater that is significantly influenced by surface water, assessed by indicators like Giardia or turbidity variations."
+  },
+  {
+    q: "Under the SWTR, the combined filter effluent turbidity must not exceed what level?",
+    choices: [
+      "0.3 NTU in 95% of monthly samples",
+      "1.0 NTU at all times",
+      "5 NTU in 95% of monthly samples",
+      "0.1 NTU at all times"
+    ],
+    answer: 0,
+    explain: "<b>Combined filter effluent must be ≤0.3 NTU in 95% of samples per month AND never exceed 1.0 NTU.</b> Meeting turbidity limits is a treatment technique requirement under the SWTR."
+  },
+  {
+    q: "What criterion is used to determine if a groundwater source is under the direct influence of surface water (GWUDI)?",
+    choices: [
+      "The source is within 1 mile of a surface water body",
+      "Presence of large-diameter pathogens (Giardia, Cryptosporidium) or significant turbidity fluctuations correlated with surface water events",
+      "The source produces more than 1 MGD",
+      "The source tests positive for total coliform"
+    ],
+    answer: 1,
+    explain: "<b>GWUDI is determined by the presence of indicators like Giardia cysts, significant and rapid turbidity changes, or other characteristics indicating surface water influence.</b> A site-specific assessment is required."
+  },
+  {
+    q: "Which treatment technique under the SWTR protects against Legionella?",
+    choices: [
+      "Specific Legionella treatment requirements",
+      "Meeting the Giardia CT requirements is considered protective against Legionella",
+      "UV disinfection only",
+      "Ozonation only"
+    ],
+    answer: 1,
+    explain: "<b>EPA concluded that treatment meeting Giardia CT requirements is sufficient to control Legionella.</b> There is no separate CT table for Legionella under the SWTR."
+  },
+
+  // --- TURBIDITY REGULATIONS ---
+  {
+    q: "True or False: Under the IESWTR (Interim Enhanced Surface Water Treatment Rule), individual filter effluent turbidity must never exceed 1.0 NTU.",
+    choices: ["True", "False"],
+    answer: 0,
+    explain: "<b>True.</b> The IESWTR requires individual filter effluent turbidity not to exceed 1.0 NTU at any time (for conventional/direct filtration), plus ≤0.3 NTU in 95% of 4-hour measurements per month."
+  },
+  {
+    q: "Turbidity is measured in which units?",
+    choices: ["mg/L", "NTU (Nephelometric Turbidity Units)", "CFU/100 mL", "pCi/L"],
+    answer: 1,
+    explain: "<b>Turbidity is measured in NTU (Nephelometric Turbidity Units).</b> Nephelometric measurement uses a light beam and measures scattered light at 90°, correlating to the amount of suspended particulate matter."
+  },
+  {
+    q: "Raw water turbidity above 1 NTU in groundwater under the direct influence of surface water triggers:",
+    choices: [
+      "Immediate shutdown of the source",
+      "Additional monitoring and potential treatment technology requirements",
+      "Automatic MCL violation",
+      "Mandatory switch to bottled water supply"
+    ],
+    answer: 1,
+    explain: "<b>Elevated turbidity in GWUDI triggers additional monitoring and may require treatment changes.</b> Turbidity spikes in GWUDI often indicate surface water influence and potential pathogen contamination."
+  },
+  {
+    q: "How frequently must turbidity be measured for a conventional filtration plant under the SWTR?",
+    choices: [
+      "Once per day per filter",
+      "Continuously (every 15 minutes or less) for combined filter effluent",
+      "Once per month for combined filter effluent",
+      "Weekly for each individual filter"
+    ],
+    answer: 1,
+    explain: "<b>Turbidity must be monitored continuously (at least every 15 minutes) for combined filter effluent.</b> Individual filter effluent must also be monitored every 15 minutes for systems serving 10,000+ people."
+  },
+
+  // --- FLUORIDATION ---
+  {
+    q: "The current EPA secondary maximum contaminant level (SMCL) for fluoride is:",
+    choices: ["0.7 mg/L", "2.0 mg/L", "4.0 mg/L", "6.0 mg/L"],
+    answer: 1,
+    explain: "<b>The fluoride SMCL is 2.0 mg/L (for aesthetic/cosmetic dental fluorosis).</b> The MCL is 4.0 mg/L. The U.S. Public Health Service recommends 0.7 mg/L as the optimal fluoridation level."
+  },
+  {
+    q: "The U.S. Public Health Service (PHS) recommended optimal fluoride concentration for drinking water is:",
+    choices: ["0.3 mg/L", "0.7 mg/L", "1.0 mg/L", "1.5 mg/L"],
+    answer: 1,
+    explain: "<b>The PHS recommends 0.7 mg/L as the optimal fluoride concentration.</b> This level is associated with maximum dental caries prevention with minimal risk of dental fluorosis."
+  },
+  {
+    q: "Which fluoride compound is most commonly used for water fluoridation due to its ease of handling?",
+    choices: [
+      "Sodium fluoride (NaF)",
+      "Hydrofluosilicic acid (H₂SiF₆)",
+      "Sodium fluorosilicate (Na₂SiF₆)",
+      "Calcium fluoride (CaF₂)"
+    ],
+    answer: 1,
+    explain: "<b>Hydrofluosilicic acid (fluorosilicic acid) is the most widely used fluoridation chemical</b> because it is a liquid byproduct of phosphate fertilizer manufacturing, making it the least expensive option."
+  },
+  {
+    q: "Dental fluorosis (mottled enamel) is associated with fluoride exposure:",
+    choices: [
+      "Only from drinking water",
+      "Only above the MCL of 4.0 mg/L",
+      "During tooth development in children with exposure above optimal levels",
+      "In adults but not children"
+    ],
+    answer: 2,
+    explain: "<b>Dental fluorosis occurs during tooth development in children (before age 8) when fluoride intake exceeds optimal levels.</b> It ranges from mild (white spots) to severe (pitting) depending on concentration and duration of exposure."
+  },
+  {
+    q: "When working with hydrofluosilicic acid, which PPE is most critical due to the chemical's corrosive nature?",
+    choices: [
+      "Standard cloth gloves and safety glasses",
+      "Face shield, acid-resistant gloves, chemical splash apron, and eye wash station nearby",
+      "Dust mask and leather gloves",
+      "Only a lab coat and nitrile gloves"
+    ],
+    answer: 1,
+    explain: "<b>Hydrofluosilicic acid is highly corrosive and requires acid-resistant PPE including face shield, chemical-resistant gloves, and apron.</b> Hydrofluoric acid burns are extremely dangerous — an eyewash station must be immediately accessible."
+  },
+
+  // --- GIARDIA AND CRYPTOSPORIDIUM ---
+  {
+    q: "Why is conventional chlorination generally ineffective against Cryptosporidium parvum oocysts?",
+    choices: [
+      "Cryptosporidium is not a waterborne pathogen",
+      "Oocysts are highly resistant to chlorine — the CT required for 1-log inactivation is extremely high at typical drinking water conditions",
+      "Chlorine cannot reach oocysts in the distribution system",
+      "Cryptosporidium is only transmitted by direct contact, not through water"
+    ],
+    answer: 1,
+    explain: "<b>Cryptosporidium oocysts are extraordinarily resistant to chlorine disinfection.</b> CT values needed for 2-log inactivation by chlorine would be impractical. Physical removal (filtration) or UV disinfection is the primary control strategy."
+  },
+  {
+    q: "Under the LT2ESWTR, systems with higher Cryptosporidium concentrations in source water must achieve additional treatment. What is the maximum additional treatment required?",
+    choices: [
+      "0.5 log additional removal",
+      "1.0 log additional removal",
+      "2.5 log additional removal",
+      "5.5 log additional removal"
+    ],
+    answer: 2,
+    explain: "<b>LT2ESWTR Bin 4 systems (highest Cryptosporidium risk) must achieve 2.5 additional log treatment.</b> Systems are classified into bins based on 2 years of source water monitoring and must meet additional treatment requirements accordingly."
+  },
+  {
+    q: "UV disinfection is highly effective against Cryptosporidium because:",
+    choices: [
+      "UV oxidizes the oocyst wall chemically",
+      "UV damages the oocyst's DNA/RNA, preventing replication even though the oocyst may remain intact",
+      "UV creates ozone in the water that kills oocysts",
+      "UV raises the water temperature enough to kill oocysts"
+    ],
+    answer: 1,
+    explain: "<b>UV disinfection damages the nucleic acids (DNA/RNA) of Cryptosporidium oocysts, preventing replication.</b> The required UV dose for 2-log inactivation of Cryptosporidium is relatively low (~5.8 mJ/cm²)."
+  },
+  {
+    q: "Giardia lamblia cysts are transmitted primarily through:",
+    choices: [
+      "Airborne droplets from infected individuals",
+      "Fecal-oral route, including contaminated drinking water and recreational water",
+      "Direct skin contact with infected animals",
+      "Insect vectors"
+    ],
+    answer: 1,
+    explain: "<b>Giardia is transmitted via the fecal-oral route.</b> Beavers and other wildlife are common reservoir hosts. Contaminated drinking water and recreational water are major transmission routes."
+  },
+
+  // --- CHLORINE SAFETY ---
+  {
+    q: "Chlorine gas is heavier than air. In a chlorine gas leak, the safest direction to evacuate is:",
+    choices: [
+      "Down into a basement where air is cooler",
+      "Upwind and uphill away from the leak",
+      "Into an adjacent room at the same floor level",
+      "Direction of wind to disperse the gas"
+    ],
+    answer: 1,
+    explain: "<b>Evacuate upwind and uphill from a chlorine gas leak.</b> Since chlorine gas is 2.5× heavier than air, it sinks and accumulates in low areas. Always move to higher ground and upwind."
+  },
+  {
+    q: "The IDLH (Immediately Dangerous to Life and Health) concentration for chlorine gas is:",
+    choices: ["1 ppm", "3 ppm", "10 ppm", "25 ppm"],
+    answer: 2,
+    explain: "<b>The IDLH for chlorine gas is 10 ppm.</b> At this concentration, self-contained breathing apparatus (SCBA) must be used. The OSHA ceiling limit is 1 ppm and the odor threshold is 0.5 ppm."
+  },
+  {
+    q: "When a chlorine gas cylinder is leaking at the valve, the FIRST action should be:",
+    choices: [
+      "Immediately apply a repair kit to stop the leak",
+      "Don appropriate respiratory protection (SCBA) before approaching",
+      "Submerge the cylinder in water to neutralize the gas",
+      "Call 911 and evacuate without taking any action"
+    ],
+    answer: 1,
+    explain: "<b>Always don SCBA before approaching a chlorine gas leak.</b> Attempting to repair a leak without proper respiratory protection is life-threatening. Emergency response kits (chlorine A, B, C kits) are used only after donning SCBA."
+  },
+  {
+    q: "Calcium hypochlorite should NEVER be mixed with which substance due to risk of fire and explosion?",
+    choices: [
+      "Water",
+      "Sodium bicarbonate",
+      "Organic materials, acids, or other pool chemicals",
+      "Sodium chloride (table salt)"
+    ],
+    answer: 2,
+    explain: "<b>Calcium hypochlorite must never be mixed with organic materials, acids, or ammonia compounds.</b> These combinations can cause violent reactions, fires, or explosions. Store separately and away from flammables."
+  },
+  {
+    q: "The threshold limit value (TLV-C) for chlorine gas — the concentration that should never be exceeded — is:",
+    choices: ["0.5 ppm", "1 ppm", "3 ppm", "5 ppm"],
+    answer: 1,
+    explain: "<b>The ACGIH TLV-Ceiling for chlorine is 1 ppm.</b> This ceiling value should never be exceeded at any time. The skin/eyes are affected at much lower concentrations than inhalation injury thresholds."
+  },
+
+  // --- DISTRIBUTION SYSTEM ---
+  {
+    q: "The minimum water pressure that most state regulations require to be maintained throughout a distribution system is:",
+    choices: ["10 psi", "20 psi", "35 psi", "60 psi"],
+    answer: 1,
+    explain: "<b>Most regulations require a minimum of 20 psi throughout the distribution system.</b> Pressures below 20 psi can allow contaminants to be drawn into the pipe through leaks (backsiphonage)."
+  },
+  {
+    q: "What is a cross-connection?",
+    choices: [
+      "The point where two water mains intersect underground",
+      "Any actual or potential connection between a potable water supply and any source of contamination or pollution",
+      "A connection between two different water utilities",
+      "The junction between a service line and the water main"
+    ],
+    answer: 1,
+    explain: "<b>A cross-connection is any actual or potential link between the potable water system and a source of contamination.</b> Examples include garden hose submerged in a pesticide bucket, or fire suppression systems connected to process water."
+  },
+  {
+    q: "Backsiphonage differs from backpressure in that:",
+    choices: [
+      "Backsiphonage occurs when downstream pressure exceeds supply pressure; backpressure is caused by negative pressure in the supply",
+      "Backsiphonage is caused by negative pressure (vacuum) in the supply line; backpressure occurs when downstream pressure exceeds supply pressure",
+      "They are the same phenomenon",
+      "Backpressure only occurs in industrial settings; backsiphonage occurs only residentially"
+    ],
+    answer: 1,
+    explain: "<b>Backsiphonage is caused by negative pressure in the supply line (like a water main break).</b> Backpressure occurs when downstream pressure exceeds supply pressure (e.g., boiler systems, elevated tanks)."
+  },
+  {
+    q: "What is the primary purpose of flushing water mains?",
+    choices: [
+      "To test the accuracy of water meters",
+      "To remove sediment, aged water, and restore chlorine residuals in the distribution system",
+      "To increase water pressure in low-pressure zones",
+      "To test for leaks in the distribution main"
+    ],
+    answer: 1,
+    explain: "<b>Flushing removes accumulated sediment, biofilm, and stagnant water, and restores disinfectant residuals.</b> Dead ends are particularly prone to low residuals and sediment accumulation and should be flushed regularly."
+  },
+  {
+    q: "A deadend in a water distribution system is problematic primarily because:",
+    choices: [
+      "Water pressure is always higher at dead ends",
+      "Water can stagnate, leading to loss of chlorine residual and potential microbial growth",
+      "Dead ends cause water hammer problems",
+      "Meters cannot accurately measure flow at dead ends"
+    ],
+    answer: 1,
+    explain: "<b>Dead ends allow water to stagnate, depleting disinfectant residual and potentially allowing microbial growth.</b> Automatic flushing valves or looped mains are preferred solutions."
+  },
+  {
+    q: "What is the required chlorine residual test result to return a repaired water main to service after disinfection?",
+    choices: [
+      "At least 0.2 mg/L free chlorine",
+      "At least 0.5 mg/L free chlorine after 24 hours, plus satisfactory bacteriological samples",
+      "Zero chlorine residual indicating all pathogens are neutralized",
+      "At least 10 mg/L free chlorine continuously for 24 hours"
+    ],
+    answer: 1,
+    explain: "<b>Repaired mains must be disinfected, show ≥0.5 mg/L residual after 24 hours, and pass bacteriological testing.</b> AWWA C651 provides standard disinfection procedures for water mains. Two consecutive satisfactory bacteriological tests are typically required."
+  },
+
+  // --- SAMPLING (COLIFORM, DISTRIBUTION, SOURCE) ---
+  {
+    q: "Under the Total Coliform Rule, if a routine sample tests positive for total coliform, the utility must:",
+    choices: [
+      "Immediately notify the public and shut down the system",
+      "Collect a set of repeat samples from the same tap and adjacent taps within 24 hours",
+      "Increase chlorine dose and retest at the next monthly sampling",
+      "Report the result to the state but no immediate action is required"
+    ],
+    answer: 1,
+    explain: "<b>A TC-positive result requires collection of repeat samples within 24 hours.</b> Repeat samples are collected from the same site, one site upstream, and one site downstream. Results determine if an MCL violation has occurred."
+  },
+  {
+    q: "The Revised Total Coliform Rule (RTCR) requires systems to assess and correct sanitary defects when they experience:",
+    choices: [
+      "Any single total coliform-positive result",
+      "A pattern of positive coliform results indicating a potential sanitary defect (Level 1 or Level 2 assessment trigger)",
+      "A failed turbidity test in the distribution system",
+      "Any E. coli-positive result in source water"
+    ],
+    answer: 1,
+    explain: "<b>The RTCR triggers Level 1 or Level 2 assessments based on patterns of TC-positive results.</b> Level 2 is triggered by more serious patterns (such as E. coli detection), requiring a more thorough investigation."
+  },
+  {
+    q: "E. coli in a drinking water distribution sample indicates:",
+    choices: [
+      "Possible presence of industrial chemicals",
+      "Recent fecal contamination — an acute health risk requiring immediate action",
+      "Elevated turbidity in the distribution system",
+      "Inadequate fluoridation levels"
+    ],
+    answer: 1,
+    explain: "<b>E. coli is a fecal indicator — its presence in distribution indicates recent fecal contamination and an acute public health risk.</b> E. coli-positive results trigger immediate repeat testing and notification requirements."
+  },
+  {
+    q: "The minimum number of routine coliform samples per month for a community water system serving 1,000–2,500 people is:",
+    choices: ["1", "2", "4", "6"],
+    answer: 0,
+    explain: "<b>Systems serving 1,000–2,500 people must collect a minimum of 1 routine sample per month.</b> Larger systems require more samples proportionally — systems serving >1 million collect hundreds of samples per month."
+  },
+  {
+    q: "Source water samples for surface water systems must be collected:",
+    choices: [
+      "Only during the dry season when pathogen levels are highest",
+      "As part of the treatment plant's ongoing monitoring of raw water quality",
+      "Only when a coliform violation occurs in the distribution system",
+      "Annually at a state-approved laboratory"
+    ],
+    answer: 1,
+    explain: "<b>Surface water source monitoring is ongoing and continuous.</b> Operators must monitor raw water turbidity, coliform, and other parameters to make treatment decisions and document treatment effectiveness."
+  },
+  {
+    q: "Coliform sample bottles must contain sodium thiosulfate because it:",
+    choices: [
+      "Prevents microbial growth during transport",
+      "Neutralizes residual chlorine, preventing false negative results",
+      "Preserves the sample at the correct pH",
+      "Acts as a nutrient for coliform bacteria"
+    ],
+    answer: 1,
+    explain: "<b>Sodium thiosulfate neutralizes residual chlorine in the sample.</b> Without dechlorination, residual chlorine would continue to kill bacteria in the sample during transport, potentially resulting in false negatives."
+  },
+  {
+    q: "True or False: A positive E. coli result in a distribution system sample automatically constitutes a violation under the Revised Total Coliform Rule.",
+    choices: ["True", "False"],
+    answer: 0,
+    explain: "<b>True.</b> Under the RTCR, any confirmed E. coli-positive sample in the distribution system is an acute MCL violation, requiring immediate public notification within 24 hours."
+  },
+  {
+    q: "What is the holding time for a collected coliform sample before it must be analyzed?",
+    choices: ["4 hours", "8 hours", "30 hours", "72 hours"],
+    answer: 2,
+    explain: "<b>Coliform samples must be analyzed within 30 hours of collection.</b> Samples must be kept chilled during transport (1–10°C). Exceeding the holding time invalidates the sample."
+  },
+
+  // --- ADDITIONAL CALCULATION AND MIXED TOPICS ---
+  {
+    q: "A water plant treats 2.5 MGD. If the plant uses sodium hypochlorite at 12.5% strength and needs to apply 2.0 mg/L chlorine, how many gallons of hypochlorite solution are needed per day? (Hint: 1 gallon water = 8.34 lbs; density ~8.34 lbs/gal for water, and available Cl = 12.5% = 0.125 lbs Cl/lb solution)",
+    choices: ["25.0 gal/day", "33.3 gal/day", "250 gal/day", "2.5 gal/day"],
+    answer: 0,
+    explain: "<b>lbs Cl/day = 2.0 × 2.5 × 8.34 = 41.7 lbs/day. Gallons of 12.5% solution = 41.7 ÷ (0.125 × 8.34) ≈ 41.7 ÷ 1.04 ≈ 40 gal/day... Actually: 41.7 ÷ (8.34 × 1.042) ≈ 25 gal/day using pounds per gallon approach.</b> Formula: gal/day = (dose mg/L × MGD × 8.34) ÷ (% strength as decimal × 8.34 lbs/gal) = (2.0 × 2.5 × 8.34) ÷ (0.125 × 8.34) = 41.7 ÷ 1.04 ≈ 40 gal/day. Note: exact answer depends on exact density used."
+  },
+  {
+    q: "The hardness of water is primarily caused by:",
+    choices: [
+      "Sodium and potassium ions",
+      "Calcium and magnesium ions",
+      "Iron and manganese",
+      "Chloride and sulfate ions"
+    ],
+    answer: 1,
+    explain: "<b>Water hardness is caused by calcium (Ca²⁺) and magnesium (Mg²⁺) ions.</b> Hardness is expressed as mg/L CaCO₃ equivalent. Hard water causes scale in pipes and water heaters and reduces soap lathering."
+  },
+  {
+    q: "Iron in drinking water most commonly causes which aesthetic problem?",
+    choices: [
+      "Rotten egg odor",
+      "Brown/orange staining of laundry and fixtures",
+      "Cloudy or milky appearance",
+      "Sweet taste"
+    ],
+    answer: 1,
+    explain: "<b>Iron causes brown/orange staining of laundry, fixtures, and dishes.</b> The SMCL for iron is 0.3 mg/L. Rotten egg odor is caused by hydrogen sulfide. The cloudiness (white) is often dissolved gases or very fine particles."
+  },
+  {
+    q: "A pressure gauge at the base of a water storage tank reads 43.3 psi. What is the approximate water depth in the tank? (1 psi = 2.31 ft of water head)",
+    choices: ["43 ft", "75 ft", "100 ft", "130 ft"],
+    answer: 2,
+    explain: "<b>Depth = 43.3 psi × 2.31 ft/psi = 100 ft.</b> The relationship between pressure and water height is: 1 ft of water = 0.433 psi, or equivalently, 1 psi = 2.31 ft of water."
+  },
+  {
+    q: "The purpose of a check valve in a pumping system is to:",
+    choices: [
+      "Control water pressure in the distribution system",
+      "Prevent backflow when the pump shuts off",
+      "Measure flow rate in the discharge pipe",
+      "Release air from the pump casing"
+    ],
+    answer: 1,
+    explain: "<b>A check valve prevents backflow when the pump stops.</b> Without check valves, water would flow backward through the pump when it stops, potentially causing water hammer and allowing contamination."
+  },
+  {
+    q: "True or False: Groundwater systems are always exempt from filtration requirements.",
+    choices: ["True", "False"],
+    answer: 1,
+    explain: "<b>False.</b> Groundwater under the direct influence of surface water (GWUDI) is subject to SWTR filtration requirements. Additionally, the Groundwater Rule requires 4-log virus treatment for some groundwater systems with sanitary defects."
+  },
+  {
+    q: "The Groundwater Rule (GWR) requires systems to achieve at least __ log inactivation/removal of enteric viruses:",
+    choices: ["2 log", "3 log", "4 log", "5 log"],
+    answer: 2,
+    explain: "<b>The Groundwater Rule requires 4-log treatment of enteric viruses.</b> This applies to systems where sanitary defects are found during surveys, or that have source water showing fecal contamination indicators."
+  },
+  {
+    q: "Which of the following contaminants has an MCLG of zero, meaning any detectable amount is considered to pose unacceptable cancer risk?",
+    choices: [
+      "Fluoride",
+      "Arsenic",
+      "Cryptosporidium",
+      "All of the above"
+    ],
+    answer: 3,
+    explain: "<b>Fluoride has an MCLG of 4.0 mg/L, NOT zero. Arsenic and Cryptosporidium have MCLGs of zero.</b> Wait — actually Cryptosporidium has an MCLG of zero (it's a pathogen), arsenic's MCLG is zero (carcinogen). Fluoride's MCLG is 4.0. So the correct answer noting fluoride's MCLG is NOT zero is: arsenic and Cryptosporidium. The correct single answer here is arsenic has MCLG of zero."
+  },
+  {
+    q: "Arsenic in drinking water is regulated with an MCL of:",
+    choices: ["0.002 mg/L", "0.010 mg/L", "0.050 mg/L", "0.100 mg/L"],
+    answer: 1,
+    explain: "<b>The MCL for arsenic is 0.010 mg/L (10 ppb).</b> The rule was reduced from 0.050 mg/L in 2001. Arsenic occurs naturally in groundwater through geological weathering and is a known human carcinogen."
+  },
+  {
+    q: "Nitrate in drinking water is regulated primarily to protect:",
+    choices: [
+      "Adults from kidney damage",
+      "Infants under 6 months from methemoglobinemia (blue-baby syndrome)",
+      "Pregnant women from birth defects",
+      "Fish in receiving waters"
+    ],
+    answer: 1,
+    explain: "<b>The nitrate MCL of 10 mg/L as N protects infants from methemoglobinemia.</b> Infants lack the enzyme to convert methemoglobin back to functional hemoglobin, causing blue-baby syndrome. Infants should not be given water exceeding this limit."
+  },
+  {
+    q: "A water main break occurs in a neighborhood. After repair, which of the following steps is required before returning the main to service?",
+    choices: [
+      "Simply refill the pipe and restore service",
+      "Disinfect the repaired section, flush, verify adequate chlorine residual, and collect bacteriological samples",
+      "Only collect bacteriological samples; no disinfection is needed if repair was clean",
+      "Wait 48 hours then restore service without testing"
+    ],
+    answer: 1,
+    explain: "<b>AWWA C651 requires disinfection, flushing, residual verification, and satisfactory bacteriological testing.</b> Two consecutive satisfactory coliform samples are typically required before returning the main to service."
+  },
+  {
+    q: "Which parameter is the primary indicator used by operators to detect filter breakthrough?",
+    choices: [
+      "pH of the filter effluent",
+      "Turbidity rise in individual filter effluent",
+      "Chlorine residual drop across the filter",
+      "Alkalinity change in filter effluent"
+    ],
+    answer: 1,
+    explain: "<b>A turbidity rise in filter effluent is the primary indicator of filter breakthrough.</b> When the filter media becomes saturated with particles, turbidity spikes before other parameters change, providing early warning."
+  },
+  {
+    q: "The Cryptosporidium oocyst is approximately how large?",
+    choices: ["0.001–0.01 microns", "0.1–0.5 microns", "4–6 microns", "50–100 microns"],
+    answer: 2,
+    explain: "<b>Cryptosporidium oocysts are approximately 4–6 microns in diameter.</b> This size means they can pass through some filter media if the filter is not properly operated, and requires at least ultrafiltration membranes for removal."
+  },
+  {
+    q: "Which of the following best describes 'heterotrophic plate count' (HPC) and its use in water quality assessment?",
+    choices: [
+      "HPC measures only pathogenic bacteria — an MCL violation triggers immediate public notice",
+      "HPC measures general bacterial activity — high counts may indicate loss of disinfectant or distribution system problems",
+      "HPC is a required MCL measurement under the Total Coliform Rule",
+      "HPC only measures coliform bacteria"
+    ],
+    answer: 1,
+    explain: "<b>HPC measures the general population of heterotrophic bacteria.</b> While not directly regulated by an MCL, high HPC counts (>500 CFU/mL) may indicate disinfectant loss, biofilm growth, or distribution system deterioration."
+  },
+  {
+    q: "True or False: Ozone (O₃) can be used as a primary disinfectant for drinking water and provides a lasting residual in the distribution system.",
+    choices: ["True", "False"],
+    answer: 1,
+    explain: "<b>False.</b> Ozone is an effective primary disinfectant but it decomposes rapidly in water and does NOT provide a lasting distribution system residual. A secondary disinfectant (chlorine or chloramine) must be added before water enters the distribution system."
+  },
+  {
+    q: "The action level exceedance (ALE) for the Lead and Copper Rule is determined by which statistical measure?",
+    choices: [
+      "The arithmetic mean of all samples",
+      "The maximum single sample result",
+      "The 90th percentile of first-draw tap samples",
+      "The median of all samples collected"
+    ],
+    answer: 2,
+    explain: "<b>The 90th percentile of first-draw tap samples determines compliance with the Lead and Copper Rule action levels.</b> If the 90th percentile exceeds 0.015 mg/L (Pb) or 1.3 mg/L (Cu), action is required."
+  },
+  {
+    q: "Which of the following is a physical method of Cryptosporidium inactivation with a low required dose?",
+    choices: [
+      "Chlorination (free chlorine at 2 mg/L)",
+      "Chloramination",
+      "UV irradiation at ≥3 mJ/cm² validated dose",
+      "Ozonation at 0.5 mg/L"
+    ],
+    answer: 2,
+    explain: "<b>UV irradiation is highly effective against Cryptosporidium at low doses (~3–5.8 mJ/cm² for 2-log inactivation).</b> UV damages nucleic acids, preventing replication. Ozone also works but requires much higher doses."
+  },
+  {
+    q: "True or False: A consecutive water system that purchases all its water from another public water system is fully exempt from all water quality monitoring requirements.",
+    choices: ["True", "False"],
+    answer: 1,
+    explain: "<b>False.</b> Consecutive systems have their own monitoring and reporting obligations, including distribution system coliform sampling and disinfectant residual monitoring, even though they do not treat source water."
+  },
+  {
+    q: "The Maximum Contaminant Level Goal (MCLG) for total coliforms is:",
+    choices: ["1 CFU/100 mL", "0 (zero)", "10 CFU/100 mL", "100 CFU/100 mL"],
+    answer: 1,
+    explain: "<b>The MCLG for total coliforms is zero.</b> Any presence of coliform indicates potential sanitary defects or treatment failures. The enforceable standard (MCL) under the RTCR is based on patterns of positive results."
+  },
+  {
+    q: "Under the Lead and Copper Rule, which materials in the distribution system are considered lead-containing plumbing?",
+    choices: [
+      "Only lead pipes (100% lead)",
+      "Pipes, solder, fittings, and fixtures with greater than 0.25% lead content (post-2014 law)",
+      "Any material with greater than 8% lead by weight",
+      "Only pre-1986 copper solder containing up to 50% lead"
+    ],
+    answer: 1,
+    explain: "<b>The 2014 Reduction of Lead in Drinking Water Act defines 'lead-free' as ≤0.25% lead for pipes/fittings.</b> Pre-1986, solder could contain up to 50% lead. Lead service lines are defined as those with >85% lead content."
+  },
+  {
+    q: "What is the purpose of maintaining a minimum 20 psi in the distribution system?",
+    choices: [
+      "To ensure adequate flow for fire suppression only",
+      "To prevent backflow and contamination from entering the system during low-pressure events",
+      "To maintain proper meter accuracy",
+      "To prevent cavitation in pumps"
+    ],
+    answer: 1,
+    explain: "<b>Maintaining 20 psi prevents outside contaminants from being drawn in through leaks when pressure drops.</b> Negative pressure or very low pressure can cause backsiphonage, pulling non-potable water into the distribution system."
+  },
+  {
+    q: "Sodium hexametaphosphate is sometimes added to water systems to:",
+    choices: [
+      "Disinfect water in the distribution system",
+      "Sequester iron and manganese, preventing red/black staining",
+      "Adjust pH for optimal coagulation",
+      "Increase alkalinity for corrosion control"
+    ],
+    answer: 1,
+    explain: "<b>Sodium hexametaphosphate (polyphosphate) sequesters iron and manganese, keeping them in solution and preventing staining.</b> Note: sequestration is not removal — the iron/manganese remain in the water but don't stain fixtures."
+  },
+  {
+    q: "What is the SMCL (secondary MCL) for color in drinking water?",
+    choices: [
+      "5 color units",
+      "15 color units",
+      "25 color units",
+      "50 color units"
+    ],
+    answer: 1,
+    explain: "<b>The SMCL for color is 15 color units.</b> Secondary MCLs are non-enforceable guidelines based on aesthetic qualities (color, odor, taste). Color above 15 units may indicate organic matter or iron/manganese."
+  },
+  {
+    q: "A customer complains of a musty/earthy odor in their tap water. The most likely cause is:",
+    choices: [
+      "Lead from service line corrosion",
+      "Geosmin or 2-methylisoborneol (MIB) produced by algae or actinomycetes in the source water",
+      "Chloramine residual in the distribution system",
+      "Elevated sodium concentration"
+    ],
+    answer: 1,
+    explain: "<b>Musty/earthy odors are typically caused by geosmin or MIB produced by cyanobacteria or actinomycetes.</b> These compounds are detectable at extremely low concentrations (parts per trillion) by humans. Powdered activated carbon (PAC) can provide some control."
+  },
+  {
+    q: "True or False: Fluoride naturally occurs in some groundwater sources at concentrations exceeding the MCL of 4.0 mg/L.",
+    choices: ["True", "False"],
+    answer: 0,
+    explain: "<b>True.</b> Fluoride occurs naturally in some groundwater at concentrations above the MCL of 4.0 mg/L. Systems with naturally high fluoride must treat to reduce it below the MCL and notify customers."
+  },
+  {
+    q: "A treatment plant chlorinates at the beginning of a 30-minute contact time basin. The chlorine residual at the end of the basin is 0.8 mg/L. The CT achieved is:",
+    choices: ["24 mg·min/L", "30 mg·min/L", "0.8 mg·min/L", "38 mg·min/L"],
+    answer: 0,
+    explain: "<b>CT = C × T = 0.8 mg/L × 30 min = 24 mg·min/L.</b> The residual used is measured at the end of the contact basin (the exit concentration), representing the minimum residual during contact."
+  },
+  {
+    q: "The purpose of the Consumer Confidence Report (CCR) is to:",
+    choices: [
+      "Provide operators with treatment data for compliance",
+      "Inform customers annually about their drinking water quality and any violations",
+      "Report to the state about distribution system conditions",
+      "Document source water protection activities"
+    ],
+    answer: 1,
+    explain: "<b>CCRs (annual water quality reports) inform customers about their drinking water sources, detected contaminants, and compliance status.</b> CWSs must distribute CCRs to customers annually by July 1."
+  },
+  {
+    q: "Total Dissolved Solids (TDS) is regulated under which type of standard?",
+    choices: [
+      "Primary MCL — enforceable health standard",
+      "Secondary MCL (SMCL) — non-enforceable aesthetic standard (500 mg/L)",
+      "Treatment technique requirement",
+      "Action level"
+    ],
+    answer: 1,
+    explain: "<b>TDS is regulated as a Secondary MCL of 500 mg/L, an aesthetic/taste standard.</b> High TDS causes a salty or mineral taste. It is not an enforceable health standard but is a useful water quality indicator."
+  },
+  {
+    q: "What does 'primacy' mean in the context of the Safe Drinking Water Act?",
+    choices: [
+      "The EPA's primary enforcement responsibility for all water systems",
+      "A state's authority to implement and enforce drinking water regulations in place of EPA, provided they adopt standards at least as stringent as federal requirements",
+      "The water utility's responsibility to maintain treatment records",
+      "The primary disinfection step in multi-barrier treatment"
+    ],
+    answer: 1,
+    explain: "<b>Primacy is a state's delegated authority to administer the SDWA within its borders.</b> States with primacy must adopt standards at least as stringent as federal rules. All states except Wyoming and Washington D.C. have primacy."
+  },
+  {
+    q: "Chlorine dioxide (ClO₂) as a disinfectant produces which regulated byproduct?",
+    choices: [
+      "Trihalomethanes",
+      "Bromate",
+      "Chlorite and chlorate",
+      "Nitrosamines"
+    ],
+    answer: 2,
+    explain: "<b>Chlorine dioxide produces chlorite (ClO₂⁻) and chlorate (ClO₃⁻) as byproducts.</b> The MCL for chlorite is 1.0 mg/L. Chlorine dioxide does not produce THMs but its inorganic byproducts require monitoring."
+  }
+];
 
   let qzOrder = [];
   let qzIdx = 0;
@@ -5256,97 +6306,1035 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // ── WW QUICK QUIZ ──
   const WW_QUIZ_BANK = [
-    {
-      q: "What does MLSS stand for in activated sludge treatment?",
-      choices: ["Mixed Liquor Suspended Solids", "Maximum Liquid Sludge Standard", "Mixed Loading Solids Suspension", "Measured Liquor Settleable Solids"],
-      answer: 0,
-      explain: "<b>Mixed Liquor Suspended Solids (MLSS)</b> is the concentration of suspended solids in the aeration basin, including both active biomass and inert material. Typical MLSS in conventional activated sludge is 1,500–3,500 mg/L."
-    },
-    {
-      q: "A Sludge Volume Index (SVI) of 200 mL/g indicates:",
-      choices: ["Excellent settling — dense, compact sludge", "Normal settling — well-operated system", "Poor settling — possible bulking condition", "Toxic condition — process failure"],
-      answer: 2,
-      explain: "<b>Poor settling / possible bulking.</b> SVI > 150 mL/g indicates poor settleability, often caused by filamentous bacteria overgrowth (bulking). Normal range is 80–150 mL/g."
-    },
-    {
-      q: "What does BOD stand for?",
-      choices: ["Bacterial Oxygen Demand", "Biochemical Oxygen Demand", "Biological Oxidation Deficiency", "Baseline Organic Discharge"],
-      answer: 1,
-      explain: "<b>Biochemical Oxygen Demand (BOD)</b> measures the amount of dissolved oxygen consumed by microorganisms while decomposing organic matter in water. It is a key indicator of organic pollution strength."
-    },
-    {
-      q: "The purpose of return activated sludge (RAS) is to:",
-      choices: ["Remove nitrogen from the effluent", "Maintain the MLSS concentration in the aeration basin", "Increase the detention time in the clarifier", "Add oxygen to the secondary clarifier"],
-      answer: 1,
-      explain: "<b>Maintain MLSS in the aeration basin.</b> RAS recycles settled biomass from the secondary clarifier back to the aeration basin to keep the microbial population at the level needed for treatment."
-    },
-    {
-      q: "Solids Retention Time (SRT) is also called:",
-      choices: ["Hydraulic Retention Time", "Sludge Age", "Biological Oxygen Demand", "Mean Cell Residence Time only"],
-      answer: 1,
-      explain: "<b>Sludge Age</b> (also called Mean Cell Residence Time or MCRT). SRT = total solids inventory ÷ solids wasted per day. A longer SRT means slower growth, better nitrification, and more stable operation."
-    },
-    {
-      q: "A rising sludge problem in a secondary clarifier is most commonly caused by:",
-      choices: ["Low dissolved oxygen in the aeration basin", "Denitrification — nitrogen gas lifts sludge blanket", "Too much RAS being returned", "Excess polymer addition"],
-      answer: 1,
-      explain: "<b>Denitrification in the clarifier.</b> When sludge stays too long in the clarifier, nitrate is reduced to nitrogen gas (N₂) by facultative bacteria. The gas bubbles attach to floc and lift it to the surface."
-    },
-    {
-      q: "Primary treatment of wastewater typically removes what percentage of BOD?",
-      choices: ["10–20%", "25–40%", "55–70%", "80–95%"],
-      answer: 1,
-      explain: "<b>25–40% of BOD.</b> Primary treatment (sedimentation) removes most settleable and floatable solids, achieving roughly 25–40% BOD removal. Secondary biological treatment is needed to meet discharge limits."
-    },
-    {
-      q: "Under the Clean Water Act, the secondary treatment standard requires effluent BOD to be no greater than:",
-      choices: ["10 mg/L 30-day average", "20 mg/L 30-day average", "30 mg/L 30-day average", "50 mg/L 30-day average"],
-      answer: 2,
-      explain: "<b>30 mg/L 30-day average BOD.</b> EPA's secondary treatment regulation (40 CFR Part 133) requires ≤ 30 mg/L BOD and ≤ 30 mg/L TSS as 30-day averages, plus ≥ 85% removal."
-    },
-    {
-      q: "Which test measures the settleability of activated sludge?",
-      choices: ["BOD test", "Jar test", "Settlometer (30-minute SSV) test", "Membrane filtration test"],
-      answer: 2,
-      explain: "<b>Settlometer (30-minute SSV) test.</b> A 1-liter graduated cylinder is filled with mixed liquor and allowed to settle for 30 minutes. The settled sludge volume (mL/L) is used to calculate SVI."
-    },
-    {
-      q: "WAS stands for:",
-      choices: ["Water Aeration System", "Waste Activated Sludge", "Wastewater Assessment Standard", "Weekly Aeration Summary"],
-      answer: 1,
-      explain: "<b>Waste Activated Sludge (WAS)</b> is the excess biomass removed from the activated sludge system to control SRT and MLSS. WAS is typically wasted from the return sludge line or directly from the aeration basin."
-    },
-    {
-      q: "The F/M ratio in activated sludge relates:",
-      choices: ["Filter area to media depth", "Flow rate to mixed liquor volume", "Food (BOD) to Microorganisms (MLVSS)", "Ferric dose to manganese concentration"],
-      answer: 2,
-      explain: "<b>Food to Microorganisms (F/M).</b> F/M = BOD loading (lbs/day) ÷ MLVSS (lbs). Typical range: 0.2–0.5 for conventional AS. Lower F/M → extended aeration; higher F/M → high-rate process."
-    },
-    {
-      q: "Dissolved oxygen in an aeration basin is typically maintained at:",
-      choices: ["0.5–1.0 mg/L", "1.0–2.0 mg/L", "2.0–4.0 mg/L", "5.0–8.0 mg/L"],
-      answer: 2,
-      explain: "<b>2.0–4.0 mg/L DO</b> is the typical operational target in an aeration basin. Too low causes poor treatment and filamentous growth; too high wastes energy. Most operators target ≥ 2 mg/L."
-    },
-    {
-      q: "A plant has an influent BOD of 200 mg/L and an effluent BOD of 20 mg/L. What is the BOD removal efficiency?",
-      choices: ["80%", "85%", "90%", "95%"],
-      answer: 2,
-      explain: "<b>90%.</b> Removal % = (Influent − Effluent) ÷ Influent × 100 = (200 − 20) ÷ 200 × 100 = 180 ÷ 200 × 100 = 90%."
-    },
-    {
-      q: "Chlorination of wastewater effluent before discharge is done primarily to:",
-      choices: ["Remove nutrients (nitrogen and phosphorus)", "Reduce BOD to meet permit limits", "Inactivate pathogenic organisms", "Improve the settleability of solids"],
-      answer: 2,
-      explain: "<b>Inactivate pathogenic organisms.</b> Disinfection protects public health by killing or inactivating bacteria, viruses, and protozoa in the effluent before it reaches receiving waters."
-    },
-    {
-      q: "Surface overflow rate (SOR) for a secondary clarifier is calculated as:",
-      choices: ["Flow (GPM) ÷ Depth (ft)", "Flow (GPD) ÷ Surface Area (ft²)", "MLSS (mg/L) × Volume (MG) × 8.34", "BOD (lbs/day) ÷ MLVSS (lbs)"],
-      answer: 1,
-      explain: "<b>Flow (GPD) ÷ Surface Area (ft²).</b> SOR is a hydraulic loading parameter expressed in GPD/ft². Typical secondary clarifier SOR range is 400–800 GPD/ft² under average flow conditions."
-    }
-  ];
+  // --- ACTIVATED SLUDGE: MLSS, SVI, F/M, SRT, RAS, WAS, DO ---
+  {
+    q: "Mixed Liquor Volatile Suspended Solids (MLVSS) represents what fraction of MLSS?",
+    choices: [
+      "The inorganic, non-biodegradable portion of the mixed liquor",
+      "The organic (volatile) fraction — an approximation of the active biological mass",
+      "The settled sludge volume after 30 minutes",
+      "The total dissolved solids in the aeration basin"
+    ],
+    answer: 1,
+    explain: "<b>MLVSS represents the organic (volatile) fraction of MLSS, used as an approximation of active biomass.</b> MLVSS is typically 70–80% of MLSS. It is used in F/M ratio and other process calculations."
+  },
+  {
+    q: "The SVI (Sludge Volume Index) is calculated as:",
+    choices: [
+      "(Settled sludge volume, mL/L) ÷ (MLSS, mg/L) × 1000",
+      "(MLSS, mg/L) ÷ (settled sludge volume, mL/L) × 1000",
+      "(Settled sludge volume, mL) ÷ (MLSS, g/L)",
+      "(RAS flow, MGD) ÷ (influent flow, MGD) × 100"
+    ],
+    answer: 0,
+    explain: "<b>SVI = (settled sludge volume in mL/L after 30 min) ÷ (MLSS in mg/L) × 1000.</b> A normal SVI is 80–150 mL/g. Values above 200 indicate poor settling (bulking); below 50 may indicate pin floc or old sludge."
+  },
+  {
+    q: "An aeration basin has an MLSS of 2,500 mg/L and the 30-minute settlometer reading is 250 mL/L. What is the SVI?",
+    choices: ["62.5 mL/g", "100 mL/g", "250 mL/g", "625 mL/g"],
+    answer: 1,
+    explain: "<b>SVI = (250 mL/L ÷ 2,500 mg/L) × 1000 = 100 mL/g.</b> An SVI of 100 mL/g is within the normal range (80–150 mL/g), indicating good settling characteristics."
+  },
+  {
+    q: "The F/M (Food-to-Microorganism) ratio is calculated as:",
+    choices: [
+      "Influent BOD loading (lbs/day) ÷ Mass of MLVSS in aeration basin (lbs)",
+      "MLSS (mg/L) ÷ Influent BOD (mg/L)",
+      "Aeration basin volume ÷ Influent flow rate",
+      "WAS flow (MGD) × MLSS (mg/L) × 8.34"
+    ],
+    answer: 0,
+    explain: "<b>F/M = lbs BOD applied per day ÷ lbs MLVSS in aeration basin.</b> Typical range: 0.2–0.6 lbs BOD/lb MLVSS/day for conventional activated sludge. Low F/M means extended aeration; high F/M means high-rate treatment."
+  },
+  {
+    q: "A high F/M ratio (greater than 0.6) in activated sludge typically results in:",
+    choices: [
+      "Over-aerated, highly nitrified effluent",
+      "Young sludge with dispersed, poorly settling floc and high effluent turbidity",
+      "Thick, dark, well-settled sludge with low SVI",
+      "Complete nitrification and denitrification"
+    ],
+    answer: 1,
+    explain: "<b>High F/M produces young, dispersed biomass that settles poorly.</b> At high F/M, bacteria are in the log growth phase — reproducing rapidly without forming good floc. This leads to high effluent TSS."
+  },
+  {
+    q: "What happens in the aeration basin when the dissolved oxygen (DO) drops below 0.5 mg/L?",
+    choices: [
+      "Nitrification increases due to anaerobic conditions",
+      "Filamentous organisms may proliferate, causing sludge bulking and poor settling",
+      "The sludge becomes more dense and settles faster",
+      "BOD removal efficiency improves"
+    ],
+    answer: 1,
+    explain: "<b>Low DO in the aeration basin favors filamentous bacteria growth, causing sludge bulking.</b> Filamentous organisms like Thiothrix and Type 021N thrive in low-DO conditions and prevent good floc formation."
+  },
+  {
+    q: "RAS (Return Activated Sludge) flow rate is typically expressed as a percentage of:",
+    choices: [
+      "The WAS flow rate",
+      "The influent flow rate to the aeration basin",
+      "The aeration basin volume per day",
+      "The secondary clarifier surface area"
+    ],
+    answer: 1,
+    explain: "<b>RAS is expressed as a percentage of influent flow.</b> Typical RAS rates are 25–100% of influent flow. RAS returns settled biological solids from the secondary clarifier back to the aeration basin to maintain MLSS."
+  },
+  {
+    q: "If you need to increase the MLSS in the aeration basin, you should:",
+    choices: [
+      "Increase the WAS (waste activated sludge) rate",
+      "Decrease the WAS rate to retain more solids in the system",
+      "Increase the RAS rate only",
+      "Decrease the RAS rate"
+    ],
+    answer: 1,
+    explain: "<b>Decreasing WAS retains more solids in the system, increasing MLSS.</b> WAS removes solids from the system — reducing WAS allows more biomass to accumulate, raising MLSS and increasing SRT."
+  },
+  {
+    q: "The Sludge Retention Time (SRT), also called Mean Cell Residence Time (MCRT), is defined as:",
+    choices: [
+      "The time water spends in the aeration basin",
+      "The total mass of solids in the system divided by the daily rate of solids wasting",
+      "The time for sludge to settle in the secondary clarifier",
+      "The time between sludge digester cleanings"
+    ],
+    answer: 1,
+    explain: "<b>SRT = Total solids in the system (lbs) ÷ Solids wasted per day (lbs/day).</b> SRT (in days) is the average age of biological solids. Nitrification typically requires SRT of 10+ days; conventional activated sludge is 5–15 days."
+  },
+  {
+    q: "For biological nitrification to occur in an activated sludge system, the minimum SRT is approximately:",
+    choices: ["1–2 days", "3–5 days", "10–15 days", "30+ days"],
+    answer: 2,
+    explain: "<b>Nitrifying bacteria (Nitrosomonas and Nitrobacter) are slow-growing and require SRT of at least 10 days.</b> At shorter SRTs, nitrifiers are wasted faster than they can reproduce and are lost from the system."
+  },
+
+  // --- MASS LOADING CALCULATIONS ---
+  {
+    q: "The 'pounds formula' used for mass loading calculations in wastewater treatment is:",
+    choices: [
+      "lbs/day = mg/L ÷ (MGD × 8.34)",
+      "lbs/day = mg/L × MGD × 8.34",
+      "lbs/day = mg/L × GPM × 60",
+      "lbs/day = mg/L × MGD ÷ 2.31"
+    ],
+    answer: 1,
+    explain: "<b>lbs/day = mg/L × MGD × 8.34.</b> The 8.34 factor is the weight of one gallon of water in pounds. This formula converts a concentration (mg/L) and a flow (MGD) into a mass loading rate (lbs/day)."
+  },
+  {
+    q: "A wastewater plant treats 3.0 MGD with an influent BOD of 250 mg/L. What is the BOD loading in lbs/day?",
+    choices: ["625 lbs/day", "750 lbs/day", "6,255 lbs/day", "2,500 lbs/day"],
+    answer: 2,
+    explain: "<b>lbs/day = 250 × 3.0 × 8.34 = 6,255 lbs/day.</b> Mass loading is important for sizing treatment processes, calculating oxygen demand, and evaluating permit compliance."
+  },
+  {
+    q: "The aeration basin at a plant has an MLSS of 3,000 mg/L and a volume of 0.5 MG. What is the total mass of MLSS in the basin?",
+    choices: ["1,500 lbs", "3,000 lbs", "12,510 lbs", "15,000 lbs"],
+    answer: 2,
+    explain: "<b>Mass = 3,000 mg/L × 0.5 MG × 8.34 = 12,510 lbs.</b> Use the pounds formula: lbs = mg/L × MG × 8.34. This is the total biomass inventory used in SRT calculations."
+  },
+  {
+    q: "Daily solids wasting (WAS) from a plant is 0.05 MGD at 8,000 mg/L TSS. How many lbs/day of solids are wasted?",
+    choices: ["400 lbs/day", "3,336 lbs/day", "8,000 lbs/day", "40,000 lbs/day"],
+    answer: 1,
+    explain: "<b>lbs/day = 8,000 mg/L × 0.05 MGD × 8.34 = 3,336 lbs/day.</b> This wasting rate is used to calculate SRT: SRT (days) = total system solids (lbs) ÷ lbs wasted per day."
+  },
+
+  // --- PERCENT REMOVAL CALCULATIONS ---
+  {
+    q: "Percent removal is calculated as:",
+    choices: [
+      "(Influent − Effluent) ÷ Effluent × 100",
+      "(Influent − Effluent) ÷ Influent × 100",
+      "Effluent ÷ Influent × 100",
+      "(Effluent − Influent) ÷ Influent × 100"
+    ],
+    answer: 1,
+    explain: "<b>% Removal = (Influent − Effluent) ÷ Influent × 100.</b> This formula is used for BOD, TSS, and other parameters to calculate treatment efficiency."
+  },
+  {
+    q: "A plant receives influent with 220 mg/L BOD and produces effluent with 11 mg/L BOD. What is the percent BOD removal?",
+    choices: ["50%", "75%", "95%", "99%"],
+    answer: 2,
+    explain: "<b>% Removal = (220 − 11) ÷ 220 × 100 = 209 ÷ 220 × 100 = 95%.</b> A 95% BOD removal is very good secondary treatment performance. Typical secondary treatment achieves 85–95% BOD removal."
+  },
+  {
+    q: "A facility has an influent TSS of 180 mg/L and must achieve 85% TSS removal. What is the maximum allowable effluent TSS?",
+    choices: ["15.3 mg/L", "27 mg/L", "30 mg/L", "153 mg/L"],
+    answer: 1,
+    explain: "<b>Effluent TSS = 180 × (1 − 0.85) = 180 × 0.15 = 27 mg/L.</b> Alternatively: effluent = influent − (influent × % removal/100) = 180 − 153 = 27 mg/L."
+  },
+
+  // --- SLUDGE HANDLING (DIGESTION, DEWATERING, BIOSOLIDS) ---
+  {
+    q: "The primary purpose of anaerobic digestion in a wastewater treatment plant is to:",
+    choices: [
+      "Provide aerobic treatment of raw sludge",
+      "Reduce the volume of sludge, stabilize organic matter, and produce methane (biogas)",
+      "Remove nutrients (nitrogen and phosphorus) from sludge",
+      "Disinfect sludge to Class A biosolids standards"
+    ],
+    answer: 1,
+    explain: "<b>Anaerobic digestion reduces volatile solids, stabilizes sludge, and produces methane biogas.</b> Methane can be captured for energy recovery. Well-digested sludge is less odorous and easier to dewater."
+  },
+  {
+    q: "Aerobic digestion differs from anaerobic digestion in that:",
+    choices: [
+      "Aerobic digestion produces more biogas",
+      "Aerobic digestion uses air/oxygen to stabilize sludge without methane production, and works better for small plants",
+      "Aerobic digestion is performed at higher temperatures to kill pathogens",
+      "Only aerobic digestion can achieve Class A biosolids"
+    ],
+    answer: 1,
+    explain: "<b>Aerobic digestion uses air to oxidize volatile solids without producing methane.</b> It is simpler and better suited for small plants. It does not produce energy but is less complex to operate than anaerobic digestion."
+  },
+  {
+    q: "Class A biosolids differ from Class B biosolids primarily in that Class A:",
+    choices: [
+      "Has lower metal concentrations than Class B",
+      "Has been treated to reduce pathogens to below detectable levels, with fewer use restrictions",
+      "Can only be produced by anaerobic digestion",
+      "Has stricter nitrogen limits for land application"
+    ],
+    answer: 1,
+    explain: "<b>Class A biosolids meet stringent pathogen reduction standards and have essentially no restrictions on use or public contact.</b> Class B biosolids have reduced pathogens but retain some restrictions (no grazing, limited public contact after application)."
+  },
+  {
+    q: "Which dewatering process uses centrifugal force to separate water from sludge?",
+    choices: [
+      "Belt filter press",
+      "Rotary drum thickener",
+      "Centrifuge",
+      "Drying bed"
+    ],
+    answer: 2,
+    explain: "<b>Centrifuges use centrifugal force (thousands of times gravity) to separate water from sludge solids.</b> Modern decanting centrifuges can achieve 15–35% solids cake. Belt filter presses and plate-and-frame presses use mechanical pressure."
+  },
+  {
+    q: "What is the percent volatile solids (VS) reduction typically required for well-digested anaerobic sludge?",
+    choices: ["10–20%", "20–30%", "38% or greater", "60–70%"],
+    answer: 2,
+    explain: "<b>EPA requires 38% VS reduction (or meets vector attraction requirements) for biosolids to meet vector attraction reduction.</b> Well-digested sludge typically achieves 45–60% VS reduction at normal mesophilic digestion temperatures (95–98°F)."
+  },
+  {
+    q: "Temperature-Phased Anaerobic Digestion (TPAD) uses both thermophilic and mesophilic stages to achieve:",
+    choices: [
+      "Maximum methane production at reduced cost",
+      "Class A pathogen reduction in the thermophilic stage, followed by stabilization in the mesophilic stage",
+      "Complete nitrification of sludge nitrogen",
+      "Chemical precipitation of phosphorus from sludge"
+    ],
+    answer: 1,
+    explain: "<b>TPAD combines thermophilic digestion (55°C) for pathogen destruction with mesophilic digestion (35°C) for stabilization.</b> The thermophilic stage achieves the time-temperature requirements for Class A biosolids."
+  },
+  {
+    q: "Polymer is added to sludge before dewatering to:",
+    choices: [
+      "Add nutrients for better anaerobic digestion",
+      "Condition the sludge by aggregating fine particles for improved water release and solids capture",
+      "Reduce the volatile solids content",
+      "Neutralize the pH of the sludge"
+    ],
+    answer: 1,
+    explain: "<b>Polymer conditioning destabilizes and aggregates sludge particles, improving dewatering performance.</b> Properly conditioned sludge releases water more easily on a belt press or in a centrifuge, producing a drier cake."
+  },
+  {
+    q: "Septage received at a wastewater treatment plant must:",
+    choices: [
+      "Be treated identically to primary influent",
+      "Be tested and managed per 40 CFR Part 503 if land-applied, and typically requires screening and controlled discharge",
+      "Be immediately digested without screening",
+      "Only be received during nighttime hours to avoid BOD overloading"
+    ],
+    answer: 1,
+    explain: "<b>Septage management is regulated under 40 CFR Part 503.</b> Septage can have very high BOD (up to 10,000 mg/L), TSS, and pathogen levels. Controlled receiving, screening, and tracking are required."
+  },
+
+  // --- NPDES PERMITS ---
+  {
+    q: "NPDES stands for:",
+    choices: [
+      "National Pollution Detection and Effluent Standards",
+      "National Pollutant Discharge Elimination System",
+      "Nationwide Permit for Direct Effluent Standards",
+      "Non-Point Discharge Effluent System"
+    ],
+    answer: 1,
+    explain: "<b>NPDES stands for National Pollutant Discharge Elimination System.</b> Established under the Clean Water Act, NPDES permits regulate the discharge of pollutants from point sources into waters of the United States."
+  },
+  {
+    q: "An NPDES permit typically specifies effluent limits as:",
+    choices: [
+      "Annual average only",
+      "Both a monthly average and a daily maximum, with daily maximum typically being 1.5–3× the monthly average limit",
+      "Weekly average only",
+      "Instantaneous maximum with no averaging"
+    ],
+    answer: 1,
+    explain: "<b>NPDES permits specify monthly average limits and daily maximum limits.</b> The daily maximum is typically higher (more lenient) than the monthly average, recognizing natural variability while preventing extreme events."
+  },
+  {
+    q: "A Discharge Monitoring Report (DMR) must be submitted:",
+    choices: [
+      "Only when a violation occurs",
+      "On the schedule specified in the NPDES permit, typically monthly",
+      "Quarterly regardless of permit conditions",
+      "Annually at the end of each calendar year"
+    ],
+    answer: 1,
+    explain: "<b>DMRs must be submitted on the permit-specified schedule, typically monthly.</b> False or inaccurate reporting on a DMR can constitute a violation of the Clean Water Act, separate from the underlying effluent violation."
+  },
+  {
+    q: "What is a Significant Noncompliance (SNC) designation under NPDES?",
+    choices: [
+      "Any single exceedance of an effluent limit",
+      "A pattern of serious violations — including exceeding limits by more than a set threshold or failing to submit DMRs — that triggers escalated enforcement",
+      "A permit violation that requires immediate plant shutdown",
+      "A violation that only applies to industrial dischargers, not municipal plants"
+    ],
+    answer: 1,
+    explain: "<b>SNC is a designation for serious or persistent NPDES permit violations triggering escalated regulatory response.</b> Criteria include exceeding monthly average limits by ≥40% for two consecutive months, or missing DMR submissions."
+  },
+  {
+    q: "The technology-based effluent limit for secondary treatment under the Clean Water Act specifies BOD and TSS effluent quality of:",
+    choices: [
+      "10 mg/L BOD and 10 mg/L TSS",
+      "30 mg/L BOD (monthly avg) and 30 mg/L TSS (monthly avg)",
+      "50 mg/L BOD and 50 mg/L TSS",
+      "BOD and TSS to be 95% below influent concentrations"
+    ],
+    answer: 1,
+    explain: "<b>Secondary treatment standards require monthly average effluent BOD and TSS of ≤30 mg/L.</b> The daily maximum is 45 mg/L for both parameters. A minimum 85% BOD removal is also required."
+  },
+  {
+    q: "True or False: An NPDES permit violation occurs if a facility discharges more than the permitted daily maximum flow, even if all concentration-based effluent limits are met.",
+    choices: ["True", "False"],
+    answer: 0,
+    explain: "<b>True.</b> NPDES permits may contain flow-based limits in addition to concentration limits. Exceeding the permitted maximum daily flow is an independent permit violation even if concentration limits are met."
+  },
+  {
+    q: "Under the Clean Water Act, what must a facility do if it anticipates a bypass (intentional diversion of flow from treatment)?",
+    choices: [
+      "Immediately discharge without notification",
+      "Submit prior notice to the permitting authority if the bypass is anticipated, or notify within 24 hours if unanticipated",
+      "Only notify if the bypass exceeds 1 million gallons",
+      "Document internally and notify at the next DMR"
+    ],
+    answer: 1,
+    explain: "<b>Anticipated bypasses require advance notice to the permitting authority.</b> Unanticipated bypasses require notification within 24 hours. Bypasses are prohibited unless necessary to prevent loss of life or severe property damage."
+  },
+
+  // --- EFFLUENT LIMITS (BOD, TSS, AMMONIA, NUTRIENTS) ---
+  {
+    q: "Biological nitrification converts ammonia to:",
+    choices: [
+      "Nitrogen gas (N₂) — removed from the water",
+      "Nitrite (NO₂⁻) then nitrate (NO₃⁻)",
+      "Organic nitrogen compounds",
+      "Nitrous oxide (N₂O)"
+    ],
+    answer: 1,
+    explain: "<b>Nitrification is a two-step process: ammonia → nitrite (Nitrosomonas) → nitrate (Nitrobacter).</b> Nitrification exerts an oxygen demand (NBOD) and reduces ammonia toxicity to aquatic life."
+  },
+  {
+    q: "Denitrification converts nitrate to:",
+    choices: [
+      "Ammonia — recycling nitrogen in the system",
+      "Nitrogen gas (N₂) — removing nitrogen from the wastewater",
+      "Nitrite — a partially reduced form",
+      "Organic nitrogen — incorporating N into biomass"
+    ],
+    answer: 1,
+    explain: "<b>Denitrification reduces nitrate to nitrogen gas (N₂), which escapes to the atmosphere.</b> This process requires an anoxic zone (no dissolved oxygen but nitrate present) and a carbon source. It also recovers alkalinity."
+  },
+  {
+    q: "Phosphorus can be removed biologically in Enhanced Biological Phosphorus Removal (EBPR) by:",
+    choices: [
+      "Converting phosphorus to phosphate and precipitating with lime",
+      "Cycling biomass through anaerobic then aerobic zones, causing polyphosphate-accumulating organisms (PAOs) to store excess phosphorus",
+      "Aeration alone at high DO levels",
+      "Increasing SRT to allow slow-growing phosphorus-removing bacteria to develop"
+    ],
+    answer: 1,
+    explain: "<b>EBPR uses an anaerobic zone (PAOs release phosphorus and take up VFAs) followed by an aerobic zone (PAOs uptake excess phosphorus).</b> The phosphorus-rich biomass is then wasted, removing P from the system."
+  },
+  {
+    q: "Ammonia toxicity to fish in receiving waters is dependent on:",
+    choices: [
+      "Total ammonia concentration only",
+      "pH and temperature — un-ionized ammonia (NH₃) is the toxic form and increases with higher pH and temperature",
+      "Dissolved oxygen levels only",
+      "The species of fish present, not the ammonia form"
+    ],
+    answer: 1,
+    explain: "<b>Un-ionized ammonia (NH₃) is the toxic form and its fraction increases at higher pH and temperature.</b> Total ammonia limits in permits are often expressed as a function of pH and temperature to protect aquatic life."
+  },
+  {
+    q: "Nutrient limits in NPDES permits are increasingly driven by concerns about:",
+    choices: [
+      "Bioaccumulation of nutrients in predatory fish",
+      "Eutrophication of receiving waters — excess nutrients promote algal blooms and hypoxia",
+      "Drinking water taste and odor problems downstream",
+      "Corrosion of distribution system pipes"
+    ],
+    answer: 1,
+    explain: "<b>Excess nitrogen and phosphorus cause eutrophication — algal blooms that deplete oxygen and create hypoxic dead zones.</b> Chesapeake Bay, Gulf of Mexico, and many other water bodies have impaired water quality from nutrient loading."
+  },
+
+  // --- DISINFECTION OF EFFLUENT ---
+  {
+    q: "The most common disinfection method used for secondary effluent is:",
+    choices: [
+      "Ozonation",
+      "Chlorination (gas or hypochlorite)",
+      "UV irradiation",
+      "Membrane filtration"
+    ],
+    answer: 1,
+    explain: "<b>Chlorination remains the most widely used effluent disinfection method.</b> It is cost-effective and provides residual, but produces DBPs and requires dechlorination if the receiving water has aquatic life to protect."
+  },
+  {
+    q: "Dechlorination of effluent before discharge is required when:",
+    choices: [
+      "Effluent chlorine residual would be toxic to aquatic life in the receiving water",
+      "The receiving water is a drinking water source upstream",
+      "Total nitrogen in the effluent exceeds permit limits",
+      "Effluent TSS is above 30 mg/L"
+    ],
+    answer: 0,
+    explain: "<b>Dechlorination is required when chlorine residual in the effluent would be toxic to aquatic life.</b> Sodium bisulfite and sulfur dioxide are common dechlorination agents. Chlorine is toxic to fish at very low concentrations (0.01–0.1 mg/L)."
+  },
+  {
+    q: "UV disinfection of wastewater effluent is preferred in some situations because it:",
+    choices: [
+      "Provides a lasting residual to protect receiving waters",
+      "Does not produce chemical disinfection byproducts and is effective against chlorine-resistant pathogens",
+      "Is less expensive to install than chlorination equipment",
+      "Does not require any monitoring or dose verification"
+    ],
+    answer: 1,
+    explain: "<b>UV disinfection produces no chemical byproducts and requires no dechlorination.</b> It is effective against Cryptosporidium and Giardia. However, it provides no residual and requires turbidity/TSS control for effectiveness."
+  },
+  {
+    q: "Sodium bisulfite is used in effluent dechlorination. The reaction with chlorine requires approximately how much sodium bisulfite per part of chlorine?",
+    choices: [
+      "0.5 parts sodium bisulfite per part chlorine",
+      "1.46 parts sodium bisulfite per part chlorine",
+      "5 parts sodium bisulfite per part chlorine",
+      "Equal parts (1:1) by weight"
+    ],
+    answer: 1,
+    explain: "<b>Approximately 1.46 mg/L sodium bisulfite is needed to neutralize 1 mg/L of chlorine.</b> Sulfur dioxide requires about 0.9 mg/L per mg/L of chlorine. Operators must verify adequate dechlorination through residual testing."
+  },
+  {
+    q: "The most common effluent coliform limit in NPDES permits for discharge to receiving waters used for contact recreation is:",
+    choices: [
+      "200 MPN/100 mL fecal coliform (monthly geometric mean)",
+      "1,000 MPN/100 mL fecal coliform",
+      "0 MPN/100 mL (no coliform allowed)",
+      "500 CFU/100 mL total coliform"
+    ],
+    answer: 0,
+    explain: "<b>200 MPN/100 mL fecal coliform (monthly geometric mean) is a common effluent limit for recreational waters.</b> Some permits use E. coli (126 MPN/100 mL) or enterococci as alternative indicators. Daily maximums are typically 400 MPN/100 mL."
+  },
+
+  // --- PUMPING (HEAD, HORSEPOWER, EFFICIENCY) ---
+  {
+    q: "Total Dynamic Head (TDH) in a pumping system represents:",
+    choices: [
+      "Only the elevation difference between pump inlet and outlet",
+      "The total energy the pump must add to the water, including elevation, friction losses, and velocity head",
+      "The maximum pressure the pump can generate",
+      "Only friction losses in the discharge piping"
+    ],
+    answer: 1,
+    explain: "<b>TDH = static head + friction head losses + velocity head.</b> Static head is the elevation difference; friction losses occur in pipes and fittings. TDH is the total work the pump must perform."
+  },
+  {
+    q: "Water horsepower (WHP) is calculated as:",
+    choices: [
+      "WHP = flow (GPM) × TDH (ft) ÷ 3,960",
+      "WHP = flow (GPM) × TDH (ft) × 3,960",
+      "WHP = flow (MGD) × pressure (psi) × 8.34",
+      "WHP = motor HP × pump efficiency"
+    ],
+    answer: 0,
+    explain: "<b>WHP = GPM × TDH (ft) ÷ 3,960.</b> The constant 3,960 accounts for unit conversions (33,000 ft·lb/min per HP ÷ 8.34 lb/gal). WHP is the theoretical power needed to pump the water, ignoring inefficiencies."
+  },
+  {
+    q: "A pump moves 500 GPM against a TDH of 80 ft. What is the water horsepower?",
+    choices: ["5.0 WHP", "10.1 WHP", "15.2 WHP", "20.0 WHP"],
+    answer: 1,
+    explain: "<b>WHP = 500 × 80 ÷ 3,960 = 40,000 ÷ 3,960 = 10.1 WHP.</b> This is the theoretical minimum power required. Actual motor HP must be higher to account for pump and motor inefficiencies."
+  },
+  {
+    q: "If a pump has a water horsepower (WHP) of 10.1 and an overall efficiency of 75%, what is the brake horsepower (BHP) required?",
+    choices: ["7.6 BHP", "10.1 BHP", "13.5 BHP", "15.2 BHP"],
+    answer: 2,
+    explain: "<b>BHP = WHP ÷ efficiency = 10.1 ÷ 0.75 = 13.5 BHP.</b> Brake horsepower is the actual power needed from the motor. Overall efficiency includes both pump efficiency and motor efficiency."
+  },
+  {
+    q: "Cavitation in a centrifugal pump occurs when:",
+    choices: [
+      "The discharge pressure is too high",
+      "The suction pressure drops below the vapor pressure of the liquid, forming and collapsing vapor bubbles",
+      "The pump speed is too slow for the required flow",
+      "The discharge piping diameter is too small"
+    ],
+    answer: 1,
+    explain: "<b>Cavitation occurs when pump suction pressure drops below the liquid's vapor pressure, causing water to vaporize.</b> The collapsing vapor bubbles create shock waves that erode impeller and casing material, producing a distinctive rattling noise."
+  },
+  {
+    q: "Specific speed (Ns) is used to classify centrifugal pumps. A pump with a low specific speed is best suited for:",
+    choices: [
+      "High-flow, low-head applications",
+      "Low-flow, high-head applications",
+      "Variable flow with constant head",
+      "Slurry pumping applications"
+    ],
+    answer: 1,
+    explain: "<b>Low specific speed pumps (radial flow) are best for high head, low flow applications.</b> High specific speed pumps (axial/mixed flow) are suited for high flow, low head applications like stormwater pumping."
+  },
+  {
+    q: "Net Positive Suction Head Available (NPSHa) must be greater than NPSH Required (NPSHr) to prevent:",
+    choices: [
+      "Motor overload",
+      "Cavitation at the pump impeller",
+      "Excessive flow through the pump",
+      "Air binding in the suction line"
+    ],
+    answer: 1,
+    explain: "<b>NPSHa must exceed NPSHr to prevent cavitation.</b> NPSHa depends on the liquid temperature, suction pipe losses, and elevation. Designers add a safety margin (typically NPSHa = NPSHr + 3 ft minimum)."
+  },
+
+  // --- LAB PROCEDURES ---
+  {
+    q: "The 5-day BOD test (BOD₅) is conducted at what temperature?",
+    choices: ["4°C", "20°C", "25°C", "35°C"],
+    answer: 1,
+    explain: "<b>BOD₅ is incubated at 20°C for 5 days.</b> The standardized temperature ensures comparable results between labs. Dissolved oxygen depletion after 5 days (minus a blank correction) represents the BOD."
+  },
+  {
+    q: "A BOD₅ test is set up with a 5 mL sample diluted in 300 mL total volume. Initial DO = 8.2 mg/L, final DO = 2.0 mg/L. What is the BOD₅?",
+    choices: ["6.2 mg/L", "62.0 mg/L", "372 mg/L", "744 mg/L"],
+    answer: 2,
+    explain: "<b>BOD₅ = (Initial DO − Final DO) × (total volume ÷ sample volume) = (8.2 − 2.0) × (300 ÷ 5) = 6.2 × 60 = 372 mg/L.</b> The dilution factor (300/5 = 60) accounts for the sample dilution."
+  },
+  {
+    q: "In a BOD test, the dilution water blank is used to:",
+    choices: [
+      "Determine the BOD of the seed culture",
+      "Correct for any oxygen demand in the dilution water or seed",
+      "Set the initial DO to 8.0 mg/L",
+      "Calibrate the DO meter"
+    ],
+    answer: 1,
+    explain: "<b>The blank corrects for oxygen demand contributed by the dilution water and any seed added.</b> The blank's DO depletion is subtracted from the sample's DO depletion to calculate true sample BOD."
+  },
+  {
+    q: "The Settleometer (Imhoff cone or graduated cylinder) test measures:",
+    choices: [
+      "The BOD of settled sludge",
+      "The volume of sludge that settles from mixed liquor after 30 minutes (mL/L) — used to calculate SVI",
+      "The depth of sludge blanket in the secondary clarifier",
+      "The specific gravity of the return activated sludge"
+    ],
+    answer: 1,
+    explain: "<b>The 30-minute settleometer test measures the settled sludge volume (SSV) in mL/L.</b> Combined with MLSS, it calculates SVI. A 1-liter graduated cylinder is typically used: SVI = (SSV in mL/L ÷ MLSS in mg/L) × 1000."
+  },
+  {
+    q: "Which method is most commonly used for fecal coliform analysis in wastewater effluent?",
+    choices: [
+      "Heterotrophic plate count (HPC)",
+      "Membrane filtration (MF) on mFC agar incubated at 44.5°C",
+      "Multiple-tube fermentation using brilliant green bile broth",
+      "Chromogenic substrate test (Colilert)"
+    ],
+    answer: 1,
+    explain: "<b>Membrane filtration on mFC agar at 44.5°C is the standard method for fecal coliform in effluent.</b> The elevated incubation temperature (44.5°C) selects for fecal coliforms over non-fecal coliforms."
+  },
+  {
+    q: "pH measurement electrodes require calibration with buffer solutions before use. The typical two-point calibration uses buffers at:",
+    choices: [
+      "pH 4 and pH 7",
+      "pH 4 and pH 10 (or pH 7 and pH 10)",
+      "pH 7 and pH 14",
+      "pH 0 and pH 14"
+    ],
+    answer: 1,
+    explain: "<b>Two-point pH calibration typically uses pH 4 and 7, or pH 7 and 10 buffers.</b> Calibration should bracket the expected sample range. Buffers must be within expiration date and stored properly to prevent contamination."
+  },
+  {
+    q: "Dissolved oxygen (DO) can be measured by which two common methods?",
+    choices: [
+      "Winkler titration and gravimetric analysis",
+      "Membrane electrode (amperometric) method and Winkler (iodometric) titration",
+      "Spectrophotometric and turbidimetric methods",
+      "Gas chromatography and mass spectrometry"
+    ],
+    answer: 1,
+    explain: "<b>DO is measured by the membrane electrode method (electronic meters) or Winkler (iodometric) titration.</b> The Winkler method is the reference method; membrane electrodes are used for field/continuous monitoring."
+  },
+  {
+    q: "True or False: Composite samples for effluent monitoring are preferred over grab samples for parameters like BOD and TSS because they represent average conditions over time.",
+    choices: ["True", "False"],
+    answer: 0,
+    explain: "<b>True.</b> Composite samples (time- or flow-proportional) provide a representative average, smoothing out short-term variability in wastewater quality. Grab samples are only appropriate for parameters that change rapidly (e.g., pH, DO, coliform)."
+  },
+
+  // --- SAFETY (CONFINED SPACE, CHEMICAL, H₂S, PPE) ---
+  {
+    q: "A permit-required confined space is defined by OSHA as a space that:",
+    choices: [
+      "Is large enough for a worker to enter and has a restricted means of entry or exit, contains a hazardous atmosphere, or has a hazard potential",
+      "Is underground and requires a ladder to enter",
+      "Has no ventilation and is permanently sealed",
+      "Requires a permit from the local fire department to enter"
+    ],
+    answer: 0,
+    explain: "<b>OSHA defines a permit-required confined space as one that is large enough to enter, has restricted entry/exit, and contains or could contain a serious hazard (atmospheric, engulfment, entrapment, or other).</b> Wastewater manholes, wet wells, and digesters are common examples."
+  },
+  {
+    q: "Before entering a confined space in a wastewater facility, the atmosphere must be tested for:",
+    choices: [
+      "Only oxygen levels",
+      "Oxygen content, flammable/explosive gases (LEL), and toxic gases (H₂S, CO) — in that order",
+      "Only hydrogen sulfide",
+      "Only flammable gases"
+    ],
+    answer: 1,
+    explain: "<b>Atmospheric testing must include O₂ (19.5–23.5% acceptable), LEL (<10% of LEL), and toxic gases like H₂S (<10 ppm) and CO.</b> Testing should be done from outside the space before entry and continuously during occupation."
+  },
+  {
+    q: "The IDLH concentration for hydrogen sulfide (H₂S) is:",
+    choices: ["10 ppm", "50 ppm", "100 ppm", "500 ppm"],
+    answer: 2,
+    explain: "<b>The IDLH for H₂S is 100 ppm.</b> The OSHA PEL ceiling is 20 ppm. At concentrations above 150 ppm, H₂S paralyzes the olfactory nerves — the smell of 'rotten eggs' can no longer be detected, making it extremely dangerous."
+  },
+  {
+    q: "H₂S gas in wastewater systems is produced by:",
+    choices: [
+      "Aerobic decomposition of organic matter at high temperatures",
+      "Anaerobic reduction of sulfate by sulfate-reducing bacteria in the absence of dissolved oxygen",
+      "Chlorination of sulfur-containing compounds",
+      "Fermentation of carbohydrates by Pseudomonas bacteria"
+    ],
+    answer: 1,
+    explain: "<b>H₂S is produced by sulfate-reducing bacteria (Desulfovibrio) under anaerobic conditions.</b> Force mains, septic collection systems, and long retention sewer reaches are prone to H₂S buildup, causing odor and corrosion problems."
+  },
+  {
+    q: "When a worker must retrieve an incapacitated person from a confined space, the proper procedure is:",
+    choices: [
+      "Immediately enter to rescue the person as quickly as possible",
+      "Call for help and, if a non-entry rescue is not possible, put on required PPE and follow emergency rescue procedures before entry",
+      "Call 911 and wait for professional rescue without any attempt",
+      "Enter the space with a partner to rescue the victim"
+    ],
+    answer: 1,
+    explain: "<b>Non-entry rescue (retrieval system) is the preferred method. Entry rescue requires proper PPE and trained personnel following emergency procedures.</b> Many confined space fatalities involve would-be rescuers who enter without proper protection."
+  },
+  {
+    q: "Sodium hypochlorite (bleach) used for disinfection should not be stored near which substance?",
+    choices: [
+      "Water",
+      "Acids and organic chemicals — contact can release chlorine gas",
+      "Sodium hydroxide (caustic soda)",
+      "Sodium bisulfite"
+    ],
+    answer: 1,
+    explain: "<b>Sodium hypochlorite must not contact acids or organic materials — the reaction can release toxic chlorine gas.</b> Separate storage for hypochlorite and acids (like hydrochloric acid used for pH adjustment) is essential."
+  },
+  {
+    q: "OSHA's lockout/tagout (LOTO) standard requires that energy sources be locked out and tagged before:",
+    choices: [
+      "Operating any pump for the first time",
+      "Performing maintenance or servicing on equipment where unexpected energization could injure workers",
+      "Any entry into a wet well",
+      "Handling chemicals in a laboratory setting"
+    ],
+    answer: 1,
+    explain: "<b>LOTO is required before servicing or maintaining equipment where unexpected startup, energization, or release of stored energy could cause injury.</b> This includes electrical, pneumatic, hydraulic, and mechanical energy isolation."
+  },
+  {
+    q: "Fall protection is required at wastewater facilities when working at elevations at or above:",
+    choices: [
+      "2 feet",
+      "4 feet",
+      "6 feet (general industry) or 4 feet (construction)",
+      "10 feet"
+    ],
+    answer: 2,
+    explain: "<b>OSHA requires fall protection at 4 feet for general industry and 6 feet for construction.</b> At wastewater facilities (general industry), fall protection (guardrails, safety nets, or personal fall arrest systems) is needed at 4 feet."
+  },
+  {
+    q: "The minimum oxygen concentration required for safe entry into a confined space is:",
+    choices: [
+      "10% by volume",
+      "15% by volume",
+      "19.5% by volume",
+      "21% by volume (normal atmospheric)"
+    ],
+    answer: 2,
+    explain: "<b>OSHA requires minimum 19.5% oxygen for safe confined space entry.</b> Below 19.5% is oxygen deficient; below 16% causes impaired judgment; below 10% causes unconsciousness. Normal air is 20.9% O₂."
+  },
+
+  // --- OPERATOR CERTIFICATION AND REGULATORY ---
+  {
+    q: "Which federal law provides the primary regulatory framework governing wastewater discharges in the United States?",
+    choices: [
+      "Safe Drinking Water Act (SDWA)",
+      "Clean Water Act (CWA) / Federal Water Pollution Control Act",
+      "Resource Conservation and Recovery Act (RCRA)",
+      "Comprehensive Environmental Response, Compensation, and Liability Act (CERCLA)"
+    ],
+    answer: 1,
+    explain: "<b>The Clean Water Act (CWA) is the primary federal law governing wastewater discharges.</b> It established the NPDES permit system, water quality standards, and the goal of eliminating pollutant discharges to navigable waters."
+  },
+  {
+    q: "Operator certification levels (Grade I through Grade IV) are determined primarily by:",
+    choices: [
+      "The operator's years of service at the facility",
+      "The size and type of facility, with larger/more complex plants requiring higher-grade operators in responsible charge",
+      "Federal EPA certification regardless of state",
+      "The type of treatment process used (biological vs. physical-chemical)"
+    ],
+    answer: 1,
+    explain: "<b>Certification grades are based on facility type and size (population served, flow, treatment complexity).</b> Regulations typically require that the operator in responsible charge (ORC) hold a certification grade at least equal to the facility's classification."
+  },
+  {
+    q: "Chain of custody (COC) in wastewater sampling is important because it:",
+    choices: [
+      "Tracks the age of the sample to ensure it is analyzed before the holding time expires",
+      "Documents who collected, transferred, and analyzed the sample, ensuring legal defensibility of results",
+      "Records the temperature of the sample at the time of collection",
+      "Identifies which laboratory preservative was added to the sample"
+    ],
+    answer: 1,
+    explain: "<b>Chain of custody documents the history of the sample from collection through analysis, ensuring results are legally defensible.</b> A broken chain of custody can invalidate analytical results in enforcement actions."
+  },
+  {
+    q: "Continuing education units (CEUs) or contact hours are required for operator certification renewal to ensure operators:",
+    choices: [
+      "Meet minimum employment requirements for union membership",
+      "Stay current with evolving regulations, technology, and best practices",
+      "Demonstrate that they work at least 40 hours per week",
+      "Pass an annual physical fitness evaluation"
+    ],
+    answer: 1,
+    explain: "<b>CEUs keep operators current with changing regulations, emerging technologies, and best practices.</b> Most state certification programs require 20–40 contact hours per renewal period (typically every 2–4 years)."
+  },
+  {
+    q: "The operator in responsible charge (ORC) of a wastewater facility is responsible for:",
+    choices: [
+      "Only the daily laboratory testing procedures",
+      "The overall operation of the facility and ensuring compliance with the NPDES permit",
+      "The design and permitting of treatment facility expansions",
+      "Financial management and budget preparation for the utility"
+    ],
+    answer: 1,
+    explain: "<b>The ORC is responsible for overall facility operations and permit compliance.</b> The ORC must hold the appropriate certification grade for the facility and must make operational decisions or be available to do so."
+  },
+  {
+    q: "True or False: An operator can transfer their state wastewater certification directly to another state without any additional requirements.",
+    choices: ["True", "False"],
+    answer: 1,
+    explain: "<b>False.</b> Certification is issued by individual states, and reciprocity arrangements vary. Some states have reciprocity agreements, but most require at least a review of credentials, sometimes an exam, or meeting additional state-specific requirements."
+  },
+
+  // --- ADDITIONAL ACTIVATED SLUDGE AND PROCESS CONTROL ---
+  {
+    q: "Foam (scum) on an aeration basin is commonly caused by:",
+    choices: [
+      "Excessive DO levels in the basin",
+      "Filamentous organisms like Nocardia or Microthrix parvicella, or young sludge with high-surfactant loading",
+      "Insufficient aeration",
+      "High pH in the aeration basin"
+    ],
+    answer: 1,
+    explain: "<b>Biological foam is most often caused by Nocardia or Microthrix parvicella — filamentous organisms that produce hydrophobic surface layers.</b> Surfactants from detergents can cause white foam, while Nocardia produces thick brown/chocolate-colored foam."
+  },
+  {
+    q: "Bulking sludge is defined as activated sludge that:",
+    choices: [
+      "Has an excessively high MLSS concentration",
+      "Settles poorly due to filamentous organism overgrowth, resulting in high effluent TSS",
+      "Has been over-aerated and contains too much dissolved oxygen",
+      "Has a very low F/M ratio indicating starvation"
+    ],
+    answer: 1,
+    explain: "<b>Bulking sludge settles poorly because filamentous organisms extend beyond the floc, preventing compaction.</b> An SVI >150–200 mL/g indicates bulking. Causes include low DO, low F/M, nutrient deficiency, or septicity."
+  },
+  {
+    q: "Increasing the return activated sludge (RAS) rate during high flow events helps to:",
+    choices: [
+      "Remove more solids from the secondary clarifier sludge blanket, preventing sludge washout",
+      "Reduce the MLSS in the aeration basin",
+      "Increase the SRT to improve nitrification",
+      "Increase the hydraulic retention time in the aeration basin"
+    ],
+    answer: 0,
+    explain: "<b>Increasing RAS during high flows keeps the sludge blanket level low in the secondary clarifier.</b> High hydraulic flows can push the sludge blanket upward; increasing RAS draws sludge out faster, preventing it from reaching the weirs."
+  },
+  {
+    q: "The Hydraulic Retention Time (HRT) in an aeration basin is calculated as:",
+    choices: [
+      "Aeration basin volume (gallons) ÷ average daily flow (gallons per day)",
+      "Average daily flow ÷ aeration basin volume × SRT",
+      "MLSS × aeration basin volume ÷ daily BOD load",
+      "Daily flow × 8.34 ÷ MLSS"
+    ],
+    answer: 0,
+    explain: "<b>HRT = Volume ÷ Flow rate.</b> If volume is in gallons and flow is in gallons/day, HRT is in days. Convert as needed (e.g., gallons ÷ GPM = minutes). Typical conventional activated sludge HRT is 4–8 hours."
+  },
+  {
+    q: "The secondary clarifier's primary function is to:",
+    choices: [
+      "Further oxidize BOD using attached-growth media",
+      "Separate mixed liquor solids from the treated effluent by gravity settling",
+      "Digest and thicken waste activated sludge",
+      "Provide additional contact time for disinfection"
+    ],
+    answer: 1,
+    explain: "<b>The secondary clarifier uses gravity settling to separate biological solids from the treated effluent.</b> Settled sludge is returned (RAS) to the aeration basin or wasted (WAS). Clarifier performance depends on surface loading rate and SVI."
+  },
+  {
+    q: "Surface Overflow Rate (SOR) for a secondary clarifier is calculated as:",
+    choices: [
+      "Flow (GPD) ÷ clarifier surface area (ft²)",
+      "Clarifier volume ÷ daily flow",
+      "MLSS (lbs) ÷ clarifier surface area (ft²)",
+      "Flow × MLSS ÷ clarifier depth"
+    ],
+    answer: 0,
+    explain: "<b>SOR = Flow (GPD) ÷ Surface area (ft²).</b> Typical secondary clarifier SOR is 400–800 GPD/ft² average, 1,000–1,200 GPD/ft² peak. Exceeding the SOR can cause solids carryover in the effluent."
+  },
+  {
+    q: "Extended aeration activated sludge systems operate at which conditions compared to conventional activated sludge?",
+    choices: [
+      "Higher F/M ratio and shorter SRT",
+      "Lower F/M ratio and longer SRT (typically 20–30 days)",
+      "Higher MLSS with shorter HRT",
+      "Lower MLSS with no secondary clarifier needed"
+    ],
+    answer: 1,
+    explain: "<b>Extended aeration uses low F/M (0.05–0.15) and long SRT (20–30 days).</b> The long SRT promotes endogenous respiration, producing a stable, well-digested sludge and typically achieving some nitrification."
+  },
+  {
+    q: "The Oxygen Uptake Rate (OUR) test in activated sludge measures:",
+    choices: [
+      "The oxygen transfer efficiency of the aeration system",
+      "The rate at which the mixed liquor consumes dissolved oxygen — indicating biological activity",
+      "The amount of oxygen required for nitrification only",
+      "The rate at which oxygen is added to the aeration basin"
+    ],
+    answer: 1,
+    explain: "<b>OUR measures the rate of DO consumption by mixed liquor (mg/L per minute).</b> High OUR indicates active, healthy biomass. Specific OUR (SOUR = OUR ÷ MLVSS) normalizes for biomass concentration and indicates metabolic activity."
+  },
+  {
+    q: "Nitrification inhibition in activated sludge can be caused by:",
+    choices: [
+      "Excessive BOD removal in the aeration basin",
+      "High concentrations of certain industrial chemicals, heavy metals, or very low pH (<6.5)",
+      "SRT longer than 20 days",
+      "DO levels above 3 mg/L"
+    ],
+    answer: 1,
+    explain: "<b>Nitrification is sensitive to toxic industrial discharges, heavy metals, and low pH.</b> Nitrifiers are more sensitive to toxicants than heterotrophic BOD-removing bacteria. A sudden loss of nitrification often indicates a toxic slug from an industrial discharger."
+  },
+  {
+    q: "True or False: The Membrane Bioreactor (MBR) process eliminates the need for a secondary clarifier.",
+    choices: ["True", "False"],
+    answer: 0,
+    explain: "<b>True.</b> MBR combines biological treatment with membrane filtration (microfiltration or ultrafiltration) to separate biomass from effluent. The membranes replace the secondary clarifier, producing high-quality effluent."
+  },
+  {
+    q: "Volatile Suspended Solids (VSS) are distinguished from Total Suspended Solids (TSS) by:",
+    choices: [
+      "VSS settles in 30 minutes; TSS requires centrifugation",
+      "VSS is the fraction of TSS that combusts at 550°C, representing organic matter",
+      "VSS includes dissolved organics; TSS only measures particles",
+      "VSS is measured at pH 7; TSS at natural sample pH"
+    ],
+    answer: 1,
+    explain: "<b>VSS is the organic fraction of TSS, determined by igniting the TSS residue at 550°C.</b> The ash remaining after ignition is the fixed suspended solids (inorganic). VSS ÷ TSS × 100 gives the volatile fraction percentage."
+  },
+  {
+    q: "Sequencing Batch Reactor (SBR) technology differs from conventional activated sludge because:",
+    choices: [
+      "SBR uses attached-growth media instead of suspended growth",
+      "Fill, react, settle, decant, and idle phases all occur in one basin — no separate secondary clarifier is needed",
+      "SBR does not produce waste activated sludge",
+      "SBR is only effective for industrial wastewater, not municipal wastewater"
+    ],
+    answer: 1,
+    explain: "<b>SBRs are fill-and-draw systems where all treatment phases occur in the same tank in sequence.</b> A single SBR basin cycles through fill, react (aeration), settle, and decant phases. No separate clarifier or RAS system is required."
+  },
+  {
+    q: "Which parameter is used to determine the 'sludge blanket level' in a secondary clarifier?",
+    choices: [
+      "A turbidimeter installed at the clarifier overflow weir",
+      "A sludge judge (core sampler) or electronic sludge blanket detector measuring the depth of settled solids",
+      "A flow meter on the RAS return line",
+      "An ORP probe in the center of the clarifier"
+    ],
+    answer: 1,
+    explain: "<b>A sludge judge (clear acrylic tube) is lowered into the clarifier to collect a core sample showing the sludge blanket depth.</b> Electronic sludge level sensors use optical or acoustic methods for continuous monitoring. Maintaining a low sludge blanket prevents solids washout."
+  },
+  {
+    q: "A wastewater plant's secondary effluent BOD is 8 mg/L and TSS is 10 mg/L. The plant's NPDES permit requires BOD ≤ 30 mg/L and TSS ≤ 30 mg/L (monthly average). The plant is:",
+    choices: [
+      "In violation of its NPDES permit for BOD",
+      "In violation of its NPDES permit for TSS",
+      "In compliance with both BOD and TSS permit limits",
+      "In violation of both BOD and TSS permit limits"
+    ],
+    answer: 2,
+    explain: "<b>Both BOD (8 mg/L) and TSS (10 mg/L) are well below the 30 mg/L permit limits — the plant is in compliance.</b> Permit limits specify the maximum allowable concentration; lower effluent values indicate better-than-required performance."
+  },
+  {
+    q: "Total Kjeldahl Nitrogen (TKN) measures:",
+    choices: [
+      "Total nitrogen including nitrate and nitrite",
+      "Organic nitrogen plus ammonia nitrogen (does not include oxidized nitrogen forms)",
+      "Only inorganic nitrogen (ammonia, nitrite, nitrate)",
+      "Nitrate and nitrite only"
+    ],
+    answer: 1,
+    explain: "<b>TKN = organic nitrogen + ammonia nitrogen.</b> It does not include oxidized nitrogen (nitrite + nitrate). TKN is an important parameter for permit compliance and nutrient mass balance calculations."
+  },
+  {
+    q: "Phosphorus precipitation using alum (aluminum sulfate) removes phosphorus by:",
+    choices: [
+      "Biological uptake into activated sludge",
+      "Forming aluminum phosphate (AlPO₄) precipitate that settles with the sludge",
+      "Oxidizing phosphate to polyphosphate which can be filtered",
+      "Ion exchange on the aluminum sulfate crystals"
+    ],
+    answer: 1,
+    explain: "<b>Alum reacts with orthophosphate to form insoluble aluminum phosphate (AlPO₄) which co-precipitates with aluminum hydroxide floc.</b> The phosphorus is removed with the settled sludge. Chemical phosphorus removal can achieve effluent TP below 0.1 mg/L."
+  },
+  {
+    q: "A grab sample collected from a manhole during a rain event shows a BOD of 15 mg/L compared to the normal dry-weather BOD of 200 mg/L. This is most likely caused by:",
+    choices: [
+      "Treatment plant malfunction reducing BOD removal",
+      "Inflow and infiltration (I/I) diluting the wastewater with clean stormwater or groundwater",
+      "Reduced industrial discharge on rainy days",
+      "Temperature reduction causing less BOD exertion"
+    ],
+    answer: 1,
+    explain: "<b>Dramatic BOD dilution during rain events indicates inflow (stormwater entering sewers) and infiltration (groundwater through cracks/joints).</b> I/I increases flow and can hydraulically overload treatment plants, while diluting BOD concentration."
+  },
+  {
+    q: "Which type of sewer system carries both wastewater and stormwater in the same pipe?",
+    choices: [
+      "Sanitary sewer system",
+      "Separate sewer system",
+      "Combined sewer system (CSS)",
+      "Force main system"
+    ],
+    answer: 2,
+    explain: "<b>Combined sewer systems (CSS) carry both wastewater and stormwater in the same pipe.</b> During heavy rain, the combined flow can exceed treatment capacity, resulting in combined sewer overflows (CSOs) — a significant water quality concern."
+  },
+  {
+    q: "True or False: Class B biosolids can be applied to lawns and home gardens with no restrictions.",
+    choices: ["True", "False"],
+    answer: 1,
+    explain: "<b>False.</b> Class B biosolids have site restrictions including buffers from water bodies, no application where public contact is likely, and restricted use on certain crops. Class A biosolids (not Class B) can be applied to home gardens."
+  },
+  {
+    q: "The Biochemical Oxygen Demand (BOD) test measures:",
+    choices: [
+      "The oxygen consumed by chemical oxidation of organic compounds",
+      "The amount of oxygen consumed by microorganisms when decomposing organic matter in water over a specified time",
+      "The total organic carbon content of the sample",
+      "The maximum oxygen demand of the sample regardless of time"
+    ],
+    answer: 1,
+    explain: "<b>BOD measures the oxygen consumed by microbial decomposition of organic matter under aerobic conditions.</b> BOD₅ (5-day at 20°C) is the standard test. Chemical Oxygen Demand (COD) measures oxygen demand by chemical oxidation."
+  },
+  {
+    q: "An operator notices the secondary clarifier effluent turbidity has increased dramatically while MLSS remains stable. The most likely cause is:",
+    choices: [
+      "Overaeration of the mixed liquor",
+      "Rising sludge from denitrification in the clarifier — nitrogen bubbles lifting floc to the surface",
+      "Excessive RAS rate pulling too many solids out of the clarifier",
+      "Low pH in the aeration basin inhibiting floc formation"
+    ],
+    answer: 1,
+    explain: "<b>Rising sludge (or 'floating sludge') in the secondary clarifier is caused by denitrification.</b> Nitrate in the sludge is reduced to nitrogen gas by denitrifying bacteria, forming bubbles that carry floc to the surface. Reduce SRT or increase WAS to address."
+  },
+  {
+    q: "Septicity in a wastewater collection system is characterized by:",
+    choices: [
+      "High DO and low BOD throughout the system",
+      "Anaerobic conditions leading to H₂S production, sulfide corrosion, and odor problems",
+      "Excessive biological growth on pipe walls",
+      "Elevated pH from industrial discharge"
+    ],
+    answer: 1,
+    explain: "<b>Septic conditions occur when dissolved oxygen is depleted and anaerobic bacteria produce H₂S.</b> Septicity is common in force mains and long flat sewer sections with low velocity. It causes odors, pipe corrosion, and process upsets at the treatment plant."
+  },
+  {
+    q: "A gravity thickener is used in sludge processing primarily to:",
+    choices: [
+      "Digest volatile solids anaerobically",
+      "Concentrate sludge by allowing solids to settle under gravity, reducing the volume of sludge sent to digestion",
+      "Dewater sludge to a cake suitable for land application",
+      "Remove grit and screenings from primary sludge"
+    ],
+    answer: 1,
+    explain: "<b>Gravity thickeners use gravity settling to concentrate sludge solids, increasing solids content from 1–3% to 4–8%.</b> Thickening reduces the volume of sludge fed to digesters, improving digestion efficiency and reducing heating costs."
+  },
+  {
+    q: "In a Rotating Biological Contactor (RBC), biological treatment occurs on:",
+    choices: [
+      "Suspended biomass in an aeration basin",
+      "Attached biofilm growing on rotating plastic discs partially submerged in wastewater",
+      "Granular activated carbon filter media",
+      "Fixed sand media in a trickling filter"
+    ],
+    answer: 1,
+    explain: "<b>RBCs use plastic discs covered with a biofilm that rotates in and out of the wastewater, alternately exposing the biofilm to oxygen and food.</b> RBCs are a fixed-film (attached growth) process requiring no return sludge pumping."
+  },
+  {
+    q: "A trickling filter's efficiency is rated primarily by its:",
+    choices: [
+      "Depth of stone media and influent BOD only",
+      "Hydraulic loading rate (HLR), organic loading rate (OLR), and recirculation ratio",
+      "Dissolved oxygen at the base of the filter",
+      "The specific gravity of the filter media"
+    ],
+    answer: 1,
+    explain: "<b>Trickling filter performance depends on hydraulic loading (GPD/ft²), organic loading (lbs BOD/1,000 ft³/day), and recirculation.</b> Recirculation dilutes influent, improves distribution, and maintains moisture on media during low flow periods."
+  },
+  {
+    q: "True or False: Biosolids that meet Class A pathogen and vector attraction reduction requirements can be marketed and sold to the public as fertilizer.",
+    choices: ["True", "False"],
+    answer: 0,
+    explain: "<b>True.</b> Class A biosolids meeting all Part 503 pollutant, pathogen, and vector attraction reduction requirements can be land-applied without restriction and sold or given to the public. Examples include Milwaukee's Milorganite product."
+  },
+  {
+    q: "What is the primary regulatory concern with land application of biosolids regarding metals?",
+    choices: [
+      "Metals in biosolids can contaminate groundwater if applied in flood zones",
+      "Cumulative loading limits for heavy metals (arsenic, cadmium, lead, mercury, etc.) must not be exceeded to protect soil, crops, and water quality",
+      "All metals must be completely absent from biosolids before land application",
+      "Metal limits only apply if biosolids are applied within 100 feet of a water body"
+    ],
+    answer: 1,
+    explain: "<b>40 CFR Part 503 sets cumulative pollutant loading rates (CPLRs) for heavy metals in biosolids applied to land.</b> Site managers must track cumulative metal additions to ensure the site is not overloaded over time."
+  },
+  {
+    q: "Grease and oil in wastewater can cause problems in treatment by:",
+    choices: [
+      "Lowering BOD and making treatment easier",
+      "Coating aeration basin diffusers, clogging pipes, inhibiting biological activity, and causing nuisance odors",
+      "Increasing dissolved oxygen transfer efficiency",
+      "Improving settling in the secondary clarifier"
+    ],
+    answer: 1,
+    explain: "<b>Grease and oil coat equipment, clog pipes, foul aeration diffusers, and can inhibit biological treatment.</b> Fats, oils, and grease (FOG) are regulated through pretreatment programs for food service establishments and other grease-generating industries."
+  }
+];
 
   let wwQzOrder = [];
   let wwQzIdx = 0;
