@@ -2643,7 +2643,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             </tr>
             <tr>
               <td>Fluoride</td>
-              <td>4.0 mg/L MCL <em class="reg-note">Optimal: 0.7–1.0 mg/L</em></td>
+              <td>4.0 mg/L MCL <em class="reg-note">SMCL: 2.0 mg/L &bull; Optimal: 0.7 mg/L (EPA 2015)</em></td>
             </tr>
           </table>
         </div>
@@ -2653,7 +2653,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
           <table class="reg-table">
             <tr>
               <td>Lead</td>
-              <td>0.015 mg/L</td>
+              <td>0.015 mg/L <em class="reg-note">10 µg/L under CA LCRR / EPA LCRR 2024</em></td>
             </tr>
             <tr>
               <td>Copper</td>
@@ -2676,6 +2676,34 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             <tr>
               <td>Cryptosporidium</td>
               <td>2-log <em class="reg-note">99% removal/inactivation</em></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="reg-section">
+          <div class="reg-section-title">Total Coliform Rule (TCR / RTCR)</div>
+          <table class="reg-table">
+            <tr>
+              <td>Monthly violation threshold</td>
+              <td>&gt; 5% TC-positive samples/month</td>
+            </tr>
+            <tr>
+              <td>E. coli presence</td>
+              <td>Immediate Tier 1 violation <em class="reg-note">notify state within 24 hrs</em></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="reg-section">
+          <div class="reg-section-title">CT Reference — Free Chlorine (SWTR)</div>
+          <table class="reg-table">
+            <tr>
+              <td>Giardia 3-log (15°C, pH 6–9)</td>
+              <td>CT ≈ 41 mg·min/L <em class="reg-note">varies by temp &amp; pH; see EPA CT tables</em></td>
+            </tr>
+            <tr>
+              <td>CT formula</td>
+              <td>CT = Residual (mg/L) × T10 (min)</td>
             </tr>
           </table>
         </div>
@@ -2775,7 +2803,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
               <button class="f-head" onclick="toggleFormula('f-ww-fm')">F/M Ratio <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
               <div class="f-body">
                 <div class="f-eq">F/M = BOD Loading (lbs/day) ÷ MLVSS Inventory (lbs)</div>
-                <p class="f-when">Conventional AS: 0.2–0.4. Extended aeration: 0.05–0.15. Higher F/M = younger sludge.</p>
+                <p class="f-when">Conventional AS: 0.2–0.5. Extended aeration: 0.05–0.15. Higher F/M = younger sludge.</p>
                 <p class="f-source">Source: Sacramento State OIT Wastewater T1 Study Guide</p>
               </div>
             </div>
@@ -2925,11 +2953,15 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             <table class="reg-table">
               <tr>
                 <td>Fecal coliform monthly avg</td>
-                <td>200 MPN/100 mL</td>
+                <td>200 MPN/100 mL <em class="reg-note">geometric mean</em></td>
+              </tr>
+              <tr>
+                <td>Fecal coliform 7-day avg</td>
+                <td>400 MPN/100 mL</td>
               </tr>
               <tr>
                 <td>Turbidity — filtered effluent median</td>
-                <td>2 NTU <em class="reg-note">never exceed 5 NTU</em></td>
+                <td>2 NTU <em class="reg-note">never exceed 5 NTU; applies where state has adopted filtered effluent turbidity limits</em></td>
               </tr>
             </table>
           </div>
@@ -2951,7 +2983,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
               </tr>
               <tr>
                 <td>F/M ratio</td>
-                <td>0.2–0.4 lbs BOD/lb MLVSS/day <em class="reg-note">typical</em></td>
+                <td>0.2–0.5 lbs BOD/lb MLVSS/day <em class="reg-note">typical</em></td>
               </tr>
             </table>
           </div>
@@ -3948,7 +3980,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>A Community Water System (CWS) serves at least 25 people or 15 connections year-round.</b> Examples include cities, towns, and mobile home parks with permanent residents."
   },
   {
-    q: "A public water system that serves the same people year-round but not as their primary residence (e.g., a nursing home) is classified as:",
+    q: "A public water system that serves the same people year-round but not as their primary residence (e.g., a school or workplace) is classified as:",
     choices: [
       "Community water system",
       "Transient non-community water system",
@@ -4348,10 +4380,10 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>E. coli is a fecal indicator — its presence in distribution indicates recent fecal contamination and an acute public health risk.</b> E. coli-positive results trigger immediate repeat testing and notification requirements."
   },
   {
-    q: "The minimum number of routine coliform samples per month for a community water system serving 1,000–2,500 people is:",
+    q: "The minimum number of routine coliform samples per month for a community water system serving 25–1,000 people is:",
     choices: ["1", "2", "4", "6"],
     answer: 0,
-    explain: "<b>Systems serving 1,000–2,500 people must collect a minimum of 1 routine sample per month.</b> Larger systems require more samples proportionally — systems serving >1 million collect hundreds of samples per month."
+    explain: "<b>Systems serving 25–1,000 people must collect a minimum of 1 routine sample per month.</b> Systems serving 1,001–2,500 must collect 2/month. Larger systems require more samples proportionally — systems serving >1 million collect hundreds of samples per month."
   },
   {
     q: "Source water samples for surface water systems must be collected:",
@@ -4390,10 +4422,10 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- ADDITIONAL CALCULATION AND MIXED TOPICS ---
   {
-    q: "A water plant treats 2.5 MGD. If the plant uses sodium hypochlorite at 12.5% strength and needs to apply 2.0 mg/L chlorine, how many gallons of hypochlorite solution are needed per day? (Hint: 1 gallon water = 8.34 lbs; density ~8.34 lbs/gal for water, and available Cl = 12.5% = 0.125 lbs Cl/lb solution)",
+    q: "A water plant treats 2.5 MGD. If the plant uses sodium hypochlorite at 12.5% strength and needs to apply 2.0 mg/L chlorine, how many gallons of hypochlorite solution are needed per day?",
     choices: ["25.0 gal/day", "33.3 gal/day", "250 gal/day", "2.5 gal/day"],
-    answer: 0,
-    explain: "<b>lbs Cl/day = 2.0 × 2.5 × 8.34 = 41.7 lbs/day. Gallons of 12.5% solution = 41.7 ÷ (0.125 × 8.34) ≈ 41.7 ÷ 1.04 ≈ 40 gal/day... Actually: 41.7 ÷ (8.34 × 1.042) ≈ 25 gal/day using pounds per gallon approach.</b> Formula: gal/day = (dose mg/L × MGD × 8.34) ÷ (% strength as decimal × 8.34 lbs/gal) = (2.0 × 2.5 × 8.34) ÷ (0.125 × 8.34) = 41.7 ÷ 1.04 ≈ 40 gal/day. Note: exact answer depends on exact density used."
+    answer: 1,
+    explain: "<b>lbs Cl/day = 2.0 × 2.5 × 8.34 = 41.7 lbs/day. 12.5% NaOCl has a specific gravity of ~1.165 (9.72 lbs/gal). lbs of solution/day = 41.7 ÷ 0.125 = 333.6 lbs/day. Gallons = 333.6 ÷ 9.72 ≈ 33.3 gal/day.</b> Simplified: gal/day = lbs Cl/day ÷ (strength × solution density) = 41.7 ÷ (0.125 × 9.72) ≈ 33.3 gal/day."
   },
   {
     q: "The hardness of water is primarily caused by:",
@@ -4452,10 +4484,10 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       "Fluoride",
       "Arsenic",
       "Cryptosporidium",
-      "All of the above"
+      "Both arsenic and Cryptosporidium"
     ],
     answer: 3,
-    explain: "<b>Fluoride has an MCLG of 4.0 mg/L, NOT zero. Arsenic and Cryptosporidium have MCLGs of zero.</b> Wait — actually Cryptosporidium has an MCLG of zero (it's a pathogen), arsenic's MCLG is zero (carcinogen). Fluoride's MCLG is 4.0. So the correct answer noting fluoride's MCLG is NOT zero is: arsenic and Cryptosporidium. The correct single answer here is arsenic has MCLG of zero."
+    explain: "<b>Both arsenic and Cryptosporidium have MCLGs of zero.</b> Arsenic's MCLG is zero because it is a known human carcinogen. Cryptosporidium's MCLG is zero because it is a pathogen with no safe threshold. Fluoride's MCLG is 4.0 mg/L — it is NOT zero."
   },
   {
     q: "Arsenic in drinking water is regulated with an MCL of:",
@@ -4500,7 +4532,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     q: "The Cryptosporidium oocyst is approximately how large?",
     choices: ["0.001–0.01 microns", "0.1–0.5 microns", "4–6 microns", "50–100 microns"],
     answer: 2,
-    explain: "<b>Cryptosporidium oocysts are approximately 4–6 microns in diameter.</b> This size means they can pass through some filter media if the filter is not properly operated, and requires at least ultrafiltration membranes for removal."
+    explain: "<b>Cryptosporidium oocysts are approximately 4–6 microns in diameter.</b> This size means they can pass through some filter media if the filter is not properly operated. Microfiltration (0.1–10 µm pore size) or ultrafiltration membranes both provide an adequate physical barrier for oocyst removal."
   },
   {
     q: "Which of the following best describes 'heterotrophic plate count' (HPC) and its use in water quality assessment?",
@@ -4535,11 +4567,11 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     choices: [
       "Chlorination (free chlorine at 2 mg/L)",
       "Chloramination",
-      "UV irradiation at ≥3 mJ/cm² validated dose",
+      "UV irradiation at ≥5.8 mJ/cm² validated dose",
       "Ozonation at 0.5 mg/L"
     ],
     answer: 2,
-    explain: "<b>UV irradiation is highly effective against Cryptosporidium at low doses (~3–5.8 mJ/cm² for 2-log inactivation).</b> UV damages nucleic acids, preventing replication. Ozone also works but requires much higher doses."
+    explain: "<b>UV irradiation is highly effective against Cryptosporidium at low doses (5.8 mJ/cm² for 2-log inactivation per EPA UV Guidance).</b> UV damages nucleic acids, preventing replication. Ozone also works but requires much higher doses."
   },
   {
     q: "True or False: A consecutive water system that purchases all its water from another public water system is fully exempt from all water quality monitoring requirements.",
@@ -6344,7 +6376,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       "WAS flow (MGD) × MLSS (mg/L) × 8.34"
     ],
     answer: 0,
-    explain: "<b>F/M = lbs BOD applied per day ÷ lbs MLVSS in aeration basin.</b> Typical range: 0.2–0.6 lbs BOD/lb MLVSS/day for conventional activated sludge. Low F/M means extended aeration; high F/M means high-rate treatment."
+    explain: "<b>F/M = lbs BOD applied per day ÷ lbs MLVSS in aeration basin.</b> Typical range: 0.2–0.5 lbs BOD/lb MLVSS/day for conventional activated sludge. Low F/M means extended aeration; high F/M means high-rate treatment."
   },
   {
     q: "A high F/M ratio (greater than 0.6) in activated sludge typically results in:",
@@ -6510,10 +6542,10 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Centrifuges use centrifugal force (thousands of times gravity) to separate water from sludge solids.</b> Modern decanting centrifuges can achieve 15–35% solids cake. Belt filter presses and plate-and-frame presses use mechanical pressure."
   },
   {
-    q: "What is the percent volatile solids (VS) reduction typically required for well-digested anaerobic sludge?",
+    q: "What is the minimum volatile solids (VS) reduction required by EPA's 40 CFR Part 503 rules for biosolids to meet vector attraction reduction requirements?",
     choices: ["10–20%", "20–30%", "38% or greater", "60–70%"],
     answer: 2,
-    explain: "<b>EPA requires 38% VS reduction (or meets vector attraction requirements) for biosolids to meet vector attraction reduction.</b> Well-digested sludge typically achieves 45–60% VS reduction at normal mesophilic digestion temperatures (95–98°F)."
+    explain: "<b>EPA 40 CFR Part 503 requires a minimum of 38% VS reduction for vector attraction reduction.</b> This is the regulatory floor — well-digested sludge typically achieves 45–60% VS reduction under normal mesophilic digestion temperatures (95–98°F), but 38% is the compliance threshold."
   },
   {
     q: "Temperature-Phased Anaerobic Digestion (TPAD) uses both thermophilic and mesophilic stages to achieve:",
@@ -6856,12 +6888,12 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     q: "pH measurement electrodes require calibration with buffer solutions before use. The typical two-point calibration uses buffers at:",
     choices: [
       "pH 4 and pH 7",
-      "pH 4 and pH 10 (or pH 7 and pH 10)",
+      "pH 4 and pH 10",
       "pH 7 and pH 14",
       "pH 0 and pH 14"
     ],
-    answer: 1,
-    explain: "<b>Two-point pH calibration typically uses pH 4 and 7, or pH 7 and 10 buffers.</b> Calibration should bracket the expected sample range. Buffers must be within expiration date and stored properly to prevent contamination."
+    answer: 0,
+    explain: "<b>Standard two-point pH calibration uses pH 4 and pH 7 buffers.</b> These two points bracket the typical wastewater effluent range (6–8). pH 7 and pH 10 may be used when measuring samples with higher pH. Buffers must be within expiration date and stored properly."
   },
   {
     q: "Dissolved oxygen (DO) can be measured by which two common methods?",
@@ -6959,7 +6991,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     choices: [
       "2 feet",
       "4 feet",
-      "6 feet (general industry) or 4 feet (construction)",
+      "4 feet (general industry) or 6 feet (construction)",
       "10 feet"
     ],
     answer: 2,
