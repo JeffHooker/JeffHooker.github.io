@@ -1,5 +1,6 @@
 {
   "appId": "app.drh2o.flocs",
   "appName": "flocs",
-  "webDir": "."
+  "webDir": ".",
+  "bundledWebRuntime": false
 }
