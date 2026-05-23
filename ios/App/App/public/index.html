@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacific Pines Craftsman | Handyman Services Under $1000</title>
+    <style>
+        :root {
+            --navy: #0a1d37;
+            --forest: #2d4c3b;
+            --light-green: #e9f1ee;
+            --white: #ffffff;
+        }
+
+        body { 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            color: var(--forest);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            background: var(--white);
+            border-bottom: 2px solid var(--navy);
+        }
+
+        .header-logo { height: 80px; width: auto; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--forest);
+            font-weight: 500;
+            margin-left: 30px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .hero-text-box h1 { 
+            font-size: 3rem; 
+            color: var(--forest); 
+            margin: 0; 
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .hero-text-box p { 
+            font-size: 1.5rem; 
+            color: var(--navy); 
+            margin: 20px 0; 
+            font-weight: 500;
+        }
+
+        /* --- CONTENT GRID --- */
+        .content-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--light-green);
+        }
+
+        .section-block { padding: 60px 10%; text-align: center; }
+        .section-block:first-child { border-right: 2px solid var(--white); }
+
+        .section-title { 
+            text-transform: uppercase; 
+            font-weight: bold; 
+            color: var(--forest); 
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+        }
+
+        /* --- ICONS --- */
+        .service-grid { display: flex; justify-content: space-around; gap: 20px; }
+        .service-item { flex: 1; text-align: center; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; line-height: 1.4; }
+        .icon-svg { width: 50px; height: 50px; margin-bottom: 15px; fill: var(--forest); }
+
+        /* --- CONTACT FORM --- */
+        .form-container { text-align: left; }
+        input, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 2px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        .legal-disclosure { 
+            background: var(--white);
+            border: 1px solid #000; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .btn-quote {
+            background: var(--forest);
+            color: var(--white);
+            padding: 15px;
+            width: 100%;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-quote:hover { background: #1a2e24; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            text-align: center;
+            padding: 40px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 850px) {
+            .content-sections { grid-template-columns: 1fr; }
+            .section-block:first-child { border-right: none; border-bottom: 2px solid var(--white); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo.PNG" alt="Pacific Pines Craftsman" class="header-logo">
+    <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">About</a>
+        <a href="#booking">Request Quote</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-text-box">
+        <h1>PACIFIC PINES CRAFTSMAN:<br>Handyman Services<br>Under $1000.</h1>
+        <p>Transparent, Licensed*, Local.<br>Serving the Monterey Bay Area.</p>
+    </div>
+</section>
+
+<div class="content-sections">
+    <div class="section-block">
+        <div class="section-title">My Services</div>
+        <div class="service-grid">
+            <div class="service-item">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22.7,19L13.6,9.9C14.5,7.6 14,4.9 12.1,3C10.1,1 7.1,0.6 4.7,1.7L9,6L6,9L1.7,4.7C0.6,7.1 1,10.1 3,12.1C4.9,14 7.6,14.5 9.9,13.6L19,22.7L22.7,19Z"/></svg>
+                <br>Handyman<br>Repairs
+            </div>
+            <div class="service-item">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M2,14H8V20H2V14M16,14H22V20H16V14M9,14H15V20H9V14M4,4H20V12H4V4Z"/></svg>
+                <br>General<br>Installations
+            </div>
+            <div class="service-item">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2Z"/></svg>
+                <br>Fixture<br>Upgrades
+            </div>
+        </div>
+    </div>
+
+    <div class="section-block" id="booking">
+        <div class="section-title">Let's Work Together</div>
+        <form class="form-container" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+            <input type="text" name="name" placeholder="YOUR NAME" required>
+            <input type="email" name="email" placeholder="YOUR EMAIL" required>
+            <textarea name="project" placeholder="PROJECT DESCRIPTION..." rows="3" required></textarea>
+            
+            <div class="legal-disclosure">
+                LEGAL DISCLOSURE: I, Jeff Hooker, am not a licensed contractor in the State of California. All projects under $1,000 (labor & materials).
+            </div>
+            
+            <button type="submit" class="btn-quote">Submit Project Request</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 PACIFIC PINES CRAFTSMAN | Location: Rio del Mar, CA.</p>
+</footer>
+
+</body>
+</html>
