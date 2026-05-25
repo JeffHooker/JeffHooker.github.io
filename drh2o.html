@@ -38,7 +38,8 @@
 
     html.light .field input,
     html.light .field textarea,
-    html.light .field select { background: #f0f0ed; color: var(--text); }
+    html.light .field select,
+    html.light .unit-sel { background: #f0f0ed; color: var(--text); }
     html.light .field input::placeholder,
     html.light .field textarea::placeholder { color: #aaa; }
     html.light .acc-body .card { border-color: #ddd; }
@@ -75,6 +76,7 @@
     html.glove .field input,
     html.glove .field textarea { padding: 16px 18px; }
     html.glove .field select { padding: 16px 18px; }
+    html.glove .unit-sel { padding: 16px 8px; }
     html.glove .clear-btn { padding: 5px 10px; }
     html.glove .acc-head { padding: 20px 18px; }
     html.glove .study-head { padding: 23px 18px; }
@@ -695,6 +697,25 @@
       background-position: right 14px center;
     }
     .field select:focus { border-color: var(--blue); }
+    .input-unit-row { display: flex; gap: 6px; align-items: stretch; }
+    .field .input-unit-row input { width: auto; flex: 1; min-width: 0; }
+    .unit-sel {
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 8px;
+      font-size: 0.82rem;
+      color: var(--text);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      min-width: 56px;
+      text-align: center;
+      text-align-last: center;
+    }
+    .unit-sel:focus { border-color: var(--blue); }
 
     /* ── ACCORDION ── */
     .acc {
@@ -1570,8 +1591,17 @@
             <button class="clear-btn" onclick="clearInputs(['fl-dia','fl-vel','fl-time'], calcFlow)">Clear</button>
           </div>
           <div class="field">
-            <label>Pipe Diameter (<span class="ul" data-imp="inches" data-met="mm">inches</span>)</label>
-            <input id="fl-dia" type="number" inputmode="decimal" placeholder="e.g. 6" min="0" step="0.25">
+            <label>Pipe Diameter</label>
+            <div class="input-unit-row">
+              <input id="fl-dia" type="number" inputmode="decimal" placeholder="e.g. 0.5" min="0" step="0.05">
+              <select id="fl-dia-unit" class="unit-sel" onchange="calcFlow()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="field">
             <label>Flow Velocity (<span class="ul" data-imp="fps" data-met="m/s">fps</span>)</label>
@@ -1640,16 +1670,43 @@
             <input id="pr-source" type="number" inputmode="decimal" placeholder="e.g. 65" min="0">
           </div>
           <div class="field">
-            <label>Elevation Change (<span class="ul" data-imp="ft" data-met="m">ft</span>) <span style="font-weight:400;font-size:.75em;color:var(--muted)">+ downhill / − uphill</span></label>
-            <input id="pr-elev" type="number" inputmode="decimal" placeholder="e.g. 50">
+            <label>Elevation Change <span style="font-weight:400;font-size:.75em;color:var(--muted)">+ downhill / − uphill</span></label>
+            <div class="input-unit-row">
+              <input id="pr-elev" type="number" inputmode="decimal" placeholder="e.g. 50">
+              <select id="pr-elev-unit" class="unit-sel" onchange="calcPressure()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label>Pipe Length (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
-            <input id="pr-len" type="number" inputmode="decimal" placeholder="e.g. 1000" min="0">
+            <label>Pipe Length</label>
+            <div class="input-unit-row">
+              <input id="pr-len" type="number" inputmode="decimal" placeholder="e.g. 1000" min="0">
+              <select id="pr-len-unit" class="unit-sel" onchange="calcPressure()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label>Pipe Diameter (<span class="ul" data-imp="inches" data-met="mm">inches</span>)</label>
-            <input id="pr-dia" type="number" inputmode="decimal" placeholder="e.g. 6" min="0" step="0.25">
+            <label>Pipe Diameter</label>
+            <div class="input-unit-row">
+              <input id="pr-dia" type="number" inputmode="decimal" placeholder="e.g. 0.5" min="0" step="0.05">
+              <select id="pr-dia-unit" class="unit-sel" onchange="calcPressure()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="field">
             <label>Flow Rate (<span class="ul" data-imp="GPM" data-met="L/min">GPM</span>)</label>
@@ -1669,7 +1726,16 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Results</div>
+          <div class="card-header">
+            <div class="card-title">Results</div>
+            <select id="pr-head-unit" class="unit-sel" onchange="calcPressure()" title="Head display unit">
+              <option value="ft" selected>ft</option>
+              <option value="m">m</option>
+              <option value="in">in</option>
+              <option value="yd">yd</option>
+              <option value="cm">cm</option>
+            </select>
+          </div>
           <div class="result-row">
             <span class="result-label">Static Pressure (elevation)</span>
             <span class="result-val"><span class="primary" id="pr-static">—</span><span class="secondary" id="pr-static-sub"></span></span>
@@ -1716,12 +1782,30 @@
             <button class="clear-btn" onclick="clearInputs(['tv-cyl-dia','tv-cyl-h'], calcCylinder)">Clear</button>
           </div>
           <div class="field">
-            <label>Diameter (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
-            <input id="tv-cyl-dia" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
+            <label>Diameter</label>
+            <div class="input-unit-row">
+              <input id="tv-cyl-dia" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
+              <select id="tv-cyl-dia-unit" class="unit-sel" onchange="calcCylinder()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label>Height / Depth (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
-            <input id="tv-cyl-h" type="number" inputmode="decimal" placeholder="e.g. 15" min="0" step="0.1">
+            <label>Height / Depth</label>
+            <div class="input-unit-row">
+              <input id="tv-cyl-h" type="number" inputmode="decimal" placeholder="e.g. 15" min="0" step="0.1">
+              <select id="tv-cyl-h-unit" class="unit-sel" onchange="calcCylinder()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="result-row" style="padding-top:12px">
             <span class="result-label">Volume</span>
@@ -1752,16 +1836,43 @@
             <button class="clear-btn" onclick="clearInputs(['tv-rec-l','tv-rec-w','tv-rec-h'], calcRect)">Clear</button>
           </div>
           <div class="field">
-            <label>Length (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
-            <input id="tv-rec-l" type="number" inputmode="decimal" placeholder="e.g. 30" min="0" step="0.1">
+            <label>Length</label>
+            <div class="input-unit-row">
+              <input id="tv-rec-l" type="number" inputmode="decimal" placeholder="e.g. 30" min="0" step="0.1">
+              <select id="tv-rec-l-unit" class="unit-sel" onchange="calcRect()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label>Width (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
-            <input id="tv-rec-w" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
+            <label>Width</label>
+            <div class="input-unit-row">
+              <input id="tv-rec-w" type="number" inputmode="decimal" placeholder="e.g. 20" min="0" step="0.1">
+              <select id="tv-rec-w-unit" class="unit-sel" onchange="calcRect()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label>Height / Depth (<span class="ul" data-imp="ft" data-met="m">ft</span>)</label>
-            <input id="tv-rec-h" type="number" inputmode="decimal" placeholder="e.g. 10" min="0" step="0.1">
+            <label>Height / Depth</label>
+            <div class="input-unit-row">
+              <input id="tv-rec-h" type="number" inputmode="decimal" placeholder="e.g. 10" min="0" step="0.1">
+              <select id="tv-rec-h-unit" class="unit-sel" onchange="calcRect()">
+                <option value="in">in</option>
+                <option value="ft" selected>ft</option>
+                <option value="yd">yd</option>
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+              </select>
+            </div>
           </div>
           <div class="result-row" style="padding-top:12px">
             <span class="result-label">Volume</span>
@@ -3432,18 +3543,13 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   // Conversion factors: imperial → metric
   const TO_MET = {
     'cl-volume':  3.78541,   // gal → L
-    'fl-dia':     25.4,      // in → mm
     'fl-vel':     0.3048,    // fps → m/s
     'pr-source':  6.89476,   // PSI → kPa
-    'pr-elev':    0.3048,    // ft → m
-    'pr-len':     0.3048,    // ft → m
-    'pr-dia':     25.4,      // in → mm
     'pr-gpm':     3.78541,   // GPM → L/min
-    'tv-cyl-dia': 0.3048, 'tv-cyl-h': 0.3048,
-    'tv-rec-l':   0.3048, 'tv-rec-w': 0.3048, 'tv-rec-h': 0.3048,
     'dt-vol':     3.78541,   // gal → L
     'dt-gpm':     3.78541,   // GPM → L/min
     'cf-gpm':     3.78541,
+    // length fields omitted — per-field unit selectors handle conversion
   };
 
   function setUnits(unit) {
@@ -5480,6 +5586,19 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     return toFeet(value, unit) / 3.280839895;
   }
 
+  // Convert a value already in feet to any supported length unit
+  function fromFeet(val_ft, unit) {
+    const factor = LENGTH_TO_FEET[unit];
+    if (factor === undefined) throw new Error('Unknown unit: ' + unit);
+    return val_ft / factor;
+  }
+
+  // Read the unit selector for a given field ID (looks for id + '-unit')
+  function lenUnit(id) {
+    const el = document.getElementById(id + '-unit');
+    return el ? el.value : 'ft';
+  }
+
   // ── CHLORINE CALC ──
   function calcDateDiff(prefix) {
     const startVal = document.getElementById(prefix + '-dc-start').value;
@@ -5581,7 +5700,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     const raw_dia = parseFloat(document.getElementById('fl-dia').value)  || 0;
     const raw_vel = parseFloat(document.getElementById('fl-vel').value)  || 0;
     const time_min= parseFloat(document.getElementById('fl-time').value) || 0;
-    const dia_in  = U === 'met' ? raw_dia / 25.4   : raw_dia;
+    const dia_in  = toFeet(raw_dia, lenUnit('fl-dia')) * 12;
     const vel_fps = U === 'met' ? raw_vel / 0.3048 : raw_vel;
 
     if (!dia_in || !vel_fps) {
@@ -5663,10 +5782,11 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     const raw_gpm  = parseFloat(document.getElementById('pr-gpm').value)    || 0;
     const C        = parseFloat(document.getElementById('pr-cfactor').value)|| 120;
     const p_source = U === 'met' ? raw_src  / 6.89476 : raw_src;
-    const elev_ft  = U === 'met' ? raw_elev / 0.3048  : raw_elev;
-    const len_ft   = U === 'met' ? raw_len  / 0.3048  : raw_len;
-    const dia_in   = U === 'met' ? raw_dia  / 25.4    : raw_dia;
+    const elev_ft  = toFeet(raw_elev, lenUnit('pr-elev'));
+    const len_ft   = toFeet(raw_len,  lenUnit('pr-len'));
+    const dia_in   = toFeet(raw_dia,  lenUnit('pr-dia')) * 12;
     const gpm      = U === 'met' ? raw_gpm  / 3.78541 : raw_gpm;
+    const headUnit = (document.getElementById('pr-head-unit') || {value:'ft'}).value;
 
     const hasFlow = dia_in > 0 && len_ft > 0 && gpm > 0;
 
@@ -5676,7 +5796,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     const pu = U === 'met'; // pressure in metric?
     const pSign = static_psi >= 0 ? '+' : '';
     set('pr-static',     pSign + fmt(pu ? static_psi*6.89476 : static_psi, 2) + (pu?' kPa':' PSI'));
-    set('pr-static-sub', pSign + fmt(pu ? elev_ft*0.3048 : static_ft,  1)   + (pu?' m head':' ft head'));
+    set('pr-static-sub', pSign + fmt(fromFeet(static_ft, headUnit), 1) + ' ' + headUnit + ' head');
 
     // Hazen-Williams friction loss
     // hf (ft) = 4.72 × L × Q^1.852 / (C^1.852 × D^4.87)
@@ -5687,9 +5807,9 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       per100_psi = len_ft > 0 ? (hf_psi / len_ft) * 100 : 0;
 
       set('pr-friction',     fmt(pu ? hf_psi*6.89476 : hf_psi, 2) + (pu?' kPa':' PSI'));
-      set('pr-friction-sub', fmt(pu ? hf_ft*0.3048  : hf_ft,  2) + (pu?' m head':' ft head'));
+      set('pr-friction-sub', fmt(fromFeet(hf_ft, headUnit), 2) + ' ' + headUnit + ' head');
       set('pr-per100',       fmt(pu ? per100_psi*6.89476/0.3048 : per100_psi, 3) + (pu?' kPa/100m':' PSI/100ft'));
-      set('pr-headloss',     fmt(pu ? hf_ft*0.3048 : hf_ft, 2)  + (pu?' m':' ft'));
+      set('pr-headloss',     fmt(fromFeet(hf_ft, headUnit), 2) + ' ' + headUnit);
       set('pr-headloss-sub', fmt(pu ? hf_psi*6.89476 : hf_psi, 2) + (pu?' kPa':'  PSI') + '  ·  C=' + C);
     } else {
       ['pr-friction','pr-friction-sub','pr-per100','pr-headloss','pr-headloss-sub']
@@ -5700,7 +5820,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     const residual_psi = p_source + static_psi - hf_psi;
     const residual_ft  = residual_psi / 0.43353;
     set('pr-residual',     fmt(pu ? residual_psi*6.89476 : residual_psi, 2) + (pu?' kPa':' PSI'));
-    set('pr-residual-sub', fmt(pu ? residual_ft*0.3048 : residual_ft, 1) + (pu?' m head':' ft head'));
+    set('pr-residual-sub', fmt(fromFeet(residual_ft, headUnit), 1) + ' ' + headUnit + ' head');
 
     // Color-code residual
     const dot = document.getElementById('pr-residual-dot');
@@ -5732,8 +5852,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     const raw_d = parseFloat(document.getElementById('tv-cyl-dia').value) || 0;
     const raw_h = parseFloat(document.getElementById('tv-cyl-h').value)   || 0;
     if (!raw_d || !raw_h) { set('tv-cyl-gal','—'); set('tv-cyl-sub',''); setSyw('cyl',null); return; }
-    const d_ft    = U === 'met' ? raw_d / 0.3048 : raw_d;
-    const h_ft    = U === 'met' ? raw_h / 0.3048 : raw_h;
+    const d_ft    = toFeet(raw_d, lenUnit('tv-cyl-dia'));
+    const h_ft    = toFeet(raw_h, lenUnit('tv-cyl-h'));
     const vol_ft3 = Math.PI * Math.pow(d_ft / 2, 2) * h_ft;
     const vol_gal = vol_ft3 * 7.48052;
     const vol_L   = vol_gal * 3.78541;
@@ -5752,8 +5872,9 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     const rw = parseFloat(document.getElementById('tv-rec-w').value) || 0;
     const rh = parseFloat(document.getElementById('tv-rec-h').value) || 0;
     if (!rl || !rw || !rh) { set('tv-rec-gal','—'); set('tv-rec-sub',''); setSyw('rec',null); return; }
-    const f  = U === 'met' ? 1/0.3048 : 1;
-    const rl_ft = rl*f, rw_ft = rw*f, rh_ft = rh*f;
+    const rl_ft = toFeet(rl, lenUnit('tv-rec-l'));
+    const rw_ft = toFeet(rw, lenUnit('tv-rec-w'));
+    const rh_ft = toFeet(rh, lenUnit('tv-rec-h'));
     const vol_ft3 = rl_ft * rw_ft * rh_ft;
     const vol_gal = vol_ft3 * 7.48052;
     const vol_L   = vol_gal * 3.78541;
