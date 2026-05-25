@@ -5462,6 +5462,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     return s;
   }
 
+  // ── UNIT CONVERSION UTILITIES ──
+  // Supported length units: 'in', 'ft', 'yd', 'mi', 'cm', 'm'
+  const LENGTH_TO_FEET = { in: 1/12, ft: 1, yd: 3, mi: 5280, cm: 0.032808399, m: 3.280839895 };
+
+  function toFeet(value, unit) {
+    const factor = LENGTH_TO_FEET[unit];
+    if (factor === undefined) throw new Error('Unknown unit: ' + unit);
+    return value * factor;
+  }
+
+  function toInches(value, unit) {
+    return toFeet(value, unit) * 12;
+  }
+
+  function toMeters(value, unit) {
+    return toFeet(value, unit) / 3.280839895;
+  }
+
   // ── CHLORINE CALC ──
   function calcDateDiff(prefix) {
     const startVal = document.getElementById(prefix + '-dc-start').value;
