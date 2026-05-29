@@ -438,6 +438,24 @@
       color: var(--blue);
     }
     header h1 span { color: var(--text); }
+    .header-glove-btn {
+      margin-left: auto;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .header-glove-btn.active {
+      color: var(--blue);
+      border-color: var(--blue);
+    }
 
     /* ── SCREENS ── */
     .screens {
@@ -1457,6 +1475,7 @@
 
 <header>
   <h1><span class="logo-water">flocs</span></h1>
+  <button class="header-glove-btn" id="btn-glove-header" onclick="setGlove(!GLOVE)" title="Toggle Glove Mode">GL</button>
 </header>
 
 <div id="mode-bar">
@@ -3618,6 +3637,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.documentElement.classList.toggle('glove', on);
     document.getElementById('btn-glove-off').classList.toggle('active', !on);
     document.getElementById('btn-glove-on').classList.toggle('active', on);
+    document.getElementById('btn-glove-header').classList.toggle('active', on);
   }
 
   // Apply saved glove mode on load
@@ -3625,6 +3645,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.documentElement.classList.add('glove');
     document.getElementById('btn-glove-off').classList.remove('active');
     document.getElementById('btn-glove-on').classList.add('active');
+    document.getElementById('btn-glove-header').classList.add('active');
   }
 
   // ── MODE (Drinking Water / Wastewater) ──
