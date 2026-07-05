@@ -267,11 +267,12 @@
       gap: 8px;
     }
     .assist-empty-logo {
-      font-size: 1.6rem;
-      font-weight: 900;
-      letter-spacing: -1px;
       margin-bottom: 4px;
     }
+    .assist-empty-logo .logo-dark { display: block; }
+    .assist-empty-logo .logo-light { display: none; }
+    html.light .assist-empty-logo .logo-dark { display: none; }
+    html.light .assist-empty-logo .logo-light { display: block; }
     .assist-footer {
       flex-shrink: 0;
       padding: 10px 12px 18px;
@@ -3049,7 +3050,10 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     </div>
     <div class="assist-messages" id="assist-messages">
       <div class="assist-empty" id="assist-empty">
-        <div class="assist-empty-logo"><span style="color:var(--blue)">flocs</span></div>
+        <div class="assist-empty-logo">
+          <img src="assets/flocs-logo-dark.svg" class="logo-dark" alt="flocs" style="height:160px;width:auto;">
+          <img src="assets/flocs-logo-light.svg" class="logo-light" alt="flocs" style="height:160px;width:auto;">
+        </div>
         <p>Ask a water or wastewater question to get started.</p>
       </div>
     </div>
