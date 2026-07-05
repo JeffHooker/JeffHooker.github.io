@@ -414,13 +414,12 @@
       padding: 0 20px;
       z-index: 100;
     }
-    header h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: var(--blue);
-    }
-    header h1 span { color: var(--text); }
+    .header-logo { display: flex; align-items: center; text-decoration: none; }
+    .logo-img { height: 40px; width: auto; display: block; }
+    .logo-dark { display: block; }
+    .logo-light { display: none; }
+    html.light .logo-dark { display: none; }
+    html.light .logo-light { display: block; }
 
     /* ── SCREENS ── */
     .screens {
@@ -1420,7 +1419,10 @@
 <body>
 
 <header>
-  <h1><span class="logo-water">flocs</span></h1>
+  <div class="header-logo">
+    <img src="assets/flocs-logo-dark.svg" class="logo-img logo-dark" alt="flocs">
+    <img src="assets/flocs-logo-light.svg" class="logo-img logo-light" alt="flocs">
+  </div>
 </header>
 
 <div id="mode-bar">
