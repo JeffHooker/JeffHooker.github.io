@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#3D5A99">
+  <meta name="theme-color" content="#376DA0">
   <meta name="description" content="Professional field calculator for water system operators.">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,8 +18,8 @@
       --bg:         #0a0a0a;
       --surface:    #141414;
       --border:     #222;
-      --blue:       #3D5A99;
-      --blue-dim:   #2A4080;
+      --blue:       #376DA0;
+      --blue-dim:   #2A5580;
       --text:       #f0f0f0;
       --muted:      #888;
       --nav-h:      64px;
@@ -30,8 +30,8 @@
       --bg:       #f5f5f2;
       --surface:  #ffffff;
       --border:   #d8d8d8;
-      --blue:     #0C1C4D;
-      --blue-dim: #091535;
+      --blue:     #376DA0;
+      --blue-dim: #2A5580;
       --text:     #1a1a1a;
       --muted:    #666;
     }
@@ -49,7 +49,7 @@
     html.light .prob-feedback.correct { background: #d4f0dc; color: #166534; border-color: #22c55e; }
     html.light .prob-feedback.wrong   { background: #fde8e8; color: #991b1b; border-color: #ef4444; }
     html.light .prob-feedback.wrong b { color: #dc2626; }
-    html.light .qz-choice:hover:not(:disabled) { background: #e8ecf5; border-color: var(--blue); }
+    html.light .qz-choice:hover:not(:disabled) { background: #dce8f3; border-color: var(--blue); }
     html.light .qz-choice.correct  { background: #d4f0dc; color: #166534; border-color: #22c55e; }
     html.light .qz-choice.wrong    { background: #fde8e8; color: #991b1b; border-color: #ef4444; }
     html.light .qz-choice.reveal   { background: #d4f0dc; color: #166534; border-color: #22c55e; }
@@ -95,10 +95,10 @@
     html.glove .doc-del { padding: 0 16px; }
 
     /* ── WASTEWATER MODE ── */
-    html.waste      { --blue: #2E7D55; --blue-dim: #1F5A3F; }
-    html.waste.light { --blue: #0D3B2E; --blue-dim: #0A2D22; }
-    html.waste .qz-choice:hover:not(:disabled) { background: #0f2a1e; }
-    html.waste.light .qz-choice:hover:not(:disabled) { background: #ddf0e8; border-color: var(--blue); }
+    html.waste      { --blue: #7BACA2; --blue-dim: #5C8E88; }
+    html.waste.light { --blue: #7BACA2; --blue-dim: #5C8E88; }
+    html.waste .qz-choice:hover:not(:disabled) { background: #1a2c2a; }
+    html.waste.light .qz-choice:hover:not(:disabled) { background: #dce8e6; border-color: var(--blue); }
 
     /* ── WW / DW CONTENT VISIBILITY ── */
     #ww-calcs { display: none; }
@@ -948,7 +948,7 @@
       transition: border-color 0.15s, background 0.15s;
       line-height: 1.35;
     }
-    .qz-choice:hover:not(:disabled) { border-color: var(--blue); background: #1a2744; }
+    .qz-choice:hover:not(:disabled) { border-color: var(--blue); background: #1a3047; }
     .qz-choice.correct  { border-color: #22c55e; background: #0d2b14; color: #22c55e; }
     .qz-choice.wrong    { border-color: #ef4444; background: #2b0d0d; color: #f0f0f0; }
     .qz-choice.reveal   { border-color: #22c55e; background: #0d2b14; color: #22c55e; }
