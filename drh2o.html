@@ -1123,6 +1123,52 @@
     .ex-review-wrong { color: #ef4444; margin-bottom: 2px; }
     .ex-review-explain { color: var(--muted); font-size: 0.73rem; margin-top: 4px; }
 
+    /* ── FLASHCARDS ── */
+    .fc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .fc-progress { font-size: 0.82rem; font-weight: 700; color: var(--fg); }
+    .fc-session-stat { font-size: 0.75rem; color: var(--muted); }
+    .fc-outer { perspective: 1000px; min-height: 220px; margin-bottom: 12px; }
+    .fc-card {
+      width: 100%;
+      min-height: 220px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.42s ease;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .fc-card.flipped { transform: rotateY(180deg); }
+    .fc-face {
+      position: absolute;
+      inset: 0;
+      min-height: 220px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 12px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      overflow-y: auto;
+    }
+    .fc-front { background: var(--card); border: 1.5px solid var(--border); justify-content: center; }
+    .fc-back  { background: var(--card); border: 2px solid var(--blue); transform: rotateY(180deg); justify-content: flex-start; padding-top: 20px; }
+    .fc-badge { font-size: 0.68rem; font-weight: 600; color: var(--muted); text-align: center; }
+    .fc-q-text { font-size: 0.89rem; font-weight: 600; color: var(--fg); text-align: center; line-height: 1.5; }
+    .fc-tap-hint { font-size: 0.7rem; color: var(--muted); opacity: 0.65; margin-top: 6px; }
+    .fc-answer-text { font-size: 0.95rem; font-weight: 800; color: var(--blue); text-align: center; line-height: 1.35; }
+    .fc-explain-text { font-size: 0.75rem; color: var(--muted); text-align: left; line-height: 1.5; width: 100%; margin-top: 4px; }
+    .fc-actions { display: flex; gap: 10px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .fc-actions.show { opacity: 1; pointer-events: auto; }
+    .fc-learn-btn, .fc-know-btn { flex: 1; padding: 12px; border-radius: 8px; border: none; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+    .fc-learn-btn { background: #f97316; color: #fff; }
+    .fc-know-btn  { background: #22c55e; color: #fff; }
+    .fc-done-wrap { text-align: center; padding: 16px 0 6px; }
+    .fc-done-icon  { font-size: 2.2rem; margin-bottom: 6px; }
+    .fc-done-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; color: var(--fg); }
+    .fc-done-stats { font-size: 0.82rem; color: var(--muted); margin-bottom: 20px; line-height: 1.7; }
+
     /* ── SHOW YOUR WORK ── */
     .syw-wrap { margin-top: 10px; }
     .syw-btn {
@@ -2823,6 +2869,91 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       </div>
     </div>
 
+    <!-- DW: Flashcards -->
+    <div class="study-card" id="sc-flash">
+      <button class="study-head" onclick="toggleStudy('sc-flash')">
+        <div class="study-head-text">
+          <span class="study-title">Flashcards</span>
+          <span class="study-desc">Tap to flip · Know It or Still Learning</span>
+        </div>
+        <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="study-body">
+        <div id="fc-start">
+          <div class="qz-filter-section">
+            <div class="qz-filter-label">Grade</div>
+            <div class="qz-chips">
+              <button class="qz-chip" data-val="T1" onclick="fcToggleChip(this,'dw','grade')">T1</button>
+              <button class="qz-chip" data-val="T2" onclick="fcToggleChip(this,'dw','grade')">T2</button>
+              <button class="qz-chip" data-val="T3" onclick="fcToggleChip(this,'dw','grade')">T3</button>
+              <button class="qz-chip" data-val="T4" onclick="fcToggleChip(this,'dw','grade')">T4</button>
+              <button class="qz-chip" data-val="T5" onclick="fcToggleChip(this,'dw','grade')">T5</button>
+              <button class="qz-chip" data-val="D1" onclick="fcToggleChip(this,'dw','grade')">D1</button>
+              <button class="qz-chip" data-val="D2" onclick="fcToggleChip(this,'dw','grade')">D2</button>
+              <button class="qz-chip" data-val="D3" onclick="fcToggleChip(this,'dw','grade')">D3</button>
+              <button class="qz-chip" data-val="D4" onclick="fcToggleChip(this,'dw','grade')">D4</button>
+              <button class="qz-chip" data-val="D5" onclick="fcToggleChip(this,'dw','grade')">D5</button>
+            </div>
+          </div>
+          <div class="qz-filter-section">
+            <div class="qz-filter-label">Topic</div>
+            <div class="qz-chips">
+              <button class="qz-chip" data-val="chlorination" onclick="fcToggleChip(this,'dw','topic')">Chlorination</button>
+              <button class="qz-chip" data-val="ct-inactivation" onclick="fcToggleChip(this,'dw','topic')">CT/Inactivation</button>
+              <button class="qz-chip" data-val="coagulation-flocculation" onclick="fcToggleChip(this,'dw','topic')">Coag/Floc</button>
+              <button class="qz-chip" data-val="filtration" onclick="fcToggleChip(this,'dw','topic')">Filtration</button>
+              <button class="qz-chip" data-val="ph-chemistry" onclick="fcToggleChip(this,'dw','topic')">pH/Chem</button>
+              <button class="qz-chip" data-val="dbp" onclick="fcToggleChip(this,'dw','topic')">DBPs</button>
+              <button class="qz-chip" data-val="sdwa-regs" onclick="fcToggleChip(this,'dw','topic')">SDWA Regs</button>
+              <button class="qz-chip" data-val="lcr" onclick="fcToggleChip(this,'dw','topic')">Lead &amp; Copper</button>
+              <button class="qz-chip" data-val="swtr" onclick="fcToggleChip(this,'dw','topic')">SWTR</button>
+              <button class="qz-chip" data-val="turbidity" onclick="fcToggleChip(this,'dw','topic')">Turbidity</button>
+              <button class="qz-chip" data-val="fluoridation" onclick="fcToggleChip(this,'dw','topic')">Fluoridation</button>
+              <button class="qz-chip" data-val="pathogens" onclick="fcToggleChip(this,'dw','topic')">Pathogens</button>
+              <button class="qz-chip" data-val="chemical-safety" onclick="fcToggleChip(this,'dw','topic')">Chem Safety</button>
+              <button class="qz-chip" data-val="distribution-ops" onclick="fcToggleChip(this,'dw','topic')">Distribution</button>
+              <button class="qz-chip" data-val="coliform-sampling" onclick="fcToggleChip(this,'dw','topic')">Coliform</button>
+              <button class="qz-chip" data-val="hydraulics" onclick="fcToggleChip(this,'dw','topic')">Hydraulics</button>
+            </div>
+          </div>
+          <p class="qz-filter-hint" id="fc-pool-hint">199 cards in deck</p>
+          <button class="qz-start-btn" onclick="fcLaunch('dw', false)">Start Flashcards</button>
+          <button class="qz-missed-btn" id="fc-weak-btn" onclick="fcLaunch('dw', true)">Study Weak Spots (<span id="fc-weak-cnt">0</span>)</button>
+        </div>
+        <div id="fc-deck" style="display:none">
+          <div class="fc-header">
+            <span class="fc-progress" id="fc-progress">1 / 199</span>
+            <span class="fc-session-stat" id="fc-session-stat">0 mastered</span>
+          </div>
+          <div class="fc-outer" onclick="fcFlip('dw')">
+            <div class="fc-card" id="fc-card">
+              <div class="fc-face fc-front">
+                <div class="fc-badge" id="fc-badge"></div>
+                <p class="fc-q-text" id="fc-q-text"></p>
+                <span class="fc-tap-hint">Tap card to reveal answer</span>
+              </div>
+              <div class="fc-face fc-back">
+                <div class="fc-answer-text" id="fc-answer-text"></div>
+                <div class="fc-explain-text" id="fc-explain-text"></div>
+              </div>
+            </div>
+          </div>
+          <div class="fc-actions" id="fc-actions">
+            <button class="fc-learn-btn" onclick="fcLearn('dw')">Still Learning</button>
+            <button class="fc-know-btn" onclick="fcKnow('dw')">Know It ✓</button>
+          </div>
+        </div>
+        <div id="fc-done" style="display:none">
+          <div class="fc-done-wrap">
+            <div class="fc-done-icon">🎓</div>
+            <div class="fc-done-title">Deck Complete!</div>
+            <div class="fc-done-stats" id="fc-done-stats"></div>
+            <button class="qz-retake" onclick="fcBackToStart('dw')">New Deck</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Regulatory Quick Reference -->
     <div class="study-card" id="sc-reg">
       <button class="study-head" onclick="toggleStudy('sc-reg')">
@@ -3210,6 +3341,81 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             <button class="ex-review-toggle" onclick="exToggleReview('ww')">Review Answers ▾</button>
             <div id="ww-ex-review" class="ex-review-list"></div>
             <button class="qz-retake" style="margin-top:14px" onclick="exBackToStart('ww')">New Exam</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Flashcards -->
+      <div class="study-card" id="sc-ww-flash">
+        <button class="study-head" onclick="toggleStudy('sc-ww-flash')">
+          <div class="study-head-text">
+            <span class="study-title">Flashcards</span>
+            <span class="study-desc">Tap to flip · Know It or Still Learning</span>
+          </div>
+          <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="study-body">
+          <div id="ww-fc-start">
+            <div class="qz-filter-section">
+              <div class="qz-filter-label">Grade</div>
+              <div class="qz-chips">
+                <button class="qz-chip" data-val="WW1" onclick="fcToggleChip(this,'ww','grade')">WW1</button>
+                <button class="qz-chip" data-val="WW2" onclick="fcToggleChip(this,'ww','grade')">WW2</button>
+                <button class="qz-chip" data-val="WW3" onclick="fcToggleChip(this,'ww','grade')">WW3</button>
+                <button class="qz-chip" data-val="WW4" onclick="fcToggleChip(this,'ww','grade')">WW4</button>
+              </div>
+            </div>
+            <div class="qz-filter-section">
+              <div class="qz-filter-label">Topic</div>
+              <div class="qz-chips">
+                <button class="qz-chip" data-val="activated-sludge" onclick="fcToggleChip(this,'ww','topic')">Activated Sludge</button>
+                <button class="qz-chip" data-val="mass-loading" onclick="fcToggleChip(this,'ww','topic')">Mass Loading</button>
+                <button class="qz-chip" data-val="sludge-handling" onclick="fcToggleChip(this,'ww','topic')">Sludge</button>
+                <button class="qz-chip" data-val="npdes" onclick="fcToggleChip(this,'ww','topic')">NPDES</button>
+                <button class="qz-chip" data-val="nutrients" onclick="fcToggleChip(this,'ww','topic')">Nutrients</button>
+                <button class="qz-chip" data-val="disinfection" onclick="fcToggleChip(this,'ww','topic')">Disinfection</button>
+                <button class="qz-chip" data-val="hydraulics" onclick="fcToggleChip(this,'ww','topic')">Hydraulics</button>
+                <button class="qz-chip" data-val="lab-procedures" onclick="fcToggleChip(this,'ww','topic')">Lab</button>
+                <button class="qz-chip" data-val="safety" onclick="fcToggleChip(this,'ww','topic')">Safety</button>
+                <button class="qz-chip" data-val="regulations" onclick="fcToggleChip(this,'ww','topic')">Regulations</button>
+                <button class="qz-chip" data-val="collection-systems" onclick="fcToggleChip(this,'ww','topic')">Collection</button>
+                <button class="qz-chip" data-val="pretreatment" onclick="fcToggleChip(this,'ww','topic')">Pretreatment</button>
+              </div>
+            </div>
+            <p class="qz-filter-hint" id="ww-fc-pool-hint">180 cards in deck</p>
+            <button class="qz-start-btn" onclick="fcLaunch('ww', false)">Start Flashcards</button>
+            <button class="qz-missed-btn" id="ww-fc-weak-btn" onclick="fcLaunch('ww', true)">Study Weak Spots (<span id="ww-fc-weak-cnt">0</span>)</button>
+          </div>
+          <div id="ww-fc-deck" style="display:none">
+            <div class="fc-header">
+              <span class="fc-progress" id="ww-fc-progress">1 / 180</span>
+              <span class="fc-session-stat" id="ww-fc-session-stat">0 mastered</span>
+            </div>
+            <div class="fc-outer" onclick="fcFlip('ww')">
+              <div class="fc-card" id="ww-fc-card">
+                <div class="fc-face fc-front">
+                  <div class="fc-badge" id="ww-fc-badge"></div>
+                  <p class="fc-q-text" id="ww-fc-q-text"></p>
+                  <span class="fc-tap-hint">Tap card to reveal answer</span>
+                </div>
+                <div class="fc-face fc-back">
+                  <div class="fc-answer-text" id="ww-fc-answer-text"></div>
+                  <div class="fc-explain-text" id="ww-fc-explain-text"></div>
+                </div>
+              </div>
+            </div>
+            <div class="fc-actions" id="ww-fc-actions">
+              <button class="fc-learn-btn" onclick="fcLearn('ww')">Still Learning</button>
+              <button class="fc-know-btn" onclick="fcKnow('ww')">Know It ✓</button>
+            </div>
+          </div>
+          <div id="ww-fc-done" style="display:none">
+            <div class="fc-done-wrap">
+              <div class="fc-done-icon">🎓</div>
+              <div class="fc-done-title">Deck Complete!</div>
+              <div class="fc-done-stats" id="ww-fc-done-stats"></div>
+              <button class="qz-retake" onclick="fcBackToStart('ww')">New Deck</button>
+            </div>
           </div>
         </div>
       </div>
@@ -6627,6 +6833,138 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.getElementById(pfx + 'ex-result').classList.remove('show');
     document.getElementById(pfx + 'ex-start').style.display = 'block';
     exUpdateHint(disc);
+  }
+
+  // ── FLASHCARD ENGINE ──
+
+  const FC_FILTERS = {
+    dw: { grades: new Set(), topics: new Set() },
+    ww: { grades: new Set(), topics: new Set() }
+  };
+
+  let FC_STATE = { disc: 'dw', deck: [], idx: 0, flipped: false, sessionKnow: 0, sessionLearn: 0 };
+
+  function fcPfx(disc) { return disc === 'dw' ? '' : 'ww-'; }
+
+  function fcToggleChip(btn, disc, type) {
+    btn.classList.toggle('active');
+    const set = type === 'grade' ? FC_FILTERS[disc].grades : FC_FILTERS[disc].topics;
+    if (btn.classList.contains('active')) set.add(btn.dataset.val); else set.delete(btn.dataset.val);
+    fcUpdateHint(disc);
+  }
+
+  function fcBuildPool(disc, weakOnly) {
+    const bank   = disc === 'dw' ? QUIZ_BANK : WW_QUIZ_BANK;
+    const grades = FC_FILTERS[disc].grades;
+    const topics = FC_FILTERS[disc].topics;
+    const missed = qzLoadMissed();
+    return bank.filter(q => {
+      if (weakOnly && !missed.has(q.id)) return false;
+      if (grades.size > 0 && !q.grades.some(g => grades.has(g))) return false;
+      if (topics.size > 0 && !topics.has(q.topic)) return false;
+      return true;
+    });
+  }
+
+  function fcUpdateHint(disc) {
+    const pfx  = fcPfx(disc);
+    const pool = fcBuildPool(disc, false);
+    const hint = document.getElementById(pfx + 'fc-pool-hint');
+    if (hint) hint.textContent = pool.length + ' card' + (pool.length !== 1 ? 's' : '') + ' in deck';
+    const weakPool = fcBuildPool(disc, true);
+    const wBtn = document.getElementById(pfx + 'fc-weak-btn');
+    const wCnt = document.getElementById(pfx + 'fc-weak-cnt');
+    if (wBtn && wCnt) {
+      wCnt.textContent = weakPool.length;
+      if (weakPool.length > 0) wBtn.classList.add('show'); else wBtn.classList.remove('show');
+    }
+  }
+
+  function fcLaunch(disc, weakMode) {
+    const pool = fcBuildPool(disc, weakMode);
+    if (pool.length === 0) { alert(weakMode ? 'No weak spots yet — get some wrong first!' : 'No cards match those filters.'); return; }
+    const pfx    = fcPfx(disc);
+    const missed = qzLoadMissed();
+    const weak   = shuffleArr(pool.filter(q => missed.has(q.id)));
+    const rest   = shuffleArr(pool.filter(q => !missed.has(q.id)));
+    const deck   = [...weak, ...rest];
+    FC_STATE = { disc, deck, idx: 0, flipped: false, sessionKnow: 0, sessionLearn: 0 };
+    document.getElementById(pfx + 'fc-start').style.display = 'none';
+    document.getElementById(pfx + 'fc-done').style.display  = 'none';
+    document.getElementById(pfx + 'fc-deck').style.display  = 'block';
+    fcRender();
+  }
+
+  function fcRender() {
+    const { disc, deck, idx, sessionKnow } = FC_STATE;
+    const pfx    = fcPfx(disc);
+    const q      = deck[idx];
+    const missed = qzLoadMissed();
+    const isWeak = missed.has(q.id);
+
+    document.getElementById(pfx + 'fc-progress').textContent    = (idx + 1) + ' / ' + deck.length;
+    document.getElementById(pfx + 'fc-session-stat').textContent = sessionKnow + ' mastered this session';
+
+    document.getElementById(pfx + 'fc-badge').textContent       = (isWeak ? '⚠ weak · ' : '') + q.topic.replace(/-/g, ' ') + ' · ' + q.grades.join(' ');
+    document.getElementById(pfx + 'fc-q-text').textContent      = q.q;
+    document.getElementById(pfx + 'fc-answer-text').textContent = q.choices[q.answer];
+    document.getElementById(pfx + 'fc-explain-text').innerHTML  = q.explain;
+
+    document.getElementById(pfx + 'fc-card').classList.remove('flipped');
+    document.getElementById(pfx + 'fc-actions').classList.remove('show');
+    FC_STATE.flipped = false;
+  }
+
+  function fcFlip(disc) {
+    if (FC_STATE.disc !== disc || FC_STATE.flipped) return;
+    const pfx = fcPfx(disc);
+    document.getElementById(pfx + 'fc-card').classList.add('flipped');
+    document.getElementById(pfx + 'fc-actions').classList.add('show');
+    FC_STATE.flipped = true;
+  }
+
+  function fcKnow(disc) {
+    const q      = FC_STATE.deck[FC_STATE.idx];
+    const missed = qzLoadMissed();
+    missed.delete(q.id);
+    qzSaveMissed(missed);
+    FC_STATE.sessionKnow++;
+    fcAdvance(disc);
+  }
+
+  function fcLearn(disc) {
+    const q      = FC_STATE.deck[FC_STATE.idx];
+    const missed = qzLoadMissed();
+    missed.add(q.id);
+    qzSaveMissed(missed);
+    FC_STATE.sessionLearn++;
+    fcAdvance(disc);
+  }
+
+  function fcAdvance(disc) {
+    FC_STATE.idx++;
+    if (FC_STATE.idx >= FC_STATE.deck.length) fcDone(disc); else fcRender();
+  }
+
+  function fcDone(disc) {
+    const { sessionKnow, sessionLearn } = FC_STATE;
+    const pfx     = fcPfx(disc);
+    const weakLeft = fcBuildPool(disc, true).length;
+    document.getElementById(pfx + 'fc-deck').style.display = 'none';
+    document.getElementById(pfx + 'fc-done').style.display = 'block';
+    document.getElementById(pfx + 'fc-done-stats').innerHTML =
+      '<b>' + sessionKnow + '</b> mastered &nbsp;&middot;&nbsp; <b>' + sessionLearn + '</b> still learning<br>' +
+      (weakLeft > 0
+        ? weakLeft + ' card' + (weakLeft !== 1 ? 's' : '') + ' remain in your weak spots queue'
+        : '🎉 No weak spots remaining!');
+    fcUpdateHint(disc);
+  }
+
+  function fcBackToStart(disc) {
+    const pfx = fcPfx(disc);
+    document.getElementById(pfx + 'fc-done').style.display  = 'none';
+    document.getElementById(pfx + 'fc-start').style.display = 'block';
+    fcUpdateHint(disc);
   }
 
   // ── FORMULA ITEMS ──
