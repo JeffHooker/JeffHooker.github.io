@@ -8781,8 +8781,974 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     ],
     answer: 1,
     explain: "<b>Grease and oil coat equipment, clog pipes, foul aeration diffusers, and can inhibit biological treatment.</b> Fats, oils, and grease (FOG) are regulated through pretreatment programs for food service establishments and other grease-generating industries."
+  },
+
+  // --- ADVANCED PROCESS CALCULATIONS (WW2–WW4) ---
+  {
+    id:"ww-0101", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "An aeration basin holds 500,000 gallons of mixed liquor with an MLSS of 2,500 mg/L. What is the total mass of solids in the basin (lbs)?",
+    choices: ["1,043 lbs", "5,213 lbs", "10,425 lbs", "20,850 lbs"],
+    answer: 2,
+    explain: "<b>lbs = concentration (mg/L) × volume (MG) × 8.34 lb/gal. Volume = 500,000 gal = 0.5 MG. lbs = 2,500 × 0.5 × 8.34 = 10,425 lbs.</b> This mass of solids is used to calculate waste sludge volumes and SRT."
+  },
+  {
+    id:"ww-0102", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "A plant must maintain an SRT of 10 days. The system contains 10,425 lbs of MLSS. What is the required waste activated sludge (WAS) rate in lbs per day?",
+    choices: ["521 lbs/day", "1,043 lbs/day", "2,086 lbs/day", "10,425 lbs/day"],
+    answer: 1,
+    explain: "<b>WAS (lbs/day) = Total system solids ÷ SRT = 10,425 ÷ 10 = 1,043 lbs/day.</b> The system must waste this many pounds daily to maintain the target SRT. If SRT is too long, old sludge degrades; too short, pathogens and treatment quality suffer."
+  },
+  {
+    id:"ww-0103", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "Return activated sludge (RAS) concentration is 8,000 mg/L. The aeration basin MLSS must be maintained at 2,000 mg/L and influent TSS is negligible. What RAS flow ratio (RAS flow ÷ influent flow) is required?",
+    choices: ["0.20", "0.25", "0.33", "0.50"],
+    answer: 2,
+    explain: "<b>RAS ratio = MLSS ÷ (RAS concentration − MLSS) = 2,000 ÷ (8,000 − 2,000) = 2,000 ÷ 6,000 = 0.33.</b> For every 1 MGD of influent, 0.33 MGD of RAS is returned. Higher RAS concentrations allow lower RAS flow ratios while maintaining the same MLSS."
+  },
+  {
+    id:"ww-0104", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "A wastewater plant receives 3.0 MGD with an influent BOD of 250 mg/L and produces an effluent with a BOD of 10 mg/L. What is the BOD removal efficiency?",
+    choices: ["84%", "88%", "96%", "99.6%"],
+    answer: 2,
+    explain: "<b>% removal = (influent − effluent) ÷ influent × 100 = (250 − 10) ÷ 250 × 100 = 240 ÷ 250 × 100 = 96%.</b> Secondary treatment secondary standards require 85% BOD removal. This plant exceeds requirements with 96% removal."
+  },
+  {
+    id:"ww-0105", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "A plant receives 3.0 MGD at 250 mg/L BOD. What is the daily BOD loading in lbs/day?",
+    choices: ["625 lbs/day", "3,130 lbs/day", "6,255 lbs/day", "12,510 lbs/day"],
+    answer: 2,
+    explain: "<b>lbs/day = mg/L × MGD × 8.34 = 250 × 3.0 × 8.34 = 6,255 lbs/day.</b> BOD loading drives oxygen demand, sludge production, and biological capacity. Design loading determines required aeration capacity and basin volume."
+  },
+  {
+    id:"ww-0106", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "The F/M ratio at a plant is 0.25 lb BOD/lb MLVSS/day. The aeration basin contains 8,000 lbs of MLVSS. What is the daily BOD applied (lbs/day)?",
+    choices: ["320 lbs/day", "2,000 lbs/day", "8,000 lbs/day", "32,000 lbs/day"],
+    answer: 1,
+    explain: "<b>F/M = lbs BOD applied per day ÷ lbs MLVSS in system. BOD applied = F/M × MLVSS = 0.25 × 8,000 = 2,000 lbs/day.</b> F/M ratios for conventional activated sludge: 0.2–0.5 lb BOD/lb MLVSS/day. Extended aeration: 0.05–0.15."
+  },
+  {
+    id:"ww-0107", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"calc",
+    q: "The oxygen demand for BOD removal in activated sludge is approximately 1.0–1.5 lbs O₂ per lb BOD removed. If a plant removes 6,000 lbs BOD/day using 1.2 lbs O₂/lb BOD, what is the oxygen demand in lbs/day?",
+    choices: ["5,000 lbs O₂/day", "7,200 lbs O₂/day", "9,000 lbs O₂/day", "12,000 lbs O₂/day"],
+    answer: 1,
+    explain: "<b>O₂ demand = 6,000 × 1.2 = 7,200 lbs/day.</b> Nitrification adds approximately 4.6 lbs O₂ per lb of ammonia-N oxidized. Total oxygen demand guides aeration system design and energy management."
+  },
+  {
+    id:"ww-0108", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"calc",
+    q: "A secondary clarifier has a surface area of 5,000 ft² and receives 3.0 MGD. What is the surface overflow rate (SOR) in GPD/ft²?",
+    choices: ["300 GPD/ft²", "600 GPD/ft²", "900 GPD/ft²", "1,500 GPD/ft²"],
+    answer: 1,
+    explain: "<b>SOR = flow (GPD) ÷ area (ft²) = 3,000,000 ÷ 5,000 = 600 GPD/ft².</b> Design SOR for secondary clarifiers: 400–800 GPD/ft² average flow; 1,000–1,200 GPD/ft² peak. Exceeding the SOR causes sludge blanket rise and solids loss to effluent."
+  },
+  {
+    id:"ww-0109", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "A plant wastes 1,043 lbs/day of WAS at a concentration of 0.8% solids (8,000 mg/L). What volume of WAS must be wasted per day (in gallons)?",
+    choices: ["833 gal/day", "1,560 gal/day", "15,600 gal/day", "156,000 gal/day"],
+    answer: 2,
+    explain: "<b>Volume = mass ÷ (concentration × 8.34) = 1,043 lbs/day ÷ (8,000 mg/L × 8.34 lb/MG·(mg/L)⁻¹). Convert: 8,000 mg/L × 8.34 × 10⁻⁶ MG/gal = 0.0000667 lb/gal. Volume = 1,043 ÷ 0.0000667 = 15,637 ≈ 15,600 gal/day.</b> Alternatively: 1,043 ÷ (8,000 × 8.34 ÷ 1,000,000) = 15,637 GPD."
+  },
+  {
+    id:"ww-0110", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "A plant produces 10,000 lbs/day of sludge at 3% solids. What volume of sludge (gallons/day) must be handled?",
+    choices: ["3,330 gal/day", "10,000 gal/day", "39,900 gal/day", "100,000 gal/day"],
+    answer: 2,
+    explain: "<b>Sludge volume = lbs dry solids ÷ (% solids ÷ 100 × 8.34 lb/gal). = 10,000 ÷ (0.03 × 8.34) = 10,000 ÷ 0.250 = 39,900 gal/day.</b> Thickening sludge from 3% to 6% solids halves the volume, reducing pumping and digestion costs."
+  },
+  {
+    id:"ww-0111", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW3","WW4"], diff:3, type:"calc",
+    q: "A plant achieves 75% total nitrogen (TN) removal. The influent TN is 40 mg/L. What is the effluent TN concentration?",
+    choices: ["5 mg/L", "10 mg/L", "20 mg/L", "30 mg/L"],
+    answer: 1,
+    explain: "<b>Effluent TN = influent × (1 − % removal) = 40 × (1 − 0.75) = 40 × 0.25 = 10 mg/L.</b> Many NPDES permits with sensitive receiving water require TN ≤10 mg/L or even ≤3 mg/L, necessitating biological nitrogen removal (BNR) with nitrification and denitrification."
+  },
+  {
+    id:"ww-0112", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW3","WW4"], diff:3, type:"calc",
+    q: "Biological nitrification requires approximately 4.6 lbs O₂ per lb of ammonia-N oxidized. A plant nitrifies 15 mg/L of ammonia at 2.0 MGD. What is the additional oxygen demand from nitrification (lbs/day)?",
+    choices: ["150 lbs/day", "920 lbs/day", "1,150 lbs/day", "2,300 lbs/day"],
+    answer: 2,
+    explain: "<b>lbs NH₃-N/day = 15 × 2.0 × 8.34 = 250 lbs/day. O₂ demand = 250 × 4.6 = 1,150 lbs/day.</b> Nitrification significantly increases aeration requirements. Systems converting to BNR must verify existing blowers can handle the additional nitrification oxygen demand."
+  },
+  {
+    id:"ww-0113", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "A pump delivers 1,200 GPM against a TDH of 55 ft. What is the water horsepower (WHP)?",
+    choices: ["8.5 WHP", "16.7 WHP", "33.3 WHP", "66.0 WHP"],
+    answer: 1,
+    explain: "<b>WHP = GPM × TDH ÷ 3,960 = 1,200 × 55 ÷ 3,960 = 66,000 ÷ 3,960 = 16.7 WHP.</b> Brake HP (motor size) = WHP ÷ efficiency. At 80% efficiency: BHP = 16.7 ÷ 0.80 = 20.9 HP."
+  },
+  {
+    id:"ww-0114", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
+    q: "A wet well receives 2.0 MGD average flow. During peak hour flow (peaking factor = 2.5), what is the peak flow in GPM?",
+    choices: ["694 GPM", "1,736 GPM", "2,085 GPM", "3,472 GPM"],
+    answer: 3,
+    explain: "<b>Average flow = 2,000,000 gal ÷ 1,440 min = 1,389 GPM. Peak flow = 1,389 × 2.5 = 3,472 GPM.</b> Peaking factors account for morning/evening usage surges. Collection system pumping stations and treatment plant hydraulics must handle peak flows without overflow."
+  },
+  {
+    id:"ww-0115", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Volatile acids (VA) in an anaerobic digester are measured to assess:",
+    choices: [
+      "The oxygen content remaining in the digester gas",
+      "Process stability — elevated volatile acids (>200–300 mg/L as acetic acid) indicate stress or overloading",
+      "The pH of the digester influent only",
+      "The concentration of ammonia produced during digestion"
+    ],
+    answer: 1,
+    explain: "<b>VA accumulation is an early warning sign of digester instability.</b> The VA/alkalinity ratio (should be <0.1–0.2) is a key control parameter. High VA with declining pH indicates methanogens are being inhibited. Reduce organic loading and/or add alkalinity (sodium bicarbonate) to recover."
+  },
+  {
+    id:"ww-0116", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Chemical Oxygen Demand (COD) differs from BOD₅ because:",
+    choices: [
+      "COD measures only inorganic oxygen demand; BOD measures only organic",
+      "COD chemically oxidizes all organic matter (including non-biodegradable organics) giving a faster result; BOD₅ measures only biologically degradable organics",
+      "COD requires 5 days; BOD₅ requires 2 hours",
+      "COD results are always lower than BOD₅ results for the same sample"
+    ],
+    answer: 1,
+    explain: "<b>COD uses a chemical oxidant (dichromate) to oxidize all organic matter in ~2 hours.</b> COD ≥ BOD (BOD is a subset — only biodegradable fraction). The BOD/COD ratio indicates biodegradability: industrial waste with ratio <0.3 may be poorly treatable by biological processes."
+  },
+  {
+    id:"ww-0117", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Anaerobic digester gas typically contains what composition?",
+    choices: [
+      "80–90% nitrogen, 10–20% carbon dioxide",
+      "60–70% methane (CH₄) and 30–40% carbon dioxide (CO₂)",
+      "50% hydrogen sulfide, 50% carbon dioxide",
+      "90% methane, 5% carbon dioxide, 5% hydrogen sulfide"
+    ],
+    answer: 1,
+    explain: "<b>Digester gas is typically 60–70% methane and 30–40% CO₂, with trace H₂S.</b> Methane content depends on substrate — fats produce more methane than carbohydrates. Digester gas (biogas) can be used for heat (to maintain digester temperature at 95–100°F) or electricity generation via cogeneration."
+  },
+  {
+    id:"ww-0118", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "The volatile solids destruction (VSD) target for a well-operating anaerobic digester is:",
+    choices: [
+      "10–20% VSD",
+      "38–50% VSD",
+      "60–70% VSD",
+      "90–100% VSD"
+    ],
+    answer: 1,
+    explain: "<b>Well-operated mesophilic anaerobic digesters typically achieve 38–50% volatile solids reduction.</b> Higher VSD indicates better stabilization. Thermophilic digesters (130–135°F) can achieve higher VSD and provide Class A pathogen reduction at elevated temperatures."
+  },
+  {
+    id:"ww-0119", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Belt filter presses (BFPs) and centrifuges are used in biosolids dewatering. Polymer addition before dewatering is required to:",
+    choices: [
+      "Lower pH of the sludge for better pathogen reduction",
+      "Condition the sludge — cationic polymers neutralize the negative charge on biosolids particles, improving their ability to coagulate and release water",
+      "Add alkalinity to meet lime stabilization requirements",
+      "Increase volatile solids content of the cake"
+    ],
+    answer: 1,
+    explain: "<b>Biosolids particles are negatively charged; cationic polymers neutralize this charge, promoting floc formation and water release.</b> Polymer dose is optimized to minimize chemical cost while achieving target cake solids content (typically 18–25% for BFP, 25–35% for centrifuge)."
+  },
+  {
+    id:"ww-0120", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "Lime stabilization of biosolids works by:",
+    choices: [
+      "Digesting volatile solids anaerobically using calcium as a carbon source",
+      "Raising pH above 12 for at least 2 hours, which destroys pathogens and reduces vector attraction",
+      "Precipitating heavy metals as calcium complexes",
+      "Neutralizing volatile acids to halt anaerobic digestion"
+    ],
+    answer: 1,
+    explain: "<b>Adding quicklime (CaO) or hydrated lime (Ca(OH)₂) raises biosolids pH above 12, achieving Class B pathogen reduction.</b> The exothermic reaction also raises temperature. Advanced alkaline stabilization (pH >12 for 72 hours at 52°C) can achieve Class A. Lime-stabilized biosolids are easier to land-apply in emergency situations."
+  },
+
+  // --- COLLECTION SYSTEMS ---
+  {
+    id:"ww-0121", discipline:"ww", sub:"wastewater", topic:"collection-systems",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
+    q: "The minimum self-cleaning velocity in a gravity sewer main is typically:",
+    choices: ["0.5 ft/s", "2.0 ft/s", "5.0 ft/s", "10.0 ft/s"],
+    answer: 1,
+    explain: "<b>Self-cleaning velocity of 2.0 ft/s (at design flow) prevents grit and solids deposition in sewer mains.</b> Slopes are designed to maintain this velocity. Flat sections accumulate grit and debris, requiring mechanical cleaning (jetting, rodding) and potentially becoming odor sources from septicity."
+  },
+  {
+    id:"ww-0122", discipline:"ww", sub:"wastewater", topic:"collection-systems",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "A sanitary sewer overflow (SSO) occurs when:",
+    choices: [
+      "A wastewater treatment plant exceeds its permitted NPDES discharge flow",
+      "Wastewater escapes from the collection system before reaching the treatment plant — typically during wet weather from I/I or system blockages",
+      "Reclaimed water is discharged to the storm drain rather than the irrigation system",
+      "A lift station fails to pump during normal dry-weather flow"
+    ],
+    answer: 1,
+    explain: "<b>SSOs are unauthorized discharges of raw wastewater from the collection system.</b> They are reportable violations under the Clean Water Act. Causes include I/I overwhelming system capacity, blockages (roots, grease), and pump station failures. EPA's SSO rule requires incident reporting and corrective action."
+  },
+  {
+    id:"ww-0123", discipline:"ww", sub:"wastewater", topic:"collection-systems",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "A force main in a wastewater collection system is a:",
+    choices: [
+      "Gravity sewer main with steep slope for high velocity",
+      "Pressurized pipe that conveys wastewater under pressure from a lift station",
+      "Interceptor sewer connecting multiple collection systems",
+      "Sewer main that forces solids through a screening process"
+    ],
+    answer: 1,
+    explain: "<b>Force mains carry wastewater under pressure from a pump station when gravity flow is not possible (low-lying areas, crossing obstacles).</b> They are prone to septicity and H₂S generation due to long retention times. Air-release valves are required at high points."
+  },
+  {
+    id:"ww-0124", discipline:"ww", sub:"wastewater", topic:"collection-systems",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "Grease accumulation (FOG — fats, oils, and grease) in sewer mains is primarily controlled through:",
+    choices: [
+      "Increasing sewer slope to maintain higher velocities",
+      "Grease interceptors (grease traps) at food service establishments, combined with regular sewer jetting and FOG disposal education",
+      "Chlorinating the collection system to dissolve fats",
+      "Installing special FOG-resistant pipe liners in commercial districts"
+    ],
+    answer: 1,
+    explain: "<b>Grease interceptors capture FOG before it enters the sewer, preventing accumulation that causes blockages and SSOs.</b> Pre-treatment standards (local limits) require food service establishments to maintain grease interceptors and pump them regularly. Regulatory authority is through the pretreatment program."
+  },
+  {
+    id:"ww-0125", discipline:"ww", sub:"wastewater", topic:"collection-systems",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Closed-circuit television (CCTV) inspection of sewers is used to:",
+    choices: [
+      "Monitor flow in real time at all manhole locations",
+      "Visually assess pipe condition — identifying cracks, root intrusion, offset joints, and structural deficiencies to prioritize rehabilitation",
+      "Detect H₂S gas concentrations without entering the sewer",
+      "Measure I/I rates during storm events"
+    ],
+    answer: 1,
+    explain: "<b>CCTV inspection is the standard method for sewer condition assessment.</b> Video is recorded and rated using NASSCO PACP (Pipeline Assessment and Certification Program) codes. Pipe condition data drives capital improvement planning, targeting worst-condition mains for lining, point repair, or replacement."
+  },
+  {
+    id:"ww-0126", discipline:"ww", sub:"wastewater", topic:"collection-systems",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Cured-in-place pipe (CIPP) lining is a trenchless rehabilitation method that:",
+    choices: [
+      "Replaces existing pipe by pulling new pipe through the old one (pipe bursting)",
+      "Installs a resin-impregnated felt liner inside the existing pipe, which is cured to form a new structural pipe within the old host pipe",
+      "Applies a cement-mortar spray coating to the interior of existing pipe",
+      "Installs slip-lined HDPE pipe inside the existing pipe with the annular space grouted"
+    ],
+    answer: 1,
+    explain: "<b>CIPP installs a flexible liner impregnated with thermosetting resin (polyester or vinyl ester), which is cured by hot water, steam, or UV light to create a new pipe inside the old one.</b> CIPP reduces pipe diameter slightly but seals infiltration, eliminates root intrusion, and is faster and less costly than open-cut replacement."
+  },
+  {
+    id:"ww-0127", discipline:"ww", sub:"wastewater", topic:"collection-systems",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "A pump station wet well volume must be designed to provide sufficient cycle time to prevent:",
+    choices: [
+      "Cavitation in the pump impellers",
+      "Excessive starts per hour (motor overheating) while also preventing septicity from excessively long retention times",
+      "Air binding in the force main at high points",
+      "Excessive velocity in the influent gravity sewer"
+    ],
+    answer: 1,
+    explain: "<b>Wet well design balances two competing concerns: enough volume to limit pump starts (≤6–10 per hour for submersible pumps) but not so much that wastewater becomes septic from long detention time.</b> Detention times >30 minutes at average flow can lead to H₂S generation and odor problems."
+  },
+  {
+    id:"ww-0128", discipline:"ww", sub:"wastewater", topic:"collection-systems",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Flow measurement in a gravity sewer using a Parshall flume measures:",
+    choices: [
+      "Pressure differential between two points in the sewer",
+      "Flow velocity and depth, with depth converted to flow using a calibrated relationship for the flume geometry",
+      "Conductivity changes to calculate flow from dissolved solids",
+      "Ultrasonic Doppler shift in the flowing wastewater"
+    ],
+    answer: 1,
+    explain: "<b>Parshall flumes create a controlled hydraulic condition (critical flow throat) where flow rate is a function of upstream head depth only.</b> Used in open-channel flow measurement at treatment plant influent and interceptor sewers. Submerged conditions (throat depth > 70% of upstream depth) reduce accuracy."
+  },
+
+  // --- INDUSTRIAL PRETREATMENT ---
+  {
+    id:"ww-0129", discipline:"ww", sub:"wastewater", topic:"pretreatment",
+    grades:["WW3","WW4"], diff:3, type:"reg",
+    q: "A Publicly Owned Treatment Works (POTW) must implement a pretreatment program when:",
+    choices: [
+      "Any industrial discharge exceeds 25,000 GPD",
+      "The POTW has a design flow ≥5 MGD or receives significant industrial users (SIUs) whose discharge could interfere with operations, pass through untreated, or contaminate biosolids",
+      "The POTW violates its NPDES permit more than twice in any 12-month period",
+      "Industrial users account for more than 10% of total BOD loading"
+    ],
+    answer: 1,
+    explain: "<b>Pretreatment programs are required for POTWs that receive industrial influent that could interfere with treatment, pass through to receiving waters, or contaminate biosolids.</b> Approval authority (EPA or state) approves the program; the POTW becomes the Control Authority issuing permits to industrial users."
+  },
+  {
+    id:"ww-0130", discipline:"ww", sub:"wastewater", topic:"pretreatment",
+    grades:["WW3","WW4"], diff:3, type:"reg",
+    q: "Categorical pretreatment standards set limits on industrial discharges based on:",
+    choices: [
+      "The total volume of water used per unit of production",
+      "The best available technology (BAT) for each industrial category — different limits for each industry type (metal finishing, electroplating, food processing, etc.)",
+      "The POTW's individual NPDES permit effluent limits",
+      "The distance from the industrial facility to the POTW"
+    ],
+    answer: 1,
+    explain: "<b>Categorical standards are national technology-based limits for specific industrial categories (40 CFR Part 400 et seq.).</b> They limit pollutants at the source (end of pipe) before industrial wastewater enters the sewer system. POTWs may impose more stringent local limits if the categorical standards are not sufficient."
+  },
+  {
+    id:"ww-0131", discipline:"ww", sub:"wastewater", topic:"pretreatment",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "The general pretreatment prohibitions in 40 CFR Part 403 prohibit industrial users from discharging to the sewer:",
+    choices: [
+      "Any wastewater with BOD above 300 mg/L",
+      "Pollutants that could cause fire or explosion (flammables), corrode the sewer (pH <5), clog the sewer, cause excessive heat (>40°C / 104°F), or interfere with treatment",
+      "Any wastewater containing metals in any concentration",
+      "Any discharge that exceeds the POTW's influent concentration for a given parameter"
+    ],
+    answer: 1,
+    explain: "<b>General prohibitions protect the collection system and treatment plant from safety hazards and interference.</b> Specific prohibitions include: flammable materials (flash point <140°F), concentrated acids (pH <5.0 unless neutralized), and discharges that alone could create 10% of the LEL in the sewer atmosphere."
+  },
+  {
+    id:"ww-0132", discipline:"ww", sub:"wastewater", topic:"pretreatment",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Local limits in a pretreatment program are derived by:",
+    choices: [
+      "Using the most stringent categorical standard from any industrial user in the service area",
+      "Working backward from NPDES permit limits and biosolids standards to determine the maximum allowable headworks loading (MAHL) for each pollutant",
+      "Applying EPA's national pretreatment standards directly to all industrial users",
+      "Setting limits 10% below the POTW's actual influent concentrations"
+    ],
+    answer: 1,
+    explain: "<b>Local limits protect: NPDES effluent compliance, biosolids quality (Part 503 metals limits), inhibition of biological treatment, and collection system integrity.</b> The MAHL calculation allocates available assimilative capacity across all industrial users. Local limits may be more stringent than national categorical standards."
+  },
+
+  // --- ADVANCED NUTRIENTS AND BNR ---
+  {
+    id:"ww-0133", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Biological Nutrient Removal (BNR) systems that remove both nitrogen and phosphorus typically use which configuration?",
+    choices: [
+      "Single aeration basin with continuous aeration",
+      "Anaerobic–anoxic–aerobic (A²/O or similar) zones to support PAOs (phosphorus) and denitrification (nitrogen) in the same process",
+      "Two separate treatment trains — one for nitrogen, one for phosphorus",
+      "Anoxic zones alone, followed by aerobic zones for polishing"
+    ],
+    answer: 1,
+    explain: "<b>A²/O (anaerobic → anoxic → aerobic) provides: (1) anaerobic zone for PAO phosphorus release and VFA uptake; (2) anoxic zone for denitrification using internal recycle of nitrate; (3) aerobic zone for nitrification and PAO phosphorus uptake.</b> Variants include UCT, MLE, Bardenpho, and 5-stage processes."
+  },
+  {
+    id:"ww-0134", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Simultaneous nitrification/denitrification (SND) in activated sludge can occur when:",
+    choices: [
+      "Very low F/M ratio causes complete oxygen consumption",
+      "DO is controlled at 0.5–1.5 mg/L, creating anoxic microenvironments within floc particles where denitrification occurs simultaneously with aerobic nitrification on floc exterior",
+      "Aeration is intermittently turned off and on in a conventional basin",
+      "The SRT is extended beyond 30 days"
+    ],
+    answer: 1,
+    explain: "<b>At low DO, oxygen is consumed at the floc exterior while anoxic conditions develop inside floc particles, allowing denitrification to occur simultaneously.</b> SND reduces TN without dedicated anoxic zones, but requires precise DO control and is less predictable than zone-based BNR."
+  },
+  {
+    id:"ww-0135", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW4"], diff:3, type:"concept",
+    q: "Anammox (anaerobic ammonium oxidation) is used in sidestream nitrogen removal because:",
+    choices: [
+      "It requires an organic carbon source, making it compatible with the high-carbon mainstream",
+      "It converts ammonia and nitrite directly to nitrogen gas without organic carbon — making it highly energy-efficient for treating high-ammonia reject water",
+      "It achieves phosphorus removal simultaneously with nitrogen removal",
+      "It is the primary pathway for nitrogen removal in conventional activated sludge systems"
+    ],
+    answer: 1,
+    explain: "<b>Anammox bacteria oxidize ammonia using nitrite as the electron acceptor, producing nitrogen gas without organic carbon requirement.</b> It is used in SHARON/ANAMMOX or DEMON processes to treat digester reject water (high NH₃, no carbon). Energy savings vs. conventional nitrification/denitrification are 60%+."
+  },
+  {
+    id:"ww-0136", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Struvite (MgNH₄PO₄) precipitation in digester pipes and equipment occurs because:",
+    choices: [
+      "Digestion concentrates magnesium, ammonia, and phosphate above saturation — precipitation is triggered by pH rise and pressure drop in dewatering equipment",
+      "Thermophilic digestion produces magnesium as a metabolic byproduct",
+      "Polymer addition during dewatering reacts with phosphate to form struvite",
+      "Struvite forms only in aerobic digesters, not anaerobic digesters"
+    ],
+    answer: 0,
+    explain: "<b>Digestion releases ammonia and phosphate from biosolids; at high pH (from CO₂ stripping at dewatering) and with ambient magnesium, struvite precipitates spontaneously.</b> Struvite can be harvested as a slow-release fertilizer (e.g., Ostara Pearl process) rather than causing equipment scaling."
+  },
+  {
+    id:"ww-0137", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "An internal recycle (IMLR) pump in a Modified Ludzack-Ettinger (MLE) BNR process recycles:",
+    choices: [
+      "Return activated sludge from the secondary clarifier to the anoxic zone",
+      "Nitrified mixed liquor from the aerobic zone back to the anoxic zone, providing nitrate for denitrification",
+      "Settled sludge from the primary clarifier to the anaerobic zone",
+      "Effluent from the secondary clarifier to the anoxic zone as a dilution water"
+    ],
+    answer: 1,
+    explain: "<b>The IMLR returns aerobic zone mixed liquor (rich in nitrate from nitrification) to the anoxic zone.</b> There, denitrifying bacteria reduce nitrate to N₂ using influent wastewater carbon. Higher recycle ratios (3–5Q) improve TN removal but increase energy costs and can introduce DO into the anoxic zone."
+  },
+  {
+    id:"ww-0138", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW3","WW4"], diff:3, type:"calc",
+    q: "A biological phosphorus removal system must achieve effluent TP ≤ 1.0 mg/L from influent TP of 7 mg/L. What percentage P removal is required?",
+    choices: ["75.3%", "82.1%", "85.7%", "91.4%"],
+    answer: 2,
+    explain: "<b>% removal = (7 − 1) ÷ 7 × 100 = 6 ÷ 7 × 100 = 85.7%.</b> EBPR can typically achieve 80–90% P removal; chemical polishing (alum or ferric) is often needed to reliably meet ≤1 mg/L limits."
+  },
+  {
+    id:"ww-0139", discipline:"ww", sub:"wastewater", topic:"disinfection",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "UV disinfection dose for wastewater effluent is expressed in mJ/cm². The dose is calculated as:",
+    choices: [
+      "UV lamp wattage × contact time in the channel",
+      "UV intensity (mW/cm²) × exposure time (seconds) — both measured at the design transmittance and flow rate",
+      "Total UV output (watts) ÷ flow rate (MGD)",
+      "Number of UV lamps × lamp life (hours)"
+    ],
+    answer: 1,
+    explain: "<b>UV dose = intensity (mW/cm²) × time (s) = mW·s/cm² = mJ/cm².</b> Effective dose (or RED — reduction equivalent dose) accounts for lamp fouling, aging, and UV transmittance of the effluent. Higher TSS and lower UV transmittance reduce the effective dose delivered."
+  },
+  {
+    id:"ww-0140", discipline:"ww", sub:"wastewater", topic:"disinfection",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Chlorine contact time (CT) for effluent disinfection differs from drinking water CT because:",
+    choices: [
+      "Wastewater CT uses free chlorine only; drinking water uses total chlorine",
+      "Wastewater CT values are not standardized; effluent coliform limits define the performance target (e.g., 200 MPN/100 mL) rather than a prescribed CT",
+      "Drinking water CT is calculated from tables; wastewater CT is calculated from first-principles chemistry",
+      "Wastewater requires higher CT than drinking water because pathogens are more resistant"
+    ],
+    answer: 1,
+    explain: "<b>For wastewater effluent, operators target the effluent coliform limit directly rather than a CT table value.</b> Chlorine dose is adjusted based on effluent quality, chlorine demand, and contact time. The high chlorine demand of wastewater (from NH₃, organics, TSS) means far more chlorine is needed per mg/L residual than in drinking water."
+  },
+
+  // --- ADVANCED ACTIVATED SLUDGE / ALTERNATE PROCESSES ---
+  {
+    id:"ww-0141", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Moving Bed Biofilm Reactor (MBBR) technology differs from conventional activated sludge because:",
+    choices: [
+      "MBBR uses dissolved air flotation instead of secondary clarification",
+      "Biomass grows on plastic carrier media that moves freely in the basin — no return sludge system is needed",
+      "MBBR operates at much higher F/M ratios than conventional activated sludge",
+      "MBBR requires pure oxygen aeration rather than air"
+    ],
+    answer: 1,
+    explain: "<b>MBBR uses polyethylene carriers (protected biofilm surface) suspended freely in the aeration basin — no RAS return is required.</b> MBBRs are used as standalone treatment or as a hybrid with activated sludge (IFAS). They tolerate variable loads well and have a smaller footprint than conventional AS."
+  },
+  {
+    id:"ww-0142", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Membrane Bioreactor (MBR) systems maintain very high MLSS concentrations (8,000–15,000 mg/L) because:",
+    choices: [
+      "High MLSS improves oxygen transfer to the biomass",
+      "The membrane separates solids regardless of settling characteristics, removing the settling limitation that constrains conventional AS MLSS to 2,000–4,000 mg/L",
+      "Higher MLSS reduces the aeration requirements per unit BOD",
+      "MBR membranes need high solids loading to function properly"
+    ],
+    answer: 1,
+    explain: "<b>MBR membranes (MF or UF) physically retain all solids regardless of SVI, allowing higher MLSS and longer SRT than conventional clarifiers permit.</b> Higher SRT enables full nitrification and improved pathogen reduction. The tradeoff is higher energy cost for membrane aeration (fouling control) and membrane replacement cost."
+  },
+  {
+    id:"ww-0143", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Step-feed activated sludge distributes influent wastewater at multiple points along the aeration basin to:",
+    choices: [
+      "Increase the total aeration basin volume by diluting the influent",
+      "Equalize organic loading along the basin, reducing peak oxygen demand and preventing DO sag at the head end",
+      "Provide multiple points for chlorine addition for pre-disinfection",
+      "Allow the plant to operate at higher F/M ratios without sludge bulking"
+    ],
+    answer: 1,
+    explain: "<b>Step-feed distributes the food load across the basin, preventing the high-oxygen-demand zone at the influent end seen in plug-flow systems.</b> It also allows the plant to adapt to wet-weather peak flows by concentrating influent at the head end (step-feed becomes contact stabilization during peaks)."
+  },
+  {
+    id:"ww-0144", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "Aerobic digestion of waste activated sludge (WAS) differs from anaerobic digestion in that:",
+    choices: [
+      "Aerobic digestion is faster and produces more biogas",
+      "Aerobic digestion uses oxygen to endogenously respire cell mass; it does not require a closed vessel, produces no biogas, but has higher energy cost and smaller volume reduction",
+      "Aerobic digestion operates at higher temperatures and requires sealed digesters",
+      "Aerobic digestion achieves better volatile solids reduction than anaerobic digestion"
+    ],
+    answer: 1,
+    explain: "<b>Aerobic digestion is simpler (open tanks with diffused air) and achieves Class B pathogen reduction but uses more energy than anaerobic digestion and produces no recoverable energy (no biogas).</b> It is more common at smaller plants where anaerobic digestion economics are less favorable."
+  },
+  {
+    id:"ww-0145", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Selector zones (contact zones) are added before the aeration basin in bulking control to:",
+    choices: [
+      "Pre-screen influent TSS before biological treatment",
+      "Create high F/M conditions that favor floc-forming bacteria over filamentous organisms, suppressing bulking",
+      "Pre-aerate the influent to drive off H₂S from the collection system",
+      "Provide phosphorus release for EBPR by creating anaerobic conditions"
+    ],
+    answer: 1,
+    explain: "<b>Selectors create a high-F/M zone (aerobic, anoxic, or anaerobic) at the influent where floc formers quickly consume available substrate.</b> Filamentous organisms are slower to uptake substrate and are outcompeted. Aerobic selectors are simple but less effective; anoxic/anaerobic selectors are more effective for Microthrix."
+  },
+  {
+    id:"ww-0146", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Thermal drying of biosolids (to produce Class A pellets or granules) achieves which advantage over dewatered cake?",
+    choices: [
+      "Lower energy cost than belt press dewatering",
+      "Produces a dry, stable, Class A product with >90% solids that can be marketed as fertilizer or fuel — reduces hauling volume and landfill costs",
+      "Greater volatile solids reduction than anaerobic digestion",
+      "Eliminates the need for prior anaerobic digestion"
+    ],
+    answer: 1,
+    explain: "<b>Thermal drying reduces biosolids to granular product at >90% solids, achieving Class A (meets both pathogen and vector reduction requirements).</b> Dried biosolids have fertilizer value and reduced hauling cost but require significant energy input. Milorganite (Milwaukee) and Synagro products are examples."
+  },
+  {
+    id:"ww-0147", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Co-digestion in an anaerobic digester involves:",
+    choices: [
+      "Mixing primary and secondary sludge before digestion",
+      "Adding high-strength organic waste (food scraps, fats/oils/grease, industrial organics) to the digester to increase biogas production",
+      "Simultaneously operating mesophilic and thermophilic digestion in sequence",
+      "Combining aerobic and anaerobic digestion in alternating cycles"
+    ],
+    answer: 1,
+    explain: "<b>Co-digestion of high-strength organics (food waste, restaurant grease trap waste, industrial sludges) significantly increases biogas yield and can improve digester economics.</b> FOG received at the plant — a nuisance that blocks sewers — becomes a revenue-positive input at proper co-digestion facilities."
+  },
+  {
+    id:"ww-0148", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW2","WW3","WW4"], diff:2, type:"safety",
+    q: "Chlorine gas in its pure form is heavier than air. This property means that during a chlorine leak:",
+    choices: [
+      "Chlorine rises quickly to the roof of the chlorine building where vents should be located",
+      "Chlorine accumulates at floor level and in low areas — floor-level vents and gas detectors positioned low are critical",
+      "Chlorine disperses rapidly because its density causes turbulent air mixing",
+      "Chlorine quickly becomes diluted in outdoor environments"
+    ],
+    answer: 1,
+    explain: "<b>Chlorine gas is 2.5× heavier than air, pooling in trenches, pits, lower floors, and low points.</b> Chlorine room ventilation must exhaust at floor level. Gas detectors should be mounted low. Operators should never enter low areas after a suspected leak without air monitoring and SCBA."
+  },
+  {
+    id:"ww-0149", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW2","WW3","WW4"], diff:2, type:"safety",
+    q: "An employee develops a headache, dizziness, and nausea while working inside a pump station. The most likely hazard is:",
+    choices: [
+      "Carbon monoxide from a poorly ventilated generator",
+      "Hydrogen sulfide exposure — H₂S is produced by anaerobic decomposition and accumulates in poorly ventilated wet wells and pump stations",
+      "Lack of water — dehydration from working in a hot environment",
+      "Chlorine exposure from chlorine tablets in the wet well"
+    ],
+    answer: 1,
+    explain: "<b>H₂S causes headache, dizziness, and nausea at low concentrations (10–50 ppm), with rapid loss of consciousness at higher levels.</b> Pump stations and wet wells are classic confined space H₂S hazards. Never enter without gas monitoring. Evacuate immediately if symptoms appear."
+  },
+  {
+    id:"ww-0150", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Personal protective equipment (PPE) for handling concentrated sodium hydroxide (caustic soda, used for pH control) must include at minimum:",
+    choices: [
+      "Safety glasses and latex gloves only",
+      "Face shield, chemical splash goggles, chemical-resistant gloves (neoprene or nitrile), and chemical-resistant apron or suit",
+      "Hard hat and steel-toed boots only",
+      "N95 respirator and standard work gloves"
+    ],
+    answer: 1,
+    explain: "<b>Sodium hydroxide causes severe chemical burns to eyes and skin on contact.</b> Full face protection and chemical-resistant gloves are essential. Safety showers and eyewash stations must be within 10 seconds of caustic handling areas. Never dilute caustic by adding water to caustic — add caustic to water slowly."
+  },
+  {
+    id:"ww-0151", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "The digester alkalinity test is performed to:",
+    choices: [
+      "Determine the amount of lime needed to raise the pH of the biosolids",
+      "Evaluate the buffering capacity of the digester — adequate alkalinity (>2,500–3,000 mg/L as CaCO₃) buffers against pH drop from volatile acid accumulation",
+      "Measure the carbonate hardness in the digester effluent",
+      "Calculate the amount of polymer needed for biosolids conditioning"
+    ],
+    answer: 1,
+    explain: "<b>Alkalinity is the digester's buffer — it prevents volatile acids from dropping the pH below the range for methanogen activity (6.8–7.4).</b> When VA/alkalinity ratio rises above 0.3–0.5, the digester is stressed. Supplemental alkalinity (sodium bicarbonate) or reduced loading can recover an upset digester."
+  },
+  {
+    id:"ww-0152", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "The specific gravity of a sludge sample is used to:",
+    choices: [
+      "Determine whether the sludge will float or sink in a secondary clarifier",
+      "Convert between percent solids and mg/L concentrations, and estimate sludge density for volume calculations",
+      "Measure the volatile fraction of the sludge",
+      "Calculate the oxygen uptake rate of the activated sludge"
+    ],
+    answer: 1,
+    explain: "<b>Specific gravity relates sludge density to water.</b> Dense, inorganic sludges have higher specific gravity than organic sludges. For biosolids: % solids ÷ (specific gravity × 100) = volume per unit mass. Most biological sludges have specific gravity of 1.02–1.05."
+  },
+  {
+    id:"ww-0153", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "The zone settling velocity (ZSV) test is used to evaluate:",
+    choices: [
+      "The sedimentation rate of grit in a grit chamber",
+      "How well activated sludge settles under operational MLSS concentrations — used to develop the flux analysis for clarifier design and troubleshooting",
+      "The settling velocity of individual floc particles in the aeration basin",
+      "Turbidity removal in a primary clarifier"
+    ],
+    answer: 1,
+    explain: "<b>ZSV testing at multiple MLSS concentrations generates a solids flux curve for the secondary clarifier.</b> This determines the maximum solids loading rate (state point analysis). Operators use state point analysis to optimize RAS rate and MLSS, preventing clarifier failure during high-flow events."
+  },
+  {
+    id:"ww-0154", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW3","WW4"], diff:3, type:"reg",
+    q: "Wet weather flow management for a POTW may involve a Capacity, Management, Operation, and Maintenance (CMOM) program, which requires the utility to:",
+    choices: [
+      "Construct sufficient capacity to eliminate all SSOs at any storm return period",
+      "Demonstrate adequate capacity and maintenance programs to prevent SSOs, and develop a response plan for SSO events that cannot be prevented",
+      "Report all dry-weather flow reductions to the state primacy agency",
+      "Install real-time monitoring at every manhole in the collection system"
+    ],
+    answer: 1,
+    explain: "<b>CMOM documents the utility's capacity assessment, maintenance practices, and emergency response procedures.</b> It is EPA's framework for addressing SSO compliance — the expectation is that utilities proactively manage their systems to minimize SSOs rather than reactively respond to violations."
+  },
+  {
+    id:"ww-0155", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW3","WW4"], diff:3, type:"reg",
+    q: "A wastewater utility operating under a consent decree for SSO violations is typically required to:",
+    choices: [
+      "Pay a one-time fine and take no further action",
+      "Implement a schedule of capital improvements, enhanced maintenance, and SSO reduction measures, with penalties for missing milestones",
+      "Immediately separate all combined sewers in the service area within 12 months",
+      "Transfer regulatory oversight from the state primacy agency to EPA directly"
+    ],
+    answer: 1,
+    explain: "<b>Consent decrees are legal agreements between a utility and EPA/state that require corrective action over a defined schedule to achieve compliance.</b> They include performance milestones, stipulated penalties for non-compliance, and independent oversight. Consent decrees for SSOs often involve multi-decade infrastructure investment programs."
+  },
+  {
+    id:"ww-0156", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW3","WW4"], diff:3, type:"reg",
+    q: "Whole effluent toxicity (WET) testing in an NPDES permit evaluates:",
+    choices: [
+      "Whether the effluent exceeds individual chemical MCLs for toxic pollutants",
+      "The combined biological effect of all effluent constituents on aquatic organisms (acute and chronic survival/reproduction)",
+      "The toxicity of residual chlorine in the effluent only",
+      "Whether the effluent meets the pH range for bioassay test organisms"
+    ],
+    answer: 1,
+    explain: "<b>WET testing exposes standard test organisms (fathead minnow, Ceriodaphnia) to effluent dilutions to measure acute (LC50) and chronic (NOEC) toxicity.</b> It captures combined toxicity that chemical-specific limits cannot — a permit may be met on all parameters yet still be toxic due to synergistic effects."
+  },
+  {
+    id:"ww-0157", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW2","WW3","WW4"], diff:2, type:"reg",
+    q: "A POTW's NPDES permit contains both technology-based effluent limits (TBEL) and water quality-based effluent limits (WQBEL). The more stringent of these limits applies because:",
+    choices: [
+      "POTWs must always comply with both types of limits — the more stringent one governs compliance",
+      "TBELs always take precedence over WQBELs for municipal dischargers",
+      "WQBELs only apply during low-flow conditions in the receiving water",
+      "TBELs are set by the state; WQBELs are set by EPA — whichever agency has jurisdiction applies their limit"
+    ],
+    answer: 0,
+    explain: "<b>Both TBELs (technology-based, e.g., secondary treatment 30/30) and WQBELs (receiving water quality standards) must be met.</b> When a water body is impaired, WQBELs derived from TMDLs may be more stringent than secondary standards. The NPDES permit writer selects the more stringent limit for each parameter."
+  },
+  {
+    id:"ww-0158", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "An electromagnetic flow meter measures wastewater flow by:",
+    choices: [
+      "Measuring the pressure differential across an orifice plate using Bernoulli's equation",
+      "Detecting the voltage induced by conductive liquid moving through a magnetic field — voltage is proportional to flow velocity",
+      "Measuring the time for an ultrasonic pulse to travel upstream vs. downstream",
+      "Counting the rotations of a paddle wheel inserted into the flow stream"
+    ],
+    answer: 1,
+    explain: "<b>Mag meters use Faraday's law of electromagnetic induction — a voltage proportional to flow velocity is induced as the conductive liquid moves through the magnetic field.</b> They have no moving parts, work with both clean and dirty water, and are highly accurate. They require a full pipe and minimum conductivity."
+  },
+  {
+    id:"ww-0159", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "An ultrasonic open-channel flow meter (area-velocity sensor) in a sewer measures flow by:",
+    choices: [
+      "Measuring the pressure drop through a venturi section in the pipe",
+      "Simultaneously measuring water depth (to calculate cross-sectional area) and velocity using Doppler shift — flow = area × velocity",
+      "Counting the time for sound pulses to travel from the sensor to the water surface and back",
+      "Measuring conductivity changes as the sensor is submerged at different depths"
+    ],
+    answer: 1,
+    explain: "<b>Area-velocity (AV) meters are used in partially full sewer pipes where traditional full-pipe mag meters cannot be installed.</b> The Doppler sensor measures velocity from the reflected signal of particles in flow; the depth sensor measures cross-sectional area. Combined: Q = A × V."
+  },
+  {
+    id:"ww-0160", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Effluent polishing using tertiary sand filtration after secondary treatment is used to:",
+    choices: [
+      "Further reduce BOD and TSS to meet stringent NPDES limits (e.g., BOD ≤ 5 mg/L, TSS ≤ 5 mg/L) or reclaimed water standards",
+      "Remove dissolved nitrogen and phosphorus that passed through secondary treatment",
+      "Add chlorine residual to the polished effluent for distribution system disinfection",
+      "Increase the pH of the effluent to meet receiving water standards"
+    ],
+    answer: 0,
+    explain: "<b>Tertiary filters (sand, anthracite, or synthetic media) remove residual suspended solids and BOD after secondary clarification.</b> Required for advanced NPDES limits, Title 22 reclaimed water reuse (California), or discharge to sensitive water bodies. Chemical addition before filtration improves phosphorus and TSS removal."
+  },
+
+  // --- WATER REUSE AND ADVANCED TREATMENT ---
+  {
+    id:"ww-0161", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Title 22 (California) reclaimed water classified as 'disinfected tertiary recycled water' can be used for:",
+    choices: [
+      "Unrestricted surface irrigation of food crops — direct contact with edible portions",
+      "Groundwater recharge (surface spreading), unrestricted landscape irrigation, and some indirect potable reuse applications",
+      "Direct injection into a drinking water distribution system",
+      "Cooling tower makeup water only — no irrigation use allowed"
+    ],
+    answer: 1,
+    explain: "<b>Disinfected tertiary recycled water (≤2 NTU, ≤2.2 MPN/100 mL total coliform) is approved for unrestricted irrigation, groundwater recharge, industrial cooling, and toilet flushing.</b> California Title 22 is the national model for recycled water regulations. Higher-quality 'purified water' standards apply for potable reuse."
+  },
+  {
+    id:"ww-0162", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Indirect potable reuse (IPR) involves:",
+    choices: [
+      "Adding treated wastewater directly to a drinking water distribution system",
+      "Introducing highly treated recycled water into an environmental buffer (groundwater basin or reservoir) before withdrawal and treatment as a drinking water source",
+      "Using recycled water for irrigation of food crops grown for human consumption",
+      "Treating drinking water plant sludge as a potable water source"
+    ],
+    answer: 1,
+    explain: "<b>IPR uses an environmental buffer to provide additional treatment time and dilution before the water is re-extracted and treated as drinking water.</b> The buffer provides public reassurance, additional natural attenuation of trace contaminants, and time for detection of failures. Orange County's GWRS is the largest IPR project in the U.S."
+  },
+  {
+    id:"ww-0163", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "The 503 regulations for biosolids land application establish limits for which heavy metals?",
+    choices: [
+      "Only lead and mercury — the most toxic metals",
+      "Arsenic, cadmium, chromium, copper, lead, mercury, molybdenum, nickel, selenium, and zinc",
+      "All metals detectable by ICP analysis — no specific list",
+      "Copper and zinc only — the metals most commonly found in municipal biosolids"
+    ],
+    answer: 1,
+    explain: "<b>40 CFR Part 503 regulates 10 metals in biosolids for land application.</b> Both ceiling concentrations (never exceeded) and pollutant loading rates (cumulative limits per acre) are established. Biosolids must be analyzed for these metals regularly; land application records must document cumulative site loading."
+  },
+  {
+    id:"ww-0164", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Phosphorus management plans are required in some states for land application of biosolids because:",
+    choices: [
+      "Phosphorus from biosolids reacts with soil nitrogen to produce nitrous oxide",
+      "Repeated biosolids application can saturate soil phosphorus capacity, leading to phosphorus runoff that causes eutrophication of receiving waters",
+      "Phosphorus in biosolids is toxic to most crops above 0.1 mg/kg in soil",
+      "Federal Part 503 requires phosphorus-based loading calculations for all land-applied biosolids"
+    ],
+    answer: 1,
+    explain: "<b>Soils can only absorb a limited amount of phosphorus — once saturated, P runs off in storm events.</b> Chesapeake Bay and other nutrient-impaired watersheds require P-based agronomic rate calculations rather than N-based rates (which allowed higher application rates). Pennsylvania's Act 38 and Maryland regulations are examples."
+  },
+  {
+    id:"ww-0165", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW3","WW4"], diff:3, type:"reg",
+    q: "A Total Maximum Daily Load (TMDL) for a nutrient-impaired water body allocates pollutant loads among:",
+    choices: [
+      "Only point source dischargers with NPDES permits",
+      "Point sources (wastewater and stormwater NPDES permits), nonpoint sources (agriculture, urban runoff), and a margin of safety",
+      "Only the POTW discharging the highest load to the impaired water body",
+      "Agricultural sources only — POTWs are exempt from TMDL allocations"
+    ],
+    answer: 1,
+    explain: "<b>A TMDL is the total pollutant load that a water body can receive and still meet water quality standards.</b> It allocates wasteload allocations (WLAs) to NPDES point sources and load allocations (LAs) to nonpoint sources. POTWs' NPDES permits are then written to meet their WLA portion of the TMDL."
+  },
+  {
+    id:"ww-0166", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "A plant receiving a slug discharge of high-strength industrial waste (BOD = 2,000 mg/L) should respond by:",
+    choices: [
+      "Immediately increasing chlorine dose at the effluent to compensate",
+      "Notifying the industrial user, reducing aeration basin loading if possible, increasing WAS to prevent sludge washout, and monitoring effluent quality",
+      "Bypassing secondary treatment to reduce hydraulic loading",
+      "Shutting down the plant and reporting the bypass to the state regulator"
+    ],
+    answer: 1,
+    explain: "<b>A high-BOD slug can create an oxygen deficit, depress DO, and stress the biological system.</b> Operators should increase aeration, monitor DO and effluent quality, and reduce loading if possible. The industrial user must be contacted — unauthorized high-strength discharge may violate their sewer use permit."
+  },
+  {
+    id:"ww-0167", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "Dissolved oxygen (DO) in an aeration basin should typically be maintained at:",
+    choices: [
+      "0–0.5 mg/L to minimize energy consumption",
+      "1–3 mg/L — sufficient to support aerobic biological treatment without wasting energy on excessive aeration",
+      "Above 5 mg/L to ensure complete nitrification",
+      "Exactly 7 mg/L to maximize oxygen transfer efficiency"
+    ],
+    answer: 1,
+    explain: "<b>DO of 1–3 mg/L supports aerobic heterotrophic and nitrifying bacteria without excessive energy cost.</b> Nitrification may require higher DO (>2 mg/L) since nitrifiers have higher oxygen affinity requirements. Aeration costs are typically 50–70% of a plant's total energy budget — DO control optimization is critical."
+  },
+  {
+    id:"ww-0168", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Variable frequency drives (VFDs) on aeration blowers provide energy savings because:",
+    choices: [
+      "VFDs convert AC power to DC, which is more efficient for blower motors",
+      "VFDs match blower output to the actual process demand by varying motor speed, eliminating throttling losses from inlet guide vanes or discharge dampers",
+      "VFDs reduce harmonic distortion in the electrical system, improving power factor",
+      "VFDs allow blowers to operate at higher pressure than their design rating"
+    ],
+    answer: 1,
+    explain: "<b>Affinity laws show that blower power varies as the cube of speed — reducing speed 20% saves ~49% of power.</b> VFDs modulate blower output based on DO feedback, saving energy during low-demand periods (nights, low-flow days) while maintaining process control. VFDs on blowers often provide the largest energy savings opportunity at a POTW."
+  },
+  {
+    id:"ww-0169", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Combined heat and power (CHP), also called cogeneration, at a wastewater plant uses digester biogas to:",
+    choices: [
+      "Directly heat the anaerobic digesters without electricity production",
+      "Generate electricity and recover waste heat from the engine/generator to heat digesters — improving overall energy efficiency to 65–80%",
+      "Produce compressed natural gas for fleet vehicles only",
+      "Power UV disinfection systems as the only biogas use"
+    ],
+    answer: 1,
+    explain: "<b>CHP systems burn biogas in an engine-generator; waste heat from combustion is recovered to maintain digester temperature (95–100°F).</b> Large plants can meet 50–100% of electrical energy demand from biogas CHP. This is a key component of energy-neutral or energy-positive plant design."
+  },
+  {
+    id:"ww-0170", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"safety",
+    q: "Hydrogen sulfide (H₂S) at concentrations above 150 ppm is especially dangerous because:",
+    choices: [
+      "It becomes explosive above this concentration",
+      "It paralyzes the olfactory nerves — the characteristic rotten-egg odor disappears, removing the warning that dangerous concentrations are present",
+      "It reacts with oxygen to form sulfuric acid vapors",
+      "It causes immediate skin burns at this concentration"
+    ],
+    answer: 1,
+    explain: "<b>Olfactory fatigue (paralysis) at >150 ppm removes the only natural warning sign of dangerous H₂S levels.</b> Workers may believe the air is safe because they no longer smell it. At >300 ppm, loss of consciousness can occur within seconds. Continuous air monitoring is the only reliable safety control at these concentrations."
+  },
+  {
+    id:"ww-0171", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW2","WW3","WW4"], diff:2, type:"reg",
+    q: "Recordkeeping requirements under NPDES permits include retaining monitoring records for:",
+    choices: [
+      "1 year",
+      "At least 3 years (with some records up to 5–10 years depending on the parameter)",
+      "6 months — then records can be discarded after the next DMR submission",
+      "Indefinitely — all records must be kept permanently"
+    ],
+    answer: 1,
+    explain: "<b>NPDES regulations require a minimum 3-year retention period for monitoring records and DMRs.</b> Some parameters (radionuclides, PCBs) have longer retention requirements. Records must be available for inspection by regulators. Electronic records are acceptable but must be protected against alteration."
+  },
+  {
+    id:"ww-0172", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW3","WW4"], diff:3, type:"reg",
+    q: "A POTW that receives stormwater and wastewater in combined sewers is regulated under which program for combined sewer overflows (CSOs)?",
+    choices: [
+      "The Pretreatment Program",
+      "The CSO Control Policy, requiring long-term CSO control plans (LTCPs) with nine minimum controls and selected CSO controls",
+      "Only NPDES stormwater Phase II permits",
+      "The SSO CMOM program — CSOs and SSOs are regulated identically"
+    ],
+    answer: 1,
+    explain: "<b>EPA's 1994 CSO Control Policy requires POTWs with CSOs to implement nine minimum controls (NMC) immediately and develop LTCPs to achieve water quality-based controls over time.</b> LTCPs often involve major tunnel/storage infrastructure (e.g., Chicago's TARP, DC's Anacostia Clean Rivers Project)."
+  },
+  {
+    id:"ww-0173", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW3","WW4"], diff:3, type:"concept",
+    q: "Membrane integrity testing of MBR membranes is performed by:",
+    choices: [
+      "Measuring monthly effluent turbidity as the only integrity indicator",
+      "Pressure decay testing (PDT) or vacuum decay testing to detect breaches; turbidity and particle counts provide continuous online integrity monitoring",
+      "Analyzing effluent for fecal coliform to confirm pathogen removal",
+      "Testing each individual fiber by dye injection"
+    ],
+    answer: 1,
+    explain: "<b>PDT/VDT pressurizes (or evacuates) the membrane module and measures pressure/vacuum decay rate — a fast decay rate indicates a breach (fiber break, O-ring failure).</b> Continuous turbidity monitoring provides real-time leak detection. Integrity testing frequency is specified by LT2ESWTR/state regulations and provides pathogen removal credit."
+  },
+  {
+    id:"ww-0174", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "Grit removal at the head of a wastewater treatment plant is important because:",
+    choices: [
+      "Grit contains pathogens that must be removed before biological treatment",
+      "Grit (sand, gravel, coffee grounds, eggshells) is abrasive and heavy — it damages equipment, settles in digesters, and reduces effective treatment capacity",
+      "Grit has high BOD and must be removed to prevent organic overload",
+      "Grit removal is required only at plants receiving industrial pretreatment discharge"
+    ],
+    answer: 1,
+    explain: "<b>Grit causes wear on pumps and mechanical equipment, settles in digesters (reducing digestion volume), and accumulates in aeration basins.</b> Vortex grit chambers and horizontal-flow grit chambers separate grit by density; grit classifiers wash and dewater grit for disposal. Grit disposal to landfill is typical."
+  },
+  {
+    id:"ww-0175", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "Trickling filters are classified as 'attached growth' processes because:",
+    choices: [
+      "Their stone or plastic media physically attaches to the treatment basin floor",
+      "Microorganisms form a biofilm attached to the media surface — they do not flow through the system as suspended solids the way activated sludge does",
+      "The process attaches trickling filter effluent to activated sludge for polishing",
+      "Trickling filter media is chemically bonded to the support structure"
+    ],
+    answer: 1,
+    explain: "<b>Attached growth (fixed-film) processes — trickling filters, RBCs, MBBR — retain biomass on a fixed or semi-fixed media surface.</b> Unlike activated sludge (suspended growth), no return sludge system is needed. Biofilm thickness is controlled by hydraulic shear and predation. Attached growth is simpler to operate but less controllable than activated sludge."
+  },
+  {
+    id:"ww-0176", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW3","WW4"], diff:3, type:"calc",
+    q: "A plant's organic loading rate for an aeration basin of 500,000 gallons receiving 5,500 lbs BOD/day is:",
+    choices: ["0.013 lbs BOD/gal/day", "11 lbs BOD/gal/day", "0.011 lbs BOD/gal/day", "110 lbs BOD/1,000 gal/day"],
+    answer: 2,
+    explain: "<b>Volumetric loading = 5,500 lbs BOD/day ÷ 500,000 gal = 0.011 lbs BOD/gal/day.</b> Alternatively expressed as 11 lbs BOD/1,000 gal/day. Typical design loading for conventional activated sludge: 20–40 lbs BOD/1,000 ft³/day. This parameter guides basin sizing and identifies potential overloading conditions."
+  },
+  {
+    id:"ww-0177", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "A submersible pump in a wet well loses prime and stops pumping. The most likely cause is:",
+    choices: [
+      "The motor windings have overheated from extended operation",
+      "Air binding or a vortex forming at the pump intake, allowing air to enter the impeller — this is prevented by maintaining minimum submergence depth",
+      "The discharge valve has failed open, reducing pump head",
+      "The force main has been blocked by a blockage downstream"
+    ],
+    answer: 1,
+    explain: "<b>Vortex formation at low wet well levels draws air into the pump intake, breaking prime.</b> Minimum submergence requirements (typically 1.5–2× impeller diameter) prevent vortex formation. Vortex suppressors and submergence monitoring alarms protect against this condition."
+  },
+  {
+    id:"ww-0178", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "Before performing maintenance on a submersible pump inside a wet well, the operator must first:",
+    choices: [
+      "Turn off the circuit breaker to the pump and begin work",
+      "Complete a permit-required confined space entry procedure: test atmosphere, establish attendant, secure ventilation, implement LOTO, and have retrieval equipment ready",
+      "Notify the state regulatory agency that maintenance will occur",
+      "Reduce flow to the wet well by 50% to lower the water level"
+    ],
+    answer: 1,
+    explain: "<b>Wet wells are permit-required confined spaces — classified due to potential hazardous atmosphere (H₂S), engulfment risk, and restricted entry.</b> OSHA 29 CFR 1910.146 requirements apply: atmospheric testing, entry permit, trained attendant, retrieval system, and LOTO of pumps and influent valves before entry."
+  },
+  {
+    id:"ww-0179", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW2","WW3","WW4"], diff:2, type:"reg",
+    q: "An operator who knowingly falsifies a discharge monitoring report (DMR) faces which potential consequence?",
+    choices: [
+      "Only a civil fine of up to $500 per violation",
+      "Criminal penalties under the Clean Water Act — up to 2 years imprisonment and fines up to $10,000 per day per violation",
+      "License suspension only — no financial penalties for first offense",
+      "No federal consequences — DMR reporting is regulated by states only"
+    ],
+    answer: 1,
+    explain: "<b>Knowingly falsifying a DMR is a criminal violation of the Clean Water Act, carrying up to 2 years imprisonment and $10,000/day fines.</b> Subsequent violations double the penalties. This applies to the individual falsifying the report — not just the utility. Operators have whistleblower protection when reporting suspected falsification."
+  },
+  {
+    id:"ww-0180", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
+    q: "Rising sludge in a secondary clarifier (sludge floating to the surface in clumps) during the afternoon on a warm day is most likely caused by:",
+    choices: [
+      "Hydraulic overloading from peak afternoon flow",
+      "Denitrification in the sludge blanket — bacteria converting nitrate to nitrogen gas bubbles that lift sludge to the surface as temperatures warm and biological activity increases",
+      "Pump failure reducing RAS withdrawal from the clarifier",
+      "High pH in the aeration basin inhibiting settling"
+    ],
+    answer: 1,
+    explain: "<b>Rising sludge from denitrification is more common in warm weather (increased biological activity) and with longer sludge blanket retention times.</b> Corrective actions: increase RAS rate, reduce SRT, waste more sludge, or increase DO to reduce nitrate formation. Afternoon temperature peaks accelerate the denitrification rate."
   }
-];
 
   let wwQzOrder = [];
   let wwQzIdx = 0;
