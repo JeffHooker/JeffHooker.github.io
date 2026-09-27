@@ -1,0 +1,26 @@
+{
+  "name": "flocs",
+  "short_name": "flocs",
+  "description": "Professional field calculator for water system operators.",
+  "start_url": "/drh2o.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00A8E8",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230a0a0a' rx='28'/%3E%3Cpath d='M96 28c0 0-52 64-52 100 0 28.7 23.3 52 52 52s52-23.3 52-52c0-36-52-100-52-100z' fill='%2300A8E8'/%3E%3Cpath d='M80 138c0 8.8 7.2 16 16 16s16-7.2 16-16c0-8.8-16-28-16-28s-16 19.2-16 28z' fill='white' opacity='0.3'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a' rx='64'/%3E%3Cpath d='M256 72c0 0-138 170-138 265 0 76.2 61.8 138 138 138s138-61.8 138-138c0-95-138-265-138-265z' fill='%2300A8E8'/%3E%3Cpath d='M212 366c0 24.3 19.7 44 44 44s44-19.7 44-44c0-24.3-44-74-44-74s-44 49.7-44 74z' fill='white' opacity='0.3'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"]
+}

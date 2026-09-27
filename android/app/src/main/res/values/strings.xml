@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">flocs</string>
+    <string name="title_activity_main">flocs</string>
+    <string name="package_name">app.drh2o.flocs</string>
+    <string name="custom_url_scheme">app.drh2o.flocs</string>
+</resources>
