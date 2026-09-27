@@ -1028,6 +1028,39 @@
     }
     .qz-start-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.55; margin-bottom: 4px; }
 
+    /* ── QUIZ FILTER CHIPS ── */
+    .qz-filter-section { margin-bottom: 10px; }
+    .qz-filter-label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px; }
+    .qz-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+    .qz-chip {
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: none;
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color 0.12s, background 0.12s, color 0.12s;
+    }
+    .qz-chip:hover { border-color: var(--blue); color: var(--blue); }
+    .qz-chip.active { border-color: var(--blue); background: var(--blue); color: #fff; }
+    .qz-filter-hint { font-size: 0.78rem; color: var(--muted); margin: 8px 0 4px; }
+    .qz-missed-btn {
+      width: 100%;
+      padding: 11px;
+      background: none;
+      border: 2px solid #f97316;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #f97316;
+      cursor: pointer;
+      margin-top: 8px;
+      display: none;
+    }
+    .qz-missed-btn.show { display: block; }
+
     /* ── SHOW YOUR WORK ── */
     .syw-wrap { margin-top: 10px; }
     .syw-btn {
@@ -2575,8 +2608,45 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       <div class="study-body">
         <!-- Start screen -->
         <div id="qz-start" class="qz-start-wrap">
-          <p class="qz-start-desc">10 questions covering regulations, terminology, system operations, safety, and basic calculations.<br>Pass = 70% or better.</p>
-          <button class="qz-start-btn" onclick="startQuiz()">Start Quiz</button>
+          <div class="qz-filter-section">
+            <div class="qz-filter-label">Grade</div>
+            <div class="qz-chips">
+              <button class="qz-chip" data-val="T1" onclick="qzToggleChip(this,'dw','grade')">T1</button>
+              <button class="qz-chip" data-val="T2" onclick="qzToggleChip(this,'dw','grade')">T2</button>
+              <button class="qz-chip" data-val="T3" onclick="qzToggleChip(this,'dw','grade')">T3</button>
+              <button class="qz-chip" data-val="T4" onclick="qzToggleChip(this,'dw','grade')">T4</button>
+              <button class="qz-chip" data-val="T5" onclick="qzToggleChip(this,'dw','grade')">T5</button>
+              <button class="qz-chip" data-val="D1" onclick="qzToggleChip(this,'dw','grade')">D1</button>
+              <button class="qz-chip" data-val="D2" onclick="qzToggleChip(this,'dw','grade')">D2</button>
+              <button class="qz-chip" data-val="D3" onclick="qzToggleChip(this,'dw','grade')">D3</button>
+              <button class="qz-chip" data-val="D4" onclick="qzToggleChip(this,'dw','grade')">D4</button>
+              <button class="qz-chip" data-val="D5" onclick="qzToggleChip(this,'dw','grade')">D5</button>
+            </div>
+          </div>
+          <div class="qz-filter-section">
+            <div class="qz-filter-label">Topic</div>
+            <div class="qz-chips">
+              <button class="qz-chip" data-val="chlorination" onclick="qzToggleChip(this,'dw','topic')">Chlorination</button>
+              <button class="qz-chip" data-val="ct-inactivation" onclick="qzToggleChip(this,'dw','topic')">CT/Inactivation</button>
+              <button class="qz-chip" data-val="coagulation-flocculation" onclick="qzToggleChip(this,'dw','topic')">Coag/Floc</button>
+              <button class="qz-chip" data-val="filtration" onclick="qzToggleChip(this,'dw','topic')">Filtration</button>
+              <button class="qz-chip" data-val="ph-chemistry" onclick="qzToggleChip(this,'dw','topic')">pH/Chem</button>
+              <button class="qz-chip" data-val="dbp" onclick="qzToggleChip(this,'dw','topic')">DBPs</button>
+              <button class="qz-chip" data-val="sdwa-regs" onclick="qzToggleChip(this,'dw','topic')">SDWA Regs</button>
+              <button class="qz-chip" data-val="lcr" onclick="qzToggleChip(this,'dw','topic')">Lead &amp; Copper</button>
+              <button class="qz-chip" data-val="swtr" onclick="qzToggleChip(this,'dw','topic')">SWTR</button>
+              <button class="qz-chip" data-val="turbidity" onclick="qzToggleChip(this,'dw','topic')">Turbidity</button>
+              <button class="qz-chip" data-val="fluoridation" onclick="qzToggleChip(this,'dw','topic')">Fluoridation</button>
+              <button class="qz-chip" data-val="pathogens" onclick="qzToggleChip(this,'dw','topic')">Pathogens</button>
+              <button class="qz-chip" data-val="chemical-safety" onclick="qzToggleChip(this,'dw','topic')">Chem Safety</button>
+              <button class="qz-chip" data-val="distribution-ops" onclick="qzToggleChip(this,'dw','topic')">Distribution</button>
+              <button class="qz-chip" data-val="coliform-sampling" onclick="qzToggleChip(this,'dw','topic')">Coliform</button>
+              <button class="qz-chip" data-val="hydraulics" onclick="qzToggleChip(this,'dw','topic')">Hydraulics</button>
+            </div>
+          </div>
+          <p class="qz-filter-hint" id="qz-pool-hint">199 questions in pool</p>
+          <button class="qz-start-btn" id="qz-start-btn" onclick="qzLaunch('dw', false)">Start Quiz (10 Qs)</button>
+          <button class="qz-missed-btn" id="qz-missed-btn" onclick="qzLaunch('dw', true)">Review Missed (<span id="qz-missed-cnt">0</span>)</button>
         </div>
         <!-- Question screen -->
         <div id="qz-question" style="display:none">
@@ -2588,7 +2658,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
           <p class="qz-q" id="qz-q"></p>
           <div class="qz-choices" id="qz-choices"></div>
           <div class="qz-explain" id="qz-explain"></div>
-          <button class="qz-next-btn" id="qz-next" onclick="nextQuestion()">Next Question</button>
+          <button class="qz-next-btn" id="qz-next" onclick="qzNext()">Next Question</button>
         </div>
         <!-- Result screen -->
         <div id="qz-result" class="qz-result">
@@ -2598,7 +2668,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
           </div>
           <div class="qz-verdict" id="qz-verdict"></div>
           <div class="qz-verdict-sub" id="qz-verdict-sub"></div>
-          <button class="qz-retake" onclick="startQuiz()">Retake Quiz</button>
+          <button class="qz-retake" onclick="qzBackToStart('dw')">Retake / Change Filters</button>
         </div>
       </div>
     </div>
@@ -2863,8 +2933,35 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
         </button>
         <div class="study-body">
           <div id="ww-qz-start" class="qz-start-wrap">
-            <p class="qz-start-desc">10 questions covering activated sludge, sludge digestion, chlorination, pumping, and lab procedures.<br>Pass = 70% or better.</p>
-            <button class="qz-start-btn" onclick="wwStartQuiz()">Start Quiz</button>
+            <div class="qz-filter-section">
+              <div class="qz-filter-label">Grade</div>
+              <div class="qz-chips">
+                <button class="qz-chip" data-val="WW1" onclick="qzToggleChip(this,'ww','grade')">WW1</button>
+                <button class="qz-chip" data-val="WW2" onclick="qzToggleChip(this,'ww','grade')">WW2</button>
+                <button class="qz-chip" data-val="WW3" onclick="qzToggleChip(this,'ww','grade')">WW3</button>
+                <button class="qz-chip" data-val="WW4" onclick="qzToggleChip(this,'ww','grade')">WW4</button>
+              </div>
+            </div>
+            <div class="qz-filter-section">
+              <div class="qz-filter-label">Topic</div>
+              <div class="qz-chips">
+                <button class="qz-chip" data-val="activated-sludge" onclick="qzToggleChip(this,'ww','topic')">Activated Sludge</button>
+                <button class="qz-chip" data-val="mass-loading" onclick="qzToggleChip(this,'ww','topic')">Mass Loading</button>
+                <button class="qz-chip" data-val="sludge-handling" onclick="qzToggleChip(this,'ww','topic')">Sludge</button>
+                <button class="qz-chip" data-val="npdes" onclick="qzToggleChip(this,'ww','topic')">NPDES</button>
+                <button class="qz-chip" data-val="nutrients" onclick="qzToggleChip(this,'ww','topic')">Nutrients</button>
+                <button class="qz-chip" data-val="disinfection" onclick="qzToggleChip(this,'ww','topic')">Disinfection</button>
+                <button class="qz-chip" data-val="hydraulics" onclick="qzToggleChip(this,'ww','topic')">Hydraulics</button>
+                <button class="qz-chip" data-val="lab-procedures" onclick="qzToggleChip(this,'ww','topic')">Lab</button>
+                <button class="qz-chip" data-val="safety" onclick="qzToggleChip(this,'ww','topic')">Safety</button>
+                <button class="qz-chip" data-val="regulations" onclick="qzToggleChip(this,'ww','topic')">Regulations</button>
+                <button class="qz-chip" data-val="collection-systems" onclick="qzToggleChip(this,'ww','topic')">Collection</button>
+                <button class="qz-chip" data-val="pretreatment" onclick="qzToggleChip(this,'ww','topic')">Pretreatment</button>
+              </div>
+            </div>
+            <p class="qz-filter-hint" id="ww-qz-pool-hint">180 questions in pool</p>
+            <button class="qz-start-btn" id="ww-qz-start-btn" onclick="qzLaunch('ww', false)">Start Quiz (10 Qs)</button>
+            <button class="qz-missed-btn" id="ww-qz-missed-btn" onclick="qzLaunch('ww', true)">Review Missed (<span id="ww-qz-missed-cnt">0</span>)</button>
           </div>
           <div id="ww-qz-question" style="display:none">
             <div class="qz-progress-bar"><div class="qz-progress-fill" id="ww-qz-fill" style="width:0%"></div></div>
@@ -2875,7 +2972,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             <p class="qz-q" id="ww-qz-q"></p>
             <div class="qz-choices" id="ww-qz-choices"></div>
             <div class="qz-explain" id="ww-qz-explain"></div>
-            <button class="qz-next-btn" id="ww-qz-next" onclick="wwNextQuestion()">Next Question</button>
+            <button class="qz-next-btn" id="ww-qz-next" onclick="qzNext()">Next Question</button>
           </div>
           <div id="ww-qz-result" class="qz-result">
             <div class="qz-score-circle">
@@ -2884,7 +2981,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             </div>
             <div class="qz-verdict" id="ww-qz-verdict"></div>
             <div class="qz-verdict-sub" id="ww-qz-verdict-sub"></div>
-            <button class="qz-retake" onclick="wwStartQuiz()">Retake Quiz</button>
+            <button class="qz-retake" onclick="qzBackToStart('ww')">Retake / Change Filters</button>
           </div>
         </div>
       </div>
@@ -5914,10 +6011,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>EPA's RMP rule requires facilities storing regulated chemicals above threshold quantities to prepare a risk management plan covering hazard assessment, prevention program, and emergency response.</b> For chlorine gas, the threshold is 2,500 lbs. Many utilities switched to hypochlorite or on-site generation to avoid RMP requirements."
   }
 
-  let qzOrder = [];
-  let qzIdx = 0;
-  let qzScore = 0;
-  const QZ_COUNT = 10;
+  // ── UNIFIED QUIZ ENGINE ──
 
   function shuffleArr(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -5927,104 +6021,169 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     return arr;
   }
 
-  function startQuiz() {
-    // Build randomized order of QZ_COUNT questions
-    const indices = QUIZ_BANK.map((_, i) => i);
-    shuffleArr(indices);
-    qzOrder = indices.slice(0, QZ_COUNT);
-    qzIdx = 0;
-    qzScore = 0;
+  const QZ_MAX = 10;
 
-    document.getElementById('qz-start').style.display  = 'none';
-    document.getElementById('qz-result').classList.remove('show');
-    document.getElementById('qz-question').style.display = 'block';
-    renderQuestion();
+  const QZ_FILTERS = {
+    dw: { grades: new Set(), topics: new Set() },
+    ww: { grades: new Set(), topics: new Set() }
+  };
+
+  let QZ_STATE = { disc: 'dw', pool: [], order: [], idx: 0, score: 0, missed: new Set(), missedMode: false };
+
+  function qzLoadMissed() {
+    try { return new Set(JSON.parse(localStorage.getItem('drh2o_missed') || '[]')); }
+    catch(e) { return new Set(); }
   }
 
-  function renderQuestion() {
-    const q = QUIZ_BANK[qzOrder[qzIdx]];
-    const num = qzIdx + 1;
+  function qzSaveMissed(s) {
+    try { localStorage.setItem('drh2o_missed', JSON.stringify([...s])); } catch(e) {}
+  }
 
-    document.getElementById('qz-qnum').textContent = 'Question ' + num + ' of ' + QZ_COUNT;
-    document.getElementById('qz-score-live').textContent = 'Score: ' + qzScore;
-    document.getElementById('qz-fill').style.width = ((num - 1) / QZ_COUNT * 100) + '%';
-    document.getElementById('qz-q').textContent = q.q;
+  function qzToggleChip(btn, disc, type) {
+    btn.classList.toggle('active');
+    const set = type === 'grade' ? QZ_FILTERS[disc].grades : QZ_FILTERS[disc].topics;
+    if (btn.classList.contains('active')) set.add(btn.dataset.val);
+    else set.delete(btn.dataset.val);
+    qzUpdateHint(disc);
+  }
 
-    // Shuffle choice order (store mapping)
-    const choiceOrder = q.choices.map((_, i) => i);
-    shuffleArr(choiceOrder);
+  function qzBuildPool(disc, missedOnly) {
+    const bank   = disc === 'dw' ? QUIZ_BANK : WW_QUIZ_BANK;
+    const grades = QZ_FILTERS[disc].grades;
+    const topics = QZ_FILTERS[disc].topics;
+    const missed = qzLoadMissed();
+    return bank.filter(q => {
+      if (missedOnly && !missed.has(q.id)) return false;
+      if (grades.size > 0 && !q.grades.some(g => grades.has(g))) return false;
+      if (topics.size > 0 && !topics.has(q.topic)) return false;
+      return true;
+    });
+  }
 
-    const container = document.getElementById('qz-choices');
+  function qzUpdateHint(disc) {
+    const pfx  = disc === 'dw' ? '' : 'ww-';
+    const pool = qzBuildPool(disc, false);
+    const cnt  = Math.min(QZ_MAX, pool.length);
+    const hint = document.getElementById(pfx + 'qz-pool-hint');
+    const sBtn = document.getElementById(pfx + 'qz-start-btn');
+    if (hint) hint.textContent = pool.length + ' question' + (pool.length !== 1 ? 's' : '') + ' in pool';
+    if (sBtn) sBtn.textContent = 'Start Quiz (' + cnt + ' Qs)';
+
+    const missed = qzLoadMissed();
+    const bank   = disc === 'dw' ? QUIZ_BANK : WW_QUIZ_BANK;
+    const mPool  = qzBuildPool(disc, true);
+    const mBtn   = document.getElementById(pfx + 'qz-missed-btn');
+    const mCnt   = document.getElementById(pfx + 'qz-missed-cnt');
+    if (mBtn && mCnt) {
+      mCnt.textContent = mPool.length;
+      const totalMissed = bank.filter(q => missed.has(q.id)).length;
+      if (totalMissed > 0) mBtn.classList.add('show'); else mBtn.classList.remove('show');
+    }
+  }
+
+  function qzLaunch(disc, missedMode) {
+    const pool = qzBuildPool(disc, missedMode);
+    if (pool.length === 0) {
+      alert(missedMode ? 'No missed questions match your current filters.' : 'No questions match those filters. Try fewer selections.');
+      return;
+    }
+    const pfx = disc === 'dw' ? '' : 'ww-';
+    const shuffled = shuffleArr(pool.map((_, i) => i));
+    QZ_STATE = { disc, pool: [...pool], order: shuffled.slice(0, QZ_MAX), idx: 0, score: 0, missed: qzLoadMissed(), missedMode };
+    document.getElementById(pfx + 'qz-start').style.display = 'none';
+    document.getElementById(pfx + 'qz-result').classList.remove('show');
+    document.getElementById(pfx + 'qz-question').style.display = 'block';
+    qzRender();
+  }
+
+  function qzRender() {
+    const { disc, pool, order, idx, score } = QZ_STATE;
+    const pfx   = disc === 'dw' ? '' : 'ww-';
+    const total = order.length;
+    const q     = pool[order[idx]];
+    const num   = idx + 1;
+
+    document.getElementById(pfx + 'qz-qnum').textContent       = 'Question ' + num + ' of ' + total;
+    document.getElementById(pfx + 'qz-score-live').textContent = 'Score: ' + score;
+    document.getElementById(pfx + 'qz-fill').style.width       = ((num - 1) / total * 100) + '%';
+    document.getElementById(pfx + 'qz-q').textContent          = q.q;
+
+    const choiceOrder = shuffleArr(q.choices.map((_, i) => i));
+    const container   = document.getElementById(pfx + 'qz-choices');
     container.innerHTML = '';
     choiceOrder.forEach(origIdx => {
       const btn = document.createElement('button');
-      btn.className = 'qz-choice';
+      btn.className   = 'qz-choice';
       btn.textContent = q.choices[origIdx];
       btn.dataset.idx = origIdx;
-      btn.onclick = () => selectAnswer(btn, origIdx, q.answer, q.explain, container);
+      btn.onclick = () => qzSelect(btn, origIdx, q.answer, q.explain, container, q.id);
       container.appendChild(btn);
     });
 
-    const explain = document.getElementById('qz-explain');
-    explain.className = 'qz-explain';
-    explain.innerHTML = '';
+    const exEl  = document.getElementById(pfx + 'qz-explain');
+    exEl.className = 'qz-explain';
+    exEl.innerHTML = '';
 
-    const nextBtn = document.getElementById('qz-next');
-    nextBtn.className = 'qz-next-btn';
-    nextBtn.textContent = (qzIdx < QZ_COUNT - 1) ? 'Next Question' : 'See Results';
+    const nextBtn = document.getElementById(pfx + 'qz-next');
+    nextBtn.className   = 'qz-next-btn';
+    nextBtn.textContent = (idx < total - 1) ? 'Next Question' : 'See Results';
   }
 
-  function selectAnswer(btn, chosen, correct, explain, container) {
-    // Disable all choices
+  function qzSelect(btn, chosen, correct, explain, container, qId) {
+    const pfx = QZ_STATE.disc === 'dw' ? '' : 'ww-';
     container.querySelectorAll('.qz-choice').forEach(b => {
       b.disabled = true;
       if (parseInt(b.dataset.idx) === correct) b.classList.add('reveal');
     });
-
     if (chosen === correct) {
       btn.classList.add('correct');
-      qzScore++;
+      QZ_STATE.score++;
+      if (QZ_STATE.missedMode) { QZ_STATE.missed.delete(qId); qzSaveMissed(QZ_STATE.missed); }
     } else {
       btn.classList.add('wrong');
+      QZ_STATE.missed.add(qId);
+      qzSaveMissed(QZ_STATE.missed);
     }
-
-    const exEl = document.getElementById('qz-explain');
+    const exEl = document.getElementById(pfx + 'qz-explain');
     exEl.innerHTML = explain;
     exEl.classList.add('show');
-
-    document.getElementById('qz-next').classList.add('show');
-    document.getElementById('qz-score-live').textContent = 'Score: ' + qzScore;
+    document.getElementById(pfx + 'qz-next').classList.add('show');
+    document.getElementById(pfx + 'qz-score-live').textContent = 'Score: ' + QZ_STATE.score;
   }
 
-  function nextQuestion() {
-    qzIdx++;
-    if (qzIdx >= QZ_COUNT) {
-      showResult();
-    } else {
-      renderQuestion();
-    }
+  function qzNext() {
+    QZ_STATE.idx++;
+    if (QZ_STATE.idx >= QZ_STATE.order.length) qzFinish(); else qzRender();
   }
 
-  function showResult() {
-    document.getElementById('qz-question').style.display = 'none';
-    const result = document.getElementById('qz-result');
-    result.classList.add('show');
-
-    document.getElementById('qz-final-num').textContent = qzScore;
-    document.getElementById('qz-final-den').textContent = '/ ' + QZ_COUNT;
-
-    const pct = qzScore / QZ_COUNT;
-    const verdict = document.getElementById('qz-verdict');
-    const sub     = document.getElementById('qz-verdict-sub');
+  function qzFinish() {
+    const { disc, score, order } = QZ_STATE;
+    const pfx   = disc === 'dw' ? '' : 'ww-';
+    const total = order.length;
+    document.getElementById(pfx + 'qz-question').style.display = 'none';
+    document.getElementById(pfx + 'qz-result').classList.add('show');
+    document.getElementById(pfx + 'qz-final-num').textContent = score;
+    document.getElementById(pfx + 'qz-final-den').textContent = '/ ' + total;
+    const pct     = score / total;
+    const verdict = document.getElementById(pfx + 'qz-verdict');
+    const sub     = document.getElementById(pfx + 'qz-verdict-sub');
     if (pct >= 0.7) {
       verdict.textContent = 'PASS';
-      verdict.className = 'qz-verdict pass';
-      sub.textContent = Math.round(pct * 100) + '% — Great work!';
+      verdict.className   = 'qz-verdict pass';
+      sub.textContent     = Math.round(pct * 100) + '% — Great work!';
     } else {
       verdict.textContent = 'FAIL';
-      verdict.className = 'qz-verdict fail';
-      sub.textContent = Math.round(pct * 100) + '% — Need 70% to pass. Try again!';
+      verdict.className   = 'qz-verdict fail';
+      sub.textContent     = Math.round(pct * 100) + '% — Need 70% to pass. Try again!';
     }
+    qzUpdateHint(disc);
+  }
+
+  function qzBackToStart(disc) {
+    const pfx = disc === 'dw' ? '' : 'ww-';
+    document.getElementById(pfx + 'qz-result').classList.remove('show');
+    document.getElementById(pfx + 'qz-start').style.display = 'block';
+    qzUpdateHint(disc);
   }
 
   // ── FORMULA ITEMS ──
@@ -9748,90 +9907,6 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     ],
     answer: 1,
     explain: "<b>Rising sludge from denitrification is more common in warm weather (increased biological activity) and with longer sludge blanket retention times.</b> Corrective actions: increase RAS rate, reduce SRT, waste more sludge, or increase DO to reduce nitrate formation. Afternoon temperature peaks accelerate the denitrification rate."
-  }
-
-  let wwQzOrder = [];
-  let wwQzIdx = 0;
-  let wwQzScore = 0;
-  const WW_QZ_COUNT = 10;
-
-  function wwStartQuiz() {
-    const indices = WW_QUIZ_BANK.map((_, i) => i);
-    shuffleArr(indices);
-    wwQzOrder = indices.slice(0, WW_QZ_COUNT);
-    wwQzIdx = 0;
-    wwQzScore = 0;
-    document.getElementById('ww-qz-start').style.display    = 'none';
-    document.getElementById('ww-qz-result').classList.remove('show');
-    document.getElementById('ww-qz-question').style.display = 'block';
-    wwRenderQuestion();
-  }
-
-  function wwRenderQuestion() {
-    const q   = WW_QUIZ_BANK[wwQzOrder[wwQzIdx]];
-    const num = wwQzIdx + 1;
-    document.getElementById('ww-qz-qnum').textContent       = 'Question ' + num + ' of ' + WW_QZ_COUNT;
-    document.getElementById('ww-qz-score-live').textContent = 'Score: ' + wwQzScore;
-    document.getElementById('ww-qz-fill').style.width       = ((num - 1) / WW_QZ_COUNT * 100) + '%';
-    document.getElementById('ww-qz-q').textContent          = q.q;
-    const choiceOrder = q.choices.map((_, i) => i);
-    shuffleArr(choiceOrder);
-    const container = document.getElementById('ww-qz-choices');
-    container.innerHTML = '';
-    choiceOrder.forEach(origIdx => {
-      const btn = document.createElement('button');
-      btn.className    = 'qz-choice';
-      btn.textContent  = q.choices[origIdx];
-      btn.dataset.idx  = origIdx;
-      btn.onclick = () => wwSelectAnswer(btn, origIdx, q.answer, q.explain, container);
-      container.appendChild(btn);
-    });
-    const explain = document.getElementById('ww-qz-explain');
-    explain.className = 'qz-explain';
-    explain.innerHTML = '';
-    const nextBtn = document.getElementById('ww-qz-next');
-    nextBtn.className   = 'qz-next-btn';
-    nextBtn.textContent = (wwQzIdx < WW_QZ_COUNT - 1) ? 'Next Question' : 'See Results';
-  }
-
-  function wwSelectAnswer(btn, chosen, correct, explain, container) {
-    container.querySelectorAll('.qz-choice').forEach(b => {
-      b.disabled = true;
-      if (parseInt(b.dataset.idx) === correct) b.classList.add('reveal');
-    });
-    if (chosen === correct) { btn.classList.add('correct'); wwQzScore++; }
-    else { btn.classList.add('wrong'); }
-    const exEl = document.getElementById('ww-qz-explain');
-    exEl.innerHTML = explain;
-    exEl.classList.add('show');
-    document.getElementById('ww-qz-next').classList.add('show');
-    document.getElementById('ww-qz-score-live').textContent = 'Score: ' + wwQzScore;
-  }
-
-  function wwNextQuestion() {
-    wwQzIdx++;
-    if (wwQzIdx >= WW_QZ_COUNT) { wwShowResult(); }
-    else { wwRenderQuestion(); }
-  }
-
-  function wwShowResult() {
-    document.getElementById('ww-qz-question').style.display = 'none';
-    const result = document.getElementById('ww-qz-result');
-    result.classList.add('show');
-    document.getElementById('ww-qz-final-num').textContent = wwQzScore;
-    document.getElementById('ww-qz-final-den').textContent = '/ ' + WW_QZ_COUNT;
-    const pct     = wwQzScore / WW_QZ_COUNT;
-    const verdict = document.getElementById('ww-qz-verdict');
-    const sub     = document.getElementById('ww-qz-verdict-sub');
-    if (pct >= 0.7) {
-      verdict.textContent = 'PASS';
-      verdict.className   = 'qz-verdict pass';
-      sub.textContent     = Math.round(pct * 100) + '% — Great work!';
-    } else {
-      verdict.textContent = 'FAIL';
-      verdict.className   = 'qz-verdict fail';
-      sub.textContent     = Math.round(pct * 100) + '% — Need 70% to pass. Try again!';
-    }
   }
 
   // ── SERVICE WORKER ──
