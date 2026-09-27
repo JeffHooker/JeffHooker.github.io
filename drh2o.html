@@ -2659,7 +2659,8 @@ PSI = Head (ft) × 0.433</div>
             <button class="f-head" onclick="toggleFormula('f-feed')">Chemical Feed Rate <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
             <div class="f-body">
               <div class="f-eq">lbs/day = Flow (MGD) × Dose (mg/L) × 8.34
-gal/day = lbs/day ÷ (% Strength × 8.34)</div>
+gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
+  [% Strength as a number, e.g. 12 for 12%]</div>
               <p class="f-when">Use to calculate how much chemical to feed daily — works for chlorine, fluoride, coagulants, or any treatment chemical.</p>
               <p class="f-source">Source: ABC Need-to-Know Criteria for Operators, Grade 1 Water Treatment</p>
             </div>
@@ -2966,11 +2967,11 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       <div class="study-body">
 
         <div class="reg-section">
-          <div class="reg-section-title">MCLs — Maximum Contaminant Levels</div>
+          <div class="reg-section-title">MCLs &amp; Treatment Techniques</div>
           <table class="reg-table">
             <tr>
-              <td>Turbidity</td>
-              <td>≤ 0.3 NTU <em class="reg-note">95% of samples; never exceed 1.0 NTU</em></td>
+              <td>Turbidity <em class="reg-note">(Treatment Technique)</em></td>
+              <td>≤ 0.3 NTU in 95% of monthly samples; ≤ 1.0 NTU at any time <em class="reg-note">TT under SWTR, not a traditional MCL</em></td>
             </tr>
             <tr>
               <td>Total Trihalomethanes (TTHMs)</td>
@@ -2982,7 +2983,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             </tr>
             <tr>
               <td>Nitrate</td>
-              <td>10 mg/L</td>
+              <td>10 mg/L as N</td>
             </tr>
             <tr>
               <td>Arsenic</td>
@@ -3000,7 +3001,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
           <table class="reg-table">
             <tr>
               <td>Lead</td>
-              <td>0.015 mg/L <em class="reg-note">10 µg/L under CA LCRR / EPA LCRR 2024</em></td>
+              <td>0.015 mg/L (15 µg/L) <em class="reg-note">Trigger Level: 10 µg/L under EPA LCRR 2024 — action level remains 15 µg/L</em></td>
             </tr>
             <tr>
               <td>Copper</td>
@@ -3022,7 +3023,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             </tr>
             <tr>
               <td>Cryptosporidium</td>
-              <td>2-log <em class="reg-note">99% removal/inactivation</em></td>
+              <td>2-log filtration removal credit <em class="reg-note">IESWTR minimum; LT2ESWTR may require 0–2.5 additional log based on source water bin — removal credit only, not inactivation</em></td>
             </tr>
           </table>
         </div>
@@ -3031,8 +3032,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
           <div class="reg-section-title">Total Coliform Rule (TCR / RTCR)</div>
           <table class="reg-table">
             <tr>
-              <td>Monthly violation threshold</td>
-              <td>&gt; 5% TC-positive samples/month</td>
+              <td>Level 1 Assessment trigger</td>
+              <td>&gt; 5% TC-positive/month <em class="reg-note">for systems collecting ≥40 samples/month; or ≥ 2 TC-positive for systems taking &lt;40 samples/month</em></td>
             </tr>
             <tr>
               <td>E. coli presence</td>
@@ -3045,8 +3046,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
           <div class="reg-section-title">CT Reference — Free Chlorine (SWTR)</div>
           <table class="reg-table">
             <tr>
-              <td>Giardia 3-log (15°C, pH 6–9)</td>
-              <td>CT ≈ 41 mg·min/L <em class="reg-note">varies by temp &amp; pH; see EPA CT tables</em></td>
+              <td>Giardia 3-log (15°C, pH 7.0)</td>
+              <td>CT ≈ 46 mg·min/L <em class="reg-note">pH-sensitive: ~36 at pH 6, ~100 at pH 8, ~300+ at pH 9 — always use EPA CT tables for actual calculations</em></td>
             </tr>
             <tr>
               <td>CT formula</td>
@@ -3159,7 +3160,7 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
               <button class="f-head" onclick="toggleFormula('f-ww-sor')">Surface Overflow Rate <svg class="f-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
               <div class="f-body">
                 <div class="f-eq">SOR (gpd/ft²) = Flow (GPD) ÷ Clarifier Surface Area (ft²)</div>
-                <p class="f-when">Typical design: 400–800 gpd/ft² for primary clarifiers; 400–600 for secondary. Exceeding limits causes carryover.</p>
+                <p class="f-when">Typical design: 600–1,200 gpd/ft² for primary clarifiers; 400–800 gpd/ft² for secondary. Exceeding limits causes carryover.</p>
                 <p class="f-source">Source: ABC Need-to-Know Criteria, Grade T1 Wastewater Treatment</p>
               </div>
             </div>
@@ -3469,8 +3470,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
                 <td>At point of discharge to receiving water</td>
               </tr>
               <tr>
-                <td>Violation reporting</td>
-                <td>Within 24 hours of discovery <em class="reg-note">written report within 5 days</em></td>
+                <td>Violation reporting (health/environment risk)</td>
+                <td>Within 24 hours of discovery <em class="reg-note">written report within 5 days; routine exceedances reported on monthly DMR, not 24-hr</em></td>
               </tr>
             </table>
           </div>
@@ -3487,8 +3488,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
                 <td>400 MPN/100 mL</td>
               </tr>
               <tr>
-                <td>Turbidity — filtered effluent median</td>
-                <td>2 NTU <em class="reg-note">never exceed 5 NTU; applies where state has adopted filtered effluent turbidity limits</em></td>
+                <td>Turbidity — filtered effluent (CA Title 22)</td>
+                <td>2 NTU median <em class="reg-note">never exceed 5 NTU; CA Title 22 (22 CCR §60301.230) — not part of 40 CFR Part 133 secondary treatment standards</em></td>
               </tr>
             </table>
           </div>
