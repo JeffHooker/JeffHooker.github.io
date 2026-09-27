@@ -6577,6 +6577,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   const WW_QUIZ_BANK = [
   // --- ACTIVATED SLUDGE: MLSS, SVI, F/M, SRT, RAS, WAS, DO ---
   {
+    id:"ww-0001", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Mixed Liquor Volatile Suspended Solids (MLVSS) represents what fraction of MLSS?",
     choices: [
       "The inorganic, non-biodegradable portion of the mixed liquor",
@@ -6588,6 +6590,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>MLVSS represents the organic (volatile) fraction of MLSS, used as an approximation of active biomass.</b> MLVSS is typically 70–80% of MLSS. It is used in F/M ratio and other process calculations."
   },
   {
+    id:"ww-0002", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The SVI (Sludge Volume Index) is calculated as:",
     choices: [
       "(Settled sludge volume, mL/L) ÷ (MLSS, mg/L) × 1000",
@@ -6599,12 +6603,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>SVI = (settled sludge volume in mL/L after 30 min) ÷ (MLSS in mg/L) × 1000.</b> A normal SVI is 80–150 mL/g. Values above 200 indicate poor settling (bulking); below 50 may indicate pin floc or old sludge."
   },
   {
+    id:"ww-0003", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"calc",
     q: "An aeration basin has an MLSS of 2,500 mg/L and the 30-minute settlometer reading is 250 mL/L. What is the SVI?",
     choices: ["62.5 mL/g", "100 mL/g", "250 mL/g", "625 mL/g"],
     answer: 1,
     explain: "<b>SVI = (250 mL/L ÷ 2,500 mg/L) × 1000 = 100 mL/g.</b> An SVI of 100 mL/g is within the normal range (80–150 mL/g), indicating good settling characteristics."
   },
   {
+    id:"ww-0004", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "The F/M (Food-to-Microorganism) ratio is calculated as:",
     choices: [
       "Influent BOD loading (lbs/day) ÷ Mass of MLVSS in aeration basin (lbs)",
@@ -6616,6 +6624,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>F/M = lbs BOD applied per day ÷ lbs MLVSS in aeration basin.</b> Typical range: 0.2–0.5 lbs BOD/lb MLVSS/day for conventional activated sludge. Low F/M means extended aeration; high F/M means high-rate treatment."
   },
   {
+    id:"ww-0005", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "A high F/M ratio (greater than 0.6) in activated sludge typically results in:",
     choices: [
       "Over-aerated, highly nitrified effluent",
@@ -6627,6 +6637,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>High F/M produces young, dispersed biomass that settles poorly.</b> At high F/M, bacteria are in the log growth phase — reproducing rapidly without forming good floc. This leads to high effluent TSS."
   },
   {
+    id:"ww-0006", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "What happens in the aeration basin when the dissolved oxygen (DO) drops below 0.5 mg/L?",
     choices: [
       "Nitrification increases due to anaerobic conditions",
@@ -6638,6 +6650,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Low DO in the aeration basin favors filamentous bacteria growth, causing sludge bulking.</b> Filamentous organisms like Thiothrix and Type 021N thrive in low-DO conditions and prevent good floc formation."
   },
   {
+    id:"ww-0007", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "RAS (Return Activated Sludge) flow rate is typically expressed as a percentage of:",
     choices: [
       "The WAS flow rate",
@@ -6649,6 +6663,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>RAS is expressed as a percentage of influent flow.</b> Typical RAS rates are 25–100% of influent flow. RAS returns settled biological solids from the secondary clarifier back to the aeration basin to maintain MLSS."
   },
   {
+    id:"ww-0008", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "If you need to increase the MLSS in the aeration basin, you should:",
     choices: [
       "Increase the WAS (waste activated sludge) rate",
@@ -6660,6 +6676,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Decreasing WAS retains more solids in the system, increasing MLSS.</b> WAS removes solids from the system — reducing WAS allows more biomass to accumulate, raising MLSS and increasing SRT."
   },
   {
+    id:"ww-0009", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "The Sludge Retention Time (SRT), also called Mean Cell Residence Time (MCRT), is defined as:",
     choices: [
       "The time water spends in the aeration basin",
@@ -6671,6 +6689,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>SRT = Total solids in the system (lbs) ÷ Solids wasted per day (lbs/day).</b> SRT (in days) is the average age of biological solids. Nitrification typically requires SRT of 10+ days; conventional activated sludge is 5–15 days."
   },
   {
+    id:"ww-0010", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "For biological nitrification to occur in an activated sludge system, the minimum SRT is approximately:",
     choices: ["1–2 days", "3–5 days", "10–15 days", "30+ days"],
     answer: 2,
@@ -6679,6 +6699,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- MASS LOADING CALCULATIONS ---
   {
+    id:"ww-0011", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The 'pounds formula' used for mass loading calculations in wastewater treatment is:",
     choices: [
       "lbs/day = mg/L ÷ (MGD × 8.34)",
@@ -6690,18 +6712,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>lbs/day = mg/L × MGD × 8.34.</b> The 8.34 factor is the weight of one gallon of water in pounds. This formula converts a concentration (mg/L) and a flow (MGD) into a mass loading rate (lbs/day)."
   },
   {
+    id:"ww-0012", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"calc",
     q: "A wastewater plant treats 3.0 MGD with an influent BOD of 250 mg/L. What is the BOD loading in lbs/day?",
     choices: ["625 lbs/day", "750 lbs/day", "6,255 lbs/day", "2,500 lbs/day"],
     answer: 2,
     explain: "<b>lbs/day = 250 × 3.0 × 8.34 = 6,255 lbs/day.</b> Mass loading is important for sizing treatment processes, calculating oxygen demand, and evaluating permit compliance."
   },
   {
+    id:"ww-0013", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"calc",
     q: "The aeration basin at a plant has an MLSS of 3,000 mg/L and a volume of 0.5 MG. What is the total mass of MLSS in the basin?",
     choices: ["1,500 lbs", "3,000 lbs", "12,510 lbs", "15,000 lbs"],
     answer: 2,
     explain: "<b>Mass = 3,000 mg/L × 0.5 MG × 8.34 = 12,510 lbs.</b> Use the pounds formula: lbs = mg/L × MG × 8.34. This is the total biomass inventory used in SRT calculations."
   },
   {
+    id:"ww-0014", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"calc",
     q: "Daily solids wasting (WAS) from a plant is 0.05 MGD at 8,000 mg/L TSS. How many lbs/day of solids are wasted?",
     choices: ["400 lbs/day", "3,336 lbs/day", "8,000 lbs/day", "40,000 lbs/day"],
     answer: 1,
@@ -6710,6 +6738,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- PERCENT REMOVAL CALCULATIONS ---
   {
+    id:"ww-0015", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Percent removal is calculated as:",
     choices: [
       "(Influent − Effluent) ÷ Effluent × 100",
@@ -6721,12 +6751,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>% Removal = (Influent − Effluent) ÷ Influent × 100.</b> This formula is used for BOD, TSS, and other parameters to calculate treatment efficiency."
   },
   {
+    id:"ww-0016", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"calc",
     q: "A plant receives influent with 220 mg/L BOD and produces effluent with 11 mg/L BOD. What is the percent BOD removal?",
     choices: ["50%", "75%", "95%", "99%"],
     answer: 2,
     explain: "<b>% Removal = (220 − 11) ÷ 220 × 100 = 209 ÷ 220 × 100 = 95%.</b> A 95% BOD removal is very good secondary treatment performance. Typical secondary treatment achieves 85–95% BOD removal."
   },
   {
+    id:"ww-0017", discipline:"ww", sub:"wastewater", topic:"mass-loading",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"calc",
     q: "A facility has an influent TSS of 180 mg/L and must achieve 85% TSS removal. What is the maximum allowable effluent TSS?",
     choices: ["15.3 mg/L", "27 mg/L", "30 mg/L", "153 mg/L"],
     answer: 1,
@@ -6735,6 +6769,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- SLUDGE HANDLING (DIGESTION, DEWATERING, BIOSOLIDS) ---
   {
+    id:"ww-0018", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "The primary purpose of anaerobic digestion in a wastewater treatment plant is to:",
     choices: [
       "Provide aerobic treatment of raw sludge",
@@ -6746,6 +6782,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Anaerobic digestion reduces volatile solids, stabilizes sludge, and produces methane biogas.</b> Methane can be captured for energy recovery. Well-digested sludge is less odorous and easier to dewater."
   },
   {
+    id:"ww-0019", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Aerobic digestion differs from anaerobic digestion in that:",
     choices: [
       "Aerobic digestion produces more biogas",
@@ -6757,6 +6795,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Aerobic digestion uses air to oxidize volatile solids without producing methane.</b> It is simpler and better suited for small plants. It does not produce energy but is less complex to operate than anaerobic digestion."
   },
   {
+    id:"ww-0020", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"reg",
     q: "Class A biosolids differ from Class B biosolids primarily in that Class A:",
     choices: [
       "Has lower metal concentrations than Class B",
@@ -6768,6 +6808,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Class A biosolids meet stringent pathogen reduction standards and have essentially no restrictions on use or public contact.</b> Class B biosolids have reduced pathogens but retain some restrictions (no grazing, limited public contact after application)."
   },
   {
+    id:"ww-0021", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Which dewatering process uses centrifugal force to separate water from sludge?",
     choices: [
       "Belt filter press",
@@ -6779,12 +6821,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Centrifuges use centrifugal force (thousands of times gravity) to separate water from sludge solids.</b> Modern decanting centrifuges can achieve 15–35% solids cake. Belt filter presses and plate-and-frame presses use mechanical pressure."
   },
   {
+    id:"ww-0022", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"reg",
     q: "What is the minimum volatile solids (VS) reduction required by EPA's 40 CFR Part 503 rules for biosolids to meet vector attraction reduction requirements?",
     choices: ["10–20%", "20–30%", "38% or greater", "60–70%"],
     answer: 2,
     explain: "<b>EPA 40 CFR Part 503 requires a minimum of 38% VS reduction for vector attraction reduction.</b> This is the regulatory floor — well-digested sludge typically achieves 45–60% VS reduction under normal mesophilic digestion temperatures (95–98°F), but 38% is the compliance threshold."
   },
   {
+    id:"ww-0023", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "Temperature-Phased Anaerobic Digestion (TPAD) uses both thermophilic and mesophilic stages to achieve:",
     choices: [
       "Maximum methane production at reduced cost",
@@ -6796,6 +6842,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>TPAD combines thermophilic digestion (55°C) for pathogen destruction with mesophilic digestion (35°C) for stabilization.</b> The thermophilic stage achieves the time-temperature requirements for Class A biosolids."
   },
   {
+    id:"ww-0024", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Polymer is added to sludge before dewatering to:",
     choices: [
       "Add nutrients for better anaerobic digestion",
@@ -6807,6 +6855,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Polymer conditioning destabilizes and aggregates sludge particles, improving dewatering performance.</b> Properly conditioned sludge releases water more easily on a belt press or in a centrifuge, producing a drier cake."
   },
   {
+    id:"ww-0025", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"reg",
     q: "Septage received at a wastewater treatment plant must:",
     choices: [
       "Be treated identically to primary influent",
@@ -6820,6 +6870,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- NPDES PERMITS ---
   {
+    id:"ww-0026", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "NPDES stands for:",
     choices: [
       "National Pollution Detection and Effluent Standards",
@@ -6831,6 +6883,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>NPDES stands for National Pollutant Discharge Elimination System.</b> Established under the Clean Water Act, NPDES permits regulate the discharge of pollutants from point sources into waters of the United States."
   },
   {
+    id:"ww-0027", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"reg",
     q: "An NPDES permit typically specifies effluent limits as:",
     choices: [
       "Annual average only",
@@ -6842,6 +6896,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>NPDES permits specify monthly average limits and daily maximum limits.</b> The daily maximum is typically higher (more lenient) than the monthly average, recognizing natural variability while preventing extreme events."
   },
   {
+    id:"ww-0028", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"reg",
     q: "A Discharge Monitoring Report (DMR) must be submitted:",
     choices: [
       "Only when a violation occurs",
@@ -6853,6 +6909,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>DMRs must be submitted on the permit-specified schedule, typically monthly.</b> False or inaccurate reporting on a DMR can constitute a violation of the Clean Water Act, separate from the underlying effluent violation."
   },
   {
+    id:"ww-0029", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW2","WW3","WW4"], diff:2, type:"reg",
     q: "What is a Significant Noncompliance (SNC) designation under NPDES?",
     choices: [
       "Any single exceedance of an effluent limit",
@@ -6864,6 +6922,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>SNC is a designation for serious or persistent NPDES permit violations triggering escalated regulatory response.</b> Criteria include exceeding monthly average limits by ≥40% for two consecutive months, or missing DMR submissions."
   },
   {
+    id:"ww-0030", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"reg",
     q: "The technology-based effluent limit for secondary treatment under the Clean Water Act specifies BOD and TSS effluent quality of:",
     choices: [
       "10 mg/L BOD and 10 mg/L TSS",
@@ -6875,12 +6935,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Secondary treatment standards require monthly average effluent BOD and TSS of ≤30 mg/L.</b> The daily maximum is 45 mg/L for both parameters. A minimum 85% BOD removal is also required."
   },
   {
+    id:"ww-0031", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW2","WW3","WW4"], diff:2, type:"tf",
     q: "True or False: An NPDES permit violation occurs if a facility discharges more than the permitted daily maximum flow, even if all concentration-based effluent limits are met.",
     choices: ["True", "False"],
     answer: 0,
     explain: "<b>True.</b> NPDES permits may contain flow-based limits in addition to concentration limits. Exceeding the permitted maximum daily flow is an independent permit violation even if concentration limits are met."
   },
   {
+    id:"ww-0032", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW2","WW3","WW4"], diff:2, type:"reg",
     q: "Under the Clean Water Act, what must a facility do if it anticipates a bypass (intentional diversion of flow from treatment)?",
     choices: [
       "Immediately discharge without notification",
@@ -6894,6 +6958,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- EFFLUENT LIMITS (BOD, TSS, AMMONIA, NUTRIENTS) ---
   {
+    id:"ww-0033", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Biological nitrification converts ammonia to:",
     choices: [
       "Nitrogen gas (N₂) — removed from the water",
@@ -6905,6 +6971,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Nitrification is a two-step process: ammonia → nitrite (Nitrosomonas) → nitrate (Nitrobacter).</b> Nitrification exerts an oxygen demand (NBOD) and reduces ammonia toxicity to aquatic life."
   },
   {
+    id:"ww-0034", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Denitrification converts nitrate to:",
     choices: [
       "Ammonia — recycling nitrogen in the system",
@@ -6916,6 +6984,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Denitrification reduces nitrate to nitrogen gas (N₂), which escapes to the atmosphere.</b> This process requires an anoxic zone (no dissolved oxygen but nitrate present) and a carbon source. It also recovers alkalinity."
   },
   {
+    id:"ww-0035", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "Phosphorus can be removed biologically in Enhanced Biological Phosphorus Removal (EBPR) by:",
     choices: [
       "Converting phosphorus to phosphate and precipitating with lime",
@@ -6927,6 +6997,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>EBPR uses an anaerobic zone (PAOs release phosphorus and take up VFAs) followed by an aerobic zone (PAOs uptake excess phosphorus).</b> The phosphorus-rich biomass is then wasted, removing P from the system."
   },
   {
+    id:"ww-0036", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Ammonia toxicity to fish in receiving waters is dependent on:",
     choices: [
       "Total ammonia concentration only",
@@ -6938,6 +7010,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Un-ionized ammonia (NH₃) is the toxic form and its fraction increases at higher pH and temperature.</b> Total ammonia limits in permits are often expressed as a function of pH and temperature to protect aquatic life."
   },
   {
+    id:"ww-0037", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Nutrient limits in NPDES permits are increasingly driven by concerns about:",
     choices: [
       "Bioaccumulation of nutrients in predatory fish",
@@ -6951,6 +7025,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- DISINFECTION OF EFFLUENT ---
   {
+    id:"ww-0038", discipline:"ww", sub:"wastewater", topic:"disinfection",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The most common disinfection method used for secondary effluent is:",
     choices: [
       "Ozonation",
@@ -6962,6 +7038,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Chlorination remains the most widely used effluent disinfection method.</b> It is cost-effective and provides residual, but produces DBPs and requires dechlorination if the receiving water has aquatic life to protect."
   },
   {
+    id:"ww-0039", discipline:"ww", sub:"wastewater", topic:"disinfection",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Dechlorination of effluent before discharge is required when:",
     choices: [
       "Effluent chlorine residual would be toxic to aquatic life in the receiving water",
@@ -6973,6 +7051,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Dechlorination is required when chlorine residual in the effluent would be toxic to aquatic life.</b> Sodium bisulfite and sulfur dioxide are common dechlorination agents. Chlorine is toxic to fish at very low concentrations (0.01–0.1 mg/L)."
   },
   {
+    id:"ww-0040", discipline:"ww", sub:"wastewater", topic:"disinfection",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "UV disinfection of wastewater effluent is preferred in some situations because it:",
     choices: [
       "Provides a lasting residual to protect receiving waters",
@@ -6984,6 +7064,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>UV disinfection produces no chemical byproducts and requires no dechlorination.</b> It is effective against Cryptosporidium and Giardia. However, it provides no residual and requires turbidity/TSS control for effectiveness."
   },
   {
+    id:"ww-0041", discipline:"ww", sub:"wastewater", topic:"disinfection",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
     q: "Sodium bisulfite is used in effluent dechlorination. The reaction with chlorine requires approximately how much sodium bisulfite per part of chlorine?",
     choices: [
       "0.5 parts sodium bisulfite per part chlorine",
@@ -6995,6 +7077,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Approximately 1.46 mg/L sodium bisulfite is needed to neutralize 1 mg/L of chlorine.</b> Sulfur dioxide requires about 0.9 mg/L per mg/L of chlorine. Operators must verify adequate dechlorination through residual testing."
   },
   {
+    id:"ww-0042", discipline:"ww", sub:"wastewater", topic:"disinfection",
+    grades:["WW2","WW3","WW4"], diff:2, type:"reg",
     q: "The most common effluent coliform limit in NPDES permits for discharge to receiving waters used for contact recreation is:",
     choices: [
       "200 MPN/100 mL fecal coliform (monthly geometric mean)",
@@ -7008,6 +7092,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- PUMPING (HEAD, HORSEPOWER, EFFICIENCY) ---
   {
+    id:"ww-0043", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Total Dynamic Head (TDH) in a pumping system represents:",
     choices: [
       "Only the elevation difference between pump inlet and outlet",
@@ -7019,6 +7105,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>TDH = static head + friction head losses + velocity head.</b> Static head is the elevation difference; friction losses occur in pipes and fittings. TDH is the total work the pump must perform."
   },
   {
+    id:"ww-0044", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
     q: "Water horsepower (WHP) is calculated as:",
     choices: [
       "WHP = flow (GPM) × TDH (ft) ÷ 3,960",
@@ -7030,18 +7118,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>WHP = GPM × TDH (ft) ÷ 3,960.</b> The constant 3,960 accounts for unit conversions (33,000 ft·lb/min per HP ÷ 8.34 lb/gal). WHP is the theoretical power needed to pump the water, ignoring inefficiencies."
   },
   {
+    id:"ww-0045", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
     q: "A pump moves 500 GPM against a TDH of 80 ft. What is the water horsepower?",
     choices: ["5.0 WHP", "10.1 WHP", "15.2 WHP", "20.0 WHP"],
     answer: 1,
     explain: "<b>WHP = 500 × 80 ÷ 3,960 = 40,000 ÷ 3,960 = 10.1 WHP.</b> This is the theoretical minimum power required. Actual motor HP must be higher to account for pump and motor inefficiencies."
   },
   {
+    id:"ww-0046", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
     q: "If a pump has a water horsepower (WHP) of 10.1 and an overall efficiency of 75%, what is the brake horsepower (BHP) required?",
     choices: ["7.6 BHP", "10.1 BHP", "13.5 BHP", "15.2 BHP"],
     answer: 2,
     explain: "<b>BHP = WHP ÷ efficiency = 10.1 ÷ 0.75 = 13.5 BHP.</b> Brake horsepower is the actual power needed from the motor. Overall efficiency includes both pump efficiency and motor efficiency."
   },
   {
+    id:"ww-0047", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Cavitation in a centrifugal pump occurs when:",
     choices: [
       "The discharge pressure is too high",
@@ -7053,6 +7147,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Cavitation occurs when pump suction pressure drops below the liquid's vapor pressure, causing water to vaporize.</b> The collapsing vapor bubbles create shock waves that erode impeller and casing material, producing a distinctive rattling noise."
   },
   {
+    id:"ww-0048", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "Specific speed (Ns) is used to classify centrifugal pumps. A pump with a low specific speed is best suited for:",
     choices: [
       "High-flow, low-head applications",
@@ -7064,6 +7160,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Low specific speed pumps (radial flow) are best for high head, low flow applications.</b> High specific speed pumps (axial/mixed flow) are suited for high flow, low head applications like stormwater pumping."
   },
   {
+    id:"ww-0049", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "Net Positive Suction Head Available (NPSHa) must be greater than NPSH Required (NPSHr) to prevent:",
     choices: [
       "Motor overload",
@@ -7077,18 +7175,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- LAB PROCEDURES ---
   {
+    id:"ww-0050", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The 5-day BOD test (BOD₅) is conducted at what temperature?",
     choices: ["4°C", "20°C", "25°C", "35°C"],
     answer: 1,
     explain: "<b>BOD₅ is incubated at 20°C for 5 days.</b> The standardized temperature ensures comparable results between labs. Dissolved oxygen depletion after 5 days (minus a blank correction) represents the BOD."
   },
   {
+    id:"ww-0051", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
     q: "A BOD₅ test is set up with a 5 mL sample diluted in 300 mL total volume. Initial DO = 8.2 mg/L, final DO = 2.0 mg/L. What is the BOD₅?",
     choices: ["6.2 mg/L", "62.0 mg/L", "372 mg/L", "744 mg/L"],
     answer: 2,
     explain: "<b>BOD₅ = (Initial DO − Final DO) × (total volume ÷ sample volume) = (8.2 − 2.0) × (300 ÷ 5) = 6.2 × 60 = 372 mg/L.</b> The dilution factor (300/5 = 60) accounts for the sample dilution."
   },
   {
+    id:"ww-0052", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "In a BOD test, the dilution water blank is used to:",
     choices: [
       "Determine the BOD of the seed culture",
@@ -7100,6 +7204,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The blank corrects for oxygen demand contributed by the dilution water and any seed added.</b> The blank's DO depletion is subtracted from the sample's DO depletion to calculate true sample BOD."
   },
   {
+    id:"ww-0053", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The Settleometer (Imhoff cone or graduated cylinder) test measures:",
     choices: [
       "The BOD of settled sludge",
@@ -7111,6 +7217,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The 30-minute settleometer test measures the settled sludge volume (SSV) in mL/L.</b> Combined with MLSS, it calculates SVI. A 1-liter graduated cylinder is typically used: SVI = (SSV in mL/L ÷ MLSS in mg/L) × 1000."
   },
   {
+    id:"ww-0054", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Which method is most commonly used for fecal coliform analysis in wastewater effluent?",
     choices: [
       "Heterotrophic plate count (HPC)",
@@ -7122,6 +7230,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Membrane filtration on mFC agar at 44.5°C is the standard method for fecal coliform in effluent.</b> The elevated incubation temperature (44.5°C) selects for fecal coliforms over non-fecal coliforms."
   },
   {
+    id:"ww-0055", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "pH measurement electrodes require calibration with buffer solutions before use. The typical two-point calibration uses buffers at:",
     choices: [
       "pH 4 and pH 7",
@@ -7133,6 +7243,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Standard two-point pH calibration uses pH 4 and pH 7 buffers.</b> These two points bracket the typical wastewater effluent range (6–8). pH 7 and pH 10 may be used when measuring samples with higher pH. Buffers must be within expiration date and stored properly."
   },
   {
+    id:"ww-0056", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Dissolved oxygen (DO) can be measured by which two common methods?",
     choices: [
       "Winkler titration and gravimetric analysis",
@@ -7144,6 +7256,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>DO is measured by the membrane electrode method (electronic meters) or Winkler (iodometric) titration.</b> The Winkler method is the reference method; membrane electrodes are used for field/continuous monitoring."
   },
   {
+    id:"ww-0057", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW2","WW3","WW4"], diff:2, type:"tf",
     q: "True or False: Composite samples for effluent monitoring are preferred over grab samples for parameters like BOD and TSS because they represent average conditions over time.",
     choices: ["True", "False"],
     answer: 0,
@@ -7152,6 +7266,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- SAFETY (CONFINED SPACE, CHEMICAL, H₂S, PPE) ---
   {
+    id:"ww-0058", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "A permit-required confined space is defined by OSHA as a space that:",
     choices: [
       "Is large enough for a worker to enter and has a restricted means of entry or exit, contains a hazardous atmosphere, or has a hazard potential",
@@ -7163,6 +7279,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>OSHA defines a permit-required confined space as one that is large enough to enter, has restricted entry/exit, and contains or could contain a serious hazard (atmospheric, engulfment, entrapment, or other).</b> Wastewater manholes, wet wells, and digesters are common examples."
   },
   {
+    id:"ww-0059", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Before entering a confined space in a wastewater facility, the atmosphere must be tested for:",
     choices: [
       "Only oxygen levels",
@@ -7174,12 +7292,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Atmospheric testing must include O₂ (19.5–23.5% acceptable), LEL (<10% of LEL), and toxic gases like H₂S (<10 ppm) and CO.</b> Testing should be done from outside the space before entry and continuously during occupation."
   },
   {
+    id:"ww-0060", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The IDLH concentration for hydrogen sulfide (H₂S) is:",
     choices: ["10 ppm", "50 ppm", "100 ppm", "500 ppm"],
     answer: 2,
     explain: "<b>The IDLH for H₂S is 100 ppm.</b> The OSHA PEL ceiling is 20 ppm. At concentrations above 150 ppm, H₂S paralyzes the olfactory nerves — the smell of 'rotten eggs' can no longer be detected, making it extremely dangerous."
   },
   {
+    id:"ww-0061", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "H₂S gas in wastewater systems is produced by:",
     choices: [
       "Aerobic decomposition of organic matter at high temperatures",
@@ -7191,6 +7313,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>H₂S is produced by sulfate-reducing bacteria (Desulfovibrio) under anaerobic conditions.</b> Force mains, septic collection systems, and long retention sewer reaches are prone to H₂S buildup, causing odor and corrosion problems."
   },
   {
+    id:"ww-0062", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"safety",
     q: "When a worker must retrieve an incapacitated person from a confined space, the proper procedure is:",
     choices: [
       "Immediately enter to rescue the person as quickly as possible",
@@ -7202,6 +7326,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Non-entry rescue (retrieval system) is the preferred method. Entry rescue requires proper PPE and trained personnel following emergency procedures.</b> Many confined space fatalities involve would-be rescuers who enter without proper protection."
   },
   {
+    id:"ww-0063", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"safety",
     q: "Sodium hypochlorite (bleach) used for disinfection should not be stored near which substance?",
     choices: [
       "Water",
@@ -7213,6 +7339,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Sodium hypochlorite must not contact acids or organic materials — the reaction can release toxic chlorine gas.</b> Separate storage for hypochlorite and acids (like hydrochloric acid used for pH adjustment) is essential."
   },
   {
+    id:"ww-0064", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "OSHA's lockout/tagout (LOTO) standard requires that energy sources be locked out and tagged before:",
     choices: [
       "Operating any pump for the first time",
@@ -7224,6 +7352,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>LOTO is required before servicing or maintaining equipment where unexpected startup, energization, or release of stored energy could cause injury.</b> This includes electrical, pneumatic, hydraulic, and mechanical energy isolation."
   },
   {
+    id:"ww-0065", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Fall protection is required at wastewater facilities when working at elevations at or above:",
     choices: [
       "2 feet",
@@ -7235,6 +7365,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>OSHA requires fall protection at 4 feet for general industry and 6 feet for construction.</b> At wastewater facilities (general industry), fall protection (guardrails, safety nets, or personal fall arrest systems) is needed at 4 feet."
   },
   {
+    id:"ww-0066", discipline:"ww", sub:"wastewater", topic:"safety",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The minimum oxygen concentration required for safe entry into a confined space is:",
     choices: [
       "10% by volume",
@@ -7248,6 +7380,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- OPERATOR CERTIFICATION AND REGULATORY ---
   {
+    id:"ww-0067", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"reg",
     q: "Which federal law provides the primary regulatory framework governing wastewater discharges in the United States?",
     choices: [
       "Safe Drinking Water Act (SDWA)",
@@ -7259,6 +7393,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The Clean Water Act (CWA) is the primary federal law governing wastewater discharges.</b> It established the NPDES permit system, water quality standards, and the goal of eliminating pollutant discharges to navigable waters."
   },
   {
+    id:"ww-0068", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"reg",
     q: "Operator certification levels (Grade I through Grade IV) are determined primarily by:",
     choices: [
       "The operator's years of service at the facility",
@@ -7270,6 +7406,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Certification grades are based on facility type and size (population served, flow, treatment complexity).</b> Regulations typically require that the operator in responsible charge (ORC) hold a certification grade at least equal to the facility's classification."
   },
   {
+    id:"ww-0069", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Chain of custody (COC) in wastewater sampling is important because it:",
     choices: [
       "Tracks the age of the sample to ensure it is analyzed before the holding time expires",
@@ -7281,6 +7419,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Chain of custody documents the history of the sample from collection through analysis, ensuring results are legally defensible.</b> A broken chain of custody can invalidate analytical results in enforcement actions."
   },
   {
+    id:"ww-0070", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Continuing education units (CEUs) or contact hours are required for operator certification renewal to ensure operators:",
     choices: [
       "Meet minimum employment requirements for union membership",
@@ -7292,6 +7432,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>CEUs keep operators current with changing regulations, emerging technologies, and best practices.</b> Most state certification programs require 20–40 contact hours per renewal period (typically every 2–4 years)."
   },
   {
+    id:"ww-0071", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The operator in responsible charge (ORC) of a wastewater facility is responsible for:",
     choices: [
       "Only the daily laboratory testing procedures",
@@ -7303,6 +7445,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The ORC is responsible for overall facility operations and permit compliance.</b> The ORC must hold the appropriate certification grade for the facility and must make operational decisions or be available to do so."
   },
   {
+    id:"ww-0072", discipline:"ww", sub:"wastewater", topic:"regulations",
+    grades:["WW2","WW3","WW4"], diff:2, type:"tf",
     q: "True or False: An operator can transfer their state wastewater certification directly to another state without any additional requirements.",
     choices: ["True", "False"],
     answer: 1,
@@ -7311,6 +7455,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- ADDITIONAL ACTIVATED SLUDGE AND PROCESS CONTROL ---
   {
+    id:"ww-0073", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Foam (scum) on an aeration basin is commonly caused by:",
     choices: [
       "Excessive DO levels in the basin",
@@ -7322,6 +7468,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Biological foam is most often caused by Nocardia or Microthrix parvicella — filamentous organisms that produce hydrophobic surface layers.</b> Surfactants from detergents can cause white foam, while Nocardia produces thick brown/chocolate-colored foam."
   },
   {
+    id:"ww-0074", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Bulking sludge is defined as activated sludge that:",
     choices: [
       "Has an excessively high MLSS concentration",
@@ -7333,6 +7481,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Bulking sludge settles poorly because filamentous organisms extend beyond the floc, preventing compaction.</b> An SVI >150–200 mL/g indicates bulking. Causes include low DO, low F/M, nutrient deficiency, or septicity."
   },
   {
+    id:"ww-0075", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Increasing the return activated sludge (RAS) rate during high flow events helps to:",
     choices: [
       "Remove more solids from the secondary clarifier sludge blanket, preventing sludge washout",
@@ -7344,6 +7494,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Increasing RAS during high flows keeps the sludge blanket level low in the secondary clarifier.</b> High hydraulic flows can push the sludge blanket upward; increasing RAS draws sludge out faster, preventing it from reaching the weirs."
   },
   {
+    id:"ww-0076", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
     q: "The Hydraulic Retention Time (HRT) in an aeration basin is calculated as:",
     choices: [
       "Aeration basin volume (gallons) ÷ average daily flow (gallons per day)",
@@ -7355,6 +7507,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>HRT = Volume ÷ Flow rate.</b> If volume is in gallons and flow is in gallons/day, HRT is in days. Convert as needed (e.g., gallons ÷ GPM = minutes). Typical conventional activated sludge HRT is 4–8 hours."
   },
   {
+    id:"ww-0077", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The secondary clarifier's primary function is to:",
     choices: [
       "Further oxidize BOD using attached-growth media",
@@ -7366,6 +7520,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The secondary clarifier uses gravity settling to separate biological solids from the treated effluent.</b> Settled sludge is returned (RAS) to the aeration basin or wasted (WAS). Clarifier performance depends on surface loading rate and SVI."
   },
   {
+    id:"ww-0078", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"calc",
     q: "Surface Overflow Rate (SOR) for a secondary clarifier is calculated as:",
     choices: [
       "Flow (GPD) ÷ clarifier surface area (ft²)",
@@ -7377,6 +7533,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>SOR = Flow (GPD) ÷ Surface area (ft²).</b> Typical secondary clarifier SOR is 400–800 GPD/ft² average, 1,000–1,200 GPD/ft² peak. Exceeding the SOR can cause solids carryover in the effluent."
   },
   {
+    id:"ww-0079", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Extended aeration activated sludge systems operate at which conditions compared to conventional activated sludge?",
     choices: [
       "Higher F/M ratio and shorter SRT",
@@ -7388,6 +7546,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Extended aeration uses low F/M (0.05–0.15) and long SRT (20–30 days).</b> The long SRT promotes endogenous respiration, producing a stable, well-digested sludge and typically achieving some nitrification."
   },
   {
+    id:"ww-0080", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "The Oxygen Uptake Rate (OUR) test in activated sludge measures:",
     choices: [
       "The oxygen transfer efficiency of the aeration system",
@@ -7399,6 +7559,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>OUR measures the rate of DO consumption by mixed liquor (mg/L per minute).</b> High OUR indicates active, healthy biomass. Specific OUR (SOUR = OUR ÷ MLVSS) normalizes for biomass concentration and indicates metabolic activity."
   },
   {
+    id:"ww-0081", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "Nitrification inhibition in activated sludge can be caused by:",
     choices: [
       "Excessive BOD removal in the aeration basin",
@@ -7410,12 +7572,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Nitrification is sensitive to toxic industrial discharges, heavy metals, and low pH.</b> Nitrifiers are more sensitive to toxicants than heterotrophic BOD-removing bacteria. A sudden loss of nitrification often indicates a toxic slug from an industrial discharger."
   },
   {
+    id:"ww-0082", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"tf",
     q: "True or False: The Membrane Bioreactor (MBR) process eliminates the need for a secondary clarifier.",
     choices: ["True", "False"],
     answer: 0,
     explain: "<b>True.</b> MBR combines biological treatment with membrane filtration (microfiltration or ultrafiltration) to separate biomass from effluent. The membranes replace the secondary clarifier, producing high-quality effluent."
   },
   {
+    id:"ww-0083", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Volatile Suspended Solids (VSS) are distinguished from Total Suspended Solids (TSS) by:",
     choices: [
       "VSS settles in 30 minutes; TSS requires centrifugation",
@@ -7427,6 +7593,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>VSS is the organic fraction of TSS, determined by igniting the TSS residue at 550°C.</b> The ash remaining after ignition is the fixed suspended solids (inorganic). VSS ÷ TSS × 100 gives the volatile fraction percentage."
   },
   {
+    id:"ww-0084", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "Sequencing Batch Reactor (SBR) technology differs from conventional activated sludge because:",
     choices: [
       "SBR uses attached-growth media instead of suspended growth",
@@ -7438,6 +7606,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>SBRs are fill-and-draw systems where all treatment phases occur in the same tank in sequence.</b> A single SBR basin cycles through fill, react (aeration), settle, and decant phases. No separate clarifier or RAS system is required."
   },
   {
+    id:"ww-0085", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Which parameter is used to determine the 'sludge blanket level' in a secondary clarifier?",
     choices: [
       "A turbidimeter installed at the clarifier overflow weir",
@@ -7449,6 +7619,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>A sludge judge (clear acrylic tube) is lowered into the clarifier to collect a core sample showing the sludge blanket depth.</b> Electronic sludge level sensors use optical or acoustic methods for continuous monitoring. Maintaining a low sludge blanket prevents solids washout."
   },
   {
+    id:"ww-0086", discipline:"ww", sub:"wastewater", topic:"npdes",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"calc",
     q: "A wastewater plant's secondary effluent BOD is 8 mg/L and TSS is 10 mg/L. The plant's NPDES permit requires BOD ≤ 30 mg/L and TSS ≤ 30 mg/L (monthly average). The plant is:",
     choices: [
       "In violation of its NPDES permit for BOD",
@@ -7460,6 +7632,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Both BOD (8 mg/L) and TSS (10 mg/L) are well below the 30 mg/L permit limits — the plant is in compliance.</b> Permit limits specify the maximum allowable concentration; lower effluent values indicate better-than-required performance."
   },
   {
+    id:"ww-0087", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Total Kjeldahl Nitrogen (TKN) measures:",
     choices: [
       "Total nitrogen including nitrate and nitrite",
@@ -7471,6 +7645,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>TKN = organic nitrogen + ammonia nitrogen.</b> It does not include oxidized nitrogen (nitrite + nitrate). TKN is an important parameter for permit compliance and nutrient mass balance calculations."
   },
   {
+    id:"ww-0088", discipline:"ww", sub:"wastewater", topic:"nutrients",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "Phosphorus precipitation using alum (aluminum sulfate) removes phosphorus by:",
     choices: [
       "Biological uptake into activated sludge",
@@ -7482,6 +7658,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Alum reacts with orthophosphate to form insoluble aluminum phosphate (AlPO₄) which co-precipitates with aluminum hydroxide floc.</b> The phosphorus is removed with the settled sludge. Chemical phosphorus removal can achieve effluent TP below 0.1 mg/L."
   },
   {
+    id:"ww-0089", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "A grab sample collected from a manhole during a rain event shows a BOD of 15 mg/L compared to the normal dry-weather BOD of 200 mg/L. This is most likely caused by:",
     choices: [
       "Treatment plant malfunction reducing BOD removal",
@@ -7493,6 +7671,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Dramatic BOD dilution during rain events indicates inflow (stormwater entering sewers) and infiltration (groundwater through cracks/joints).</b> I/I increases flow and can hydraulically overload treatment plants, while diluting BOD concentration."
   },
   {
+    id:"ww-0090", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Which type of sewer system carries both wastewater and stormwater in the same pipe?",
     choices: [
       "Sanitary sewer system",
@@ -7504,12 +7684,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Combined sewer systems (CSS) carry both wastewater and stormwater in the same pipe.</b> During heavy rain, the combined flow can exceed treatment capacity, resulting in combined sewer overflows (CSOs) — a significant water quality concern."
   },
   {
+    id:"ww-0091", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"tf",
     q: "True or False: Class B biosolids can be applied to lawns and home gardens with no restrictions.",
     choices: ["True", "False"],
     answer: 1,
     explain: "<b>False.</b> Class B biosolids have site restrictions including buffers from water bodies, no application where public contact is likely, and restricted use on certain crops. Class A biosolids (not Class B) can be applied to home gardens."
   },
   {
+    id:"ww-0092", discipline:"ww", sub:"wastewater", topic:"lab-procedures",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "The Biochemical Oxygen Demand (BOD) test measures:",
     choices: [
       "The oxygen consumed by chemical oxidation of organic compounds",
@@ -7521,6 +7705,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>BOD measures the oxygen consumed by microbial decomposition of organic matter under aerobic conditions.</b> BOD₅ (5-day at 20°C) is the standard test. Chemical Oxygen Demand (COD) measures oxygen demand by chemical oxidation."
   },
   {
+    id:"ww-0093", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW3","WW4"], diff:3, type:"concept",
     q: "An operator notices the secondary clarifier effluent turbidity has increased dramatically while MLSS remains stable. The most likely cause is:",
     choices: [
       "Overaeration of the mixed liquor",
@@ -7532,6 +7718,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Rising sludge (or 'floating sludge') in the secondary clarifier is caused by denitrification.</b> Nitrate in the sludge is reduced to nitrogen gas by denitrifying bacteria, forming bubbles that carry floc to the surface. Reduce SRT or increase WAS to address."
   },
   {
+    id:"ww-0094", discipline:"ww", sub:"wastewater", topic:"hydraulics",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "Septicity in a wastewater collection system is characterized by:",
     choices: [
       "High DO and low BOD throughout the system",
@@ -7543,6 +7731,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Septic conditions occur when dissolved oxygen is depleted and anaerobic bacteria produce H₂S.</b> Septicity is common in force mains and long flat sewer sections with low velocity. It causes odors, pipe corrosion, and process upsets at the treatment plant."
   },
   {
+    id:"ww-0095", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "A gravity thickener is used in sludge processing primarily to:",
     choices: [
       "Digest volatile solids anaerobically",
@@ -7554,6 +7744,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Gravity thickeners use gravity settling to concentrate sludge solids, increasing solids content from 1–3% to 4–8%.</b> Thickening reduces the volume of sludge fed to digesters, improving digestion efficiency and reducing heating costs."
   },
   {
+    id:"ww-0096", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "In a Rotating Biological Contactor (RBC), biological treatment occurs on:",
     choices: [
       "Suspended biomass in an aeration basin",
@@ -7565,6 +7757,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>RBCs use plastic discs covered with a biofilm that rotates in and out of the wastewater, alternately exposing the biofilm to oxygen and food.</b> RBCs are a fixed-film (attached growth) process requiring no return sludge pumping."
   },
   {
+    id:"ww-0097", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW2","WW3","WW4"], diff:2, type:"concept",
     q: "A trickling filter's efficiency is rated primarily by its:",
     choices: [
       "Depth of stone media and influent BOD only",
@@ -7576,12 +7770,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Trickling filter performance depends on hydraulic loading (GPD/ft²), organic loading (lbs BOD/1,000 ft³/day), and recirculation.</b> Recirculation dilutes influent, improves distribution, and maintains moisture on media during low flow periods."
   },
   {
+    id:"ww-0098", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW2","WW3","WW4"], diff:2, type:"tf",
     q: "True or False: Biosolids that meet Class A pathogen and vector attraction reduction requirements can be marketed and sold to the public as fertilizer.",
     choices: ["True", "False"],
     answer: 0,
     explain: "<b>True.</b> Class A biosolids meeting all Part 503 pollutant, pathogen, and vector attraction reduction requirements can be land-applied without restriction and sold or given to the public. Examples include Milwaukee's Milorganite product."
   },
   {
+    id:"ww-0099", discipline:"ww", sub:"wastewater", topic:"sludge-handling",
+    grades:["WW3","WW4"], diff:3, type:"reg",
     q: "What is the primary regulatory concern with land application of biosolids regarding metals?",
     choices: [
       "Metals in biosolids can contaminate groundwater if applied in flood zones",
@@ -7593,6 +7791,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>40 CFR Part 503 sets cumulative pollutant loading rates (CPLRs) for heavy metals in biosolids applied to land.</b> Site managers must track cumulative metal additions to ensure the site is not overloaded over time."
   },
   {
+    id:"ww-0100", discipline:"ww", sub:"wastewater", topic:"activated-sludge",
+    grades:["WW1","WW2","WW3","WW4"], diff:1, type:"concept",
     q: "Grease and oil in wastewater can cause problems in treatment by:",
     choices: [
       "Lowering BOD and making treatment easier",
