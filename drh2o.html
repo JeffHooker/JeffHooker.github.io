@@ -4932,8 +4932,987 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     ],
     answer: 2,
     explain: "<b>Chlorine dioxide produces chlorite (ClO₂⁻) and chlorate (ClO₃⁻) as byproducts.</b> The MCL for chlorite is 1.0 mg/L. Chlorine dioxide does not produce THMs but its inorganic byproducts require monitoring."
+  },
+
+  // --- HYDRAULICS (DISTRIBUTION) ---
+  {
+    id:"dw-0120", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D2","D3","D4","D5"], diff:2, type:"calc",
+    q: "The Hazen-Williams formula is used to calculate:",
+    choices: [
+      "The theoretical minimum chlorine dose for CT compliance",
+      "Head loss due to friction in a water main",
+      "The flow rate through an orifice plate",
+      "Pump efficiency from flow and pressure data"
+    ],
+    answer: 1,
+    explain: "<b>The Hazen-Williams formula calculates friction head loss in pipes: h_f = 10.44 × L × Q^1.852 ÷ (C^1.852 × D^4.87).</b> The C coefficient (roughness) ranges from ~60 (very rough) to 150 (new PVC). Lower C means more head loss."
+  },
+  {
+    id:"dw-0121", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D2","D3","D4","D5"], diff:2, type:"calc",
+    q: "A 6-inch water main carries 500 GPM. Using Q = A × V, what is the approximate flow velocity (ft/s) if the pipe area is 0.196 ft²? (1 GPM = 0.00223 ft³/s)",
+    choices: ["2.7 ft/s", "5.7 ft/s", "8.2 ft/s", "11.4 ft/s"],
+    answer: 1,
+    explain: "<b>Q = 500 × 0.00223 = 1.115 ft³/s; V = Q ÷ A = 1.115 ÷ 0.196 = 5.7 ft/s.</b> Velocities above 5–8 ft/s in distribution mains can cause erosion, pressure transients, and increased head loss. Optimal velocity is typically 2–5 ft/s."
+  },
+  {
+    id:"dw-0122", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "Pressure in a distribution system is measured in psi. The minimum acceptable pressure at a service connection under normal operating conditions per AWWA guidelines is:",
+    choices: ["10 psi", "20 psi", "35–40 psi", "60 psi"],
+    answer: 2,
+    explain: "<b>AWWA recommends 35–40 psi as the minimum acceptable residential service pressure.</b> Pressures below 20 psi can cause backflow risks, poor performance of plumbing fixtures, and potential for contamination intrusion."
+  },
+  {
+    id:"dw-0123", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D3","D4","D5"], diff:2, type:"concept",
+    q: "A pressure-reducing valve (PRV) is installed in a distribution system to:",
+    choices: [
+      "Boost pressure in low-pressure zones",
+      "Maintain constant downstream pressure regardless of upstream fluctuations",
+      "Prevent backflow from service connections",
+      "Regulate chlorine residual in pressure zones"
+    ],
+    answer: 1,
+    explain: "<b>A PRV reduces and regulates downstream pressure to a preset level.</b> PRVs are critical in multi-pressure-zone systems to prevent over-pressurization in lower zones from higher-elevation storage. They require periodic maintenance and testing."
+  },
+  {
+    id:"dw-0124", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D3","D4","D5"], diff:3, type:"calc",
+    q: "Static water pressure at the base of a 100-foot water tower is approximately:",
+    choices: ["23 psi", "43 psi", "63 psi", "100 psi"],
+    answer: 1,
+    explain: "<b>Pressure (psi) = height (ft) × 0.433 psi/ft = 100 × 0.433 = 43.3 psi.</b> The 0.433 factor comes from water's weight (8.34 lb/gal × 0.0519 gal/in²). Elevated storage provides pressure head to the distribution system."
+  },
+  {
+    id:"dw-0125", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D3","D4","D5"], diff:3, type:"concept",
+    q: "A water hammer event in a distribution system is caused by:",
+    choices: [
+      "Excessive chlorine residual reacting with pipe materials",
+      "Sudden stoppage or change in flow velocity creating a pressure surge",
+      "Air pockets trapped at high points in the main",
+      "Thermal expansion of water in a closed section of pipe"
+    ],
+    answer: 1,
+    explain: "<b>Water hammer is a pressure surge from rapid flow change — caused by fast valve closure, pump start/stop, or hydrant operation.</b> The pressure wave can exceed normal operating pressure by 2–10×, potentially rupturing mains or damaging fittings."
+  },
+  {
+    id:"dw-0126", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D4","D5"], diff:3, type:"concept",
+    q: "In a looped distribution system compared to a dead-end system, the primary advantage is:",
+    choices: [
+      "Lower construction cost per linear foot of pipe",
+      "Water can flow from multiple directions to any point, improving flow capacity and reliability",
+      "Simpler pressure zone management",
+      "Elimination of the need for pressure-reducing valves"
+    ],
+    answer: 1,
+    explain: "<b>Looped systems allow flow from multiple directions, reducing head loss and maintaining service during main breaks or valve closures.</b> Dead-end mains require periodic flushing to maintain water quality and face pressure loss problems under high demand."
+  },
+  {
+    id:"dw-0127", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D4","D5"], diff:3, type:"concept",
+    q: "Extended-period simulation (EPS) in distribution system hydraulic modeling is used to:",
+    choices: [
+      "Calculate the instantaneous peak demand at a single node",
+      "Track how pressures, flows, and water quality change over time (typically 24–72 hours)",
+      "Design the minimum pipe diameter for a new subdivision",
+      "Determine the required tank volume for fire suppression"
+    ],
+    answer: 1,
+    explain: "<b>EPS models simulate diurnal demand patterns, tank fill/drain cycles, pump operation, and water quality over time.</b> It is used for fire flow analysis, water age studies, disinfectant residual tracking, and energy optimization."
+  },
+
+  // --- DISTRIBUTION OPERATIONS (D2–D5) ---
+  {
+    id:"dw-0128", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D1","D2","D3","D4","D5"], diff:1, type:"concept",
+    q: "The purpose of system flushing in a water distribution system is to:",
+    choices: [
+      "Increase system pressure by removing air pockets",
+      "Remove accumulated sediment, reduce water age, and restore chlorine residual in dead-end mains",
+      "Chlorinate the distribution main before it is placed in service",
+      "Test the capacity of fire hydrants for fire flow requirements"
+    ],
+    answer: 1,
+    explain: "<b>Flushing removes sediment, biofilm, and stale water from dead ends and low-flow areas.</b> Unidirectional flushing (UDF) is more effective than conventional flushing, moving sediment in one direction at scouring velocity (≥2.5 ft/s)."
+  },
+  {
+    id:"dw-0129", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "Cross-connection control programs are required to prevent:",
+    choices: [
+      "Pressure surges from rapid valve operations",
+      "Backflow of non-potable water into the potable water system",
+      "Excessive chlorine residual from booster chlorination",
+      "Corrosion of pipe fittings from aggressive water"
+    ],
+    answer: 1,
+    explain: "<b>Backflow occurs when a pressure reversal allows non-potable water to flow backward into the drinking water system.</b> Backpressure backflow (downstream pressure > supply) and backsiphonage (negative supply pressure) are the two mechanisms."
+  },
+  {
+    id:"dw-0130", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "A reduced-pressure backflow prevention assembly (RP) is required versus a double-check valve assembly (DC) when:",
+    choices: [
+      "The downstream pressure exceeds 100 psi",
+      "The hazard is 'high' — such as a connection to a chemical feed system, irrigation with additives, or medical facilities",
+      "The pipe diameter is larger than 2 inches",
+      "The assembly is located outdoors"
+    ],
+    answer: 1,
+    explain: "<b>RP assemblies are required for high-hazard connections where backflow could be toxic or health-threatening.</b> DC assemblies are acceptable for low-hazard commercial connections. RP assemblies have a relief port that drains if the intermediate zone pressurizes."
+  },
+  {
+    id:"dw-0131", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "New or repaired water mains must be disinfected before being placed in service. The standard practice per AWWA C651 is to:",
+    choices: [
+      "Flush the main with water at 10 ft/s to remove all debris",
+      "Apply a chlorine solution (typically 25–50 mg/L) with a 24-hour contact time, then flush and test bacteriologically",
+      "Apply UV light through the main for 30 minutes",
+      "Inject ozone at 10 mg/L for 1 hour"
+    ],
+    answer: 1,
+    explain: "<b>AWWA C651 requires chlorine disinfection (typically 25–50 mg/L initial dose) with a minimum 24-hour contact time, maintaining ≥10 mg/L residual.</b> After flushing, two consecutive passing bacteriological samples (total coliform absent) are required before placing in service."
+  },
+  {
+    id:"dw-0132", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "Valve exercising programs in a water distribution system are important because:",
+    choices: [
+      "Regular valve operation generates turbulence that keeps pipes clean",
+      "Valves that are never operated can seize, making them inoperable during emergencies or main breaks",
+      "Valve operation is required to maintain AWWA C651 disinfection compliance",
+      "Valve opening and closing controls chlorine residual in the system"
+    ],
+    answer: 1,
+    explain: "<b>Inoperable valves discovered during emergencies can prevent timely isolation of main breaks.</b> AWWA recommends exercising all valves on a 5-year or shorter cycle, recording condition. Seized valves require costly replacement."
+  },
+  {
+    id:"dw-0133", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D3","D4","D5"], diff:2, type:"concept",
+    q: "A fire hydrant flow test is used to determine the system's:",
+    choices: [
+      "Minimum free chlorine residual at the hydrant location",
+      "Available fire flow — the flow the system can deliver at a minimum 20 psi residual pressure",
+      "The static pressure at peak demand conditions",
+      "Maximum allowable velocity in the main supplying the hydrant"
+    ],
+    answer: 1,
+    explain: "<b>Fire flow tests measure available flow at 20 psi residual pressure.</b> ISO requires specific flows based on construction type and occupancy. Test data is used to identify system deficiencies and verify model accuracy."
+  },
+  {
+    id:"dw-0134", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D3","D4","D5"], diff:3, type:"concept",
+    q: "Water main cathodic protection is used to:",
+    choices: [
+      "Add alkalinity to the distributed water to prevent pipe scale",
+      "Counteract electrochemical corrosion of metallic pipe by applying an opposing electrical current or sacrificial anode",
+      "Prevent biological growth inside ductile iron mains",
+      "Increase the C-factor of aging cement-lined pipes"
+    ],
+    answer: 1,
+    explain: "<b>Cathodic protection applies a DC current that makes the pipe the cathode, preventing anodic dissolution (corrosion).</b> Impressed current and sacrificial anodes (zinc, magnesium) are the two methods. Required in corrosive soils for metallic pipe."
+  },
+  {
+    id:"dw-0135", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D4","D5"], diff:3, type:"concept",
+    q: "A pressure zone boundary in a water distribution system is created by:",
+    choices: [
+      "A change in pipe material from ductile iron to PVC",
+      "Closed pressure-reducing valves (PRVs) or pressure-sustaining valves (PSVs) that hydraulically isolate different elevation bands",
+      "The boundary between pressure districts served by different pump stations",
+      "The elevation at which hydrostatic pressure equals atmospheric pressure"
+    ],
+    answer: 1,
+    explain: "<b>Pressure zones isolate areas of different elevation or pressure so that maximum pressure doesn't exceed safe limits (~150 psi) while maintaining minimum pressure in all zones.</b> PRVs drop pressure from a higher zone; PSVs maintain minimum upstream pressure."
+  },
+  {
+    id:"dw-0136", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D4","D5"], diff:3, type:"concept",
+    q: "Real water losses (physical losses) in a distribution system are best quantified by:",
+    choices: [
+      "Comparing customer meter readings to source meter readings — the difference is apparent loss",
+      "An Infrastructure Leakage Index (ILI) calculated from water audit data separating apparent and real losses",
+      "The annual number of main break repair events",
+      "Customer complaints about low pressure"
+    ],
+    answer: 1,
+    explain: "<b>The ILI = Current Annual Real Losses ÷ Unavoidable Annual Real Losses (UARL).</b> AWWA's water audit methodology separates apparent losses (meter error, unauthorized use) from real losses (leakage). An ILI of 1.0 is theoretical minimum; ILI >5 indicates significant leakage."
+  },
+  {
+    id:"dw-0137", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "The purpose of air-release/air-vacuum valves (ARVs) at high points in a water main is to:",
+    choices: [
+      "Bleed excess pressure from the system during high-demand periods",
+      "Release trapped air during filling and admit air during draining to prevent negative pressure (pipe collapse)",
+      "Allow chlorine gas to escape from the pressurized main",
+      "Regulate flow between pressure zones at topographic high points"
+    ],
+    answer: 1,
+    explain: "<b>Trapped air at high points reduces pipe capacity and can cause water hammer.</b> ARVs release air automatically as a main fills, and admit air as it drains (preventing vacuum collapse of thin-walled pipe or customer backflow)."
+  },
+  {
+    id:"dw-0138", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D3","D4","D5"], diff:3, type:"concept",
+    q: "Acoustic leak detection in water distribution systems works by:",
+    choices: [
+      "Pressurizing sections of main above normal operating pressure and measuring flow rate change",
+      "Detecting the sound or vibration generated by water escaping through a hole or crack in the pipe",
+      "Using ground-penetrating radar to locate cavities formed by water erosion",
+      "Monitoring pressure transients at each pressure zone boundary"
+    ],
+    answer: 1,
+    explain: "<b>Leaks generate a characteristic sound signature; correlators compare sounds picked up by sensors on hydrants/valves to pinpoint leak location.</b> Ground microphones can also be used on metallic pipes. Plastic pipes transmit less sound, reducing acoustic method effectiveness."
+  },
+  {
+    id:"dw-0139", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "Booster chlorination stations in a water distribution system are used to:",
+    choices: [
+      "Increase water pressure in low-pressure zones",
+      "Replenish chlorine residual that has decayed over distance or time in the system",
+      "Provide secondary disinfection after UV treatment at the plant",
+      "Neutralize taste-and-odor compounds in the distribution system"
+    ],
+    answer: 1,
+    explain: "<b>Chlorine residual decays due to reactions with pipe walls, organic matter, and elapsed time (water age).</b> Booster stations inject chlorine at strategic points to maintain the minimum 0.2 mg/L free chlorine residual required at all distribution system points."
+  },
+
+  // --- ADVANCED TREATMENT (T4–T5) ---
+  {
+    id:"dw-0140", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T4","T5"], diff:3, type:"calc",
+    q: "A water plant uses ozone for primary disinfection. At pH 7 and 15°C, the CT required for 3-log Giardia inactivation with ozone is 0.63 mg·min/L. If the ozone residual leaving the contact basin is 0.3 mg/L and the basin has a T₁₀/T of 0.7, what basin HRT (minutes) achieves the required CT?",
+    choices: ["1.0 min", "3.0 min", "5.0 min", "10.0 min"],
+    answer: 1,
+    explain: "<b>CT achieved = residual × T₁₀ = 0.3 × (T × 0.7). Solve: 0.63 = 0.3 × 0.7 × T; T = 0.63 ÷ 0.21 = 3.0 min.</b> Ozone is a much more powerful disinfectant than chlorine — it requires very low CT values but residual in finished water is zero (ozone decomposes)."
+  },
+  {
+    id:"dw-0141", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Under the Long-Term 2 Enhanced Surface Water Treatment Rule (LT2ESWTR), Cryptosporidium monitoring is required because:",
+    choices: [
+      "Cryptosporidium is removed by coagulation but not inactivated by chlorine",
+      "Cryptosporidium oocysts are highly resistant to chlorine but are removed by filtration and inactivated by UV and ozone",
+      "Cryptosporidium is regulated by the Lead and Copper Rule, not the SWTR",
+      "Only groundwater systems are required to monitor for Cryptosporidium"
+    ],
+    answer: 1,
+    explain: "<b>Cryptosporidium is resistant to chlorine disinfection at practical doses/contact times — UV and ozone are effective.</b> LT2 requires 2-year monitoring; results determine additional treatment (Bin 1–4) based on source concentration. UV is the most common Cryptosporidium control added."
+  },
+  {
+    id:"dw-0142", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Membrane filtration (microfiltration/ultrafiltration) achieves Cryptosporidium removal credit under the LT2ESWTR because:",
+    choices: [
+      "Membranes oxidize Cryptosporidium oocysts during permeation",
+      "Physical membrane pores (0.1–0.2 μm for MF) exclude oocysts (4–6 μm) by size exclusion",
+      "Membrane systems add chloramine to the permeate",
+      "Membrane modules are backwashed with UV-treated water"
+    ],
+    answer: 1,
+    explain: "<b>MF/UF membranes physically exclude Cryptosporidium oocysts and Giardia cysts by size.</b> Certified MF/UF systems can receive ≥5.5-log Cryptosporidium removal credit with an integrity testing program. NF/RO membranes also provide removal credit."
+  },
+  {
+    id:"dw-0143", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T4","T5"], diff:3, type:"concept",
+    q: "Direct filtration of surface water is appropriate when:",
+    choices: [
+      "Source turbidity routinely exceeds 10 NTU",
+      "Source water has consistently low turbidity (<5 NTU) and low color, requiring coagulation and filtration but no sedimentation",
+      "Source water has high algae counts requiring pre-oxidation",
+      "Treatment is required for taste and odor compounds"
+    ],
+    answer: 1,
+    explain: "<b>Direct filtration skips the sedimentation basin, using only coagulation/flocculation followed immediately by filtration.</b> It is suitable for high-quality source water with low turbidity and TOC. Disadvantage: limited surge capacity for source water quality changes."
+  },
+  {
+    id:"dw-0144", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Chloramination (using monochloramine for distribution disinfection) is preferred over free chlorine residual in some systems because:",
+    choices: [
+      "Monochloramine is more effective against bacteria than free chlorine",
+      "Monochloramine produces lower regulated DBPs (THMs, HAA5) and is more stable (longer-lasting residual) in distribution",
+      "Monochloramine is less expensive per pound than sodium hypochlorite",
+      "Free chlorine cannot be used in distribution systems under the D/DBP Rule"
+    ],
+    answer: 1,
+    explain: "<b>Monochloramine produces far fewer THMs and HAA5s and has lower reactivity with organics.</b> It is more stable in distribution (slower decay), reducing booster chlorination needs. Disadvantage: less effective against viruses; nitrification risk if ammonia-to-chlorine ratio not managed."
+  },
+  {
+    id:"dw-0145", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T4","T5"], diff:3, type:"concept",
+    q: "Nitrification in a distribution system using chloramines is caused by:",
+    choices: [
+      "The presence of oxidizing agents that convert ammonia to nitrite",
+      "Ammonia-oxidizing bacteria (AOB) converting free ammonia to nitrite, which then reacts with chloramine to further decay the residual",
+      "High pH causing chloramine decomposition to free chlorine",
+      "Elevated temperature converting monochloramine to dichloramine"
+    ],
+    answer: 1,
+    explain: "<b>AOB convert free ammonia (from chloramine decomposition) to nitrite, which further accelerates chloramine decay.</b> Nitrification can reduce residual to near zero, causing compliance failures. Control measures include maintaining Cl:N ratio >4:1, using breakpoint chlorination seasonally."
+  },
+  {
+    id:"dw-0146", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T4","T5"], diff:3, type:"concept",
+    q: "The Stage 2 Disinfectants/Disinfection Byproducts Rule (Stage 2 D/DBP Rule) uses locational running annual averages (LRAAs) rather than system-wide averages because:",
+    choices: [
+      "LRAAs are easier to calculate than system-wide averages",
+      "Averaging across all sites can mask high DBP concentrations at specific locations with long water age",
+      "Stage 2 applies only to groundwater systems, which have one monitoring site",
+      "EPA requires separate compliance reporting for each pressure zone"
+    ],
+    answer: 1,
+    explain: "<b>LRAA evaluates each monitoring location independently, preventing system-wide averaging from hiding high-DBP hot spots (typically in long water-age areas).</b> Systems must identify distribution system evaluation locations (DSELs) to maximize monitoring at highest-risk sites."
+  },
+  {
+    id:"dw-0147", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Enhanced coagulation under the Stage 1 D/DBP Rule requires systems to:",
+    choices: [
+      "Add excess coagulant beyond the jar-test optimum to remove all TOC",
+      "Remove specified percentages of TOC (based on source water alkalinity and TOC) to reduce DBP precursors",
+      "Use only ferric sulfate, not alum, for coagulation",
+      "Achieve turbidity ≤0.1 NTU in settled water before filtration"
+    ],
+    answer: 1,
+    explain: "<b>Enhanced coagulation requires TOC removal based on a matrix of source water TOC and alkalinity.</b> Higher-TOC, lower-alkalinity waters require greater TOC removal (up to 45%). Reducing TOC precursors limits THM/HAA5 formation during disinfection."
+  },
+  {
+    id:"dw-0148", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T3","T4","T5","D3","D4","D5"], diff:3, type:"calc",
+    q: "The Langelier Saturation Index (LSI) is calculated as LSI = pH_actual − pH_s. A water with LSI = +0.3 is:",
+    choices: [
+      "Aggressive (scale-forming) — likely to dissolve cement pipe lining and copper",
+      "Slightly scale-forming — tends to deposit a thin CaCO₃ layer protective of pipe",
+      "Corrosive — below saturation for calcium carbonate",
+      "Neutral — exactly at saturation"
+    ],
+    answer: 1,
+    explain: "<b>Positive LSI indicates oversaturation with CaCO₃ — water tends to precipitate scale.</b> A slight positive LSI (+0.1 to +0.3) is desirable for corrosion control in metallic and concrete pipes. Strongly positive LSI (>0.5) causes heavy scale buildup."
+  },
+  {
+    id:"dw-0149", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Softening of water using the lime-soda ash process removes hardness by:",
+    choices: [
+      "Ion exchange replacing Ca²⁺ and Mg²⁺ with Na⁺",
+      "Raising pH to precipitate calcium as CaCO₃ and magnesium as Mg(OH)₂",
+      "Adding sulfate to form insoluble calcium sulfate",
+      "Reversing osmosis pressure to remove divalent cations"
+    ],
+    answer: 1,
+    explain: "<b>Lime (Ca(OH)₂) raises pH, precipitating CaCO₃ and Mg(OH)₂ which are removed by settling.</b> Soda ash (Na₂CO₃) provides additional carbonate for non-carbonate hardness. The process produces large volumes of sludge."
+  },
+  {
+    id:"dw-0150", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
+    q: "Total hardness is reported as mg/L as CaCO₃. A water sample has calcium hardness of 80 mg/L as CaCO₃ and magnesium hardness of 40 mg/L as CaCO₃. What is the total hardness?",
+    choices: ["40 mg/L as CaCO₃", "80 mg/L as CaCO₃", "120 mg/L as CaCO₃", "160 mg/L as CaCO₃"],
+    answer: 2,
+    explain: "<b>Total hardness = Ca hardness + Mg hardness = 80 + 40 = 120 mg/L as CaCO₃.</b> Water is classified as: soft (<75), moderately hard (75–150), hard (150–300), very hard (>300) mg/L as CaCO₃."
+  },
+  {
+    id:"dw-0151", discipline:"dw", sub:"treatment", topic:"turbidity",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
+    q: "Turbidity in source water is caused by:",
+    choices: [
+      "Dissolved minerals that change the refractive index of water",
+      "Suspended or colloidal particles that scatter light — including clay, silt, organic matter, algae, and microorganisms",
+      "Dissolved organic carbon that absorbs UV light",
+      "Temperature gradients creating density differences in the water column"
+    ],
+    answer: 1,
+    explain: "<b>Turbidity is light scattering by suspended matter.</b> High turbidity is a public health concern because particles can shield pathogens from disinfection (CT credit reduction) and indicate inadequate treatment. The turbidity MCL of 1 NTU (0.3 NTU after filtration) protects against this."
+  },
+  {
+    id:"dw-0152", discipline:"dw", sub:"treatment", topic:"turbidity",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Cryptosporidium, Giardia, and other pathogen removal credit from filtration is dependent on:",
+    choices: [
+      "The chlorine dose applied before filtration",
+      "Filtered water turbidity — higher turbidity indicates particle breakthrough and reduced pathogen removal",
+      "The media type (sand vs. anthracite) in the filter",
+      "The backwash frequency of the filter"
+    ],
+    answer: 1,
+    explain: "<b>Turbidity is the surrogate measure for filtration performance and pathogen removal.</b> The SWTR requires ≤0.3 NTU in 95% of measurements each month. Turbidity spikes after backwash, storms, or source changes indicate reduced pathogen removal credit."
+  },
+  {
+    id:"dw-0153", discipline:"dw", sub:"treatment", topic:"turbidity",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
+    q: "A Continuous Turbidity Monitor (CTM) on a filter effluent shows a sudden spike to 0.8 NTU after a rainstorm. The appropriate operator response is:",
+    choices: [
+      "Continue normal operation as 0.8 NTU is below the 1.0 NTU MCL",
+      "Investigate the cause — check coagulant dose, sedimentation performance, and filter media; consider increasing coagulant and slowing filter rate",
+      "Immediately shut down the filter and backwash",
+      "Increase chlorine dose to compensate for reduced pathogen removal"
+    ],
+    answer: 1,
+    explain: "<b>A turbidity spike to 0.8 NTU indicates particle breakthrough, even if below the 1.0 NTU MCL.</b> The SWTR goal is ≤0.3 NTU; operators should investigate coagulation, slow the filter, or take the filter offline if turbidity remains elevated."
+  },
+  {
+    id:"dw-0154", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Granular activated carbon (GAC) in a water treatment plant is used primarily to remove:",
+    choices: [
+      "Hardness and alkalinity from the finished water",
+      "Taste- and odor-causing compounds, synthetic organic chemicals (SOCs), and some DBP precursors through adsorption",
+      "Suspended solids from the raw water before coagulation",
+      "Nitrate and nitrite from groundwater sources"
+    ],
+    answer: 1,
+    explain: "<b>GAC adsorbs taste and odor compounds (geosmin, MIB), synthetic organics, and natural organic matter.</b> GAC can be used as filter-adsorber (replacing sand/anthracite media) or as a separate contactor after filtration. Biological activated carbon (BAC) also forms when microorganisms colonize the carbon."
+  },
+  {
+    id:"dw-0155", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T4","T5"], diff:3, type:"concept",
+    q: "The filter ripening period (after backwash) is a concern because:",
+    choices: [
+      "New filter media needs time to develop biological activity before particle removal begins",
+      "Freshly backwashed filters initially produce higher turbidity effluent as the filter media re-establishes its particle-capture matrix",
+      "Chlorine residual drops in the filter effluent immediately after backwash",
+      "Filter media settles unevenly after backwash, causing channeling"
+    ],
+    answer: 1,
+    explain: "<b>After backwash, the filter media is clean and particle removal efficiency is temporarily reduced — this is the 'ripening' period.</b> Filter-to-waste (bypassing the clearwell) during the first 5–15 minutes of filter run protects finished water quality. Some systems also use filter aid polymers to improve initial turbidity."
+  },
+  {
+    id:"dw-0156", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Legionella pneumophila in a drinking water system is a concern because:",
+    choices: [
+      "It causes waterborne illness through ingestion of contaminated drinking water",
+      "It amplifies in warm stagnant water (e.g., cooling towers, hot water systems) and causes Legionnaires' disease through inhalation of aerosols",
+      "It is regulated under the Total Coliform Rule as an indicator of fecal contamination",
+      "It is removed by conventional surface water treatment but not groundwater treatment"
+    ],
+    answer: 1,
+    explain: "<b>Legionella is inhaled as an aerosol — not contracted by drinking.</b> While treatment plants reduce Legionella, it amplifies in premise plumbing (hot water heaters 77–113°F), cooling towers, and showerheads. Building water management plans (WMPs) are required for high-risk buildings under ASHRAE 188."
+  },
+  {
+    id:"dw-0157", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T4","T5"], diff:3, type:"concept",
+    q: "Virus inactivation with UV light differs from Cryptosporidium inactivation because:",
+    choices: [
+      "UV is more effective against viruses at all doses",
+      "Viruses require much higher UV doses than Cryptosporidium for equivalent log inactivation — Cryptosporidium is highly UV-sensitive",
+      "UV does not inactivate viruses; only free chlorine is effective",
+      "Viruses cannot be measured by the same biodosimetry methods used for Cryptosporidium"
+    ],
+    answer: 1,
+    explain: "<b>Cryptosporidium requires only 3–6 mJ/cm² UV dose for 3-log inactivation; viruses require 50–186 mJ/cm² for comparable inactivation.</b> UV is typically combined with chlorine to provide virus inactivation credit (chlorine) and Cryptosporidium removal (UV). Most surface water systems use both."
+  },
+  {
+    id:"dw-0158", discipline:"dw", sub:"treatment", topic:"chemical-safety",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"safety",
+    q: "Chlorine gas leak response procedures require that personnel:",
+    choices: [
+      "Attempt to stop the leak using a wet cloth while holding their breath",
+      "Exit upwind and uphill from the leak, activate emergency response, and use self-contained breathing apparatus (SCBA) for re-entry",
+      "Activate the ventilation system and then enter to assess the leak",
+      "Neutralize the chlorine with sodium thiosulfate solution before evacuation"
+    ],
+    answer: 1,
+    explain: "<b>Chlorine gas is denser than air and accumulates in low areas.</b> Exit upwind and uphill. Do not enter without SCBA. Emergency chlorine kits (Kit A for 100-lb cylinders, Kit B for 150-lb tanks, Kit C for 1-ton containers) require trained personnel and SCBA for use."
+  },
+  {
+    id:"dw-0159", discipline:"dw", sub:"treatment", topic:"chemical-safety",
+    grades:["T3","T4","T5"], diff:2, type:"safety",
+    q: "Ammonium hydroxide (aqueous ammonia) used in chloramination must be stored separately from chlorine because:",
+    choices: [
+      "Ammonia and chlorine react to form toxic nitrogen trichloride or other hazardous compounds on contact",
+      "Ammonia is flammable and chlorine is an oxidizer — contact creates a fire risk",
+      "Ammonia neutralizes chlorine, reducing its disinfection effectiveness",
+      "Mixing ammonia and chlorine produces a corrosive salt that damages feed equipment"
+    ],
+    answer: 0,
+    explain: "<b>Chlorine and ammonia react to form chloramines and, at high ratios, toxic nitrogen trichloride (NCl₃).</b> Separate storage, containment dikes, and dedicated feed equipment are required. Chlorine must be applied to water BEFORE ammonia to ensure proper chloramine formation (not the reverse)."
+  },
+
+  // --- LCR ADVANCED (T4–T5, D4–D5) ---
+  {
+    id:"dw-0160", discipline:"dw", sub:"treatment", topic:"lcr",
+    grades:["T3","T4","T5","D3","D4","D5"], diff:3, type:"reg",
+    q: "Under the Lead and Copper Rule, if the lead 90th percentile action level (15 ppb) is exceeded, the water system must:",
+    choices: [
+      "Issue a boil water advisory and add iron to precipitate lead",
+      "Implement corrosion control treatment, public education, and may be required to replace lead service lines",
+      "Immediately switch to chloramination from free chlorine",
+      "Issue a mandatory lead pipe replacement notice only to affected customers"
+    ],
+    answer: 1,
+    explain: "<b>AL exceedance triggers mandatory corrosion control treatment optimization, public education, and — if levels remain elevated — lead service line replacement at a rate of ≥7% per year.</b> The 2024 Lead and Copper Rule Revisions (LCRR) add new requirements including mandatory replacement of all LSLs within 10 years."
+  },
+  {
+    id:"dw-0161", discipline:"dw", sub:"treatment", topic:"lcr",
+    grades:["T3","T4","T5","D3","D4","D5"], diff:3, type:"concept",
+    q: "Orthophosphate addition for corrosion control under the LCR works by:",
+    choices: [
+      "Raising pH to precipitate lead as lead carbonate",
+      "Forming a protective lead phosphate scale on pipe surfaces that inhibits lead dissolution",
+      "Chelating dissolved lead in the water to prevent its absorption",
+      "Oxidizing lead(II) to lead(IV), which is less soluble"
+    ],
+    answer: 1,
+    explain: "<b>Orthophosphate (typically 1–2 mg/L as PO₄) forms sparingly soluble lead phosphate minerals (e.g., chloropyromorphite) that coat pipe surfaces.</b> Phosphate is effective in low-to-moderate alkalinity water. pH adjustment (raising pH >7.5) is the alternative corrosion control approach."
+  },
+  {
+    id:"dw-0162", discipline:"dw", sub:"distribution", topic:"lcr",
+    grades:["D4","D5"], diff:3, type:"concept",
+    q: "The Lead and Copper Rule Revisions (LCRR) require water systems to create a:",
+    choices: [
+      "Chlorine residual map showing lead concentration at each sample site",
+      "Lead service line inventory identifying the material of every service line in the distribution system",
+      "Continuous lead monitoring program at 10% of service connections annually",
+      "Mandatory lead and copper testing program in all schools within the service area"
+    ],
+    answer: 1,
+    explain: "<b>The LCRR requires a complete service line inventory categorizing each line as lead, galvanized requiring replacement (GRR), non-lead, or unknown.</b> Unknown service lines must be investigated. The inventory must be publicly available and updated annually."
+  },
+  {
+    id:"dw-0163", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T4","T5"], diff:3, type:"reg",
+    q: "The Total Coliform Rule (TCR) requires a system to collect repeat samples when:",
+    choices: [
+      "A sample result shows turbidity above 1 NTU",
+      "Any routine sample tests positive for total coliform",
+      "Total coliform is detected in more than 5% of routine samples",
+      "A distribution system pressure loss occurs"
+    ],
+    answer: 1,
+    explain: "<b>A single total coliform-positive routine sample triggers repeat sampling at the positive site plus upstream and downstream sites within 24 hours.</b> If the repeat samples are also positive, an acute MCL violation occurs and public notification is required."
+  },
+  {
+    id:"dw-0164", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T3","T4","T5"], diff:3, type:"reg",
+    q: "The Revised Total Coliform Rule (RTCR) replaced the 1989 TCR and now focuses on:",
+    choices: [
+      "Detecting E. coli as an indicator of fecal contamination rather than total coliform",
+      "Finding and correcting sanitary defects in the distribution system when coliform is detected",
+      "Requiring weekly coliform sampling at all entry points",
+      "Eliminating the use of presence/absence methods for coliform testing"
+    ],
+    answer: 1,
+    explain: "<b>The RTCR requires a Level 1 or Level 2 assessment when coliform is found, identifying sanitary defects for correction.</b> E. coli-positive results trigger an acute MCL violation. The RTCR emphasizes finding contamination pathways rather than just reporting exceedances."
+  },
+  {
+    id:"dw-0165", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T4","T5","D4","D5"], diff:3, type:"reg",
+    q: "The Consumer Confidence Report (CCR) must be delivered to customers:",
+    choices: [
+      "Immediately upon detecting any MCL violation",
+      "Annually by July 1 for the previous calendar year's data",
+      "Monthly as part of routine operations reporting",
+      "Only when a water quality violation occurs"
+    ],
+    answer: 1,
+    explain: "<b>Community water systems must deliver CCRs to customers by July 1 each year, reporting on source water, detected contaminants, any violations, and educational information.</b> Systems serving >10,000 must post online; all must mail or distribute directly to customers."
+  },
+  {
+    id:"dw-0166", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T4","T5","D4","D5"], diff:3, type:"reg",
+    q: "Emergency response planning under the America's Water Infrastructure Act (AWIA) 2018 requires community water systems serving >3,300 people to:",
+    choices: [
+      "Install backup chlorination capability within 90 days of a main break",
+      "Complete a Risk and Resilience Assessment (RRA) and update their Emergency Response Plan (ERP) on a 5-year cycle",
+      "Submit daily operations reports to EPA during declared emergencies",
+      "Maintain 72-hour on-site chemical storage for continuous treatment"
+    ],
+    answer: 1,
+    explain: "<b>AWIA 2018 requires CWSs serving >3,300 to conduct an RRA (physical, cyber, and contamination risks) and certify an updated ERP to EPA every 5 years.</b> The ERP must address strategies to respond to identified risks and maintain operations under emergency conditions."
+  },
+  {
+    id:"dw-0167", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T3","T4","T5"], diff:3, type:"reg",
+    q: "Perchlorate contamination in drinking water sources is primarily associated with:",
+    choices: [
+      "Agricultural runoff from pesticide application",
+      "Rocket propellant, munitions, fireworks, and some fertilizers — primarily a concern near defense facilities or arid areas with Chilean nitrate fertilizer use",
+      "Industrial wastewater discharges from semiconductor manufacturing",
+      "Natural decomposition of chlorine-based disinfectants in distribution"
+    ],
+    answer: 1,
+    explain: "<b>Perchlorate is used in solid rocket fuel, explosives, and pyrotechnics.</b> It is also a naturally occurring contaminant in arid regions. Perchlorate interferes with thyroid hormone production; EPA established an MCL of 0.056 mg/L in 2024."
+  },
+  {
+    id:"dw-0168", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "PFAS (per- and polyfluoroalkyl substances) in drinking water are a concern because:",
+    choices: [
+      "They cause acute gastrointestinal illness at concentrations commonly found in water sources",
+      "They are extremely persistent, bioaccumulate in the body, and are associated with cancer and other health effects — even at very low concentrations (parts per trillion)",
+      "They react with chlorine to form trihalomethanes",
+      "They are easily removed by conventional coagulation and filtration"
+    ],
+    answer: 1,
+    explain: "<b>PFAS are 'forever chemicals' that do not break down in the environment.</b> EPA set MCLs for PFOA and PFOS at 4 ppt in 2024. Granular activated carbon (GAC), high-pressure membranes (NF/RO), and anion exchange resins are effective treatment technologies."
+  },
+  {
+    id:"dw-0169", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T4","T5"], diff:3, type:"reg",
+    q: "Under the Groundwater Rule (GWR), a groundwater system is required to conduct additional source water monitoring and corrective action when:",
+    choices: [
+      "Source water turbidity exceeds 1 NTU",
+      "A triggered source water sample is positive for a fecal indicator (E. coli, enterococci, coliphage)",
+      "A routine coliform sample tests positive for total coliform",
+      "The system changes its disinfection method from chlorine to UV"
+    ],
+    answer: 1,
+    explain: "<b>Under the GWR, a fecal indicator-positive triggered source sample requires a follow-up investigation and corrective action (hydrogeologic sensitivity study, wellhead protection, continuous disinfection, or inactivation treatment).</b> The GWR protects against fecally-contaminated groundwater."
+  },
+  {
+    id:"dw-0170", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T4","T5","D4","D5"], diff:3, type:"concept",
+    q: "An MCL violation must be reported to the state primacy agency and to customers within what timeframe for an acute health risk violation (e.g., positive E. coli)?",
+    choices: [
+      "Within 24 hours to the state; within 24 hours to customers via newspaper",
+      "Within 24 hours to the state; immediately to customers by media and posting (within 24 hours)",
+      "Within 30 days to the state; in the next CCR to customers",
+      "Within 48 hours to both state and customers"
+    ],
+    answer: 1,
+    explain: "<b>Acute MCL violations (E. coli-positive, nitrate >10 mg/L, turbidity >1 NTU) require state notification within 24 hours and public notification within 24 hours.</b> Notification must be via media, posting, or direct contact — not just the CCR. Tier 1 public notification protects against immediate health risk."
+  },
+  {
+    id:"dw-0171", discipline:"dw", sub:"treatment", topic:"coliform-sampling",
+    grades:["T3","T4","T5","D3","D4","D5"], diff:3, type:"concept",
+    q: "The minimum number of routine coliform samples required per month for a system serving 25,000 people is approximately:",
+    choices: ["5", "20", "29", "50"],
+    answer: 2,
+    explain: "<b>The RTCR requires monthly samples based on population served: systems serving 25,001–50,000 people must collect ≥29 samples per month.</b> Smaller systems (≤1,000 people) may collect as few as 1 per quarter. Sample sites must be representative of the distribution system."
+  },
+  {
+    id:"dw-0172", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["D3","D4","D5"], diff:3, type:"concept",
+    q: "Distribution system monitoring sites for the RTCR should be selected to represent:",
+    choices: [
+      "Only entry points to the distribution system (plant effluent)",
+      "A variety of system characteristics including dead ends, areas far from the plant, and areas with older pipe",
+      "Only locations where customer complaints have occurred",
+      "Only fire hydrants accessible by sampling vehicles"
+    ],
+    answer: 1,
+    explain: "<b>Sample sites must represent the entire distribution system — not just points of entry.</b> Dead ends, old pipe areas, and remote portions have higher water age and greater coliform risk. Sample site plans must be submitted to the primacy agency and updated periodically."
+  },
+  {
+    id:"dw-0173", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Cyanotoxins (from harmful algal blooms — HABs) in source water are a concern for water systems because:",
+    choices: [
+      "They are easily removed by conventional coagulation and filtration",
+      "They can pass through treatment and are not regulated by primary MCLs — systems must have source monitoring and response plans",
+      "They cause corrosion of distribution system pipes",
+      "They react with chlorine to form regulated disinfection byproducts"
+    ],
+    answer: 1,
+    explain: "<b>Cyanotoxins (microcystin, cylindrospermopsin, etc.) are health advisories — 10-day HA levels exist but no federal primary MCLs.</b> Conventional treatment removes cells but cell lysis (from oxidation or coagulation) can release intracellular toxins. GAC and oxidation (ozone, permanganate) are effective post-lysis treatment."
+  },
+  {
+    id:"dw-0174", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Radionuclide monitoring under the SDWA is required primarily for:",
+    choices: [
+      "All surface water systems under the SWTR",
+      "Groundwater systems and surface water systems as required — monitoring for radium-226/228, gross alpha, uranium, and beta/photon emitters",
+      "Only systems serving populations near nuclear power plants",
+      "Systems using ozone disinfection, which can produce radioactive oxidation byproducts"
+    ],
+    answer: 1,
+    explain: "<b>Radionuclides occur naturally in many groundwater sources.</b> MCLs: gross alpha 15 pCi/L, combined radium-226/228 5 pCi/L, uranium 30 μg/L. Monitoring frequency depends on results — initial monitoring, then reduced if consistently below MCL."
+  },
+  {
+    id:"dw-0175", discipline:"dw", sub:"treatment", topic:"fluoridation",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "The optimal fluoride concentration for dental caries prevention as recommended by the U.S. Public Health Service is:",
+    choices: ["0.2 mg/L", "0.7 mg/L", "2.0 mg/L", "4.0 mg/L"],
+    answer: 1,
+    explain: "<b>The USPHS recommends 0.7 mg/L fluoride as the optimal concentration for community water fluoridation.</b> The MCL for fluoride is 4.0 mg/L; the SMCL (secondary) is 2.0 mg/L. Water systems must also notify customers if natural fluoride exceeds 2.0 mg/L."
+  },
+  {
+    id:"dw-0176", discipline:"dw", sub:"treatment", topic:"fluoridation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
+    q: "A water plant fluoridates at a dose of 0.7 mg/L from a source naturally containing 0.1 mg/L. If the flow is 2.0 MGD, what is the daily fluorosilicic acid feed rate in lbs/day? (Fluorosilicic acid is 23% fluoride by weight)",
+    choices: ["5.0 lbs/day", "8.7 lbs/day", "17.4 lbs/day", "43.5 lbs/day"],
+    answer: 3,
+    explain: "<b>Net fluoride dose = 0.7 − 0.1 = 0.6 mg/L. lbs F/day = 0.6 × 2.0 × 8.34 = 10.0 lbs/day. Acid feed = 10.0 ÷ 0.23 = 43.5 lbs/day.</b> Fluorosilicic acid (H₂SiF₆) is the most common fluoride compound used — feed rate must account for its fractional fluoride content."
+  },
+  {
+    id:"dw-0177", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T4","T5","D4","D5"], diff:3, type:"reg",
+    q: "The Safe Drinking Water Act (SDWA) authorizes EPA to set drinking water standards. The three types of standards are:",
+    choices: [
+      "Action Levels, Treatment Technique Requirements, and Maximum Contaminant Goals",
+      "Maximum Contaminant Levels (MCLs), Maximum Contaminant Level Goals (MCLGs), and Treatment Technique Requirements (TTs)",
+      "Primary MCLs, Secondary MCLs, and Action Levels",
+      "MCLs, Advisories, and Screening Levels"
+    ],
+    answer: 1,
+    explain: "<b>MCLGs are non-enforceable health goals (as close to zero as feasible for carcinogens). MCLs are enforceable limits set as close to MCLGs as feasible using best available technology. TTs are enforceable procedures (e.g., filtration, corrosion control) where measuring a contaminant is not practical.</b>"
+  },
+  {
+    id:"dw-0178", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T4","T5"], diff:3, type:"concept",
+    q: "Source water assessments required under the SDWA identify:",
+    choices: [
+      "The population at risk from each contaminant in the finished water",
+      "Potential contaminant sources in the watershed or wellhead protection area that could affect source water quality",
+      "The treatment technologies required to meet all MCLs",
+      "The number of monitoring samples required per month"
+    ],
+    answer: 1,
+    explain: "<b>Source water assessments (SWA) delineate the contributing area to a source and inventory potential contamination sources within it.</b> SWAs inform wellhead protection programs (WHPPs) and help utilities prioritize source protection activities. Results must be made publicly available."
+  },
+  {
+    id:"dw-0179", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
+    q: "Alkalinity in water is primarily provided by bicarbonate (HCO₃⁻). A water with alkalinity of 150 mg/L as CaCO₃ has approximately how many mg/L of bicarbonate?",
+    choices: ["61 mg/L HCO₃⁻", "122 mg/L HCO₃⁻", "183 mg/L HCO₃⁻", "300 mg/L HCO₃⁻"],
+    answer: 2,
+    explain: "<b>Conversion: HCO₃⁻ (mg/L) = alkalinity (mg/L as CaCO₃) × 1.22. 150 × 1.22 = 183 mg/L HCO₃⁻.</b> This uses the equivalent weight ratio: HCO₃⁻ EW = 61; CaCO₃ EW = 50; ratio = 61/50 = 1.22. Alkalinity buffers pH and affects coagulant dose requirements."
+  },
+
+  // --- ADVANCED CALCULATIONS (T4–T5, D4–D5) ---
+  {
+    id:"dw-0180", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T3","T4","T5"], diff:3, type:"calc",
+    q: "A surface water plant using free chlorine achieves a CT of 120 mg·min/L at pH 7 and 10°C. Using the SWTR CT tables, this provides approximately how many log credits for Giardia inactivation?",
+    choices: ["0.5-log", "1-log", "2-log", "3-log"],
+    answer: 2,
+    explain: "<b>At pH 7, 10°C, free chlorine CT of 120 mg·min/L provides approximately 2.0-log Giardia inactivation.</b> The SWTR requires 3-log Giardia removal/inactivation total; combined filtration (2-log removal credit) and CT (1-log inactivation) is a common strategy. CT tables vary by pH, temperature, and disinfectant type."
+  },
+  {
+    id:"dw-0181", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
+    q: "A plant applies 3.5 mg/L chlorine to water with a chlorine demand of 2.8 mg/L. What is the chlorine residual?",
+    choices: ["0.7 mg/L", "1.4 mg/L", "2.8 mg/L", "6.3 mg/L"],
+    answer: 0,
+    explain: "<b>Chlorine residual = dose − demand = 3.5 − 2.8 = 0.7 mg/L.</b> The minimum entry-point residual to the distribution system is 0.2 mg/L free chlorine (or 0.5 mg/L total chlorine for chloramine systems). Residual must be detectable throughout the distribution system."
+  },
+  {
+    id:"dw-0182", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
+    q: "A jar test determines the optimum alum dose is 25 mg/L. For a plant treating 5.0 MGD, what is the alum feed rate in lbs/day?",
+    choices: ["125 lbs/day", "1,043 lbs/day", "2,086 lbs/day", "10,425 lbs/day"],
+    answer: 1,
+    explain: "<b>lbs/day = mg/L × MGD × 8.34 = 25 × 5.0 × 8.34 = 1,043 lbs/day.</b> The pounds formula (lbs/day = concentration × flow × 8.34) is fundamental for chemical feed calculations. Always confirm units: mg/L for concentration, MGD for flow."
+  },
+  {
+    id:"dw-0183", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
+    q: "A rapid sand filter has a surface area of 400 ft² and treats 800 GPM. What is the hydraulic loading rate (GPM/ft²)?",
+    choices: ["0.5 GPM/ft²", "2.0 GPM/ft²", "5.0 GPM/ft²", "8.0 GPM/ft²"],
+    answer: 1,
+    explain: "<b>HLR = flow ÷ area = 800 ÷ 400 = 2.0 GPM/ft².</b> The SWTR limits hydraulic loading rate for conventional filters to ≤2 GPM/ft² (or up to 6 GPM/ft² under the approved optimized rate variance). Exceeding design HLR causes turbidity breakthrough."
+  },
+  {
+    id:"dw-0184", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T3","T4","T5"], diff:3, type:"reg",
+    q: "The Individual Filter Effluent Turbidity requirements under the IESWTR require that each individual filter must:",
+    choices: [
+      "Average ≤0.3 NTU for the month and never exceed 1.0 NTU",
+      "Not exceed 0.3 NTU in >5% of measurements in any month; never exceed 1.0 NTU; trigger investigation if turbidity exceeds 0.3 NTU for two consecutive periods",
+      "Achieve ≤0.1 NTU at all times after startup",
+      "Not exceed 0.5 NTU at any time"
+    ],
+    answer: 1,
+    explain: "<b>IESWTR/LT1ESWTR: Individual filter turbidity must not exceed 0.3 NTU in >5% of monthly measurements; must never exceed 1.0 NTU; values above 0.3 NTU for 2 consecutive 15-min periods trigger a Continuing Turbidity Exceedance report.</b> Combined filter effluent has additional requirements."
+  },
+  {
+    id:"dw-0185", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T4","T5"], diff:3, type:"concept",
+    q: "Toolbox technologies available under the Long-Term 2 ESWTR (LT2) for Cryptosporidium control include:",
+    choices: [
+      "Only UV disinfection and ozone — no physical removal credit",
+      "UV, ozone, membrane filtration, bag/cartridge filters, bank filtration, and combined filter performance (achieving ≤0.15 NTU)",
+      "Only additional sedimentation basins and deeper filter media",
+      "Enhanced chlorination — increasing CT by 50% above SWTR requirements"
+    ],
+    answer: 1,
+    explain: "<b>LT2 offers a 'toolbox' of options for additional Cryptosporidium treatment credit based on bin classification.</b> Systems in higher bins (higher source Crypto concentration) must select enough toolbox credits (log removal/inactivation) to meet their additional treatment requirement. UV is the most commonly selected."
+  },
+  {
+    id:"dw-0186", discipline:"dw", sub:"treatment", topic:"turbidity",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Streaming current detectors (SCDs) in a coagulation process are used to:",
+    choices: [
+      "Measure turbidity in settled water continuously",
+      "Monitor the electrical charge on colloids in raw water and optimize coagulant dose to achieve charge neutralization",
+      "Detect changes in source water alkalinity for automated pH adjustment",
+      "Control backwash timing by measuring head loss through the filter"
+    ],
+    answer: 1,
+    explain: "<b>SCDs measure the charge on particles in the coagulation process.</b> At optimal coagulant dose, the zeta potential approaches zero (charge neutralization). SCDs enable real-time automatic coagulant dose adjustment, improving response to rapid source water quality changes."
+  },
+  {
+    id:"dw-0187", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["D3","D4","D5"], diff:3, type:"concept",
+    q: "When collecting a coliform sample from a service connection, the tap should be flushed for 1–2 minutes before sampling because:",
+    choices: [
+      "The flush removes residual chlorine that would inhibit coliform growth in the sample",
+      "The flush removes standing water in premise plumbing, providing a sample representative of distribution system water",
+      "Flushing increases water pressure, improving sample collection",
+      "The flush removes biofilm fragments that could cause false-positive results"
+    ],
+    answer: 1,
+    explain: "<b>Flushing removes water that has been standing in premise plumbing, which may have higher temperature, lower residual, and potential contamination from internal sources.</b> The sample collected after flushing represents the distribution system. For lead sampling (LCR first-draw), do NOT flush — sample the standing water."
+  },
+  {
+    id:"dw-0188", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "Sodium thiosulfate is added to coliform sample bottles before collection because it:",
+    choices: [
+      "Preserves the sample by preventing microbial growth during transport",
+      "Neutralizes residual chlorine that would inhibit or kill bacteria in the sample, preventing false-negative results",
+      "Adjusts the pH to 7.0 for optimal coliform growth",
+      "Provides a nutrient source for coliform bacteria during incubation"
+    ],
+    answer: 1,
+    explain: "<b>Sodium thiosulfate dechlorinates the sample, preventing chlorine from killing bacteria between collection and analysis.</b> Without dechlorination, a sample with detectable chlorine residual could produce a false-negative (bacteria killed in sample, not in distribution system). Bottles come pre-dosed from the lab."
+  },
+  {
+    id:"dw-0189", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D3","D4","D5"], diff:3, type:"concept",
+    q: "The hydraulic grade line (HGL) in a water distribution system represents:",
+    choices: [
+      "The pipe centerline elevation above mean sea level",
+      "The elevation to which water would rise in a piezometer tube at each point — reflecting the pressure head plus elevation head",
+      "The maximum pressure at which the system can operate safely",
+      "The velocity of flow at each node in the pipe network"
+    ],
+    answer: 1,
+    explain: "<b>The HGL (= pressure head + elevation head) shows where the water surface would be in a vertical tube at any point.</b> HGL minus pipe elevation = pressure head (proportional to psi). HGL sloping downward in direction of flow indicates head loss from friction. Useful for identifying low-pressure areas."
+  },
+  {
+    id:"dw-0190", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Sweep floc coagulation (also called sweep coagulation) differs from charge neutralization coagulation in that:",
+    choices: [
+      "Sweep floc uses less coagulant than charge neutralization",
+      "Excess coagulant forms large aluminum hydroxide precipitate that physically enmeshes and sweeps down colloidal particles",
+      "Sweep floc requires lower pH than charge neutralization",
+      "Charge neutralization is only possible with polymer coagulants, not alum"
+    ],
+    answer: 1,
+    explain: "<b>At higher coagulant doses, aluminum hydroxide precipitates in large 'sweeping' flocs that entrap particles as they settle.</b> Sweep floc is less sensitive to zeta potential and raw water quality variations but uses more chemical and produces more sludge. Jar tests determine which mechanism is more effective."
+  },
+  {
+    id:"dw-0191", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T4","T5"], diff:3, type:"concept",
+    q: "Biological filtration (biofiltration) in drinking water treatment provides which additional benefit compared to conventional media filtration?",
+    choices: [
+      "Higher turbidity removal due to increased media surface area",
+      "Biodegradable organic matter (BDOC/AOC) removal by naturally occurring microorganisms in the filter media, reducing regrowth potential in distribution",
+      "Greater removal of taste-and-odor compounds without requiring GAC",
+      "Reduction in backwash water volume required"
+    ],
+    answer: 1,
+    explain: "<b>Biofiltration colonizes filter media with microorganisms that consume assimilable organic carbon (AOC) and biodegradable dissolved organic carbon (BDOC).</b> Removing AOC reduces bacterial regrowth in distribution, reducing disinfection demand and maintaining chlorine residual longer. Biofiltration is enhanced by ozonation before filtration."
+  },
+  {
+    id:"dw-0192", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Aggressive water (low LSI, low pH, low alkalinity) causes which type of corrosion problem in copper service lines?",
+    choices: [
+      "Galvanic corrosion from dissimilar metals at fittings",
+      "Pitting corrosion — localized electrochemical attack creating pinhole leaks",
+      "Microbiologically influenced corrosion (MIC) from sulfate-reducing bacteria",
+      "Uniform surface oxidation forming a green patina"
+    ],
+    answer: 1,
+    explain: "<b>Low-pH, low-alkalinity water aggressively attacks copper, causing pitting corrosion and pinhole leaks.</b> The LCR action level for copper is 1.3 mg/L at the 90th percentile. Corrosion control (pH/alkalinity adjustment, orthophosphate) is required when the AL is exceeded."
+  },
+  {
+    id:"dw-0193", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
+    q: "The purpose of the CT concept (concentration × time) in surface water disinfection is to:",
+    choices: [
+      "Calculate the chemical cost of disinfection per million gallons",
+      "Quantify the microbial inactivation achieved, since both disinfectant concentration and contact time determine efficacy",
+      "Measure the formation potential for disinfection byproducts",
+      "Determine the minimum chlorine dose needed to pass the TCR"
+    ],
+    answer: 1,
+    explain: "<b>CT = disinfectant residual (mg/L) × contact time (minutes); required CT values from tables ensure specified log inactivation.</b> Higher CT values are needed for more resistant organisms (Cryptosporidium > Giardia > viruses for chlorine) and at lower temperatures and higher pH."
+  },
+  {
+    id:"dw-0194", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Haloacetic acids (HAA5) and trihalomethanes (THMs) tend to form under which conditions?",
+    choices: [
+      "High turbidity, low organic matter, and neutral pH",
+      "High natural organic matter, higher chlorine dose, higher temperature, longer contact time, and higher pH for THMs (lower pH for HAA5s)",
+      "Low chlorine residual, short contact time, and low pH",
+      "Only in distribution systems, not during treatment"
+    ],
+    answer: 1,
+    explain: "<b>DBP formation increases with: more NOM (organic precursors), more chlorine, higher temperature, longer contact time.</b> THM formation favors higher pH; HAA5 formation slightly favors lower pH. Strategies to reduce DBPs: move point of chlorination later, reduce NOM via enhanced coagulation, use alternative disinfectants."
+  },
+  {
+    id:"dw-0195", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D4","D5"], diff:3, type:"concept",
+    q: "A water distribution system's master meter reads 15.2 MG delivered in a month. Customer meter totals sum to 12.8 MG. The system apparent water loss percentage is:",
+    choices: ["2.4%", "8.4%", "15.8%", "18.8%"],
+    answer: 2,
+    explain: "<b>Water loss % = (delivered − billed) ÷ delivered × 100 = (15.2 − 12.8) ÷ 15.2 × 100 = 2.4 ÷ 15.2 × 100 = 15.8%.</b> AWWA considers >10% non-revenue water (NRW) a trigger for investigation. Real losses (leakage) vs. apparent losses (meter error, unauthorized use) require separate accounting."
+  },
+  {
+    id:"dw-0196", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D3","D4","D5"], diff:3, type:"concept",
+    q: "Corrosion tubercles inside old iron water mains cause which operational problems?",
+    choices: [
+      "Higher dissolved iron levels that cause taste and color complaints, reduced pipe capacity from buildup, and potential for harboring bacteria",
+      "Higher chlorine demand only — tubercles do not affect hydraulics",
+      "Increased hardness in finished water from iron dissolution",
+      "Only cosmetic staining at customer taps — no hydraulic or water quality impact"
+    ],
+    answer: 0,
+    explain: "<b>Iron tubercles increase pipe roughness (reducing C-factor from 140 to as low as 40), harbor bacteria (including iron-oxidizing bacteria and potentially coliforms), and release iron causing red-water complaints.</b> Unidirectional flushing, pipe lining (cement mortar), or pipe replacement address tuberculation."
+  },
+  {
+    id:"dw-0197", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
+    q: "Water meters are the revenue interface between the utility and its customers. Meters tend to under-register (measure less than actual flow) under which condition?",
+    choices: [
+      "Very high flow rates that exceed the meter's capacity",
+      "Very low flow rates (below the meter's start-up threshold) — common with toilet leaks or small drips",
+      "Water temperatures above 70°F",
+      "Hard water that deposits scale on the impeller"
+    ],
+    answer: 1,
+    explain: "<b>Displacement meters (most residential meters) have a minimum threshold — very small flows pass unmetered.</b> This is 'apparent loss' in water audits. Compound meters (residential + fire meter bypass) address this in high-use accounts. Automatic meter reading (AMR) can detect continuous low flow indicating leaks."
+  },
+  {
+    id:"dw-0198", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
+    q: "Under the SWTR, which pathogen establishes the most conservative (highest) CT requirement for disinfection, driving the design of disinfection systems?",
+    choices: [
+      "Giardia lamblia",
+      "Cryptosporidium parvum (for chlorine-based disinfection)",
+      "Viruses (enteroviruses, norovirus)",
+      "Total coliform bacteria"
+    ],
+    answer: 1,
+    explain: "<b>Cryptosporidium is essentially chlorine-resistant — practical chlorine CT values cannot achieve even 1-log inactivation.</b> For chlorine systems, Cryptosporidium drives the choice of UV or ozone as supplemental treatment under LT2. Giardia drives chlorine CT requirements; viruses have lower CT requirements with chlorine."
+  },
+  {
+    id:"dw-0199", discipline:"dw", sub:"treatment", topic:"chemical-safety",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"safety",
+    q: "A Risk Management Plan (RMP) under 40 CFR Part 68 is required for water systems that:",
+    choices: [
+      "Apply any chemical for water treatment regardless of quantity",
+      "Store regulated toxic substances (such as chlorine gas or anhydrous ammonia) above threshold quantities — 2,500 lbs for chlorine",
+      "Use sodium hypochlorite in any quantity",
+      "Have more than three chemical feed systems"
+    ],
+    answer: 1,
+    explain: "<b>EPA's RMP rule requires facilities storing regulated chemicals above threshold quantities to prepare a risk management plan covering hazard assessment, prevention program, and emergency response.</b> For chlorine gas, the threshold is 2,500 lbs. Many utilities switched to hypochlorite or on-site generation to avoid RMP requirements."
   }
-];
 
   let qzOrder = [];
   let qzIdx = 0;
