@@ -3557,6 +3557,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
   const QUIZ_BANK = [
   // --- CHLORINATION AND CHLORINE RESIDUALS ---
   {
+    id:"dw-0001", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"concept",
     q: "What is the difference between free chlorine residual and combined chlorine residual?",
     choices: [
       "Free chlorine is chlorine combined with ammonia; combined is hypochlorous acid",
@@ -3568,24 +3570,32 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Free chlorine includes HOCl and OCl⁻.</b> Combined chlorine (chloramines) forms when free chlorine reacts with ammonia or nitrogen compounds and is less effective as a disinfectant."
   },
   {
+    id:"dw-0002", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "At pH 7.5, approximately what percentage of chlorine exists as the more effective disinfectant hypochlorous acid (HOCl)?",
     choices: ["10%", "50%", "75%", "99%"],
     answer: 1,
     explain: "<b>At pH 7.5, roughly 50% of free chlorine is HOCl.</b> As pH rises, the equilibrium shifts toward the less effective hypochlorite ion (OCl⁻), reducing disinfection efficiency."
   },
   {
+    id:"dw-0003", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"calc",
     q: "A water system adds 3.5 mg/L chlorine to a source with a chlorine demand of 2.1 mg/L. What is the chlorine residual?",
     choices: ["1.4 mg/L", "2.1 mg/L", "3.5 mg/L", "5.6 mg/L"],
     answer: 0,
     explain: "<b>Chlorine residual = dose − demand = 3.5 − 2.1 = 1.4 mg/L.</b> The chlorine demand is consumed by organic matter, iron, and other reducing agents in the water."
   },
   {
+    id:"dw-0004", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "What is the maximum residual disinfectant level (MRDL) for chlorine in drinking water under the Stage 1 DBPR?",
     choices: ["0.8 mg/L", "2.0 mg/L", "4.0 mg/L", "6.0 mg/L"],
     answer: 2,
     explain: "<b>The MRDL for chlorine is 4.0 mg/L.</b> This is an annual average measured at entry points to the distribution system, not to be confused with the maximum contaminant level for chlorite or chloramines."
   },
   {
+    id:"dw-0005", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"concept",
     q: "Breakpoint chlorination refers to the point at which:",
     choices: [
       "Chlorine dose equals the chlorine demand exactly",
@@ -3597,6 +3607,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Breakpoint is where all chloramines are oxidized and free residual starts to increase.</b> Additional chlorine beyond the breakpoint appears as free chlorine residual."
   },
   {
+    id:"dw-0006", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Sodium hypochlorite solution (12% available chlorine) is less concentrated than gas chlorine. Compared to gas chlorine, liquid hypochlorite is:",
     choices: [
       "More hazardous because it is a stronger oxidizer",
@@ -3608,6 +3620,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Liquid hypochlorite is safer to handle but raises water pH and loses strength over time.</b> Degradation accelerates with heat and light exposure, requiring careful inventory management."
   },
   {
+    id:"dw-0007", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Which chlorine compound has the highest available chlorine content by weight?",
     choices: [
       "Sodium hypochlorite (liquid bleach, ~12%)",
@@ -3619,12 +3633,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Chlorine gas is 100% available chlorine by weight.</b> Calcium hypochlorite is ~65–70%, making it the most concentrated dry form, but gas still has the highest overall content."
   },
   {
+    id:"dw-0008", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"calc",
     q: "A plant needs to add 2.0 mg/L chlorine to 1.5 MGD of water. How many pounds of chlorine are needed per day? (Use: lbs/day = mg/L × MGD × 8.34)",
     choices: ["15.0 lbs/day", "25.0 lbs/day", "16.7 lbs/day", "33.4 lbs/day"],
     answer: 1,
     explain: "<b>lbs/day = 2.0 × 1.5 × 8.34 = 25.0 lbs/day.</b> The 8.34 factor converts mg/L × MGD to pounds per day."
   },
   {
+    id:"dw-0009", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Which of the following is TRUE about chloramines as a secondary disinfectant?",
     choices: [
       "Chloramines are stronger disinfectants than free chlorine",
@@ -3636,6 +3654,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Both B and C are true.</b> Chloramines form fewer DBPs and maintain a more stable residual, but they are weaker disinfectants requiring higher CT values for pathogen inactivation."
   },
   {
+    id:"dw-0010", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "What is the minimum free chlorine residual required at the entry point to a distribution system under the Surface Water Treatment Rule?",
     choices: ["0.1 mg/L", "0.2 mg/L", "0.5 mg/L", "1.0 mg/L"],
     answer: 1,
@@ -3644,6 +3664,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- CT CALCULATIONS AND LOG INACTIVATION ---
   {
+    id:"dw-0011", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "CT is defined as:",
     choices: [
       "Chlorine residual (mg/L) multiplied by contact time (minutes)",
@@ -3655,36 +3677,48 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>CT = concentration (mg/L) × time (minutes).</b> The CT value is compared to CT tables to determine the log inactivation credit for a given pathogen at a given temperature and pH."
   },
   {
+    id:"dw-0012", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
     q: "A clearwell provides a CT of 120 mg·min/L with a free chlorine residual of 2.0 mg/L. What is the calculated contact time?",
     choices: ["30 minutes", "60 minutes", "120 minutes", "240 minutes"],
     answer: 1,
     explain: "<b>Time = CT ÷ C = 120 ÷ 2.0 = 60 minutes.</b> The contact time is the T10 value (the time it takes 10% of the water to pass through the basin), not the theoretical detention time."
   },
   {
+    id:"dw-0013", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "The SWTR requires a minimum of how many log inactivation of Giardia lamblia cysts?",
     choices: ["0.5 log", "1.0 log", "2.0 log", "3.0 log"],
     answer: 3,
     explain: "<b>The SWTR requires 3-log (99.9%) inactivation/removal of Giardia.</b> This can be achieved through a combination of treatment (filtration = 2.5 log removal credit) and disinfection."
   },
   {
+    id:"dw-0014", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "How many log inactivation of viruses does the SWTR require for surface water systems?",
     choices: ["2 log", "3 log", "4 log", "5 log"],
     answer: 2,
     explain: "<b>The SWTR requires 4-log (99.99%) inactivation/removal of viruses.</b> Filtration typically receives 2-log removal credit, so disinfection must provide the remaining 2 log."
   },
   {
+    id:"dw-0015", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
     q: "If a surface water plant uses conventional filtration, how much Giardia log inactivation credit must disinfection provide to meet the 3-log SWTR requirement?",
     choices: ["0.5 log", "1.0 log", "1.5 log", "2.5 log"],
     answer: 0,
     explain: "<b>Conventional filtration receives 2.5-log removal credit for Giardia.</b> Therefore, disinfection must provide 3.0 − 2.5 = 0.5 log inactivation to achieve the required 3-log total."
   },
   {
+    id:"dw-0016", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T1","T2","T3","T4","T5"], diff:1, type:"concept",
     q: "A 1-log reduction corresponds to removal of what percentage of organisms?",
     choices: ["10%", "90%", "99%", "99.9%"],
     answer: 1,
     explain: "<b>1 log = 90% removal.</b> Log reductions: 1 log = 90%, 2 log = 99%, 3 log = 99.9%, 4 log = 99.99%."
   },
   {
+    id:"dw-0017", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "CT values are higher (more CT needed) at which temperature condition?",
     choices: [
       "Warmer water (25°C) because organisms are more active",
@@ -3696,6 +3730,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Colder water requires higher CT because disinfection chemistry slows at lower temperatures.</b> CT tables are organized by temperature — systems must use CT values for the lowest temperature they experience."
   },
   {
+    id:"dw-0018", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "The T10 value used in CT calculations represents:",
     choices: [
       "The time for 10% removal of Giardia",
@@ -3709,6 +3745,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- COAGULATION AND FLOCCULATION ---
   {
+    id:"dw-0019", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "What is the purpose of coagulation in water treatment?",
     choices: [
       "To kill pathogens by chemical means",
@@ -3720,6 +3758,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Coagulation destabilizes colloidal particles</b> by neutralizing their negative surface charges, allowing them to come together (flocculate) and be removed by settling or filtration."
   },
   {
+    id:"dw-0020", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Aluminum sulfate (alum) is a common coagulant. When added to water, it:",
     choices: [
       "Raises the pH of the water",
@@ -3731,6 +3771,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Alum hydrolysis consumes alkalinity and lowers pH.</b> Sufficient alkalinity (typically 30–150 mg/L as CaCO₃) is needed for effective coagulation. Lime may be added to restore pH."
   },
   {
+    id:"dw-0021", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "The jar test is used in water treatment primarily to:",
     choices: [
       "Determine the chlorine demand of the source water",
@@ -3742,6 +3784,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The jar test determines the optimal coagulant dose and pH.</b> Water operators use jar tests when raw water quality changes to optimize chemical dosing before applying changes to the full plant."
   },
   {
+    id:"dw-0022", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Flocculation follows coagulation. Its purpose is to:",
     choices: [
       "Add chemicals to neutralize charge",
@@ -3753,12 +3797,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Flocculation uses gentle agitation to promote particle collision and growth.</b> Too much energy breaks apart floc; too little prevents particle collisions. Tapered flocculation reduces mixing energy as floc grows."
   },
   {
+    id:"dw-0023", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Which of the following pH ranges is generally optimal for alum coagulation?",
     choices: ["4.0–5.5", "6.0–7.5", "8.0–9.5", "10.0–11.0"],
     answer: 1,
     explain: "<b>Alum coagulation works best at pH 6.0–7.5.</b> Outside this range, aluminum hydroxide floc is less stable and residual aluminum in the finished water may increase."
   },
   {
+    id:"dw-0024", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T3","T4","T5"], diff:3, type:"reg",
     q: "Enhanced coagulation (required under the Stage 1 D/DBPR) is intended to:",
     choices: [
       "Increase turbidity removal efficiency",
@@ -3770,6 +3818,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Enhanced coagulation removes additional TOC to reduce disinfection byproduct precursors.</b> By reducing the organic carbon load before chlorination, THM and HAA formation is reduced."
   },
   {
+    id:"dw-0025", discipline:"dw", sub:"treatment", topic:"coagulation-flocculation",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
     q: "Zeta potential is used in coagulation control to measure:",
     choices: [
       "The temperature of the coagulation basin",
@@ -3783,12 +3833,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- FILTRATION ---
   {
+    id:"dw-0026", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "What is the maximum turbidity allowed in individual filter effluent under the Long Term 2 Enhanced Surface Water Treatment Rule (LT2ESWTR)?",
     choices: ["0.1 NTU in 95% of samples", "0.3 NTU in 95% of measurements", "1.0 NTU at all times", "0.5 NTU at all times"],
     answer: 1,
     explain: "<b>Individual filter effluent must be ≤0.3 NTU in 95% of measurements each month.</b> Additionally, turbidity must never exceed 1.0 NTU at any time in a 4-hour period (for conventional/direct filtration)."
   },
   {
+    id:"dw-0027", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Slow sand filtration differs from rapid sand filtration primarily because:",
     choices: [
       "Slow sand uses chemical coagulation while rapid sand does not",
@@ -3800,12 +3854,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Slow sand filtration relies on the schmutzdecke (biological mat) for treatment.</b> It operates at very low loading rates (~0.015–0.15 gpm/ft²) compared to rapid sand (~2–5 gpm/ft²) and requires no coagulation."
   },
   {
+    id:"dw-0028", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "What is the typical loading rate for conventional rapid sand filtration?",
     choices: ["0.1–0.3 gpm/ft²", "2–5 gpm/ft²", "10–15 gpm/ft²", "20–25 gpm/ft²"],
     answer: 1,
     explain: "<b>Rapid sand filters typically operate at 2–5 gpm/ft².</b> Higher rates reduce filter run time and may compromise removal efficiency. Backwash is needed every 12–72 hours depending on turbidity loading."
   },
   {
+    id:"dw-0029", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Which filtration method is most effective for removing Cryptosporidium oocysts?",
     choices: [
       "Conventional filtration (coagulation + sedimentation + filtration)",
@@ -3817,6 +3875,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Conventional filtration provides effective physical removal of Cryptosporidium.</b> Chlorine at typical drinking water doses does NOT inactivate Cryptosporidium — physical removal or UV is required."
   },
   {
+    id:"dw-0030", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "A filter that is operating in 'filter-to-waste' mode is:",
     choices: [
       "Sending effluent to a waste lagoon permanently",
@@ -3828,6 +3888,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Filter-to-waste diverts the initial turbid filtrate after backwash until the filter ripens.</b> A filter needs time to 'ripen' (form a thin layer of particles) after cleaning before producing acceptable effluent."
   },
   {
+    id:"dw-0031", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T3","T4","T5"], diff:2, type:"concept",
     q: "Membrane filtration classified as ultrafiltration (UF) is designed to remove:",
     choices: [
       "Dissolved salts and minerals",
@@ -3839,6 +3901,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Ultrafiltration membranes remove viruses, protozoa (Giardia, Cryptosporidium), and bacteria.</b> UF has a nominal pore size of 0.01–0.1 microns. Reverse osmosis removes dissolved salts."
   },
   {
+    id:"dw-0032", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "What does the term 'filter ripening period' refer to?",
     choices: [
       "The time a filter runs before its first backwash",
@@ -3852,6 +3916,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- pH EFFECTS ---
   {
+    id:"dw-0033", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "How does raising pH affect the effectiveness of chlorine disinfection?",
     choices: [
       "Higher pH increases HOCl concentration, improving disinfection",
@@ -3863,6 +3929,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>At higher pH, more chlorine exists as OCl⁻ (hypochlorite ion), which is 80× less effective than HOCl.</b> The pKa of this equilibrium is ~7.5, so above pH 7.5 the less effective form predominates."
   },
   {
+    id:"dw-0034", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T3","T4","T5"], diff:2, type:"concept",
     q: "The Langelier Saturation Index (LSI) is used to:",
     choices: [
       "Determine the optimal chlorine dose for disinfection",
@@ -3874,6 +3942,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The LSI indicates whether water will dissolve or deposit calcium carbonate.</b> An LSI near zero is balanced. Negative values indicate corrosive water; positive values indicate scale-forming water."
   },
   {
+    id:"dw-0035", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
     q: "Carbonate chemistry in water treatment: which species predominates at pH 8.3?",
     choices: [
       "Carbon dioxide (CO₂)",
@@ -3887,6 +3957,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- DISINFECTION BYPRODUCTS ---
   {
+    id:"dw-0036", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Trihalomethanes (THMs) form when chlorine reacts with:",
     choices: [
       "Ammonia in the water",
@@ -3898,24 +3970,32 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>THMs form when chlorine reacts with natural organic matter (NOM).</b> Humic and fulvic acids are the primary precursors. Reducing NOM before disinfection (enhanced coagulation) reduces THM formation."
   },
   {
+    id:"dw-0037", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "The current MCL for total trihalomethanes (TTHMs) under the Stage 2 D/DBPR is:",
     choices: ["0.010 mg/L", "0.040 mg/L", "0.080 mg/L", "0.100 mg/L"],
     answer: 2,
     explain: "<b>The MCL for TTHMs is 0.080 mg/L (80 µg/L).</b> The Stage 2 DBPR changed compliance from a system-wide average to a locational running annual average (LRAA) at each monitoring location."
   },
   {
+    id:"dw-0038", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "The MCL for haloacetic acids (HAA5) is:",
     choices: ["0.010 mg/L", "0.040 mg/L", "0.060 mg/L", "0.080 mg/L"],
     answer: 2,
     explain: "<b>The MCL for HAA5 is 0.060 mg/L (60 µg/L).</b> HAA5 includes five haloacetic acids: monochloroacetic, dichloroacetic, trichloroacetic, monobromoacetic, and dibromoacetic acids."
   },
   {
+    id:"dw-0039", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Which disinfectant produces the least amount of trihalomethanes?",
     choices: ["Chlorine gas", "Sodium hypochlorite", "Chloramines", "Chlorine dioxide"],
     answer: 2,
     explain: "<b>Chloramines produce significantly fewer THMs than free chlorine.</b> This is why many utilities switch to chloramines as a secondary disinfectant. Chlorine dioxide also produces fewer THMs but generates chlorite as a byproduct."
   },
   {
+    id:"dw-0040", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T3","T4","T5"], diff:2, type:"concept",
     q: "Bromate is a disinfection byproduct associated with which treatment process?",
     choices: [
       "Chlorination of water containing bromide",
@@ -3927,6 +4007,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Bromate forms when ozone reacts with naturally occurring bromide in source water.</b> The MCL for bromate is 0.010 mg/L. Reducing ozone dose or using ozone with UV can minimize bromate formation."
   },
   {
+    id:"dw-0041", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T3","T4","T5"], diff:3, type:"reg",
     q: "The Stage 2 Disinfectants/Disinfection Byproducts Rule (D/DBPR) changed compliance monitoring for TTHMs and HAA5 by requiring:",
     choices: [
       "More frequent sampling than Stage 1",
@@ -3938,6 +4020,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Stage 2 D/DBPR uses LRAA at each monitoring location.</b> This prevents high values at some sites from being masked by lower values elsewhere when averaged system-wide."
   },
   {
+    id:"dw-0042", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
     q: "Which of the following is NOT one of the four regulated trihalomethane compounds?",
     choices: [
       "Chloroform (trichloromethane)",
@@ -3951,12 +4035,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- SAFE DRINKING WATER ACT ---
   {
+    id:"dw-0043", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "Under the Safe Drinking Water Act, which federal agency is responsible for setting MCLs for drinking water contaminants?",
     choices: ["CDC", "OSHA", "EPA", "FDA"],
     answer: 2,
     explain: "<b>The U.S. Environmental Protection Agency (EPA) sets MCLs under the SDWA.</b> States may adopt their own regulations that are at least as stringent as federal standards and may apply for primacy to enforce them."
   },
   {
+    id:"dw-0044", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "What is the difference between an MCL and an MCLG?",
     choices: [
       "MCL is a goal; MCLG is the legally enforceable limit",
@@ -3968,6 +4056,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>MCLG (Maximum Contaminant Level Goal) is a non-enforceable health-based goal.</b> MCL is the enforceable standard, set as close to the MCLG as is technically and economically feasible."
   },
   {
+    id:"dw-0045", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "Under the SDWA, which type of water system is defined as serving at least 25 people or having at least 15 service connections year-round?",
     choices: [
       "Non-community water system",
@@ -3979,6 +4069,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>A Community Water System (CWS) serves at least 25 people or 15 connections year-round.</b> Examples include cities, towns, and mobile home parks with permanent residents."
   },
   {
+    id:"dw-0046", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "A public water system that serves the same people year-round but not as their primary residence (e.g., a school or workplace) is classified as:",
     choices: [
       "Community water system",
@@ -3990,6 +4082,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>A non-transient non-community water system (NTNCWS) serves 25+ of the same people for 6+ months/year but not as their primary residence.</b> Examples: schools, factories. Subject to most MCLs."
   },
   {
+    id:"dw-0047", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "What must a public water system do when it discovers an MCL violation?",
     choices: [
       "Notify the state within 24 hours and issue public notification within required timeframes",
@@ -4001,6 +4095,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>MCL violations require notification to the state and public notification within regulatory timeframes.</b> For acute violations, public notice must be given within 24 hours; for non-acute violations, within 30 days."
   },
   {
+    id:"dw-0048", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "A Treatment Technique (TT) requirement differs from an MCL because:",
     choices: [
       "TTs are less stringent than MCLs",
@@ -4014,18 +4110,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- LEAD AND COPPER RULE ---
   {
+    id:"dw-0049", discipline:"dw", sub:"distribution", topic:"lcr",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "Under the Lead and Copper Rule, the action level for lead is:",
     choices: ["0.005 mg/L", "0.010 mg/L", "0.015 mg/L", "0.050 mg/L"],
     answer: 2,
     explain: "<b>The Lead and Copper Rule action level for lead is 0.015 mg/L (15 ppb).</b> If more than 10% of tap samples exceed this level, the system must take action including corrosion control treatment."
   },
   {
+    id:"dw-0050", discipline:"dw", sub:"distribution", topic:"lcr",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "Under the Lead and Copper Rule, the action level for copper is:",
     choices: ["0.3 mg/L", "0.5 mg/L", "1.0 mg/L", "1.3 mg/L"],
     answer: 3,
     explain: "<b>The copper action level is 1.3 mg/L.</b> The lead action level is 0.015 mg/L. Both use the 90th percentile of first-draw tap samples to determine compliance."
   },
   {
+    id:"dw-0051", discipline:"dw", sub:"distribution", topic:"lcr",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "Lead and Copper Rule samples must be collected as:",
     choices: [
       "Running tap samples after 5 minutes of flushing",
@@ -4037,6 +4139,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>LCR samples are first-draw after 6+ hours of stagnation.</b> This approach captures water that has been in contact with lead-containing plumbing, maximizing the likelihood of detecting lead leaching."
   },
   {
+    id:"dw-0052", discipline:"dw", sub:"distribution", topic:"lcr",
+    grades:["T3","T4","T5","D3","D4","D5"], diff:2, type:"concept",
     q: "Orthophosphate is often used for corrosion control under the Lead and Copper Rule because it:",
     choices: [
       "Reduces the pH of the water to prevent leaching",
@@ -4048,6 +4152,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Orthophosphate forms a thin protective film (lead phosphate minerals) on pipe surfaces.</b> This passivation layer reduces the contact between water and lead-containing materials, lowering lead levels at the tap."
   },
   {
+    id:"dw-0053", discipline:"dw", sub:"distribution", topic:"lcr",
+    grades:["T3","T4","T5","D3","D4","D5"], diff:2, type:"reg",
     q: "Under the revised Lead and Copper Rule (LCRR), systems must identify and inventory all:",
     choices: [
       "Fire hydrants and flushing stations",
@@ -4061,6 +4167,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- SURFACE WATER TREATMENT RULE ---
   {
+    id:"dw-0054", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "The Surface Water Treatment Rule applies to all public water systems using:",
     choices: [
       "Groundwater sources only",
@@ -4072,6 +4180,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The SWTR applies to surface water and GWUDI (groundwater under direct influence of surface water).</b> GWUDI is groundwater that is significantly influenced by surface water, assessed by indicators like Giardia or turbidity variations."
   },
   {
+    id:"dw-0055", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "Under the SWTR, the combined filter effluent turbidity must not exceed what level?",
     choices: [
       "0.3 NTU in 95% of monthly samples",
@@ -4083,6 +4193,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Combined filter effluent must be ≤0.3 NTU in 95% of samples per month AND never exceed 1.0 NTU.</b> Meeting turbidity limits is a treatment technique requirement under the SWTR."
   },
   {
+    id:"dw-0056", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
     q: "What criterion is used to determine if a groundwater source is under the direct influence of surface water (GWUDI)?",
     choices: [
       "The source is within 1 mile of a surface water body",
@@ -4094,6 +4206,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>GWUDI is determined by the presence of indicators like Giardia cysts, significant and rapid turbidity changes, or other characteristics indicating surface water influence.</b> A site-specific assessment is required."
   },
   {
+    id:"dw-0057", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
     q: "Which treatment technique under the SWTR protects against Legionella?",
     choices: [
       "Specific Legionella treatment requirements",
@@ -4107,18 +4221,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- TURBIDITY REGULATIONS ---
   {
+    id:"dw-0058", discipline:"dw", sub:"treatment", topic:"turbidity",
+    grades:["T2","T3","T4","T5"], diff:2, type:"tf",
     q: "True or False: Under the IESWTR (Interim Enhanced Surface Water Treatment Rule), individual filter effluent turbidity must never exceed 1.0 NTU.",
     choices: ["True", "False"],
     answer: 0,
     explain: "<b>True.</b> The IESWTR requires individual filter effluent turbidity not to exceed 1.0 NTU at any time (for conventional/direct filtration), plus ≤0.3 NTU in 95% of 4-hour measurements per month."
   },
   {
+    id:"dw-0059", discipline:"dw", sub:"treatment", topic:"turbidity",
+    grades:["T1","T2","T3","T4","T5"], diff:1, type:"concept",
     q: "Turbidity is measured in which units?",
     choices: ["mg/L", "NTU (Nephelometric Turbidity Units)", "CFU/100 mL", "pCi/L"],
     answer: 1,
     explain: "<b>Turbidity is measured in NTU (Nephelometric Turbidity Units).</b> Nephelometric measurement uses a light beam and measures scattered light at 90°, correlating to the amount of suspended particulate matter."
   },
   {
+    id:"dw-0060", discipline:"dw", sub:"treatment", topic:"turbidity",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "Raw water turbidity above 1 NTU in groundwater under the direct influence of surface water triggers:",
     choices: [
       "Immediate shutdown of the source",
@@ -4130,6 +4250,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Elevated turbidity in GWUDI triggers additional monitoring and may require treatment changes.</b> Turbidity spikes in GWUDI often indicate surface water influence and potential pathogen contamination."
   },
   {
+    id:"dw-0061", discipline:"dw", sub:"treatment", topic:"turbidity",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "How frequently must turbidity be measured for a conventional filtration plant under the SWTR?",
     choices: [
       "Once per day per filter",
@@ -4143,18 +4265,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- FLUORIDATION ---
   {
+    id:"dw-0062", discipline:"dw", sub:"treatment", topic:"fluoridation",
+    grades:["T1","T2","T3","T4","T5"], diff:1, type:"reg",
     q: "The current EPA secondary maximum contaminant level (SMCL) for fluoride is:",
     choices: ["0.7 mg/L", "2.0 mg/L", "4.0 mg/L", "6.0 mg/L"],
     answer: 1,
     explain: "<b>The fluoride SMCL is 2.0 mg/L (for aesthetic/cosmetic dental fluorosis).</b> The MCL is 4.0 mg/L. The U.S. Public Health Service recommends 0.7 mg/L as the optimal fluoridation level."
   },
   {
+    id:"dw-0063", discipline:"dw", sub:"treatment", topic:"fluoridation",
+    grades:["T1","T2","T3","T4","T5"], diff:1, type:"reg",
     q: "The U.S. Public Health Service (PHS) recommended optimal fluoride concentration for drinking water is:",
     choices: ["0.3 mg/L", "0.7 mg/L", "1.0 mg/L", "1.5 mg/L"],
     answer: 1,
     explain: "<b>The PHS recommends 0.7 mg/L as the optimal fluoride concentration.</b> This level is associated with maximum dental caries prevention with minimal risk of dental fluorosis."
   },
   {
+    id:"dw-0064", discipline:"dw", sub:"treatment", topic:"fluoridation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Which fluoride compound is most commonly used for water fluoridation due to its ease of handling?",
     choices: [
       "Sodium fluoride (NaF)",
@@ -4166,6 +4294,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Hydrofluosilicic acid (fluorosilicic acid) is the most widely used fluoridation chemical</b> because it is a liquid byproduct of phosphate fertilizer manufacturing, making it the least expensive option."
   },
   {
+    id:"dw-0065", discipline:"dw", sub:"treatment", topic:"fluoridation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Dental fluorosis (mottled enamel) is associated with fluoride exposure:",
     choices: [
       "Only from drinking water",
@@ -4177,6 +4307,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Dental fluorosis occurs during tooth development in children (before age 8) when fluoride intake exceeds optimal levels.</b> It ranges from mild (white spots) to severe (pitting) depending on concentration and duration of exposure."
   },
   {
+    id:"dw-0066", discipline:"dw", sub:"treatment", topic:"fluoridation",
+    grades:["T1","T2","T3","T4","T5"], diff:1, type:"safety",
     q: "When working with hydrofluosilicic acid, which PPE is most critical due to the chemical's corrosive nature?",
     choices: [
       "Standard cloth gloves and safety glasses",
@@ -4190,6 +4322,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- GIARDIA AND CRYPTOSPORIDIUM ---
   {
+    id:"dw-0067", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Why is conventional chlorination generally ineffective against Cryptosporidium parvum oocysts?",
     choices: [
       "Cryptosporidium is not a waterborne pathogen",
@@ -4201,6 +4335,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Cryptosporidium oocysts are extraordinarily resistant to chlorine disinfection.</b> CT values needed for 2-log inactivation by chlorine would be impractical. Physical removal (filtration) or UV disinfection is the primary control strategy."
   },
   {
+    id:"dw-0068", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T3","T4","T5"], diff:3, type:"reg",
     q: "Under the LT2ESWTR, systems with higher Cryptosporidium concentrations in source water must achieve additional treatment. What is the maximum additional treatment required?",
     choices: [
       "0.5 log additional removal",
@@ -4212,6 +4348,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>LT2ESWTR Bin 4 systems (highest Cryptosporidium risk) must achieve 2.5 additional log treatment.</b> Systems are classified into bins based on 2 years of source water monitoring and must meet additional treatment requirements accordingly."
   },
   {
+    id:"dw-0069", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "UV disinfection is highly effective against Cryptosporidium because:",
     choices: [
       "UV oxidizes the oocyst wall chemically",
@@ -4223,6 +4361,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>UV disinfection damages the nucleic acids (DNA/RNA) of Cryptosporidium oocysts, preventing replication.</b> The required UV dose for 2-log inactivation of Cryptosporidium is relatively low (~5.8 mJ/cm²)."
   },
   {
+    id:"dw-0070", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Giardia lamblia cysts are transmitted primarily through:",
     choices: [
       "Airborne droplets from infected individuals",
@@ -4236,6 +4376,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- CHLORINE SAFETY ---
   {
+    id:"dw-0071", discipline:"dw", sub:"treatment", topic:"chemical-safety",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"safety",
     q: "Chlorine gas is heavier than air. In a chlorine gas leak, the safest direction to evacuate is:",
     choices: [
       "Down into a basement where air is cooler",
@@ -4247,12 +4389,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Evacuate upwind and uphill from a chlorine gas leak.</b> Since chlorine gas is 2.5× heavier than air, it sinks and accumulates in low areas. Always move to higher ground and upwind."
   },
   {
+    id:"dw-0072", discipline:"dw", sub:"treatment", topic:"chemical-safety",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"safety",
     q: "The IDLH (Immediately Dangerous to Life and Health) concentration for chlorine gas is:",
     choices: ["1 ppm", "3 ppm", "10 ppm", "25 ppm"],
     answer: 2,
     explain: "<b>The IDLH for chlorine gas is 10 ppm.</b> At this concentration, self-contained breathing apparatus (SCBA) must be used. The OSHA ceiling limit is 1 ppm and the odor threshold is 0.5 ppm."
   },
   {
+    id:"dw-0073", discipline:"dw", sub:"treatment", topic:"chemical-safety",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"safety",
     q: "When a chlorine gas cylinder is leaking at the valve, the FIRST action should be:",
     choices: [
       "Immediately apply a repair kit to stop the leak",
@@ -4264,6 +4410,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Always don SCBA before approaching a chlorine gas leak.</b> Attempting to repair a leak without proper respiratory protection is life-threatening. Emergency response kits (chlorine A, B, C kits) are used only after donning SCBA."
   },
   {
+    id:"dw-0074", discipline:"dw", sub:"treatment", topic:"chemical-safety",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"safety",
     q: "Calcium hypochlorite should NEVER be mixed with which substance due to risk of fire and explosion?",
     choices: [
       "Water",
@@ -4275,6 +4423,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Calcium hypochlorite must never be mixed with organic materials, acids, or ammonia compounds.</b> These combinations can cause violent reactions, fires, or explosions. Store separately and away from flammables."
   },
   {
+    id:"dw-0075", discipline:"dw", sub:"treatment", topic:"chemical-safety",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"safety",
     q: "The threshold limit value (TLV-C) for chlorine gas — the concentration that should never be exceeded — is:",
     choices: ["0.5 ppm", "1 ppm", "3 ppm", "5 ppm"],
     answer: 1,
@@ -4283,12 +4433,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- DISTRIBUTION SYSTEM ---
   {
+    id:"dw-0076", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "The minimum water pressure that most state regulations require to be maintained throughout a distribution system is:",
     choices: ["10 psi", "20 psi", "35 psi", "60 psi"],
     answer: 1,
     explain: "<b>Most regulations require a minimum of 20 psi throughout the distribution system.</b> Pressures below 20 psi can allow contaminants to be drawn into the pipe through leaks (backsiphonage)."
   },
   {
+    id:"dw-0077", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D1","D2","D3","D4","D5"], diff:1, type:"concept",
     q: "What is a cross-connection?",
     choices: [
       "The point where two water mains intersect underground",
@@ -4300,6 +4454,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>A cross-connection is any actual or potential link between the potable water system and a source of contamination.</b> Examples include garden hose submerged in a pesticide bucket, or fire suppression systems connected to process water."
   },
   {
+    id:"dw-0078", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
     q: "Backsiphonage differs from backpressure in that:",
     choices: [
       "Backsiphonage occurs when downstream pressure exceeds supply pressure; backpressure is caused by negative pressure in the supply",
@@ -4311,6 +4467,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Backsiphonage is caused by negative pressure in the supply line (like a water main break).</b> Backpressure occurs when downstream pressure exceeds supply pressure (e.g., boiler systems, elevated tanks)."
   },
   {
+    id:"dw-0079", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D1","D2","D3","D4","D5"], diff:1, type:"concept",
     q: "What is the primary purpose of flushing water mains?",
     choices: [
       "To test the accuracy of water meters",
@@ -4322,6 +4480,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Flushing removes accumulated sediment, biofilm, and stagnant water, and restores disinfectant residuals.</b> Dead ends are particularly prone to low residuals and sediment accumulation and should be flushed regularly."
   },
   {
+    id:"dw-0080", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
     q: "A deadend in a water distribution system is problematic primarily because:",
     choices: [
       "Water pressure is always higher at dead ends",
@@ -4333,6 +4493,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Dead ends allow water to stagnate, depleting disinfectant residual and potentially allowing microbial growth.</b> Automatic flushing valves or looped mains are preferred solutions."
   },
   {
+    id:"dw-0081", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"reg",
     q: "What is the required chlorine residual test result to return a repaired water main to service after disinfection?",
     choices: [
       "At least 0.2 mg/L free chlorine",
@@ -4346,6 +4508,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- SAMPLING (COLIFORM, DISTRIBUTION, SOURCE) ---
   {
+    id:"dw-0082", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "Under the Total Coliform Rule, if a routine sample tests positive for total coliform, the utility must:",
     choices: [
       "Immediately notify the public and shut down the system",
@@ -4357,6 +4521,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>A TC-positive result requires collection of repeat samples within 24 hours.</b> Repeat samples are collected from the same site, one site upstream, and one site downstream. Results determine if an MCL violation has occurred."
   },
   {
+    id:"dw-0083", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "The Revised Total Coliform Rule (RTCR) requires systems to assess and correct sanitary defects when they experience:",
     choices: [
       "Any single total coliform-positive result",
@@ -4368,6 +4534,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The RTCR triggers Level 1 or Level 2 assessments based on patterns of TC-positive results.</b> Level 2 is triggered by more serious patterns (such as E. coli detection), requiring a more thorough investigation."
   },
   {
+    id:"dw-0084", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"concept",
     q: "E. coli in a drinking water distribution sample indicates:",
     choices: [
       "Possible presence of industrial chemicals",
@@ -4379,12 +4547,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>E. coli is a fecal indicator — its presence in distribution indicates recent fecal contamination and an acute public health risk.</b> E. coli-positive results trigger immediate repeat testing and notification requirements."
   },
   {
+    id:"dw-0085", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "The minimum number of routine coliform samples per month for a community water system serving 25–1,000 people is:",
     choices: ["1", "2", "4", "6"],
     answer: 0,
     explain: "<b>Systems serving 25–1,000 people must collect a minimum of 1 routine sample per month.</b> Systems serving 1,001–2,500 must collect 2/month. Larger systems require more samples proportionally — systems serving >1 million collect hundreds of samples per month."
   },
   {
+    id:"dw-0086", discipline:"dw", sub:"treatment", topic:"coliform-sampling",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "Source water samples for surface water systems must be collected:",
     choices: [
       "Only during the dry season when pathogen levels are highest",
@@ -4396,6 +4568,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Surface water source monitoring is ongoing and continuous.</b> Operators must monitor raw water turbidity, coliform, and other parameters to make treatment decisions and document treatment effectiveness."
   },
   {
+    id:"dw-0087", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"concept",
     q: "Coliform sample bottles must contain sodium thiosulfate because it:",
     choices: [
       "Prevents microbial growth during transport",
@@ -4407,12 +4581,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Sodium thiosulfate neutralizes residual chlorine in the sample.</b> Without dechlorination, residual chlorine would continue to kill bacteria in the sample during transport, potentially resulting in false negatives."
   },
   {
+    id:"dw-0088", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"tf",
     q: "True or False: A positive E. coli result in a distribution system sample automatically constitutes a violation under the Revised Total Coliform Rule.",
     choices: ["True", "False"],
     answer: 0,
     explain: "<b>True.</b> Under the RTCR, any confirmed E. coli-positive sample in the distribution system is an acute MCL violation, requiring immediate public notification within 24 hours."
   },
   {
+    id:"dw-0089", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "What is the holding time for a collected coliform sample before it must be analyzed?",
     choices: ["4 hours", "8 hours", "30 hours", "72 hours"],
     answer: 2,
@@ -4421,12 +4599,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
 
   // --- ADDITIONAL CALCULATION AND MIXED TOPICS ---
   {
+    id:"dw-0090", discipline:"dw", sub:"treatment", topic:"chlorination",
+    grades:["T2","T3","T4","T5"], diff:3, type:"calc",
     q: "A water plant treats 2.5 MGD. If the plant uses sodium hypochlorite at 12.5% strength and needs to apply 2.0 mg/L chlorine, how many gallons of hypochlorite solution are needed per day?",
     choices: ["25.0 gal/day", "33.3 gal/day", "250 gal/day", "2.5 gal/day"],
     answer: 1,
     explain: "<b>lbs Cl/day = 2.0 × 2.5 × 8.34 = 41.7 lbs/day. 12.5% NaOCl has a specific gravity of ~1.165 (9.72 lbs/gal). lbs of solution/day = 41.7 ÷ 0.125 = 333.6 lbs/day. Gallons = 333.6 ÷ 9.72 ≈ 33.3 gal/day.</b> Simplified: gal/day = lbs Cl/day ÷ (strength × solution density) = 41.7 ÷ (0.125 × 9.72) ≈ 33.3 gal/day."
   },
   {
+    id:"dw-0091", discipline:"dw", sub:"treatment", topic:"ph-chemistry",
+    grades:["T1","T2","T3","T4","T5"], diff:1, type:"concept",
     q: "The hardness of water is primarily caused by:",
     choices: [
       "Sodium and potassium ions",
@@ -4438,6 +4620,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Water hardness is caused by calcium (Ca²⁺) and magnesium (Mg²⁺) ions.</b> Hardness is expressed as mg/L CaCO₃ equivalent. Hard water causes scale in pipes and water heaters and reduces soap lathering."
   },
   {
+    id:"dw-0092", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D1","D2","D3","D4","D5"], diff:1, type:"concept",
     q: "Iron in drinking water most commonly causes which aesthetic problem?",
     choices: [
       "Rotten egg odor",
@@ -4449,12 +4633,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Iron causes brown/orange staining of laundry, fixtures, and dishes.</b> The SMCL for iron is 0.3 mg/L. Rotten egg odor is caused by hydrogen sulfide. The cloudiness (white) is often dissolved gases or very fine particles."
   },
   {
+    id:"dw-0093", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D1","D2","D3","D4","D5"], diff:1, type:"calc",
     q: "A pressure gauge at the base of a water storage tank reads 43.3 psi. What is the approximate water depth in the tank? (1 psi = 2.31 ft of water head)",
     choices: ["43 ft", "75 ft", "100 ft", "130 ft"],
     answer: 2,
     explain: "<b>Depth = 43.3 psi × 2.31 ft/psi = 100 ft.</b> The relationship between pressure and water height is: 1 ft of water = 0.433 psi, or equivalently, 1 psi = 2.31 ft of water."
   },
   {
+    id:"dw-0094", discipline:"dw", sub:"distribution", topic:"hydraulics",
+    grades:["D1","D2","D3","D4","D5","T1","T2","T3","T4","T5"], diff:1, type:"concept",
     q: "The purpose of a check valve in a pumping system is to:",
     choices: [
       "Control water pressure in the distribution system",
@@ -4466,18 +4654,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>A check valve prevents backflow when the pump stops.</b> Without check valves, water would flow backward through the pump when it stops, potentially causing water hammer and allowing contamination."
   },
   {
+    id:"dw-0095", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T2","T3","T4","T5"], diff:2, type:"tf",
     q: "True or False: Groundwater systems are always exempt from filtration requirements.",
     choices: ["True", "False"],
     answer: 1,
     explain: "<b>False.</b> Groundwater under the direct influence of surface water (GWUDI) is subject to SWTR filtration requirements. Additionally, the Groundwater Rule requires 4-log virus treatment for some groundwater systems with sanitary defects."
   },
   {
+    id:"dw-0096", discipline:"dw", sub:"treatment", topic:"swtr",
+    grades:["T2","T3","T4","T5"], diff:2, type:"reg",
     q: "The Groundwater Rule (GWR) requires systems to achieve at least __ log inactivation/removal of enteric viruses:",
     choices: ["2 log", "3 log", "4 log", "5 log"],
     answer: 2,
     explain: "<b>The Groundwater Rule requires 4-log treatment of enteric viruses.</b> This applies to systems where sanitary defects are found during surveys, or that have source water showing fecal contamination indicators."
   },
   {
+    id:"dw-0097", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T3","T4","T5","D3","D4","D5"], diff:3, type:"reg",
     q: "Which of the following contaminants has an MCLG of zero, meaning any detectable amount is considered to pose unacceptable cancer risk?",
     choices: [
       "Fluoride",
@@ -4489,12 +4683,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Both arsenic and Cryptosporidium have MCLGs of zero.</b> Arsenic's MCLG is zero because it is a known human carcinogen. Cryptosporidium's MCLG is zero because it is a pathogen with no safe threshold. Fluoride's MCLG is 4.0 mg/L — it is NOT zero."
   },
   {
+    id:"dw-0098", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "Arsenic in drinking water is regulated with an MCL of:",
     choices: ["0.002 mg/L", "0.010 mg/L", "0.050 mg/L", "0.100 mg/L"],
     answer: 1,
     explain: "<b>The MCL for arsenic is 0.010 mg/L (10 ppb).</b> The rule was reduced from 0.050 mg/L in 2001. Arsenic occurs naturally in groundwater through geological weathering and is a known human carcinogen."
   },
   {
+    id:"dw-0099", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "Nitrate in drinking water is regulated primarily to protect:",
     choices: [
       "Adults from kidney damage",
@@ -4506,6 +4704,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The nitrate MCL of 10 mg/L as N protects infants from methemoglobinemia.</b> Infants lack the enzyme to convert methemoglobin back to functional hemoglobin, causing blue-baby syndrome. Infants should not be given water exceeding this limit."
   },
   {
+    id:"dw-0100", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D1","D2","D3","D4","D5","T1","T2","T3","T4","T5"], diff:1, type:"reg",
     q: "A water main break occurs in a neighborhood. After repair, which of the following steps is required before returning the main to service?",
     choices: [
       "Simply refill the pipe and restore service",
@@ -4517,6 +4717,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>AWWA C651 requires disinfection, flushing, residual verification, and satisfactory bacteriological testing.</b> Two consecutive satisfactory coliform samples are typically required before returning the main to service."
   },
   {
+    id:"dw-0101", discipline:"dw", sub:"treatment", topic:"filtration",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Which parameter is the primary indicator used by operators to detect filter breakthrough?",
     choices: [
       "pH of the filter effluent",
@@ -4528,12 +4730,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>A turbidity rise in filter effluent is the primary indicator of filter breakthrough.</b> When the filter media becomes saturated with particles, turbidity spikes before other parameters change, providing early warning."
   },
   {
+    id:"dw-0102", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T3","T4","T5"], diff:3, type:"concept",
     q: "The Cryptosporidium oocyst is approximately how large?",
     choices: ["0.001–0.01 microns", "0.1–0.5 microns", "4–6 microns", "50–100 microns"],
     answer: 2,
     explain: "<b>Cryptosporidium oocysts are approximately 4–6 microns in diameter.</b> This size means they can pass through some filter media if the filter is not properly operated. Microfiltration (0.1–10 µm pore size) or ultrafiltration membranes both provide an adequate physical barrier for oocyst removal."
   },
   {
+    id:"dw-0103", discipline:"dw", sub:"treatment", topic:"coliform-sampling",
+    grades:["T2","T3","T4","T5"], diff:2, type:"concept",
     q: "Which of the following best describes 'heterotrophic plate count' (HPC) and its use in water quality assessment?",
     choices: [
       "HPC measures only pathogenic bacteria — an MCL violation triggers immediate public notice",
@@ -4545,12 +4751,16 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>HPC measures the general population of heterotrophic bacteria.</b> While not directly regulated by an MCL, high HPC counts (>500 CFU/mL) may indicate disinfectant loss, biofilm growth, or distribution system deterioration."
   },
   {
+    id:"dw-0104", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T2","T3","T4","T5"], diff:2, type:"tf",
     q: "True or False: Ozone (O₃) can be used as a primary disinfectant for drinking water and provides a lasting residual in the distribution system.",
     choices: ["True", "False"],
     answer: 1,
     explain: "<b>False.</b> Ozone is an effective primary disinfectant but it decomposes rapidly in water and does NOT provide a lasting distribution system residual. A secondary disinfectant (chlorine or chloramine) must be added before water enters the distribution system."
   },
   {
+    id:"dw-0105", discipline:"dw", sub:"distribution", topic:"lcr",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "The action level exceedance (ALE) for the Lead and Copper Rule is determined by which statistical measure?",
     choices: [
       "The arithmetic mean of all samples",
@@ -4562,6 +4772,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The 90th percentile of first-draw tap samples determines compliance with the Lead and Copper Rule action levels.</b> If the 90th percentile exceeds 0.015 mg/L (Pb) or 1.3 mg/L (Cu), action is required."
   },
   {
+    id:"dw-0106", discipline:"dw", sub:"treatment", topic:"pathogens",
+    grades:["T3","T4","T5"], diff:2, type:"concept",
     q: "Which of the following is a physical method of Cryptosporidium inactivation with a low required dose?",
     choices: [
       "Chlorination (free chlorine at 2 mg/L)",
@@ -4573,18 +4785,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>UV irradiation is highly effective against Cryptosporidium at low doses (5.8 mJ/cm² for 2-log inactivation per EPA UV Guidance).</b> UV damages nucleic acids, preventing replication. Ozone also works but requires much higher doses."
   },
   {
+    id:"dw-0107", discipline:"dw", sub:"distribution", topic:"sdwa-regs",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"tf",
     q: "True or False: A consecutive water system that purchases all its water from another public water system is fully exempt from all water quality monitoring requirements.",
     choices: ["True", "False"],
     answer: 1,
     explain: "<b>False.</b> Consecutive systems have their own monitoring and reporting obligations, including distribution system coliform sampling and disinfectant residual monitoring, even though they do not treat source water."
   },
   {
+    id:"dw-0108", discipline:"dw", sub:"distribution", topic:"coliform-sampling",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "The Maximum Contaminant Level Goal (MCLG) for total coliforms is:",
     choices: ["1 CFU/100 mL", "0 (zero)", "10 CFU/100 mL", "100 CFU/100 mL"],
     answer: 1,
     explain: "<b>The MCLG for total coliforms is zero.</b> Any presence of coliform indicates potential sanitary defects or treatment failures. The enforceable standard (MCL) under the RTCR is based on patterns of positive results."
   },
   {
+    id:"dw-0109", discipline:"dw", sub:"distribution", topic:"lcr",
+    grades:["T3","T4","T5","D3","D4","D5"], diff:3, type:"reg",
     q: "Under the Lead and Copper Rule, which materials in the distribution system are considered lead-containing plumbing?",
     choices: [
       "Only lead pipes (100% lead)",
@@ -4596,6 +4814,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The 2014 Reduction of Lead in Drinking Water Act defines 'lead-free' as ≤0.25% lead for pipes/fittings.</b> Pre-1986, solder could contain up to 50% lead. Lead service lines are defined as those with >85% lead content."
   },
   {
+    id:"dw-0110", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D1","D2","D3","D4","D5"], diff:1, type:"concept",
     q: "What is the purpose of maintaining a minimum 20 psi in the distribution system?",
     choices: [
       "To ensure adequate flow for fire suppression only",
@@ -4607,6 +4827,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Maintaining 20 psi prevents outside contaminants from being drawn in through leaks when pressure drops.</b> Negative pressure or very low pressure can cause backsiphonage, pulling non-potable water into the distribution system."
   },
   {
+    id:"dw-0111", discipline:"dw", sub:"distribution", topic:"distribution-ops",
+    grades:["D2","D3","D4","D5"], diff:2, type:"concept",
     q: "Sodium hexametaphosphate is sometimes added to water systems to:",
     choices: [
       "Disinfect water in the distribution system",
@@ -4618,6 +4840,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Sodium hexametaphosphate (polyphosphate) sequesters iron and manganese, keeping them in solution and preventing staining.</b> Note: sequestration is not removal — the iron/manganese remain in the water but don't stain fixtures."
   },
   {
+    id:"dw-0112", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "What is the SMCL (secondary MCL) for color in drinking water?",
     choices: [
       "5 color units",
@@ -4629,6 +4853,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>The SMCL for color is 15 color units.</b> Secondary MCLs are non-enforceable guidelines based on aesthetic qualities (color, odor, taste). Color above 15 units may indicate organic matter or iron/manganese."
   },
   {
+    id:"dw-0113", discipline:"dw", sub:"treatment", topic:"coliform-sampling",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"concept",
     q: "A customer complains of a musty/earthy odor in their tap water. The most likely cause is:",
     choices: [
       "Lead from service line corrosion",
@@ -4640,18 +4866,24 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Musty/earthy odors are typically caused by geosmin or MIB produced by cyanobacteria or actinomycetes.</b> These compounds are detectable at extremely low concentrations (parts per trillion) by humans. Powdered activated carbon (PAC) can provide some control."
   },
   {
+    id:"dw-0114", discipline:"dw", sub:"treatment", topic:"fluoridation",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"tf",
     q: "True or False: Fluoride naturally occurs in some groundwater sources at concentrations exceeding the MCL of 4.0 mg/L.",
     choices: ["True", "False"],
     answer: 0,
     explain: "<b>True.</b> Fluoride occurs naturally in some groundwater at concentrations above the MCL of 4.0 mg/L. Systems with naturally high fluoride must treat to reduce it below the MCL and notify customers."
   },
   {
+    id:"dw-0115", discipline:"dw", sub:"treatment", topic:"ct-inactivation",
+    grades:["T2","T3","T4","T5"], diff:2, type:"calc",
     q: "A treatment plant chlorinates at the beginning of a 30-minute contact time basin. The chlorine residual at the end of the basin is 0.8 mg/L. The CT achieved is:",
     choices: ["24 mg·min/L", "30 mg·min/L", "0.8 mg·min/L", "38 mg·min/L"],
     answer: 0,
     explain: "<b>CT = C × T = 0.8 mg/L × 30 min = 24 mg·min/L.</b> The residual used is measured at the end of the contact basin (the exit concentration), representing the minimum residual during contact."
   },
   {
+    id:"dw-0116", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "The purpose of the Consumer Confidence Report (CCR) is to:",
     choices: [
       "Provide operators with treatment data for compliance",
@@ -4663,6 +4895,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>CCRs (annual water quality reports) inform customers about their drinking water sources, detected contaminants, and compliance status.</b> CWSs must distribute CCRs to customers annually by July 1."
   },
   {
+    id:"dw-0117", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T1","T2","T3","T4","T5","D1","D2","D3","D4","D5"], diff:1, type:"reg",
     q: "Total Dissolved Solids (TDS) is regulated under which type of standard?",
     choices: [
       "Primary MCL — enforceable health standard",
@@ -4674,6 +4908,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>TDS is regulated as a Secondary MCL of 500 mg/L, an aesthetic/taste standard.</b> High TDS causes a salty or mineral taste. It is not an enforceable health standard but is a useful water quality indicator."
   },
   {
+    id:"dw-0118", discipline:"dw", sub:"treatment", topic:"sdwa-regs",
+    grades:["T2","T3","T4","T5","D2","D3","D4","D5"], diff:2, type:"reg",
     q: "What does 'primacy' mean in the context of the Safe Drinking Water Act?",
     choices: [
       "The EPA's primary enforcement responsibility for all water systems",
@@ -4685,6 +4921,8 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     explain: "<b>Primacy is a state's delegated authority to administer the SDWA within its borders.</b> States with primacy must adopt standards at least as stringent as federal rules. All states except Wyoming and Washington D.C. have primacy."
   },
   {
+    id:"dw-0119", discipline:"dw", sub:"treatment", topic:"dbp",
+    grades:["T3","T4","T5"], diff:2, type:"concept",
     q: "Chlorine dioxide (ClO₂) as a disinfectant produces which regulated byproduct?",
     choices: [
       "Trihalomethanes",
