@@ -1061,6 +1061,68 @@
     }
     .qz-missed-btn.show { display: block; }
 
+    /* ── EXAM MODE ── */
+    .ex-qcount-wrap { display: flex; gap: 8px; margin-bottom: 12px; }
+    .ex-qcount-btn {
+      flex: 1;
+      padding: 8px 0;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color 0.12s, background 0.12s, color 0.12s;
+    }
+    .ex-qcount-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .ex-qcount-btn.active { border-color: var(--blue); background: var(--blue); color: #fff; }
+    .ex-timer-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .ex-timer-text { font-size: 0.95rem; font-weight: 800; color: var(--blue); font-variant-numeric: tabular-nums; letter-spacing: 0.5px; }
+    .ex-timer-text.warn { color: #ef4444; }
+    .ex-pause-btn {
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      background: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .ex-paused-overlay { text-align: center; padding: 18px 0; display: none; }
+    .ex-paused-overlay.show { display: block; }
+    .ex-resume-btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .ex-choice-lock { border-color: var(--blue) !important; background: rgba(59,130,246,0.1) !important; color: var(--fg) !important; }
+    .ex-review-toggle {
+      width: 100%;
+      padding: 10px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      margin-top: 14px;
+    }
+    .ex-review-list { margin-top: 12px; text-align: left; display: none; }
+    .ex-review-list.show { display: block; }
+    .ex-review-item { border-top: 1px solid var(--border); padding: 10px 0; font-size: 0.77rem; }
+    .ex-review-q { color: var(--fg); font-weight: 600; margin-bottom: 3px; line-height: 1.45; }
+    .ex-review-right { color: #22c55e; margin-bottom: 2px; }
+    .ex-review-wrong { color: #ef4444; margin-bottom: 2px; }
+    .ex-review-explain { color: var(--muted); font-size: 0.73rem; margin-top: 4px; }
+
     /* ── SHOW YOUR WORK ── */
     .syw-wrap { margin-top: 10px; }
     .syw-btn {
@@ -2673,6 +2735,94 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
       </div>
     </div>
 
+    <!-- DW: Exam Simulation -->
+    <div class="study-card" id="sc-exam">
+      <button class="study-head" onclick="toggleStudy('sc-exam')">
+        <div class="study-head-text">
+          <span class="study-title">Exam Simulation</span>
+          <span class="study-desc">Timed, full-length — score revealed at the end</span>
+        </div>
+        <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="study-body">
+        <div id="ex-start">
+          <div class="ex-qcount-wrap">
+            <button class="ex-qcount-btn active" data-count="25" onclick="exSelectCount(this,'dw')">25 Qs</button>
+            <button class="ex-qcount-btn" data-count="50" onclick="exSelectCount(this,'dw')">50 Qs</button>
+            <button class="ex-qcount-btn" data-count="100" onclick="exSelectCount(this,'dw')">100 Qs</button>
+          </div>
+          <p class="qz-start-desc" id="ex-time-hint">Time limit: 50 min &nbsp;·&nbsp; No feedback until you finish &nbsp;·&nbsp; Pass = 70%</p>
+          <div class="qz-filter-section">
+            <div class="qz-filter-label">Grade (optional)</div>
+            <div class="qz-chips">
+              <button class="qz-chip" data-val="T1" onclick="exToggleChip(this,'dw','grade')">T1</button>
+              <button class="qz-chip" data-val="T2" onclick="exToggleChip(this,'dw','grade')">T2</button>
+              <button class="qz-chip" data-val="T3" onclick="exToggleChip(this,'dw','grade')">T3</button>
+              <button class="qz-chip" data-val="T4" onclick="exToggleChip(this,'dw','grade')">T4</button>
+              <button class="qz-chip" data-val="T5" onclick="exToggleChip(this,'dw','grade')">T5</button>
+              <button class="qz-chip" data-val="D1" onclick="exToggleChip(this,'dw','grade')">D1</button>
+              <button class="qz-chip" data-val="D2" onclick="exToggleChip(this,'dw','grade')">D2</button>
+              <button class="qz-chip" data-val="D3" onclick="exToggleChip(this,'dw','grade')">D3</button>
+              <button class="qz-chip" data-val="D4" onclick="exToggleChip(this,'dw','grade')">D4</button>
+              <button class="qz-chip" data-val="D5" onclick="exToggleChip(this,'dw','grade')">D5</button>
+            </div>
+          </div>
+          <div class="qz-filter-section">
+            <div class="qz-filter-label">Topic (optional)</div>
+            <div class="qz-chips">
+              <button class="qz-chip" data-val="chlorination" onclick="exToggleChip(this,'dw','topic')">Chlorination</button>
+              <button class="qz-chip" data-val="ct-inactivation" onclick="exToggleChip(this,'dw','topic')">CT/Inactivation</button>
+              <button class="qz-chip" data-val="coagulation-flocculation" onclick="exToggleChip(this,'dw','topic')">Coag/Floc</button>
+              <button class="qz-chip" data-val="filtration" onclick="exToggleChip(this,'dw','topic')">Filtration</button>
+              <button class="qz-chip" data-val="ph-chemistry" onclick="exToggleChip(this,'dw','topic')">pH/Chem</button>
+              <button class="qz-chip" data-val="dbp" onclick="exToggleChip(this,'dw','topic')">DBPs</button>
+              <button class="qz-chip" data-val="sdwa-regs" onclick="exToggleChip(this,'dw','topic')">SDWA Regs</button>
+              <button class="qz-chip" data-val="lcr" onclick="exToggleChip(this,'dw','topic')">Lead &amp; Copper</button>
+              <button class="qz-chip" data-val="swtr" onclick="exToggleChip(this,'dw','topic')">SWTR</button>
+              <button class="qz-chip" data-val="turbidity" onclick="exToggleChip(this,'dw','topic')">Turbidity</button>
+              <button class="qz-chip" data-val="fluoridation" onclick="exToggleChip(this,'dw','topic')">Fluoridation</button>
+              <button class="qz-chip" data-val="pathogens" onclick="exToggleChip(this,'dw','topic')">Pathogens</button>
+              <button class="qz-chip" data-val="chemical-safety" onclick="exToggleChip(this,'dw','topic')">Chem Safety</button>
+              <button class="qz-chip" data-val="distribution-ops" onclick="exToggleChip(this,'dw','topic')">Distribution</button>
+              <button class="qz-chip" data-val="coliform-sampling" onclick="exToggleChip(this,'dw','topic')">Coliform</button>
+              <button class="qz-chip" data-val="hydraulics" onclick="exToggleChip(this,'dw','topic')">Hydraulics</button>
+            </div>
+          </div>
+          <p class="qz-filter-hint" id="ex-pool-hint">199 questions in pool</p>
+          <button class="qz-start-btn" onclick="exLaunch('dw')">Start Exam</button>
+        </div>
+        <div id="ex-question" style="display:none">
+          <div class="ex-timer-bar">
+            <span class="ex-timer-text" id="ex-timer">50:00</span>
+            <button class="ex-pause-btn" id="ex-pause-btn" onclick="exTogglePause('dw')">Pause</button>
+          </div>
+          <div class="qz-progress-bar"><div class="qz-progress-fill" id="ex-fill" style="width:0%"></div></div>
+          <div class="qz-status">
+            <span id="ex-qnum">Question 1 of 25</span>
+            <span style="font-size:0.73rem;color:var(--muted)">Score hidden until end</span>
+          </div>
+          <p class="qz-q" id="ex-q"></p>
+          <div class="qz-choices" id="ex-choices"></div>
+          <div class="ex-paused-overlay" id="ex-paused">
+            <div style="font-size:1rem;font-weight:700;margin-bottom:12px;">Exam Paused</div>
+            <button class="ex-resume-btn" onclick="exTogglePause('dw')">Resume</button>
+          </div>
+          <button class="qz-next-btn" id="ex-next" onclick="exNext('dw')">Next Question</button>
+        </div>
+        <div id="ex-result" class="qz-result">
+          <div class="qz-score-circle">
+            <span class="qz-score-num" id="ex-final-num">0</span>
+            <span class="qz-score-den" id="ex-final-den">/ 25</span>
+          </div>
+          <div class="qz-verdict" id="ex-verdict"></div>
+          <div class="qz-verdict-sub" id="ex-verdict-sub"></div>
+          <button class="ex-review-toggle" onclick="exToggleReview('dw')">Review Answers ▾</button>
+          <div id="ex-review" class="ex-review-list"></div>
+          <button class="qz-retake" style="margin-top:14px" onclick="exBackToStart('dw')">New Exam</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Regulatory Quick Reference -->
     <div class="study-card" id="sc-reg">
       <button class="study-head" onclick="toggleStudy('sc-reg')">
@@ -2982,6 +3132,84 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
             <div class="qz-verdict" id="ww-qz-verdict"></div>
             <div class="qz-verdict-sub" id="ww-qz-verdict-sub"></div>
             <button class="qz-retake" onclick="qzBackToStart('ww')">Retake / Change Filters</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Exam Simulation -->
+      <div class="study-card" id="sc-ww-exam">
+        <button class="study-head" onclick="toggleStudy('sc-ww-exam')">
+          <div class="study-head-text">
+            <span class="study-title">Exam Simulation</span>
+            <span class="study-desc">Timed, full-length — score revealed at the end</span>
+          </div>
+          <svg class="study-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="study-body">
+          <div id="ww-ex-start">
+            <div class="ex-qcount-wrap">
+              <button class="ex-qcount-btn active" data-count="25" onclick="exSelectCount(this,'ww')">25 Qs</button>
+              <button class="ex-qcount-btn" data-count="50" onclick="exSelectCount(this,'ww')">50 Qs</button>
+              <button class="ex-qcount-btn" data-count="100" onclick="exSelectCount(this,'ww')">100 Qs</button>
+            </div>
+            <p class="qz-start-desc" id="ww-ex-time-hint">Time limit: 50 min &nbsp;·&nbsp; No feedback until you finish &nbsp;·&nbsp; Pass = 70%</p>
+            <div class="qz-filter-section">
+              <div class="qz-filter-label">Grade (optional)</div>
+              <div class="qz-chips">
+                <button class="qz-chip" data-val="WW1" onclick="exToggleChip(this,'ww','grade')">WW1</button>
+                <button class="qz-chip" data-val="WW2" onclick="exToggleChip(this,'ww','grade')">WW2</button>
+                <button class="qz-chip" data-val="WW3" onclick="exToggleChip(this,'ww','grade')">WW3</button>
+                <button class="qz-chip" data-val="WW4" onclick="exToggleChip(this,'ww','grade')">WW4</button>
+              </div>
+            </div>
+            <div class="qz-filter-section">
+              <div class="qz-filter-label">Topic (optional)</div>
+              <div class="qz-chips">
+                <button class="qz-chip" data-val="activated-sludge" onclick="exToggleChip(this,'ww','topic')">Activated Sludge</button>
+                <button class="qz-chip" data-val="mass-loading" onclick="exToggleChip(this,'ww','topic')">Mass Loading</button>
+                <button class="qz-chip" data-val="sludge-handling" onclick="exToggleChip(this,'ww','topic')">Sludge</button>
+                <button class="qz-chip" data-val="npdes" onclick="exToggleChip(this,'ww','topic')">NPDES</button>
+                <button class="qz-chip" data-val="nutrients" onclick="exToggleChip(this,'ww','topic')">Nutrients</button>
+                <button class="qz-chip" data-val="disinfection" onclick="exToggleChip(this,'ww','topic')">Disinfection</button>
+                <button class="qz-chip" data-val="hydraulics" onclick="exToggleChip(this,'ww','topic')">Hydraulics</button>
+                <button class="qz-chip" data-val="lab-procedures" onclick="exToggleChip(this,'ww','topic')">Lab</button>
+                <button class="qz-chip" data-val="safety" onclick="exToggleChip(this,'ww','topic')">Safety</button>
+                <button class="qz-chip" data-val="regulations" onclick="exToggleChip(this,'ww','topic')">Regulations</button>
+                <button class="qz-chip" data-val="collection-systems" onclick="exToggleChip(this,'ww','topic')">Collection</button>
+                <button class="qz-chip" data-val="pretreatment" onclick="exToggleChip(this,'ww','topic')">Pretreatment</button>
+              </div>
+            </div>
+            <p class="qz-filter-hint" id="ww-ex-pool-hint">180 questions in pool</p>
+            <button class="qz-start-btn" onclick="exLaunch('ww')">Start Exam</button>
+          </div>
+          <div id="ww-ex-question" style="display:none">
+            <div class="ex-timer-bar">
+              <span class="ex-timer-text" id="ww-ex-timer">50:00</span>
+              <button class="ex-pause-btn" id="ww-ex-pause-btn" onclick="exTogglePause('ww')">Pause</button>
+            </div>
+            <div class="qz-progress-bar"><div class="qz-progress-fill" id="ww-ex-fill" style="width:0%"></div></div>
+            <div class="qz-status">
+              <span id="ww-ex-qnum">Question 1 of 25</span>
+              <span style="font-size:0.73rem;color:var(--muted)">Score hidden until end</span>
+            </div>
+            <p class="qz-q" id="ww-ex-q"></p>
+            <div class="qz-choices" id="ww-ex-choices"></div>
+            <div class="ex-paused-overlay" id="ww-ex-paused">
+              <div style="font-size:1rem;font-weight:700;margin-bottom:12px;">Exam Paused</div>
+              <button class="ex-resume-btn" onclick="exTogglePause('ww')">Resume</button>
+            </div>
+            <button class="qz-next-btn" id="ww-ex-next" onclick="exNext('ww')">Next Question</button>
+          </div>
+          <div id="ww-ex-result" class="qz-result">
+            <div class="qz-score-circle">
+              <span class="qz-score-num" id="ww-ex-final-num">0</span>
+              <span class="qz-score-den" id="ww-ex-final-den">/ 25</span>
+            </div>
+            <div class="qz-verdict" id="ww-ex-verdict"></div>
+            <div class="qz-verdict-sub" id="ww-ex-verdict-sub"></div>
+            <button class="ex-review-toggle" onclick="exToggleReview('ww')">Review Answers ▾</button>
+            <div id="ww-ex-review" class="ex-review-list"></div>
+            <button class="qz-retake" style="margin-top:14px" onclick="exBackToStart('ww')">New Exam</button>
           </div>
         </div>
       </div>
@@ -6184,6 +6412,221 @@ gal/day = lbs/day ÷ (% Strength × 8.34)</div>
     document.getElementById(pfx + 'qz-result').classList.remove('show');
     document.getElementById(pfx + 'qz-start').style.display = 'block';
     qzUpdateHint(disc);
+  }
+
+  // ── EXAM ENGINE ──
+
+  const EX_FILTERS = {
+    dw: { grades: new Set(), topics: new Set(), count: 25 },
+    ww: { grades: new Set(), topics: new Set(), count: 25 }
+  };
+
+  let EX_STATE = {
+    disc: 'dw', pool: [], order: [], idx: 0,
+    answers: [], timeLeft: 0, timerInterval: null, paused: false
+  };
+
+  const EX_SECS_PER_Q = 120; // 2 min per question
+
+  function exFmt(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function exPfx(disc) { return disc === 'dw' ? '' : 'ww-'; }
+
+  function exSelectCount(btn, disc) {
+    btn.closest('.ex-qcount-wrap').querySelectorAll('.ex-qcount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    EX_FILTERS[disc].count = parseInt(btn.dataset.count);
+    exUpdateHint(disc);
+  }
+
+  function exToggleChip(btn, disc, type) {
+    btn.classList.toggle('active');
+    const set = type === 'grade' ? EX_FILTERS[disc].grades : EX_FILTERS[disc].topics;
+    if (btn.classList.contains('active')) set.add(btn.dataset.val); else set.delete(btn.dataset.val);
+    exUpdateHint(disc);
+  }
+
+  function exBuildPool(disc) {
+    const bank   = disc === 'dw' ? QUIZ_BANK : WW_QUIZ_BANK;
+    const grades = EX_FILTERS[disc].grades;
+    const topics = EX_FILTERS[disc].topics;
+    return bank.filter(q => {
+      if (grades.size > 0 && !q.grades.some(g => grades.has(g))) return false;
+      if (topics.size > 0 && !topics.has(q.topic)) return false;
+      return true;
+    });
+  }
+
+  function exUpdateHint(disc) {
+    const pfx   = exPfx(disc);
+    const pool  = exBuildPool(disc);
+    const cnt   = Math.min(EX_FILTERS[disc].count, pool.length);
+    const mins  = Math.round(cnt * EX_SECS_PER_Q / 60);
+    const hint  = document.getElementById(pfx + 'ex-pool-hint');
+    const tHint = document.getElementById(pfx + 'ex-time-hint');
+    if (hint)  hint.textContent  = pool.length + ' questions in pool';
+    if (tHint) tHint.textContent = 'Time limit: ' + mins + ' min  ·  No feedback until you finish  ·  Pass = 70%';
+  }
+
+  function exLaunch(disc) {
+    const pool = exBuildPool(disc);
+    if (pool.length === 0) { alert('No questions match those filters.'); return; }
+    const pfx   = exPfx(disc);
+    const cnt   = Math.min(EX_FILTERS[disc].count, pool.length);
+    const order = shuffleArr(pool.map((_, i) => i)).slice(0, cnt);
+    EX_STATE = { disc, pool: [...pool], order, idx: 0, answers: [], timeLeft: cnt * EX_SECS_PER_Q, timerInterval: null, paused: false };
+    document.getElementById(pfx + 'ex-start').style.display  = 'none';
+    document.getElementById(pfx + 'ex-result').classList.remove('show');
+    document.getElementById(pfx + 'ex-question').style.display = 'block';
+    document.getElementById(pfx + 'ex-paused').classList.remove('show');
+    exTickDisplay();
+    EX_STATE.timerInterval = setInterval(exTick, 1000);
+    exRender();
+  }
+
+  function exTick() {
+    if (EX_STATE.paused) return;
+    EX_STATE.timeLeft--;
+    exTickDisplay();
+    if (EX_STATE.timeLeft <= 0) exTimeUp();
+  }
+
+  function exTickDisplay() {
+    const pfx  = exPfx(EX_STATE.disc);
+    const el   = document.getElementById(pfx + 'ex-timer');
+    if (!el) return;
+    el.textContent = exFmt(EX_STATE.timeLeft);
+    const total = EX_STATE.order.length * EX_SECS_PER_Q;
+    el.classList.toggle('warn', EX_STATE.timeLeft < total * 0.15);
+  }
+
+  function exTimeUp() {
+    clearInterval(EX_STATE.timerInterval);
+    // auto-fill any unanswered questions as skipped
+    while (EX_STATE.answers.length < EX_STATE.order.length) {
+      const q = EX_STATE.pool[EX_STATE.order[EX_STATE.answers.length]];
+      EX_STATE.answers.push({ chosen: -1, correct: q.answer, q });
+    }
+    exFinish();
+  }
+
+  function exRender() {
+    const { disc, pool, order, idx } = EX_STATE;
+    const pfx   = exPfx(disc);
+    const total = order.length;
+    const q     = pool[order[idx]];
+    const num   = idx + 1;
+
+    document.getElementById(pfx + 'ex-qnum').textContent = 'Question ' + num + ' of ' + total;
+    document.getElementById(pfx + 'ex-fill').style.width = ((num - 1) / total * 100) + '%';
+    document.getElementById(pfx + 'ex-q').textContent    = q.q;
+
+    const choiceOrder = shuffleArr(q.choices.map((_, i) => i));
+    const container   = document.getElementById(pfx + 'ex-choices');
+    container.innerHTML = '';
+    choiceOrder.forEach(origIdx => {
+      const btn = document.createElement('button');
+      btn.className   = 'qz-choice';
+      btn.textContent = q.choices[origIdx];
+      btn.dataset.idx = origIdx;
+      btn.onclick = () => exSelect(btn, origIdx, q.answer, q, container);
+      container.appendChild(btn);
+    });
+
+    const nextBtn = document.getElementById(pfx + 'ex-next');
+    nextBtn.className   = 'qz-next-btn';
+    nextBtn.textContent = (idx < total - 1) ? 'Next Question' : 'Submit Exam';
+  }
+
+  function exSelect(btn, chosen, correct, q, container) {
+    container.querySelectorAll('.qz-choice').forEach(b => { b.disabled = true; b.classList.remove('ex-choice-lock'); });
+    btn.classList.add('ex-choice-lock');
+    EX_STATE.answers.push({ chosen, correct, q });
+    document.getElementById(exPfx(EX_STATE.disc) + 'ex-next').classList.add('show');
+  }
+
+  function exNext(disc) {
+    if (EX_STATE.answers.length <= EX_STATE.idx) {
+      // unanswered — skip
+      const q = EX_STATE.pool[EX_STATE.order[EX_STATE.idx]];
+      EX_STATE.answers.push({ chosen: -1, correct: q.answer, q });
+    }
+    EX_STATE.idx++;
+    if (EX_STATE.idx >= EX_STATE.order.length) { exFinish(); return; }
+    exRender();
+    document.getElementById(exPfx(disc) + 'ex-next').className = 'qz-next-btn';
+  }
+
+  function exFinish() {
+    clearInterval(EX_STATE.timerInterval);
+    const { disc, answers, order } = EX_STATE;
+    const pfx   = exPfx(disc);
+    const total = order.length;
+    const score = answers.filter(a => a.chosen === a.correct).length;
+
+    document.getElementById(pfx + 'ex-question').style.display = 'none';
+    document.getElementById(pfx + 'ex-result').classList.add('show');
+    document.getElementById(pfx + 'ex-final-num').textContent = score;
+    document.getElementById(pfx + 'ex-final-den').textContent = '/ ' + total;
+
+    const pct     = score / total;
+    const verdict = document.getElementById(pfx + 'ex-verdict');
+    const sub     = document.getElementById(pfx + 'ex-verdict-sub');
+    if (pct >= 0.7) {
+      verdict.textContent = 'PASS';
+      verdict.className   = 'qz-verdict pass';
+      sub.textContent     = Math.round(pct * 100) + '% — Great work!';
+    } else {
+      verdict.textContent = 'FAIL';
+      verdict.className   = 'qz-verdict fail';
+      sub.textContent     = Math.round(pct * 100) + '% — Need 70% to pass.';
+    }
+
+    // Save wrong answers to missed queue
+    const missed = qzLoadMissed();
+    answers.forEach(a => { if (a.chosen !== a.correct && a.q.id) missed.add(a.q.id); });
+    qzSaveMissed(missed);
+
+    // Pre-render review list (hidden until toggled)
+    const reviewEl = document.getElementById(pfx + 'ex-review');
+    reviewEl.innerHTML = answers.map((a, i) => {
+      const correct = a.chosen === a.correct;
+      const yourAns = a.chosen === -1 ? '(skipped)' : a.q.choices[a.chosen];
+      return '<div class="ex-review-item">'
+        + '<div class="ex-review-q">' + (i + 1) + '. ' + a.q.q + '</div>'
+        + (correct
+            ? '<div class="ex-review-right">✓ ' + a.q.choices[a.correct] + '</div>'
+            : '<div class="ex-review-wrong">✗ Your answer: ' + yourAns + '</div>'
+              + '<div class="ex-review-right">Correct: ' + a.q.choices[a.correct] + '</div>')
+        + '<div class="ex-review-explain">' + a.q.explain + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  function exTogglePause(disc) {
+    const pfx = exPfx(disc);
+    EX_STATE.paused = !EX_STATE.paused;
+    document.getElementById(pfx + 'ex-paused').classList.toggle('show', EX_STATE.paused);
+    document.getElementById(pfx + 'ex-choices').style.visibility = EX_STATE.paused ? 'hidden' : '';
+    document.getElementById(pfx + 'ex-q').style.visibility       = EX_STATE.paused ? 'hidden' : '';
+    document.getElementById(pfx + 'ex-pause-btn').textContent     = EX_STATE.paused ? 'Resume' : 'Pause';
+  }
+
+  function exToggleReview(disc) {
+    const el = document.getElementById(exPfx(disc) + 'ex-review');
+    el.classList.toggle('show');
+  }
+
+  function exBackToStart(disc) {
+    clearInterval(EX_STATE.timerInterval);
+    const pfx = exPfx(disc);
+    document.getElementById(pfx + 'ex-result').classList.remove('show');
+    document.getElementById(pfx + 'ex-start').style.display = 'block';
+    exUpdateHint(disc);
   }
 
   // ── FORMULA ITEMS ──
