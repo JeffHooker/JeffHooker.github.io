@@ -3691,20 +3691,16 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
   <p class="welcome-tagline">Professional field tool for water system operators</p>
   <p class="welcome-prompt">Choose your discipline</p>
   <div class="welcome-cards">
-    <button class="welcome-card" id="welcome-btn-water">
+    <button class="welcome-card" id="welcome-btn-water" onclick="selectMode('water')">
       <div class="welcome-card-title">💧 Drinking Water</div>
       <p class="welcome-card-desc">Chlorination, filtration, pressure, tank volume, and distribution system compliance monitoring.</p>
     </button>
-    <button class="welcome-card" id="welcome-btn-waste">
+    <button class="welcome-card" id="welcome-btn-waste" onclick="selectMode('waste')">
       <div class="welcome-card-title">🌿 Wastewater</div>
       <p class="welcome-card-desc">Treatment processes, effluent monitoring, biosolids, and regulatory compliance.</p>
     </button>
   </div>
 </div>
-<script>
-  document.getElementById('welcome-btn-water').addEventListener('click', function() { selectMode('water'); });
-  document.getElementById('welcome-btn-waste').addEventListener('click', function() { selectMode('waste'); });
-</script>
 
 <script>
   // ── DR. H₂O ASSIST ──
