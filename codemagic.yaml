@@ -8,7 +8,7 @@ workflows:
         bundle_identifier: app.drh2o.flocs
       vars:
         BUNDLE_ID: "app.drh2o.flocs"
-        XCODE_WORKSPACE: "ios/App/App.xcworkspace"
+        XCODE_PROJECT: "ios/App/App.xcodeproj"
         XCODE_SCHEME: "App"
     scripts:
       - name: Install dependencies
@@ -19,7 +19,7 @@ workflows:
         script: |
           xcode-project use-profiles
           xcode-project build-ipa \
-            --workspace "$XCODE_WORKSPACE" \
+            --project "$XCODE_PROJECT" \
             --scheme "$XCODE_SCHEME"
     artifacts:
       - build/ios/ipa/*.ipa
