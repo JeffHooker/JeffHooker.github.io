@@ -2,6 +2,8 @@ workflows:
   ios-workflow:
     name: flocs iOS
     max_build_duration: 120
+    integrations:
+      app_store_connect: FieldOps LLC
     environment:
       ios_signing:
         distribution_type: app_store
@@ -15,6 +17,9 @@ workflows:
         script: npm install
       - name: Capacitor sync
         script: npx cap sync ios
+      - name: Set build number
+        script: |
+          sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = $BUILD_NUMBER;/g" ios/App/App.xcodeproj/project.pbxproj
       - name: Build iOS
         script: |
           xcode-project use-profiles
@@ -23,3 +28,7 @@ workflows:
             --scheme "$XCODE_SCHEME"
     artifacts:
       - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
