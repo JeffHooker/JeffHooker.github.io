@@ -3,7 +3,7 @@ workflows:
     name: flocs iOS
     max_build_duration: 120
     integrations:
-      app_store_connect: KEY_NAME_HERE
+      app_store_connect: FieldOps LLC
     environment:
       ios_signing:
         distribution_type: app_store
