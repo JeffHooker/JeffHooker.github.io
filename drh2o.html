@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#376DA0">
   <meta name="description" content="Professional field calculator for water system operators.">
   <meta name="mobile-web-app-capable" content="yes">
@@ -24,6 +24,7 @@
       --muted:      #888;
       --nav-h:      64px;
       --mode-bar-h: 28px;
+      --safe-top:   max(50px, env(safe-area-inset-top));
     }
 
     html.light {
@@ -120,7 +121,7 @@
     /* ── MODE BAR ── */
     #mode-bar {
       position: fixed;
-      top: 56px;
+      top: calc(var(--safe-top) + 56px);
       left: 0; right: 0;
       height: var(--mode-bar-h);
       background: var(--blue);
@@ -400,16 +401,18 @@
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 56px;
+      height: calc(var(--safe-top) + 56px);
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       display: flex;
-      align-items: center;
-      padding: 0 20px;
+      align-items: flex-end;
+      padding: 0 20px calc(10px);
+      padding-top: var(--safe-top);
       z-index: 100;
     }
     .header-logo { display: flex; align-items: center; text-decoration: none; }
-    .logo-img { height: 40px; width: auto; display: block; }
+    body.tab-assist .header-logo { display: none; }
+    .logo-img { height: 36px; width: auto; display: block; }
     .logo-dark { display: block; }
     .logo-light { display: none; }
     html.light .logo-dark { display: none; }
@@ -418,7 +421,7 @@
     /* ── SCREENS ── */
     .screens {
       position: fixed;
-      top: calc(56px + var(--mode-bar-h));
+      top: calc(var(--safe-top) + 56px + var(--mode-bar-h));
       bottom: var(--nav-h);
       left: 0; right: 0;
       overflow-y: auto;
@@ -3933,6 +3936,7 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
       screens.forEach(s => s.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('screen-' + target).classList.add('active');
+      document.body.classList.toggle('tab-assist', target === 'assist');
     });
   });
 
