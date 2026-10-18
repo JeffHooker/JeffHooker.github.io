@@ -1576,6 +1576,53 @@
 
     <div id="dw-calcs">
 
+    <!-- Date Calculator -->
+    <div class="acc">
+      <button class="acc-head open" onclick="toggleAcc(this)">
+        <span class="acc-label">Date Calculator</span>
+        <span class="acc-badge">Days · Weeks · Months</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body open">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs</div>
+            <button class="clear-btn" onclick="clearInputs(['dc-start','dc-end'], calcDate)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Start Date</label>
+            <input id="dc-start" type="date" oninput="calcDate()">
+          </div>
+          <div class="field">
+            <label>End Date</label>
+            <input id="dc-end" type="date" oninput="calcDate()">
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div class="result-row">
+            <span class="result-label">Total Days</span>
+            <span class="result-val"><span class="primary" id="dc-days">—</span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Weeks</span>
+            <span class="result-val"><span class="primary" id="dc-weeks">—</span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Months (approx.)</span>
+            <span class="result-val"><span class="primary" id="dc-months">—</span></span>
+          </div>
+        </div>
+        <div class="syw-wrap" id="syw-dc-wrap" style="display:none">
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-dc-btn" onclick="toggleSyw('dc')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-dc" onclick="copyResult('dc')">Copy</button>
+          </div>
+          <div class="syw-body" id="syw-dc"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Chlorine -->
     <div class="acc">
       <button class="acc-head open" onclick="toggleAcc(this)">
@@ -1948,6 +1995,53 @@
     </div><!-- end #dw-calcs -->
 
     <div id="ww-calcs">
+
+      <!-- WW: Date Calculator -->
+      <div class="acc">
+        <button class="acc-head open" onclick="toggleAcc(this)">
+          <span class="acc-label">Date Calculator</span>
+          <span class="acc-badge">Days · Weeks · Months</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body open">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wdc-start','wdc-end'], calcDateWW)">Clear</button>
+            </div>
+            <div class="field">
+              <label>Start Date</label>
+              <input id="wdc-start" type="date" oninput="calcDateWW()">
+            </div>
+            <div class="field">
+              <label>End Date</label>
+              <input id="wdc-end" type="date" oninput="calcDateWW()">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Total Days</span>
+              <span class="result-val"><span class="primary" id="wdc-days">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Weeks</span>
+              <span class="result-val"><span class="primary" id="wdc-weeks">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Months (approx.)</span>
+              <span class="result-val"><span class="primary" id="wdc-months">—</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wdc-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wdc-btn" onclick="toggleSyw('wdc')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wdc" onclick="copyResult('wdc')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wdc"></div>
+          </div>
+        </div>
+      </div>
 
       <div class="calc-group-label">Hydraulics &amp; Loading</div>
 
@@ -6997,6 +7091,43 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
     fcUpdateHint(disc);
   }
 
+  function calcDateCore(pfx) {
+    const startVal = (document.getElementById(pfx + '-start') || {}).value;
+    const endVal   = (document.getElementById(pfx + '-end')   || {}).value;
+    const set = (id, v) => { const el = document.getElementById(pfx + '-' + id); if (el) el.textContent = v; };
+    if (!startVal || !endVal) { set('days','—'); set('weeks','—'); set('months','—'); setSyw(pfx, null); return; }
+    const start = new Date(startVal + 'T00:00:00');
+    const end   = new Date(endVal   + 'T00:00:00');
+    const days  = Math.round((end - start) / 86400000);
+    if (!isFinite(days)) { set('days','Invalid'); set('weeks','—'); set('months','—'); setSyw(pfx, null); return; }
+    const absDays = Math.abs(days);
+    const sign    = days < 0 ? '−' : '';
+    const weeks   = Math.floor(absDays / 7);
+    const remDays = absDays % 7;
+    const months  = absDays / 30.4375;
+    set('days',   sign + absDays.toLocaleString() + ' day' + (absDays !== 1 ? 's' : ''));
+    set('weeks',  sign + weeks.toLocaleString() + ' wk' + (remDays ? ' ' + remDays + ' d' : ''));
+    set('months', sign + months.toFixed(1) + ' mo');
+    const fmt = d => new Date(d + 'T00:00:00').toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+    let syw = '';
+    syw += sywLbl('Start date: ' + fmt(startVal));
+    syw += sywLbl('End date: ' + fmt(endVal));
+    syw += sywSep();
+    syw += sywHi('Step 1 — Count calendar days (leap years included)');
+    syw += sywLbl('End − Start = ' + sign + absDays.toLocaleString() + ' days');
+    syw += sywSep();
+    syw += sywHi('Step 2 — Convert to weeks');
+    syw += sywLbl(sign + absDays + ' ÷ 7 = ' + weeks + ' week' + (weeks !== 1 ? 's' : '') + (remDays ? ', ' + remDays + ' day' + (remDays !== 1 ? 's' : '') + ' remaining' : ' exactly'));
+    syw += sywSep();
+    syw += sywHi('Step 3 — Convert to months (avg 30.4375 days/mo)');
+    syw += sywLbl(sign + absDays + ' ÷ 30.4375 = ' + months.toFixed(2) + ' months');
+    syw += sywSep();
+    syw += sywAns(sign + absDays.toLocaleString() + ' days  ·  ' + sign + weeks + ' wk' + (remDays ? ' ' + remDays + ' d' : '') + '  ·  ' + sign + months.toFixed(1) + ' mo');
+    setSyw(pfx, syw);
+  }
+  function calcDate()   { calcDateCore('dc');  }
+  function calcDateWW() { calcDateCore('wdc'); }
+
   // ── FORMULA ITEMS ──
   function toggleFormula(id) {
     const item   = document.getElementById(id);
@@ -7204,6 +7335,26 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
         lines.push('flocs — WW Solids Loading Rate');
         lines.push(`Inf: ${iv('wslr-qinf')} MGD | RAS: ${iv('wslr-qras')} MGD | MLSS: ${iv('wslr-mlss')} mg/L | Area: ${iv('wslr-area')} ft²`);
         lines.push(`SLR: ${rv('wslr-slr')} lbs/ft²/day`);
+        break;
+      }
+      case 'dc': {
+        const start = iv('dc-start'), end = iv('dc-end');
+        lines.push('flocs — Date Calculator');
+        lines.push(`Start: ${start} | End: ${end}`);
+        lines.push('');
+        lines.push(`Days:   ${rv('dc-days')}`);
+        lines.push(`Weeks:  ${rv('dc-weeks')}`);
+        lines.push(`Months: ${rv('dc-months')}`);
+        break;
+      }
+      case 'wdc': {
+        const start = iv('wdc-start'), end = iv('wdc-end');
+        lines.push('flocs — Date Calculator');
+        lines.push(`Start: ${start} | End: ${end}`);
+        lines.push('');
+        lines.push(`Days:   ${rv('wdc-days')}`);
+        lines.push(`Weeks:  ${rv('wdc-weeks')}`);
+        lines.push(`Months: ${rv('wdc-months')}`);
         break;
       }
     }
