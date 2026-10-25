@@ -1623,6 +1623,70 @@
       </div>
     </div>
 
+    <!-- DW: Daily Flow from Meter Read -->
+    <div class="acc">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-label">Daily Flow from Meter Read</span>
+        <span class="acc-badge">GPD · MGD · GPM</span>
+        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-body">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Inputs</div>
+            <button class="clear-btn" onclick="clearInputs(['mrd-start','mrd-end','mrd-hours','mrd-unit'], calcMeterRead)">Clear</button>
+          </div>
+          <div class="field">
+            <label>Meter Units</label>
+            <select id="mrd-unit" oninput="calcMeterRead()">
+              <option value="gal">Gallons (gal)</option>
+              <option value="kgal">Kilogallons (Kgal)</option>
+              <option value="ccf">Hundred Cubic Feet (CCF)</option>
+              <option value="cf">Cubic Feet (ft³)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Start Reading</label>
+            <input id="mrd-start" type="number" inputmode="decimal" placeholder="e.g. 123456" min="0" oninput="calcMeterRead()">
+          </div>
+          <div class="field">
+            <label>End Reading</label>
+            <input id="mrd-end" type="number" inputmode="decimal" placeholder="e.g. 125678" min="0" oninput="calcMeterRead()">
+          </div>
+          <div class="field">
+            <label>Elapsed Time (hours)</label>
+            <input id="mrd-hours" type="number" inputmode="decimal" placeholder="24" min="0" step="0.25" oninput="calcMeterRead()">
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div class="result-row">
+            <span class="result-label">Volume Used</span>
+            <span class="result-val"><span class="primary" id="mrd-vol">—</span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">GPD (normalized to 24 hr)</span>
+            <span class="result-val"><span class="primary" id="mrd-gpd">—</span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">MGD</span>
+            <span class="result-val"><span class="primary" id="mrd-mgd">—</span></span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">GPM (actual period)</span>
+            <span class="result-val"><span class="primary" id="mrd-gpm">—</span></span>
+          </div>
+        </div>
+        <div class="syw-wrap" id="syw-mrd-wrap" style="display:none">
+          <div class="syw-action-row">
+            <button class="syw-btn" id="syw-mrd-btn" onclick="toggleSyw('mrd')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="copy-btn" id="copy-mrd" onclick="copyResult('mrd')">Copy</button>
+          </div>
+          <div class="syw-body" id="syw-mrd"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Chlorine -->
     <div class="acc">
       <button class="acc-head open" onclick="toggleAcc(this)">
@@ -2039,6 +2103,70 @@
               <button class="copy-btn" id="copy-wdc" onclick="copyResult('wdc')">Copy</button>
             </div>
             <div class="syw-body" id="syw-wdc"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WW: Daily Flow from Meter Read -->
+      <div class="acc">
+        <button class="acc-head" onclick="toggleAcc(this)">
+          <span class="acc-label">Daily Flow from Meter Read</span>
+          <span class="acc-badge">GPD · MGD · GPM</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs</div>
+              <button class="clear-btn" onclick="clearInputs(['wmrd-start','wmrd-end','wmrd-hours','wmrd-unit'], calcMeterReadWW)">Clear</button>
+            </div>
+            <div class="field">
+              <label>Meter Units</label>
+              <select id="wmrd-unit" oninput="calcMeterReadWW()">
+                <option value="gal">Gallons (gal)</option>
+                <option value="kgal">Kilogallons (Kgal)</option>
+                <option value="ccf">Hundred Cubic Feet (CCF)</option>
+                <option value="cf">Cubic Feet (ft³)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Start Reading</label>
+              <input id="wmrd-start" type="number" inputmode="decimal" placeholder="e.g. 123456" min="0" oninput="calcMeterReadWW()">
+            </div>
+            <div class="field">
+              <label>End Reading</label>
+              <input id="wmrd-end" type="number" inputmode="decimal" placeholder="e.g. 125678" min="0" oninput="calcMeterReadWW()">
+            </div>
+            <div class="field">
+              <label>Elapsed Time (hours)</label>
+              <input id="wmrd-hours" type="number" inputmode="decimal" placeholder="24" min="0" step="0.25" oninput="calcMeterReadWW()">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Results</div>
+            <div class="result-row">
+              <span class="result-label">Volume Used</span>
+              <span class="result-val"><span class="primary" id="wmrd-vol">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">GPD (normalized to 24 hr)</span>
+              <span class="result-val"><span class="primary" id="wmrd-gpd">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">MGD</span>
+              <span class="result-val"><span class="primary" id="wmrd-mgd">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">GPM (actual period)</span>
+              <span class="result-val"><span class="primary" id="wmrd-gpm">—</span></span>
+            </div>
+          </div>
+          <div class="syw-wrap" id="syw-wmrd-wrap" style="display:none">
+            <div class="syw-action-row">
+              <button class="syw-btn" id="syw-wmrd-btn" onclick="toggleSyw('wmrd')">≡ Show Your Work<svg class="syw-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="copy-btn" id="copy-wmrd" onclick="copyResult('wmrd')">Copy</button>
+            </div>
+            <div class="syw-body" id="syw-wmrd"></div>
           </div>
         </div>
       </div>
@@ -7130,6 +7258,58 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
   function calcDate()   { calcDateCore('dc');  }
   function calcDateWW() { calcDateCore('wdc'); }
 
+  const MRD_UNIT_LABEL = { gal: 'Gallons', kgal: 'Kilogallons (Kgal)', ccf: 'CCF', cf: 'Cubic Feet (ft³)' };
+  const MRD_TO_GAL     = { gal: 1, kgal: 1000, ccf: 748.052, cf: 7.48052 };
+
+  function calcMeterReadCore(pfx) {
+    const unit    = (document.getElementById(pfx + '-unit') || {}).value || 'gal';
+    const startV  = parseFloat((document.getElementById(pfx + '-start') || {}).value);
+    const endV    = parseFloat((document.getElementById(pfx + '-end')   || {}).value);
+    const hoursV  = parseFloat((document.getElementById(pfx + '-hours') || {}).value);
+    const hours   = isFinite(hoursV) && hoursV > 0 ? hoursV : 24;
+    const set     = (id, v) => { const el = document.getElementById(pfx + '-' + id); if (el) el.textContent = v; };
+    if (!isFinite(startV) || !isFinite(endV)) {
+      ['vol','gpd','mgd','gpm'].forEach(k => set(k, '—'));
+      setSyw(pfx, null); return;
+    }
+    const rawDiff = endV - startV;
+    const gals    = rawDiff * MRD_TO_GAL[unit];
+    const gpd     = gals * (24 / hours);
+    const mgd     = gpd / 1e6;
+    const gpm     = gals / (hours * 60);
+    const fmt     = n => n.toLocaleString('en-US', {maximumFractionDigits: 2});
+    const fmtGal  = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+    set('vol',  fmtGal(gals)  + ' gal');
+    set('gpd',  fmtGal(gpd)   + ' gpd');
+    set('mgd',  mgd.toFixed(4) + ' MGD');
+    set('gpm',  fmt(gpm)      + ' gpm');
+    const unitLabel = MRD_UNIT_LABEL[unit] || unit;
+    let syw = '';
+    syw += sywLbl('Start reading: ' + startV.toLocaleString() + ' ' + unitLabel);
+    syw += sywLbl('End reading:   ' + endV.toLocaleString()   + ' ' + unitLabel);
+    syw += sywLbl('Elapsed time:  ' + hours + ' hr');
+    syw += sywSep();
+    syw += sywHi('Step 1 — Volume used');
+    syw += sywLbl('End − Start = ' + rawDiff.toLocaleString() + ' ' + unitLabel);
+    if (unit !== 'gal') {
+      syw += sywLbl(rawDiff.toLocaleString() + ' × ' + MRD_TO_GAL[unit] + ' = ' + fmtGal(gals) + ' gal');
+    }
+    syw += sywSep();
+    syw += sywHi('Step 2 — GPD (normalize to 24 hr)');
+    syw += sywLbl(fmtGal(gals) + ' gal ÷ ' + hours + ' hr × 24 hr = ' + fmtGal(gpd) + ' gpd');
+    syw += sywSep();
+    syw += sywHi('Step 3 — MGD');
+    syw += sywLbl(fmtGal(gpd) + ' ÷ 1,000,000 = ' + mgd.toFixed(4) + ' MGD');
+    syw += sywSep();
+    syw += sywHi('Step 4 — GPM (actual period)');
+    syw += sywLbl(fmtGal(gals) + ' gal ÷ (' + hours + ' hr × 60 min/hr) = ' + fmt(gpm) + ' gpm');
+    syw += sywSep();
+    syw += sywAns(fmtGal(gpd) + ' gpd  ·  ' + mgd.toFixed(4) + ' MGD  ·  ' + fmt(gpm) + ' gpm');
+    setSyw(pfx, syw);
+  }
+  function calcMeterRead()   { calcMeterReadCore('mrd');  }
+  function calcMeterReadWW() { calcMeterReadCore('wmrd'); }
+
   // ── FORMULA ITEMS ──
   function toggleFormula(id) {
     const item   = document.getElementById(id);
@@ -7337,6 +7517,26 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
         lines.push('flocs — WW Solids Loading Rate');
         lines.push(`Inf: ${iv('wslr-qinf')} MGD | RAS: ${iv('wslr-qras')} MGD | MLSS: ${iv('wslr-mlss')} mg/L | Area: ${iv('wslr-area')} ft²`);
         lines.push(`SLR: ${rv('wslr-slr')} lbs/ft²/day`);
+        break;
+      }
+      case 'mrd': {
+        lines.push('flocs — Daily Flow from Meter Read');
+        lines.push(`Unit: ${iv('mrd-unit')} | Start: ${iv('mrd-start')} | End: ${iv('mrd-end')} | Hours: ${iv('mrd-hours') || '24'}`);
+        lines.push('');
+        lines.push(`Volume: ${rv('mrd-vol')}`);
+        lines.push(`GPD:    ${rv('mrd-gpd')}`);
+        lines.push(`MGD:    ${rv('mrd-mgd')}`);
+        lines.push(`GPM:    ${rv('mrd-gpm')}`);
+        break;
+      }
+      case 'wmrd': {
+        lines.push('flocs — Daily Flow from Meter Read');
+        lines.push(`Unit: ${iv('wmrd-unit')} | Start: ${iv('wmrd-start')} | End: ${iv('wmrd-end')} | Hours: ${iv('wmrd-hours') || '24'}`);
+        lines.push('');
+        lines.push(`Volume: ${rv('wmrd-vol')}`);
+        lines.push(`GPD:    ${rv('wmrd-gpd')}`);
+        lines.push(`MGD:    ${rv('wmrd-mgd')}`);
+        lines.push(`GPM:    ${rv('wmrd-gpm')}`);
         break;
       }
       case 'dc': {
