@@ -1381,6 +1381,99 @@
     }
     .log-entry-del:hover { background: #2b0d0d; border-color: #ef4444; }
     .log-entry-del:active { background: #3b1010; }
+    .meter-unit-toggle {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      gap: 0;
+      margin-top: 4px;
+    }
+    .meter-unit-toggle button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .meter-unit-toggle button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .flow-summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .flow-summary-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .flow-summary-period {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .flow-period-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+    .flow-period-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .flow-period-custom {
+      display: none;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .flow-period-custom.show { display: flex; }
+    .flow-period-custom input[type=date] {
+      font-size: 0.78rem;
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .flow-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.85rem;
+      padding: 3px 0;
+    }
+    .flow-summary-label { color: var(--muted); }
+    .flow-summary-val { font-weight: 600; color: var(--text); }
+    .daily-flow-chip {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .daily-flow-chip.warn { border-color: #f59e0b; color: #f59e0b; }
     .log-field-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -2702,6 +2795,25 @@
       </div>
 
       <div class="field">
+        <label>Meter Readings
+          <div class="meter-unit-toggle" id="log-meter-unit-toggle">
+            <button id="log-mut-gal" class="active" onclick="setMeterUnit('dw','gal')">Gallons</button>
+            <button id="log-mut-cf"  onclick="setMeterUnit('dw','cf')">Cu Ft</button>
+          </div>
+        </label>
+        <div style="display:flex;gap:10px;margin-top:6px;">
+          <div class="field" style="flex:1;margin:0;">
+            <label for="log-meter-in" style="font-size:0.78rem;color:var(--muted);">Inflow Totalizer</label>
+            <input type="number" inputmode="decimal" id="log-meter-in" placeholder="optional" min="0" style="margin-top:2px;">
+          </div>
+          <div class="field" style="flex:1;margin:0;">
+            <label for="log-meter-out" style="font-size:0.78rem;color:var(--muted);">Outflow Totalizer</label>
+            <input type="number" inputmode="decimal" id="log-meter-out" placeholder="optional" min="0" style="margin-top:2px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
         <label for="log-notes">Notes</label>
         <textarea id="log-notes" placeholder="Observations, actions taken, equipment status…"></textarea>
       </div>
@@ -2757,6 +2869,25 @@
       </div>
 
       <div class="field">
+        <label>Meter Readings
+          <div class="meter-unit-toggle" id="ww-meter-unit-toggle">
+            <button id="ww-mut-gal" class="active" onclick="setMeterUnit('ww','gal')">Gallons</button>
+            <button id="ww-mut-cf"  onclick="setMeterUnit('ww','cf')">Cu Ft</button>
+          </div>
+        </label>
+        <div style="display:flex;gap:10px;margin-top:6px;">
+          <div class="field" style="flex:1;margin:0;">
+            <label for="ww-meter-in" style="font-size:0.78rem;color:var(--muted);">Inflow Totalizer</label>
+            <input type="number" inputmode="decimal" id="ww-meter-in" placeholder="optional" min="0" style="margin-top:2px;">
+          </div>
+          <div class="field" style="flex:1;margin:0;">
+            <label for="ww-meter-out" style="font-size:0.78rem;color:var(--muted);">Outflow Totalizer</label>
+            <input type="number" inputmode="decimal" id="ww-meter-out" placeholder="optional" min="0" style="margin-top:2px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
         <label for="ww-notes">Notes</label>
         <textarea id="ww-notes" placeholder="Observations, process conditions, equipment status…"></textarea>
       </div>
@@ -2770,6 +2901,23 @@
         <div class="log-section-title" style="margin-bottom:0;">Saved Entries</div>
         <button class="log-export-btn" onclick="exportLogCSV()">Export CSV</button>
       </div>
+
+      <!-- Flow Summary -->
+      <div class="flow-summary" id="flow-summary-card" style="display:none">
+        <div class="flow-summary-title">Average Daily Flow</div>
+        <div class="flow-summary-period">
+          <button class="flow-period-btn active" onclick="setFlowPeriod('7d',this)">7 Days</button>
+          <button class="flow-period-btn" onclick="setFlowPeriod('30d',this)">30 Days</button>
+          <button class="flow-period-btn" onclick="setFlowPeriod('custom',this)">Custom</button>
+        </div>
+        <div class="flow-period-custom" id="flow-custom-range">
+          <input type="date" id="flow-from" oninput="renderFlowSummary()">
+          <span style="color:var(--muted);font-size:0.8rem;">to</span>
+          <input type="date" id="flow-to" oninput="renderFlowSummary()">
+        </div>
+        <div id="flow-summary-rows"></div>
+      </div>
+
       <div id="log-list"></div>
     </div>
 
@@ -8111,6 +8259,7 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
   // ── FIELD LOG ──
   const LOG_KEY_DW = 'drh2o-log';
   const LOG_KEY_WW = 'drh2o-log-ww';
+  const CF_TO_GAL  = 7.48052;
 
   function _logKey() { return MODE === 'waste' ? LOG_KEY_WW : LOG_KEY_DW; }
 
@@ -8122,22 +8271,136 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
 
   function esc(s) { return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
+  // ── Meter unit toggle ──
+  let _meterUnitDW = 'gal', _meterUnitWW = 'gal';
+  try { _meterUnitDW = localStorage.getItem('drh2o-munit-dw') || 'gal'; } catch(e){}
+  try { _meterUnitWW = localStorage.getItem('drh2o-munit-ww') || 'gal'; } catch(e){}
+
+  function _applyMeterUnit(mode) {
+    const u    = mode === 'ww' ? _meterUnitWW : _meterUnitDW;
+    const pfx  = mode === 'ww' ? 'ww' : 'log';
+    const galB = document.getElementById(pfx + '-mut-gal');
+    const cfB  = document.getElementById(pfx + '-mut-cf');
+    if (galB) galB.classList.toggle('active', u === 'gal');
+    if (cfB)  cfB.classList.toggle('active',  u === 'cf');
+  }
+
+  function setMeterUnit(mode, unit) {
+    if (mode === 'ww') { _meterUnitWW = unit; try { localStorage.setItem('drh2o-munit-ww', unit); } catch(e){} }
+    else               { _meterUnitDW = unit; try { localStorage.setItem('drh2o-munit-dw', unit); } catch(e){} }
+    _applyMeterUnit(mode);
+  }
+
+  function _toGal(raw, unit) {
+    const n = parseFloat(raw);
+    if (!isFinite(n)) return null;
+    return unit === 'cf' ? n * CF_TO_GAL : n;
+  }
+
+  // ── Daily flow helper ──
+  // entries stored newest-first; entry at idx i, previous is idx i+1
+  function _dailyFlow(entries, idx, key) {
+    const cur  = entries[idx];
+    const prev = entries[idx + 1];
+    if (cur[key] == null || prev == null || prev[key] == null) return null;
+    const diff = cur[key] - prev[key];
+    return diff; // may be negative (rollover)
+  }
+
+  // ── Average daily flow over a date range ──
+  function _avgFlow(entries, fromDate, toDate) {
+    if (!fromDate || !toDate || fromDate > toDate) return null;
+    const msDay = 86400000;
+    const from  = new Date(fromDate + 'T00:00:00').getTime();
+    const to    = new Date(toDate   + 'T00:00:00').getTime();
+    const days  = Math.round((to - from) / msDay) + 1;
+    let sumIn = 0, cntIn = 0, sumOut = 0, cntOut = 0;
+    for (let i = 0; i < entries.length; i++) {
+      const e = entries[i];
+      if (!e.date) continue;
+      const t = new Date(e.date + 'T00:00:00').getTime();
+      if (t < from || t > to) continue;
+      const fin  = _dailyFlow(entries, i, 'meterInGal');
+      const fout = _dailyFlow(entries, i, 'meterOutGal');
+      if (fin  != null && fin  >= 0) { sumIn  += fin;  cntIn++;  }
+      if (fout != null && fout >= 0) { sumOut += fout; cntOut++; }
+    }
+    return {
+      avgIn:  cntIn  > 0 ? sumIn  / cntIn  : null,
+      avgOut: cntOut > 0 ? sumOut / cntOut : null,
+      days, validIn: cntIn, validOut: cntOut
+    };
+  }
+
+  // ── Flow summary render ──
+  let _flowPeriod = '7d';
+
+  function setFlowPeriod(period, btn) {
+    _flowPeriod = period;
+    document.querySelectorAll('.flow-period-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    const customEl = document.getElementById('flow-custom-range');
+    if (customEl) customEl.classList.toggle('show', period === 'custom');
+    renderFlowSummary();
+  }
+
+  function renderFlowSummary() {
+    const card = document.getElementById('flow-summary-card');
+    const rows = document.getElementById('flow-summary-rows');
+    if (!card || !rows) return;
+    const entries = loadLog();
+    const hasAny  = entries.some(e => e.meterInGal != null || e.meterOutGal != null);
+    card.style.display = hasAny ? '' : 'none';
+    if (!hasAny) return;
+
+    let fromDate, toDate;
+    const today = new Date().toISOString().slice(0, 10);
+    if (_flowPeriod === '7d') {
+      const d = new Date(); d.setDate(d.getDate() - 6);
+      fromDate = d.toISOString().slice(0, 10); toDate = today;
+    } else if (_flowPeriod === '30d') {
+      const d = new Date(); d.setDate(d.getDate() - 29);
+      fromDate = d.toISOString().slice(0, 10); toDate = today;
+    } else {
+      fromDate = (document.getElementById('flow-from') || {}).value;
+      toDate   = (document.getElementById('flow-to')   || {}).value;
+    }
+
+    const r = _avgFlow(entries, fromDate, toDate);
+    if (!r) { rows.innerHTML = '<div style="font-size:0.82rem;color:var(--muted);">Select a date range.</div>'; return; }
+
+    const fmt  = n => n == null ? '—' : n.toLocaleString('en-US',{maximumFractionDigits:0}) + ' GPD';
+    const note = n => n == null ? '' : ` <span style="font-size:0.72rem;color:var(--muted)">(${n} reading${n===1?'':'s'})</span>`;
+    rows.innerHTML =
+      `<div class="flow-summary-row"><span class="flow-summary-label">Avg Inflow</span><span class="flow-summary-val">${fmt(r.avgIn)}${note(r.validIn)}</span></div>` +
+      `<div class="flow-summary-row"><span class="flow-summary-label">Avg Outflow</span><span class="flow-summary-val">${fmt(r.avgOut)}${note(r.validOut)}</span></div>` +
+      `<div style="font-size:0.72rem;color:var(--muted);margin-top:6px;">${fromDate || '?'} – ${toDate || '?'} · ${r.days} day window</div>`;
+  }
+
+  // ── Render log entries ──
   function renderLog() {
     const entries = loadLog();
     const list = document.getElementById('log-list');
     if (!list) return;
     if (!entries.length) {
       list.innerHTML = '<div class="log-empty">No entries yet — save your first reading above.</div>';
+      renderFlowSummary();
       return;
     }
     list.innerHTML = entries.map((e, i) => {
       function field(label, val, unit) {
-        const display = val !== '' && val != null ? esc(val) + (unit ? ' ' + unit : '') : '—';
+        const display = val !== '' && val != null ? esc(String(val)) + (unit ? ' ' + unit : '') : '—';
         const empty   = (val === '' || val == null) ? ' empty' : '';
         return `<div class="log-entry-field">
           <span class="log-entry-field-label">${label}</span>
           <span class="log-entry-field-val${empty}">${display}</span>
         </div>`;
+      }
+      function dailyFlowChip(label, key) {
+        const df = _dailyFlow(entries, i, key);
+        if (df == null) return '';
+        if (df < 0) return `<span class="daily-flow-chip warn">⚠ ${label}: check rollover</span> `;
+        return `<span class="daily-flow-chip">${label}: ${df.toLocaleString('en-US',{maximumFractionDigits:0})} GPD</span> `;
       }
       const dt = [e.date, e.time].filter(Boolean).join(' · ');
       const notesHtml = e.notes
@@ -8145,16 +8408,34 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
              <div class="log-entry-notes-label">Notes</div>
              <div class="log-entry-notes">${esc(e.notes)}</div>
            </div>` : '';
+
+      const hasMeter = e.meterInGal != null || e.meterOutGal != null;
+      const meterInputLabel = e.meterUnit === 'cf' ? 'ft³' : 'gal';
+      const meterHtml = hasMeter ? (() => {
+        let mf = '';
+        if (e.meterIn != null && e.meterIn !== '') {
+          mf += field('Inflow Totalizer', Number(e.meterIn).toLocaleString('en-US',{maximumFractionDigits:3}) + ' ' + meterInputLabel, '');
+        }
+        if (e.meterOut != null && e.meterOut !== '') {
+          mf += field('Outflow Totalizer', Number(e.meterOut).toLocaleString('en-US',{maximumFractionDigits:3}) + ' ' + meterInputLabel, '');
+        }
+        const chips = dailyFlowChip('Inflow', 'meterInGal') + dailyFlowChip('Outflow', 'meterOutGal');
+        return mf + (chips ? `<div style="grid-column:1/-1;margin-top:4px;">${chips}</div>` : '');
+      })() : '';
+
       const modeFields = MODE === 'waste'
         ? field('Influent Flow',       e.infFlow,     'MGD')
           + field('Effluent Turbidity', e.effTurb,    'NTU')
           + field('Dissolved Oxygen',   e.dissolvedO2, 'mg/L')
           + field('pH',                 e.ph)
           + field('Cl₂ Residual',       e.cl,          'mg/L')
+          + meterHtml
         : field('Cl₂ Residual',  e.cl,   'mg/L')
           + field('pH',          e.ph)
           + field('Turbidity',   e.turb, 'NTU')
-          + field('Flow Rate',   e.flow, 'GPM');
+          + field('Flow Rate',   e.flow, 'GPM')
+          + meterHtml;
+
       return `
         <div class="log-entry">
           <div class="log-entry-header">
@@ -8170,39 +8451,56 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
           <button class="log-entry-del" onclick="deleteLogEntry(${i})">Delete Entry</button>
         </div>`;
     }).join('');
+    renderFlowSummary();
   }
 
   function saveLogEntry() {
     const v = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
     let entry, ids;
     if (MODE === 'waste') {
+      const mUnit   = _meterUnitWW;
+      const mInRaw  = v('ww-meter-in');
+      const mOutRaw = v('ww-meter-out');
       entry = {
         date: v('ww-date'), time: v('ww-time'), loc: v('ww-loc'),
         infFlow: v('ww-inf-flow'), effTurb: v('ww-eff-turb'),
         dissolvedO2: v('ww-do'), ph: v('ww-ph'), cl: v('ww-cl'),
-        notes: v('ww-notes')
+        notes: v('ww-notes'),
+        meterUnit: mUnit,
+        meterIn:    mInRaw  || null,
+        meterOut:   mOutRaw || null,
+        meterInGal:  _toGal(mInRaw,  mUnit),
+        meterOutGal: _toGal(mOutRaw, mUnit)
       };
-      if (!entry.loc && !entry.infFlow && !entry.effTurb && !entry.dissolvedO2 && !entry.ph && !entry.cl) {
+      if (!entry.loc && !entry.infFlow && !entry.effTurb && !entry.dissolvedO2 && !entry.ph && !entry.cl && entry.meterInGal == null && entry.meterOutGal == null) {
         alert('Please fill in at least a location or one reading before saving.');
         return;
       }
-      ids = ['ww-date','ww-time','ww-loc','ww-inf-flow','ww-eff-turb','ww-do','ww-ph','ww-cl','ww-notes'];
+      ids = ['ww-date','ww-time','ww-loc','ww-inf-flow','ww-eff-turb','ww-do','ww-ph','ww-cl','ww-notes','ww-meter-in','ww-meter-out'];
     } else {
+      const mUnit   = _meterUnitDW;
+      const mInRaw  = v('log-meter-in');
+      const mOutRaw = v('log-meter-out');
       entry = {
         date: v('log-date'), time: v('log-time'), loc: v('log-loc'),
         cl: v('log-cl'), ph: v('log-ph'), turb: v('log-turb'),
-        flow: v('log-flow'), notes: v('log-notes')
+        flow: v('log-flow'), notes: v('log-notes'),
+        meterUnit: mUnit,
+        meterIn:    mInRaw  || null,
+        meterOut:   mOutRaw || null,
+        meterInGal:  _toGal(mInRaw,  mUnit),
+        meterOutGal: _toGal(mOutRaw, mUnit)
       };
-      if (!entry.loc && !entry.cl && !entry.ph && !entry.turb && !entry.flow) {
+      if (!entry.loc && !entry.cl && !entry.ph && !entry.turb && !entry.flow && entry.meterInGal == null && entry.meterOutGal == null) {
         alert('Please fill in at least a location or one reading before saving.');
         return;
       }
-      ids = ['log-date','log-time','log-loc','log-cl','log-ph','log-turb','log-flow','log-notes'];
+      ids = ['log-date','log-time','log-loc','log-cl','log-ph','log-turb','log-flow','log-notes','log-meter-in','log-meter-out'];
     }
     const entries = loadLog();
     entries.unshift(entry);
     saveLog(entries);
-    ids.forEach(id => { document.getElementById(id).value = ''; });
+    ids.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
     renderLog();
   }
 
@@ -8225,11 +8523,14 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
         const timeEl = document.getElementById(timeId);
         if (dateEl && !dateEl.value) dateEl.value = now.toISOString().slice(0, 10);
         if (timeEl && !timeEl.value) timeEl.value = now.toTimeString().slice(0, 5);
+        _applyMeterUnit(MODE === 'waste' ? 'ww' : 'dw');
       });
     }
   });
 
   // Initial render
+  _applyMeterUnit('dw');
+  _applyMeterUnit('ww');
   renderLog();
 
   // ── LOG EXPORT ──
@@ -8239,12 +8540,50 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
     let headers, rows, filename;
     const date = new Date().toISOString().slice(0, 10);
     if (MODE === 'waste') {
-      headers  = ['Date','Time','Location','Influent Flow (MGD)','Effluent Turbidity (NTU)','Dissolved Oxygen (mg/L)','pH','Cl₂ Residual (mg/L)','Notes'];
-      rows     = entries.map(e => [e.date, e.time, e.loc, e.infFlow, e.effTurb, e.dissolvedO2, e.ph, e.cl, e.notes]);
+      headers = [
+        'Date','Time','Location',
+        'Influent Flow (MGD)','Effluent Turbidity (NTU)','Dissolved Oxygen (mg/L)','pH','Cl₂ Residual (mg/L)',
+        'Input Unit','Inflow Totalizer (gal)','Outflow Totalizer (gal)',
+        'Daily Flow Inflow (GPD)','Daily Flow Outflow (GPD)',
+        'Notes'
+      ];
+      rows = entries.map((e, i) => {
+        const dfIn  = _dailyFlow(entries, i, 'meterInGal');
+        const dfOut = _dailyFlow(entries, i, 'meterOutGal');
+        return [
+          e.date, e.time, e.loc,
+          e.infFlow, e.effTurb, e.dissolvedO2, e.ph, e.cl,
+          e.meterUnit || '',
+          e.meterInGal  != null ? e.meterInGal.toFixed(2)  : '',
+          e.meterOutGal != null ? e.meterOutGal.toFixed(2) : '',
+          dfIn  != null && dfIn  >= 0 ? dfIn.toFixed(2)  : (dfIn  != null ? 'ROLLOVER' : ''),
+          dfOut != null && dfOut >= 0 ? dfOut.toFixed(2) : (dfOut != null ? 'ROLLOVER' : ''),
+          e.notes
+        ];
+      });
       filename = `drh2o-log-ww-${date}.csv`;
     } else {
-      headers  = ['Date','Time','Location','Chlorine Residual (mg/L)','pH','Turbidity (NTU)','Flow Rate (GPM)','Notes'];
-      rows     = entries.map(e => [e.date, e.time, e.loc, e.cl, e.ph, e.turb, e.flow, e.notes]);
+      headers = [
+        'Date','Time','Location',
+        'Chlorine Residual (mg/L)','pH','Turbidity (NTU)','Flow Rate (GPM)',
+        'Input Unit','Inflow Totalizer (gal)','Outflow Totalizer (gal)',
+        'Daily Flow Inflow (GPD)','Daily Flow Outflow (GPD)',
+        'Notes'
+      ];
+      rows = entries.map((e, i) => {
+        const dfIn  = _dailyFlow(entries, i, 'meterInGal');
+        const dfOut = _dailyFlow(entries, i, 'meterOutGal');
+        return [
+          e.date, e.time, e.loc,
+          e.cl, e.ph, e.turb, e.flow,
+          e.meterUnit || '',
+          e.meterInGal  != null ? e.meterInGal.toFixed(2)  : '',
+          e.meterOutGal != null ? e.meterOutGal.toFixed(2) : '',
+          dfIn  != null && dfIn  >= 0 ? dfIn.toFixed(2)  : (dfIn  != null ? 'ROLLOVER' : ''),
+          dfOut != null && dfOut >= 0 ? dfOut.toFixed(2) : (dfOut != null ? 'ROLLOVER' : ''),
+          e.notes
+        ];
+      });
       filename = `drh2o-log-dw-${date}.csv`;
     }
     const qcsv = v => { const s = (v == null ? '' : String(v)).replace(/"/g,'""'); return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s; };
