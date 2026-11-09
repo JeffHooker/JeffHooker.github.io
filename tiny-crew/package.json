@@ -1,0 +1,1 @@
+{ "name": "tiny-crew", "private": true, "dependencies": { "@fontsource/bowlby-one": "*", "@fontsource/nunito": "*" } }
