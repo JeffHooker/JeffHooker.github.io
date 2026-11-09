@@ -9,13 +9,14 @@ const b64 = f => fs.readFileSync(path.join(dir, 'node_modules/@fontsource', f)).
   @font-face{font-family:"Nunito";font-weight:800;src:url(data:font/woff2;base64,${b64('nunito/files/nunito-latin-800-normal.woff2')})}
   @font-face{font-family:"Nunito";font-weight:900;src:url(data:font/woff2;base64,${b64('nunito/files/nunito-latin-900-normal.woff2')})}` });
   await p.evaluate(async () => { await Promise.all([document.fonts.load('40px "Bowlby One"'), document.fonts.load('800 40px "Nunito"'), document.fonts.load('900 40px "Nunito"')]); });
+  if (process.env.EP) await p.addScriptTag({ path: path.join(dir, process.env.EP + '.js') });
   if (mode === 'preview') {
     const times = process.argv.slice(3).map(Number);
     const d = await p.evaluate(ts => { const m = document.createElement('canvas'); m.width = 540 * 4; m.height = 960 * Math.ceil(ts.length / 4); const x = m.getContext('2d');
       ts.forEach((t, i) => { draw(t); x.drawImage(cv, (i % 4) * 540, Math.floor(i / 4) * 960, 540, 960); }); return m.toDataURL('image/jpeg', .85); }, times);
     fs.writeFileSync(path.join(dir, 'preview.jpg'), Buffer.from(d.slice(23), 'base64'));
   } else {
-    const scenes = [['s1', 0, 96], ['s2', 96, 285], ['s3', 285, 315], ['s4', 315, 765]];
+    const scenes = (await p.evaluate(() => window.SCENES || null)) || [['s1', 0, 96], ['s2', 96, 285], ['s3', 285, 315], ['s4', 315, 765]];
     const only = process.argv.slice(3);
     for (const [name, a, b] of scenes) {
       if (only.length && !only.includes(name)) continue;

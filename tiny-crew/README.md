@@ -17,3 +17,11 @@ Code-drawn vertical shorts (1080x1920, 30 fps) for Jeff's Tiny Crew channel. Not
     ffmpeg -i silent.mp4 -i audio.wav -map 0:v -map 1:a -c:v copy -c:a aac -shortest episode.mp4
 
 Scene frame ranges live in `render.js`; they must match the timeline in `film.js` and the length in `audio.py` (25.5 s).
+
+## Episodes
+
+- Episode 1, The Hairball: `node render.js full` (uses film.js and audio.py)
+- Episode 2, The Sock Heist: `python3 audio2.py && EP=ep2 node render.js full` (ep2.js loads on top of film.js and sets its own scene list; outputs ep2-s1..s3.mp4)
+- Channel art: `node art.js <output-folder>` draws the icon and banner artwork (art-draw.js)
+
+A new episode is a new `epN.js` that defines `window.SCENES` and `window.draw`, plus an `audioN.py`.
