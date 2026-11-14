@@ -211,6 +211,7 @@
       height: 100%;
       display: none;
       flex-direction: column;
+      position: relative;
     }
     #screen-assist.active { display: flex; }
     .assist-header {
@@ -321,6 +322,74 @@
       text-align: center;
       margin-top: 8px;
       line-height: 1.4;
+    }
+    html.glove .assist-disclaimer { font-size: 0.84rem; }
+    .calc-verify-note {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 10px 16px 6px;
+      line-height: 1.4;
+      opacity: 0.8;
+    }
+    html.glove .calc-verify-note { font-size: 0.8rem; }
+    #assist-notice-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 50;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px 40px;
+      overflow-y: auto;
+    }
+    #assist-notice-overlay.hidden { display: none; }
+    .assist-notice-box {
+      width: 100%;
+      max-width: 380px;
+      border: 1.5px solid var(--blue);
+      border-radius: 14px;
+      padding: 22px 20px;
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: left;
+    }
+    .assist-notice-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .assist-notice-btns {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      max-width: 380px;
+    }
+    .assist-notice-back {
+      flex: 1;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .assist-notice-continue {
+      flex: 2;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
     }
     .assist-typing {
       display: flex;
@@ -2745,6 +2814,7 @@
 
     </div><!-- end #ww-calcs -->
 
+    <p class="calc-verify-note">Results are for reference only — verify independently before use in compliance decisions.</p>
   </div><!-- end #screen-calc -->
 
   <!-- ════════════════ LOG TAB ════════════════ -->
@@ -2901,6 +2971,7 @@
         <div class="log-section-title" style="margin-bottom:0;">Saved Entries</div>
         <button class="log-export-btn" onclick="exportLogCSV()">Export CSV</button>
       </div>
+      <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin:0 0 10px;line-height:1.4;">Tip: Export your log regularly — data is stored on this device only.</p>
 
       <!-- Flow Summary -->
       <div class="flow-summary" id="flow-summary-card" style="display:none">
@@ -3974,12 +4045,25 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
       <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;">flocs collects no personal data. All log entries, uploaded documents, and app settings are stored locally on your device only and are never transmitted, shared, or stored on any external server. We have no access to your data. Documents you upload are stored on your device only. This app does not use analytics, advertising, or tracking of any kind.</p>
       <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;margin-top:10px;">By using flocs you agree to use all calculations and AI-generated guidance as reference only and accept sole responsibility for operational decisions.</p>
       <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;margin-top:10px;"><b style="color:var(--text);">AI Assist Security:</b> When you use Dr. H₂O Assist, your messages are routed through a secure proxy server solely to protect our API credentials. Your message content is never logged, stored, or retained on any server. The proxy acts as a passthrough only — no data is saved at any point in the process.</p>
+      <p style="margin-top:14px;"><a href="YOUR_PRIVACY_POLICY_URL" target="_blank" style="font-size:0.82rem;color:var(--blue);text-decoration:underline;">View Full Privacy Policy ↗</a></p>
     </div>
 
   </div><!-- end #screen-more -->
 
   <!-- ── ASSIST TAB ── -->
   <div class="screen" id="screen-assist">
+    <div id="assist-notice-overlay">
+      <div class="assist-notice-box">
+        <div class="assist-notice-title">Before you chat with Dr. H₂O</div>
+        <p>Your questions are sent to <b>Anthropic's Claude AI</b>, a third-party service, to generate answers. Messages pass through a secure proxy and are <b>not logged or stored</b> on any server.</p>
+        <p style="margin-top:10px;">Dr. H₂O is a guidance tool only. Always verify answers against official regulatory sources.</p>
+        <p style="margin-top:12px;font-size:0.8rem;"><a id="assist-notice-privacy-link" href="YOUR_PRIVACY_POLICY_URL" target="_blank" style="color:var(--blue);">Privacy Policy ↗</a></p>
+      </div>
+      <div class="assist-notice-btns">
+        <button class="assist-notice-back" onclick="document.querySelector('[data-target=more]').click()">← Back</button>
+        <button class="assist-notice-continue" onclick="dismissAssistNotice()">Got It, Continue</button>
+      </div>
+    </div>
     <div class="assist-header">
       <span class="assist-header-title">Dr. H₂O Assist</span>
     </div>
@@ -4079,6 +4163,18 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
 
 <script>
   // ── DR. H₂O ASSIST ──
+  function _initAssistNotice() {
+    const overlay = document.getElementById('assist-notice-overlay');
+    if (!overlay) return;
+    if (localStorage.getItem('drh2o-assist-notice') === '1') overlay.classList.add('hidden');
+  }
+  function dismissAssistNotice() {
+    try { localStorage.setItem('drh2o-assist-notice', '1'); } catch(e) {}
+    const overlay = document.getElementById('assist-notice-overlay');
+    if (overlay) overlay.classList.add('hidden');
+  }
+  _initAssistNotice();
+
   const ASSIST_SYSTEM = 'You are Dr. H₂O Assist, an AI helper exclusively for licensed water and wastewater operators. You only answer questions related to water treatment, wastewater treatment, system operations, calculations, compliance, troubleshooting, and operator certification. If asked anything outside this scope, politely decline and redirect the user to water or wastewater topics. Keep responses concise and field-appropriate. Always recommend verifying advice against official regulatory sources.';
   const assistHistory = [];
 
@@ -4122,12 +4218,16 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
     sendBtn.disabled = true;
     assistShowTyping();
 
+    const _ctrl = new AbortController();
+    const _tout = setTimeout(() => _ctrl.abort(), 30000);
     try {
       const res = await fetch('https://flocs-api-proxy.jeffrey-hooker.workers.dev', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ messages: assistHistory })
+        body: JSON.stringify({ messages: assistHistory }),
+        signal: _ctrl.signal
       });
+      clearTimeout(_tout);
       const data = await res.json();
       assistHideTyping();
       console.log('[Assist] HTTP', res.status, data);
@@ -4143,9 +4243,14 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
         assistAddBubble('assistant', 'Sorry, no response received. Please try again.');
       }
     } catch (err) {
+      clearTimeout(_tout);
       assistHideTyping();
-      console.error('[Assist] Fetch error:', err);
-      assistAddBubble('assistant', `Connection error: ${err.message}`);
+      if (err.name === 'AbortError') {
+        assistAddBubble('assistant', 'Request timed out (30s). Check your connection and try again.');
+      } else {
+        console.error('[Assist] Fetch error:', err);
+        assistAddBubble('assistant', `Unable to reach Dr. H₂O right now. Check your connection and try again.`);
+      }
     } finally {
       sendBtn.disabled = false;
       input.focus();
