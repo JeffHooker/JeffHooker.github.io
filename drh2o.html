@@ -395,6 +395,119 @@
     html.glove .assist-notice-title { font-size: 1.15rem; }
     html.glove .assist-notice-back,
     html.glove .assist-notice-continue { font-size: 1rem; padding: 18px; }
+    /* ── PAYWALL OVERLAY ── */
+    #assist-paywall-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 51;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px 40px;
+      overflow-y: auto;
+    }
+    #assist-paywall-overlay.hidden { display: none; }
+    .paywall-box {
+      width: 100%;
+      max-width: 380px;
+      border: 1.5px solid var(--blue);
+      border-radius: 14px;
+      padding: 22px 20px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: left;
+    }
+    .paywall-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .paywall-subtitle {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .paywall-price-row {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .paywall-price-sub {
+      font-size: 0.82rem;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .paywall-legal {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 12px;
+    }
+    .paywall-links {
+      margin-top: 10px;
+      font-size: 0.75rem;
+    }
+    .paywall-links a { color: var(--blue); }
+    .paywall-lapsed-msg {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      background: var(--border);
+      border-radius: 8px;
+      display: none;
+    }
+    .paywall-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 380px;
+    }
+    .paywall-subscribe-btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: 10px;
+      border: none;
+      background: var(--blue);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .paywall-restore-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .paywall-back-btn {
+      width: 100%;
+      max-width: 380px;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-size: 0.88rem;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    html.glove .paywall-box { font-size: 1rem; }
+    html.glove .paywall-title { font-size: 1.2rem; }
+    html.glove .paywall-subscribe-btn { font-size: 1.05rem; padding: 18px; }
+    html.glove .paywall-restore-btn,
+    html.glove .paywall-back-btn { font-size: 1rem; padding: 16px; }
     .assist-typing {
       display: flex;
       align-items: center;
@@ -4052,6 +4165,12 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
       <p style="margin-top:14px;"><a href="YOUR_PRIVACY_POLICY_URL" target="_blank" style="font-size:0.82rem;color:var(--blue);text-decoration:underline;">View Full Privacy Policy ↗</a></p>
     </div>
 
+    <div class="card" id="assist-subscription-card">
+      <div class="card-title">Dr. H₂O Assist</div>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.55;margin-bottom:14px;" id="assist-sub-status">Checking subscription…</p>
+      <button class="unit-btn" id="more-restore-btn" onclick="restoreFromMore()" style="width:100%;padding:12px;border-radius:8px;font-size:0.9rem;">Restore Purchases</button>
+    </div>
+
   </div><!-- end #screen-more -->
 
   <!-- ── ASSIST TAB ── -->
@@ -4067,6 +4186,26 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
       <div class="assist-notice-btns">
         <button class="assist-notice-back" onclick="document.querySelector('[data-target=more]').click()">← Back</button>
         <button class="assist-notice-continue" onclick="dismissAssistNotice()">Got it — Continue</button>
+      </div>
+    </div>
+    <div id="assist-paywall-overlay" class="hidden">
+      <div class="paywall-box">
+        <div class="paywall-title">Dr. H₂O Assist</div>
+        <div class="paywall-subtitle">AI troubleshooting for water and wastewater operators</div>
+        <div class="paywall-lapsed-msg" id="paywall-lapsed-msg">Your Dr. H₂O Assist subscription has ended. Resubscribe to continue.</div>
+        <div class="paywall-price-row"><span class="paywall-price-live">$1.99</span><span style="font-size:1rem;font-weight:400;color:var(--muted);">/month</span></div>
+        <div class="paywall-price-sub">Free for 7 days, then <span class="paywall-price-live">$1.99</span>/month</div>
+        <div class="paywall-legal">Auto-renews until canceled. Cancel anytime in iPhone Settings → Apple ID → Subscriptions, at least 24 hours before the trial ends to avoid being charged.</div>
+        <div class="paywall-links">
+          <a href="YOUR_PRIVACY_POLICY_URL" target="_blank">Privacy Policy</a>
+          <span style="color:var(--muted);"> · </span>
+          <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank">Terms of Use</a>
+        </div>
+      </div>
+      <div class="paywall-btns">
+        <button class="paywall-subscribe-btn" id="paywall-subscribe-btn" onclick="paywallSubscribe()">Start free trial</button>
+        <button class="paywall-restore-btn" id="paywall-restore-btn" onclick="paywallRestore()">Restore Purchases</button>
+        <button class="paywall-back-btn" onclick="paywallBack()">← Back</button>
       </div>
     </div>
     <div class="assist-header">
@@ -4168,17 +4307,144 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
 
 <script>
   // ── DR. H₂O ASSIST ──
-  function _initAssistNotice() {
+  const RC_API_KEY  = 'YOUR_REVENUECAT_API_KEY';
+  const ASSIST_ENT  = 'assist';
+  let _rcReady      = false;
+  let _cachedCI     = null;
+
+  async function _rcInit() {
+    if (!window.Capacitor?.Plugins?.Purchases) return;
+    try {
+      await window.Capacitor.Plugins.Purchases.configure({ apiKey: RC_API_KEY });
+      _rcReady = true;
+    } catch(e) {}
+  }
+
+  async function _checkEntitlement() {
+    if (!window.Capacitor?.Plugins?.Purchases) return true; // graceful web/dev fallback
+    if (!_rcReady) return false;
+    try {
+      const { customerInfo } = await window.Capacitor.Plugins.Purchases.getCustomerInfo();
+      _cachedCI = customerInfo;
+      return !!customerInfo?.entitlements?.active?.[ASSIST_ENT];
+    } catch(e) { return false; }
+  }
+
+  function _updateSubStatus(active) {
+    const el = document.getElementById('assist-sub-status');
+    if (!el) return;
+    el.textContent = active
+      ? 'Dr. H₂O Assist is active. Cancel anytime in iPhone Settings → Apple ID → Subscriptions.'
+      : 'No active subscription.';
+  }
+
+  function showAssistPaywall(lapsed) {
+    const overlay = document.getElementById('assist-paywall-overlay');
+    if (!overlay) return;
+    const msg = document.getElementById('paywall-lapsed-msg');
+    if (msg) msg.style.display = lapsed ? 'block' : 'none';
+    _loadPaywallPrice();
+    overlay.classList.remove('hidden');
+  }
+
+  async function _loadPaywallPrice() {
+    if (!window.Capacitor?.Plugins?.Purchases) return;
+    try {
+      const { current } = await window.Capacitor.Plugins.Purchases.getOfferings();
+      const pkg = current?.monthly || current?.availablePackages?.[0];
+      if (pkg?.storeProduct?.priceString) {
+        const p = pkg.storeProduct.priceString;
+        document.querySelectorAll('.paywall-price-live').forEach(el => el.textContent = p);
+      }
+    } catch(e) {}
+  }
+
+  async function paywallSubscribe() {
+    if (!window.Capacitor?.Plugins?.Purchases) return;
+    const btn = document.getElementById('paywall-subscribe-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Processing…'; }
+    try {
+      const { current } = await window.Capacitor.Plugins.Purchases.getOfferings();
+      const pkg = current?.monthly || current?.availablePackages?.[0];
+      if (!pkg) throw new Error('no_package');
+      const { customerInfo } = await window.Capacitor.Plugins.Purchases.purchasePackage({ aPackage: pkg });
+      _cachedCI = customerInfo;
+      _updateSubStatus(true);
+      if (customerInfo?.entitlements?.active?.[ASSIST_ENT]) {
+        document.getElementById('assist-paywall-overlay')?.classList.add('hidden');
+      }
+    } catch(e) {
+      if (btn) { btn.disabled = false; btn.textContent = 'Start free trial'; }
+      if (e?.code !== 'PURCHASE_CANCELLED' && e?.message !== 'PURCHASE_CANCELLED') {
+        alert('Purchase could not be completed. Please try again.');
+      }
+    }
+  }
+
+  async function paywallRestore() {
+    if (!window.Capacitor?.Plugins?.Purchases) return;
+    const btn = document.getElementById('paywall-restore-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Restoring…'; }
+    try {
+      const { customerInfo } = await window.Capacitor.Plugins.Purchases.restorePurchases();
+      _cachedCI = customerInfo;
+      const active = !!customerInfo?.entitlements?.active?.[ASSIST_ENT];
+      _updateSubStatus(active);
+      if (active) {
+        document.getElementById('assist-paywall-overlay')?.classList.add('hidden');
+      } else {
+        alert('No active subscription found for this Apple ID.');
+      }
+    } catch(e) {
+      alert('Restore failed. Please try again.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Restore Purchases'; }
+    }
+  }
+
+  function paywallBack() {
+    document.querySelector('[data-target=more]').click();
+    document.getElementById('assist-paywall-overlay')?.classList.add('hidden');
+  }
+
+  async function restoreFromMore() {
+    if (!window.Capacitor?.Plugins?.Purchases) return;
+    const btn = document.getElementById('more-restore-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Restoring…'; }
+    try {
+      const { customerInfo } = await window.Capacitor.Plugins.Purchases.restorePurchases();
+      _cachedCI = customerInfo;
+      const active = !!customerInfo?.entitlements?.active?.[ASSIST_ENT];
+      _updateSubStatus(active);
+      alert(active ? 'Subscription restored successfully.' : 'No active subscription found for this Apple ID.');
+    } catch(e) {
+      alert('Restore failed. Please try again.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Restore Purchases'; }
+    }
+  }
+
+  async function _initAssistNotice() {
     const overlay = document.getElementById('assist-notice-overlay');
     if (!overlay) return;
-    if (localStorage.getItem('drh2o-assist-notice') === '1') overlay.classList.add('hidden');
+    if (localStorage.getItem('drh2o-assist-notice') === '1') {
+      overlay.classList.add('hidden');
+      const active = await _checkEntitlement();
+      _updateSubStatus(active);
+      if (!active) showAssistPaywall(false);
+    }
   }
-  function dismissAssistNotice() {
+
+  async function dismissAssistNotice() {
     try { localStorage.setItem('drh2o-assist-notice', '1'); } catch(e) {}
     const overlay = document.getElementById('assist-notice-overlay');
     if (overlay) overlay.classList.add('hidden');
+    const active = await _checkEntitlement();
+    _updateSubStatus(active);
+    if (!active) showAssistPaywall(false);
   }
-  _initAssistNotice();
+
+  _rcInit().then(_initAssistNotice);
 
   const ASSIST_SYSTEM = 'You are Dr. H₂O Assist, an AI helper exclusively for licensed water and wastewater operators. You only answer questions related to water treatment, wastewater treatment, system operations, calculations, compliance, troubleshooting, and operator certification. If asked anything outside this scope, politely decline and redirect the user to water or wastewater topics. Keep responses concise and field-appropriate. Always recommend verifying advice against official regulatory sources.';
   const assistHistory = [];
@@ -4213,8 +4479,14 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
     if (!text) return;
 
     if (localStorage.getItem('drh2o-assist-notice') !== '1') {
-      const overlay = document.getElementById('assist-notice-overlay');
-      if (overlay) overlay.classList.remove('hidden');
+      document.getElementById('assist-notice-overlay')?.classList.remove('hidden');
+      return;
+    }
+    const _entActive = _cachedCI
+      ? !!_cachedCI.entitlements?.active?.[ASSIST_ENT]
+      : await _checkEntitlement();
+    if (!_entActive) {
+      showAssistPaywall(!!_cachedCI?.entitlements?.all?.[ASSIST_ENT]);
       return;
     }
 
@@ -4425,6 +4697,12 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
       btn.classList.add('active');
       document.getElementById('screen-' + target).classList.add('active');
       document.body.classList.toggle('tab-assist', target === 'assist');
+      if (target === 'assist' && localStorage.getItem('drh2o-assist-notice') === '1') {
+        _checkEntitlement().then(active => {
+          _updateSubStatus(active);
+          if (!active) showAssistPaywall(!!_cachedCI?.entitlements?.all?.[ASSIST_ENT]);
+        });
+      }
     });
   });
 
