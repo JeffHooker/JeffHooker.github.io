@@ -391,6 +391,10 @@
       font-weight: 600;
       cursor: pointer;
     }
+    html.glove .assist-notice-box { font-size: 1rem; padding: 24px 22px; }
+    html.glove .assist-notice-title { font-size: 1.15rem; }
+    html.glove .assist-notice-back,
+    html.glove .assist-notice-continue { font-size: 1rem; padding: 18px; }
     .assist-typing {
       display: flex;
       align-items: center;
@@ -4054,14 +4058,15 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
   <div class="screen" id="screen-assist">
     <div id="assist-notice-overlay">
       <div class="assist-notice-box">
-        <div class="assist-notice-title">Before you chat with Dr. H₂O</div>
-        <p>Your questions are sent to <b>Anthropic's Claude AI</b>, a third-party service, to generate answers. Messages pass through a secure proxy and are <b>not logged or stored</b> on any server.</p>
-        <p style="margin-top:10px;">Dr. H₂O is a guidance tool only. Always verify answers against official regulatory sources.</p>
-        <p style="margin-top:12px;font-size:0.8rem;"><a id="assist-notice-privacy-link" href="YOUR_PRIVACY_POLICY_URL" target="_blank" style="color:var(--blue);">Privacy Policy ↗</a></p>
+        <div class="assist-notice-title">Before you start</div>
+        <p>Dr. H₂O Assist uses AI to help answer your water and wastewater questions. When you send a question, the text you type is sent to our AI provider (Anthropic) to generate a response.</p>
+        <p style="margin-top:10px;">Don't include personal or confidential system information in your questions.</p>
+        <p style="margin-top:10px;">This is guidance only. Always verify answers against official sources before making operational or compliance decisions.</p>
+        <p style="margin-top:12px;font-size:0.8rem;"><a id="assist-notice-privacy-link" href="YOUR_PRIVACY_POLICY_URL" target="_blank" style="color:var(--blue);">View Privacy Policy ↗</a></p>
       </div>
       <div class="assist-notice-btns">
         <button class="assist-notice-back" onclick="document.querySelector('[data-target=more]').click()">← Back</button>
-        <button class="assist-notice-continue" onclick="dismissAssistNotice()">Got It, Continue</button>
+        <button class="assist-notice-continue" onclick="dismissAssistNotice()">Got it — Continue</button>
       </div>
     </div>
     <div class="assist-header">
@@ -4206,6 +4211,12 @@ gal/day = (lbs/day × 100) ÷ (% Strength × 8.34)
     const sendBtn = document.getElementById('assist-send-btn');
     const text    = input.value.trim();
     if (!text) return;
+
+    if (localStorage.getItem('drh2o-assist-notice') !== '1') {
+      const overlay = document.getElementById('assist-notice-overlay');
+      if (overlay) overlay.classList.remove('hidden');
+      return;
+    }
 
     const empty = document.getElementById('assist-empty');
     if (empty) empty.remove();
